@@ -1,0 +1,114 @@
+# Options ────────────────────────────────────────────────────────────────────
+set -add global ui_options terminal_assistant=none
+set global tabstop 4
+set global indentwidth 4
+set global scrolloff 3,5
+set global grepcmd "rg --column --with-filename"
+
+
+# Highlighters ────────────────────────────────────────────────────────────────
+addhl global/ wrap
+addhl global/ number-lines
+addhl global/trailing-whitespaces regex "\h+$" 0:black,red
+
+
+# Mappings ────────────────────────────────────────────────────────────────────
+map global user c ":comment-line<ret>" -docstring "Comment line"
+map global insert <tab> "<a-;><a-gt>"
+map global insert <s-tab> "<a-;><lt>"
+
+# scroll with <c-e> and <c-y> like in vim
+map global normal <c-e> "vj"
+map global insert <c-e> "vj"
+map global normal <c-y> "vk"
+map global insert <c-y> "vk"
+
+# Splits
+declare-user-mode windows
+map global windows h ':split-horizontal<ret>' -docstring "Open a new window horizontally"
+map global windows v ':split-vertical<ret>' -docstring "Open a new window vertically"
+map global normal <c-w> ':enter-user-mode windows<ret>'
+
+
+# Plugins ────────────────────────────────────────────────────────────────────
+### kakoune-surround ###
+declare-user-mode surround
+map global surround s ':surround<ret>' -docstring "Surround selected text"
+map global surround c ':change-surround<ret>' -docstring "Change selected text's surroundings"
+map global surround d ':delete-surround<ret>' -docstring "Delete selected text's surroundings"
+map global surround t ':select-surrounding-tag<ret>' -docstring "Select selected text's surrounding tags"
+map global normal ^ ':enter-user-mode surround<ret>'
+
+### kak-lsp ###
+eval %sh{kak-lsp --kakoune -s $kak_session}
+
+# Enable logs
+# eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
+# set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+
+set global lsp_diagnostic_line_error_sign "║"
+set global lsp_diagnostic_line_warning_sign "┊"
+set global lsp_auto_highlight_references true
+set global lsp_hover_anchor false
+
+map global user r ":lsp-rename-prompt<ret>" -docstring "LSP rename the selected symbol"
+map global goto p "<esc>: lsp-implementation<ret>" -docstring "implementation"
+
+hook global WinSetOption filetype=(rust|python|go|nix) %{
+    lsp-auto-hover-enable
+    lsp-enable-window
+}
+hook global KakEnd .* lsp-exit
+
+### auto-pairs ###
+hook global WinCreate .* %{
+  enable-auto-pairs
+}
+
+# Hooks ──────────────────────────────────────────────────────────────────────
+hook global WinSetOption filetype=(go|c|cpp|rust) %{
+    set global indentwidth 0
+}
+hook global WinSetOption filetype=(yaml|json|protobuf|nix) %{
+    set global indentwidth 2
+}
+hook global WinSetOption filetype=python %{
+    map global user b "\Obreakpoint()<esc>" -docstring "Insert a breakpoint on the line above"
+}
+hook global WinSetOption filetype=go %{
+    set-option window formatcmd "goimports"
+    hook buffer BufWritePost .* format
+}
+hook global WinSetOption filetype=nix %{
+    set-option window formatcmd "nixpkgs-fmt"
+    hook buffer BufWritePost .* format
+}
+hook global ModuleLoaded tmux %{
+    alias global terminal tmux-terminal-vertical
+}
+
+# Auto-set clipboard
+hook global RegisterModified '"' %{ nop %sh{
+    if [ -n "$DISPLAY" ]; then
+        printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
+    elif [ -n "$TMUX" ]; then
+        tmux set-buffer -- "$kak_main_reg_dquote"
+    fi
+}}
+
+
+# Commands ────────────────────────────────────────────────────────────────────
+define-command -docstring "split-vertical: split tmux vertically" \
+split-vertical %{
+    tmux-terminal-vertical fedit %val{session}
+}
+
+define-command -docstring "split-horizontal: split tmux horizontally" \
+split-horizontal %{
+    tmux-terminal-horizontal fedit %val{session}
+}
+
+# aliases
+alias global x write-quit
+alias global vs split-vertical
+alias global sp split-horizontal

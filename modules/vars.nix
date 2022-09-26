@@ -1,0 +1,33 @@
+{ config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.vars;
+in
+{
+  options.vars = {
+    email = mkOption { type = types.str; };
+    username = mkOption { type = types.str; };
+    terminal = mkOption { type = types.str; };
+    terminalBin = mkOption { type = types.str; };
+
+    home = mkOption { type = types.str; };
+    configHome = mkOption { type = types.str; };
+    documentsFolder = mkOption { type = types.str; };
+    downloadFolder = mkOption { type = types.str; };
+    musicFolder = mkOption { type = types.str; };
+    picturesFolder = mkOption { type = types.str; };
+    videosFolder = mkOption { type = types.str; };
+    repositoriesFolder = mkOption { type = types.str; };
+    screenshotFolder = mkOption { type = types.str; };
+    screencastFolder = mkOption { type = types.str; };
+    wallpaper = mkOption { type = types.str; };
+
+    # Server vars
+    domainName = mkOption { type = types.str; };
+    smtpUsername = mkOption { type = types.str; };
+    smtpHost = mkOption { type = types.str; };
+    smtpPort = mkOption { type = types.int; };
+  };
+}

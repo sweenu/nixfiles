@@ -1,0 +1,36 @@
+# Theme
+colorscheme base16-oceanicnext
+
+# Open urls
+unbind t
+unbind T
+unbind w
+
+bind O fillcmdline tabopen
+bind W tabdetach
+bind ge current_url tabopen
+bind yt tabduplicate
+
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/\/?$/,".git") | clipboard yank
+
+# Scrolling
+bind j scrollline 2
+bind k scrollline -2
+bind <C-e> scrollline 2
+bind <C-y> scrollline -2
+set smoothscroll = true
+set scrollduration = 10
+
+# Vim search mode
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
+# Misc
+set hindelay = 100
+set relatedopenpos = last
+set tabopenpos = last
+set modeindicatormodes {"normal": "false"}
