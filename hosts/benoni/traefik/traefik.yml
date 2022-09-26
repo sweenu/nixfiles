@@ -1,0 +1,46 @@
+---
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+providers:
+  docker:
+    network: @networkName@
+    exposedByDefault: false
+    defaultRule: Host(`{{ index .Labels "com.docker.compose.service" }}.@domainName@`)
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: ":443"
+    http:
+      middlewares:
+        - "hsts-header@docker"
+      tls:
+        certResolver: default
+        domains:
+          - main: "@domainName@"
+            sans:
+              - "*.@domainName@"
+
+api:
+  dashboard: true
+
+ping: {}
+
+accessLog: {}
+
+certificatesResolvers:
+  default:
+    acme:
+      email: @email@
+      storage: @acmeDirInContainer@/acme.json
+      dnsChallenge:
+        provider: digitalocean
