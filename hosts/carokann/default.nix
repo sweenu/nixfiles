@@ -1,0 +1,66 @@
+{ config, suites, pkgs, ... }:
+
+{
+  imports = suites.laptop;
+
+  boot = {
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "sd_mod" ];
+      luks.devices."cryptroot".device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+    };
+    kernelModules = [ "kvm-intel" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      systemd-boot.editor = false;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/50d06182-1747-42e1-88fa-cadca977e46b";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/EC81-FE28";
+      fsType = "vfat";
+    };
+  };
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
+    sane.enable = true;
+    opengl.enable = true;
+  };
+
+  powerManagement.cpuFreqGovernor = "powersave";
+
+  services = {
+    avahi.enable = true;
+    fwupd.enable = true;
+  };
+
+  time.timeZone = "Europe/Paris";
+
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
+
+  home-manager.users."${config.vars.username}" = {
+    services.kanshi.profiles = {
+      undocked.outputs = [
+        {
+          criteria = "eDP-1";
+          status = "enable";
+          scale = 1.5;
+          position = "0,0";
+        }
+      ];
+    };
+  };
+}
