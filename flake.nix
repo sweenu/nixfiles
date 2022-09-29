@@ -32,7 +32,8 @@
     digga.lib.mkFlake {
       inherit self inputs;
 
-      channelsConfig = { allowUnfree = true; };
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      channelsConfig.allowUnfree = true;
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
@@ -40,7 +41,6 @@
           ./pkgs/default.nix
         ];
       };
-      supportedSystems = [ "x86_64-linux" ];
 
       nixos = {
         hostDefaults = {
@@ -69,6 +69,7 @@
 
         hosts = {
           carokann.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ];
+          grunfeld.system = "aarch64-linux";
         };
       };
 
@@ -85,6 +86,9 @@
             sshUser = "root";
             path = deploy.lib.x86_64-linux.activate.home-manager self.homeConfigurations."sweenu@benoni";
           };
+        };
+        grunfeld = {
+          profiles.system.sshUser = "root";
         };
       };
     };
