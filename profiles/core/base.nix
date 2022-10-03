@@ -37,7 +37,6 @@
       rsync
       skim
       speedtest-cli
-      tailscale
       tmux
       unzip
       usbutils
@@ -58,14 +57,8 @@
 
   networking = {
     useDHCP = false;
-    firewall = {
-      enable = true;
-      trustedInterfaces = [ config.services.tailscale.interfaceName ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      checkReversePath = "loose"; # for Tailscale
-    };
+    firewall.enable = true;
     networkmanager.enable = true;
-    wireguard.enable = true;
   };
 
   nix = {
@@ -125,7 +118,6 @@
         MulticastDNS=no
       '';
     };
-    tailscale.enable = true;
   };
 
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";

@@ -14,9 +14,10 @@ in
         version = 3;
         uboot.enable = true;
       };
+      generic-extlinux-compatible.enable = lib.mkForce false; # incompatible with raspberryPi.enable = true
     };
     kernelParams = [ "cma=32M" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_5_10;
   };
 
   fileSystems = {
@@ -27,19 +28,24 @@ in
     "/data" = {
       device = "/dev/disk/by-uuid/87d6b688-bd27-4466-8824-5d559f6115ec";
       fsType = "ext4";
+      options = [ "nofail" "X-mount.mkdir" ];
     };
   };
 
-  environment.systemPackages = with pkgs; [ kakoune git curl bottom ];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 1024;
+      options = [ "nofail" ];
+    }
+  ];
 
-  documentation.enable = false;
+  environment.systemPackages = with pkgs; [ kakoune git curl bottom ];
 
   services.journald.extraConfig = ''
     Storage = volatile
     RuntimeMaxFileSize = 10M;
   '';
-
-  networking.firewall.enable = false;
 
   networking = {
     useDHCP = false;
@@ -55,8 +61,6 @@ in
       useDHCP = false;
     };
   };
-
-  programs.mosh.enable = true;
 
   services.avahi = {
     enable = true;
@@ -95,19 +99,7 @@ in
     };
   };
 
-  services = {
-    openssh = {
-      enable = true;
-      passwordAuthentication = false;
-    };
-    tailscale.enable = true;
-  };
-
-
-  swapDevices = [
-    { device = "/swapfile"; size = 1024; }
-  ];
-  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey benoniRootKey ];
+  users.users.root.openssh.authorizedKeys.keys = [ benoniRootKey ];
 
   hardware.enableRedistributableFirmware = true;
 
