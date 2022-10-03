@@ -1,25 +1,24 @@
 let
-  carokann = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKg9NXu70s3AO2GbpzTBGleZVaCmGZn6HscelaYrnFnt";
-  carokannUser = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z";
-  benoni = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGL0bFwpJXdt7vxT82aeMZhfwF5i0DEXaWT3SH2TzxIX";
-  carokannKeys = [ carokann carokannUser ];
+  carokann = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z sweenu@carokann";
+  benoniHost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGL0bFwpJXdt7vxT82aeMZhfwF5i0DEXaWT3SH2TzxIX root@benoni";
 in
 {
-  # personal
-  "scw_conf.age".publicKeys = carokannKeys;
+  # carokann
+  "scw_conf.age".publicKeys = [ carokann ];
 
-  # server
-  "smtp_password.age".publicKeys = carokannKeys ++ [ benoni ];
-  "traefik/env.age".publicKeys = carokannKeys ++ [ benoni ];
-  "authelia/jwt_secret.age".publicKeys = carokannKeys ++ [ benoni ];
-  "authelia/session_secret.age".publicKeys = carokannKeys ++ [ benoni ];
-  "authelia/storage_encryption_key.age".publicKeys = carokannKeys ++ [ benoni ];
-  "authelia/users.age".publicKeys = carokannKeys ++ [ benoni ];
-  "nextcloud/env.age".publicKeys = carokannKeys ++ [ benoni ];
-  "nextcloud/admin_user.age".publicKeys = carokannKeys ++ [ benoni ];
-  "nextcloud/admin_password.age".publicKeys = carokannKeys ++ [ benoni ];
-  "nextcloud/db_password.age".publicKeys = carokannKeys ++ [ benoni ];
+  # benoni
+  "benoni_root_key.age".publicKeys = [ carokann benoniHost ];
+  "smtp_password.age".publicKeys = [ carokann benoniHost ];
+  "traefik/env.age".publicKeys = [ carokann benoniHost ];
+  "authelia/jwt_secret.age".publicKeys = [ carokann benoniHost ];
+  "authelia/session_secret.age".publicKeys = [ carokann benoniHost ];
+  "authelia/storage_encryption_key.age".publicKeys = [ carokann benoniHost ];
+  "authelia/users.age".publicKeys = [ carokann benoniHost ];
+  "nextcloud/env.age".publicKeys = [ carokann benoniHost ];
+  "nextcloud/admin_user.age".publicKeys = [ carokann benoniHost ];
+  "nextcloud/admin_password.age".publicKeys = [ carokann benoniHost ];
+  "nextcloud/db_password.age".publicKeys = [ carokann benoniHost ];
 
   # restic
-  "restic/nextcloud.age".publicKeys = carokannKeys ++ [ benoni ];
+  "restic/nextcloud.age".publicKeys = [ carokann benoniHost ];
 }
