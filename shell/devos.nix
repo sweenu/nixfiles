@@ -8,5 +8,6 @@ in
   commands = with pkgs; [
     (devos agenix)
     (devos inputs.deploy.packages.${pkgs.system}.deploy-rs)
+    (devos inputs.nixos-generators.defaultPackage.${pkgs.system})
   ];
 }
