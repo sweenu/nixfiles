@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
+  systemd.services.NetworkManager-wait-online.enable = false;
   boot.cleanTmpDir = true;
 
   environment = {
@@ -117,7 +118,6 @@
       locate = pkgs.plocate;
       localuser = null;
     };
-    openssh.enable = true;
     resolved = {
       extraConfig = ''
         # No need when using Avahi
