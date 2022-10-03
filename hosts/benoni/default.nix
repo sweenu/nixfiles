@@ -1,4 +1,4 @@
-{ modulesPath, config, suites, pkgs, ... }:
+{ self, modulesPath, config, suites, pkgs, ... }:
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -7,7 +7,7 @@
     ./traefik
     ./authelia
     ./nextcloud
-  ] ++ suites.base;
+  ] ++ suites.server ++ suites.base;
 
   boot = {
     loader.grub = {
@@ -23,17 +23,27 @@
   fileSystems."/boot" = { device = "/dev/disk/by-uuid/591D-B8EA"; fsType = "vfat"; };
   fileSystems."/opt" = { device = "/dev/disk/by-uuid/01a1dc15-ffeb-4237-805c-4b3bc1784738"; fsType = "ext4"; };
 
+  age.secrets.sshPrivateKey = {
+    file = "${self}/secrets/benoni_root_key.age";
+    path = "/root/.ssh/id_ed25519";
+    mode = "600";
+  };
+
   environment.defaultPackages = with pkgs; [ restic ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+  };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z"
-  ];
-
-  users.users."${config.vars.username}".openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z"
-  ];
+  users.users = {
+    root.openssh.authorizedKeys.keys = [
+      config.vars.sshPublicKey
+    ];
+    "${config.vars.username}".openssh.authorizedKeys.keys = [
+      config.vars.sshPublicKey
+    ];
+  };
 
   time.timeZone = "Europe/Paris";
 
