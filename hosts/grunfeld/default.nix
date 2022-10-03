@@ -1,11 +1,10 @@
-{ pkgs, config, profiles, ... }:
+{ lib, pkgs, config, suites, ... }:
 let
-  carokannKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z sweenu@carokann'';
-  benoniSystemKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGL0bFwpJXdt7vxT82aeMZhfwF5i0DEXaWT3SH2TzxIX root@benoni'';
+  benoniRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@benoni'';
   ipv4 = "192.168.0.24";
 in
 {
-  imports = [ profiles.vars ];
+  imports = suites.server;
 
   boot = {
     loader = {
@@ -97,15 +96,18 @@ in
   };
 
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      passwordAuthentication = false;
+    };
     tailscale.enable = true;
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [ carokannKey benoniSystemKey ];
 
   swapDevices = [
     { device = "/swapfile"; size = 1024; }
   ];
+  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey benoniRootKey ];
 
   hardware.enableRedistributableFirmware = true;
 
