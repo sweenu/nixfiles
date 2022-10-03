@@ -1,7 +1,6 @@
 Fixes:
 - [sway/swaylock] make sure wallpaper exists
 - [sway] screencast cannot be stopped when started with keybinding
-- [agenix] unpin and fix errors
 
 Improvments:
 - [NetworkManager] manage connections with nix (create a module)
