@@ -17,6 +17,7 @@ in
         criteria = "Dell Inc. DELL P2422HE 3KQS5L3";
         status = "enable";
         position = "0,0";
+        mode = "1920x1080";
       }
     ];
   };
