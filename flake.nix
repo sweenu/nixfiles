@@ -18,17 +18,15 @@
     agenix.url = "github:yaxitech/ragenix";
     agenix.inputs.nixpkgs.follows = "nixos";
 
-    bud.url = "github:divnix/bud";
-    bud.inputs.nixpkgs.follows = "nixos";
-    bud.inputs.devshell.follows = "digga/devshell";
-
     deploy.url = "github:serokell/deploy-rs";
     deploy.inputs.nixpkgs.follows = "nixos";
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
     arion.url = "github:hercules-ci/arion";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, bud, deploy, arion } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -49,7 +47,6 @@
           imports = [ (digga.lib.importExportableModules ./modules) ];
           modules = [
             agenix.nixosModules.age
-            bud.nixosModules.bud
             home.nixosModules.home-manager
             arion.nixosModules.arion
           ];
