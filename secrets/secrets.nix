@@ -22,4 +22,5 @@ in
 
   # restic
   "restic/nextcloud.age".publicKeys = [ carokann benoniHost ];
+  "restic/calibre.age".publicKeys = [ carokann benoniHost ];
 }

@@ -7,6 +7,7 @@
     ./traefik
     ./authelia
     ./nextcloud
+    ./calibre-web
   ] ++ suites.server ++ suites.base;
 
   boot = {
