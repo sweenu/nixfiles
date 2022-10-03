@@ -7,6 +7,7 @@
     ./traefik
     ./authelia
     ./nextcloud
+    ./calibre-web
   ] ++ suites.server ++ suites.base;
 
   boot = {
@@ -31,7 +32,7 @@
     mode = "600";
   };
 
-  environment.defaultPackages = with pkgs; [ restic ];
+  environment.defaultPackages = with pkgs; [ restic unison ];
 
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [
     config.vars.sshPublicKey
