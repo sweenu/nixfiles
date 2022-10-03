@@ -66,5 +66,12 @@
         }
       ];
     };
+    services.unison = {
+      enable = true;
+      pairs.calibre.roots = [
+        "${config.vars.home}/books"
+        "ssh://root@benoni//opt/calibre/data"
+      ];
+    };
   };
 }
