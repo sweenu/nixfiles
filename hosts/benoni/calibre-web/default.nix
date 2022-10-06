@@ -15,6 +15,7 @@ in
       pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
       timerConfig = { OnCalendar = "*-*-* *:00:00"; RandomizedDelaySec = "5m"; };
       passwordFile = config.age.secrets.resticCalibrePassword.path;
+      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/2946b770-8b05-4b75-b254-351f453a358c";
     };
   };
 
