@@ -21,6 +21,7 @@ in
       pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
       timerConfig = { OnCalendar = "*-*-* *:00:00"; RandomizedDelaySec = "5m"; };
       passwordFile = config.age.secrets.resticNextcloudPassword.path;
+      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a";
     };
   };
 
