@@ -6,6 +6,7 @@ in
 {
   # carokann
   "scw_conf.age".publicKeys = [ carokann ];
+  "fastmail_token.age".publicKeys = [ carokann ];
 
   # benoni
   "benoni_root_key.age".publicKeys = [ carokann benoniHost ];
