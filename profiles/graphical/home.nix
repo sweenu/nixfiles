@@ -5,8 +5,8 @@
     home.packages = with pkgs; [
       calibre
       imv
-      joplin-desktop
       libnotify
+      obsidian
       paprefs
       pavucontrol
       signal-desktop
