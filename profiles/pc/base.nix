@@ -30,7 +30,6 @@
       gpg-tui
       hledger
       hledger-iadd
-      joplin
       tmate
       viu
       wuzz
