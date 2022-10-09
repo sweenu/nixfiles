@@ -5,6 +5,7 @@ in
 {
   # carokann
   "scw_conf.age".publicKeys = [ carokann ];
+  "himalaya/google_app_password.age".publicKeys = [ carokann ];
 
   # benoni
   "benoni_root_key.age".publicKeys = [ carokann benoniHost ];
