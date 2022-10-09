@@ -1,5 +1,4 @@
 Fixes:
-- [sway/swaylock] make sure wallpaper exists
 - [sway] screencast cannot be stopped when started with keybinding
 
 Improvments:
