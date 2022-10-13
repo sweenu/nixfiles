@@ -6,8 +6,9 @@
     # services
     ./traefik
     ./authelia
-    ./nextcloud
-    ./calibre-web
+    ./nextcloud.nix
+    ./calibre-web.nix
+    ./simple-torrent.nix
   ] ++ suites.server ++ suites.base;
 
   boot = {
