@@ -9,6 +9,8 @@ in
   # benoni
   "benoni_root_key.age".publicKeys = [ carokann benoniHost ];
   "smtp_password.age".publicKeys = [ carokann benoniHost ];
+  "hercules-ci/binary-caches.json.age".publicKeys = [ carokann benoniHost ];
+  "hercules-ci/cluster-join-token.key.age".publicKeys = [ carokann benoniHost ];
   "traefik/env.age".publicKeys = [ carokann benoniHost ];
   "authelia/jwt_secret.age".publicKeys = [ carokann benoniHost ];
   "authelia/session_secret.age".publicKeys = [ carokann benoniHost ];

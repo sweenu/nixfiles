@@ -1,7 +1,7 @@
-{ config, suites, pkgs, ... }:
+{ config, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop;
+  imports = suites.laptop ++ [ profiles.hercules-ci-agent ];
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
