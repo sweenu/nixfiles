@@ -59,7 +59,7 @@
           suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
           with profiles; rec {
             base = (explodeAttrs core) ++ [ vars ];
-            server = [ profiles.server vars ];
+            server = [ profiles.server vars core.cachix ];
             desktop = base ++ [ audio snapclient ] ++ (explodeAttrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
             laptop = desktop ++ [ profiles.laptop ];
           };
