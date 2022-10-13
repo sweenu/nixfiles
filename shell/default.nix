@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
   exportedModules = [
-    ./devos.nix
+    ./nixfiles.nix
   ];
 }
