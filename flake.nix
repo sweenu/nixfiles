@@ -89,5 +89,9 @@
           profiles.system.sshUser = "root";
         };
       };
+
+      herculesCI = {
+        ciSystems = [ "x86_64-linux" ];
+      };
     };
 }
