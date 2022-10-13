@@ -37,7 +37,6 @@ in
       };
       labels = {
         "traefik.enable" = "true";
-
         "traefik.http.routers.to-calibre.service" = "calibre";
         "traefik.http.services.calibre.loadbalancer.server.port" = "8083";
       };
