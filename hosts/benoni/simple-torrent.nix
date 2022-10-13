@@ -1,0 +1,26 @@
+{ config, ... }:
+
+let
+  simpleTorrentDir = "/opt/simple-torrent";
+in
+{
+  virtualisation.arion.projects.simple-torrent.settings = {
+    enableDefaultNetwork = false;
+    networks.traefik.external = true;
+    services.simple-torrent.service = {
+      image = "boypt/cloud-torrent";
+      container_name = "simple-torrent";
+      volumes = [
+        "${simpleTorrentDir}/downloads:/downloads"
+        "${simpleTorrentDir}/torrents:/torrents"
+      ];
+      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      labels = {
+        "traefik.enable" = "true";
+        "traefik.http.routers.to-simple-torrent.service" = "simple-torrent";
+        "traefik.http.routers.to-simple-torrent.middlewares" = "authelia@docker";
+        "traefik.http.services.simple-torrent.loadbalancer.server.port" = "3000";
+      };
+    };
+  };
+}
