@@ -35,6 +35,10 @@
 
   environment.defaultPackages = with pkgs; [ restic unison ];
 
+  services.journald.extraConfig = ''
+    SystemMaxUse = 2G;
+  '';
+
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [
     config.vars.sshPublicKey
   ];
