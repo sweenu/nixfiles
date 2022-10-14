@@ -41,11 +41,6 @@
 
   time.timeZone = "Europe/Paris";
 
-  nix = {
-    gc.automatic = true;
-    optimise.automatic = true;
-  };
-
   virtualisation.docker.enable = true;
   virtualisation.arion.backend = "docker";
 

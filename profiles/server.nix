@@ -6,7 +6,10 @@
   documentation.enable = false;
 
   nix = {
-    gc.automatic = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 5d";
+    };
     optimise.automatic = true;
   };
 
