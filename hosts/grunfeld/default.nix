@@ -1,7 +1,6 @@
 { lib, pkgs, config, suites, ... }:
 let
   benoniRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@benoni'';
-  ipv4 = "192.168.0.24";
 in
 {
   imports = suites.server;
@@ -56,7 +55,7 @@ in
     nameservers = [ "1.1.1.1" ];
     interfaces.eth0 = {
       ipv4.addresses = [
-        { address = ipv4; prefixLength = 24; }
+        { address = config.vars.grunfeldIPv4; prefixLength = 24; }
       ];
       useDHCP = false;
     };

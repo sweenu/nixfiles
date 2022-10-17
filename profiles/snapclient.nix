@@ -1,15 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   systemd.user.services.snapclient = {
-    wantedBy = [
-      "pipewire.service"
-    ];
-    after = [
-      "pipewire.service"
-    ];
+    wantedBy = [ "default.target" ];
+    after = [ "pipewire.service" ];
+    description = "Snapcast client";
     serviceConfig = {
-      ExecStart = "${pkgs.snapcast}/bin/snapclient -h 192.168.0.24 --player pulse --mixer hardware";
+      ExecStart = "${pkgs.snapcast}/bin/snapclient -h ${config.vars.grunfeldIPv4} --player pulse --mixer hardware";
+      Restart = "on-failure";
     };
   };
 }
