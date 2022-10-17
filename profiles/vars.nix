@@ -26,5 +26,8 @@
     smtpUsername = "contact@sweenu.xyz";
     smtpHost = "smtp.fastmail.com";
     smtpPort = 465;
+
+    # RaspberryPi
+    grunfeldIPv4 = "192.168.0.24";
   };
 }
