@@ -7,5 +7,6 @@ then
     notify-send System "Suspend reactivated"
 else
     notify-send System "Suspend inhibited"
-    systemd-inhibit --what=sleep --who=$USER --why="$REASON" $CMD
+    # shellcheck disable=SC2086
+    systemd-inhibit --what=sleep --who="$USER" --why="$REASON" $CMD
 fi
