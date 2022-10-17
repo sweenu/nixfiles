@@ -26,13 +26,14 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 
 ### Self-hosted apps on my server (benoni)
 
-I deploy most services as Docker containers through [arion](https://github.com/hercules-ci/arion)
+I deploy most services as Docker containers through [Arion](https://github.com/hercules-ci/arion)
 
-- [træfik](https://traefik.io/traefik)
+- [Træfik](https://traefik.io/traefik)
 - [Authelia](https://www.authelia.com)
 - [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
-- [Simple-torrent](https://github.com/boypt/simple-torrent)
+- [SimpleTorrent](https://github.com/boypt/simple-torrent)
+- [SearXNG](https://docs.searxng.org)
 
 Important data is backed up with [Restic](https://restic.net) to a local disk connect to my RaspberryPi.
 
