@@ -30,6 +30,10 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
+    - domain: "searx.@domainName@"
+      resources:
+        - '^/opensearch\.xml(\?.*)?$'
+      policy: bypass
     - domain: "*.@domainName@"
       subject:
         - "user:sweenu"
