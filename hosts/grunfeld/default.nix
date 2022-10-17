@@ -3,7 +3,7 @@ let
   benoniRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@benoni'';
 in
 {
-  imports = suites.server;
+  imports = suites.server ++ [ ./snapserver.nix ];
 
   boot = {
     loader = {
@@ -69,32 +69,6 @@ in
       addresses = true;
       domain = true;
       userServices = true;
-    };
-  };
-
-  services.snapserver = {
-    enable = true;
-    openFirewall = true;
-    http = {
-      enable = true;
-      listenAddress = "0.0.0.0";
-      docRoot = "${pkgs.snapcast}/share/snapserver/snapweb/";
-    };
-    streams = {
-      Spotify = {
-        type = "librespot";
-        location = "${pkgs.librespot}/bin/librespot";
-        query = {
-          username = config.vars.email;
-          password = ""; # has to be set before deploying...
-          devicename = "Snapcast";
-          normalize = "true";
-          autoplay = "false";
-          cache = "/home/nixos/.cache/librespot";
-          killall = "true";
-          params = "--cache-size-limit=4G";
-        };
-      };
     };
   };
 

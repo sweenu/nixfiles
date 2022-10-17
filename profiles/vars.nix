@@ -21,13 +21,13 @@
 
     sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z sweenu@carokann";
 
-    # Server
+    # benoni
     domainName = "sweenu.xyz";
     smtpUsername = "contact@sweenu.xyz";
     smtpHost = "smtp.fastmail.com";
     smtpPort = 465;
 
-    # RaspberryPi
+    # grunfeld
     grunfeldIPv4 = "192.168.0.24";
   };
 }
