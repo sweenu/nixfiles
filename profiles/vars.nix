@@ -26,5 +26,8 @@
     smtpUsername = "brunoinec";
     smtpHost = "smtp.gmail.com";
     smtpPort = 587;
+
+    # RaspberryPi
+    grunfeldIPv4 = "192.168.0.24";
   };
 }
