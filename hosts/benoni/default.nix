@@ -9,6 +9,7 @@
     ./nextcloud.nix
     ./calibre-web.nix
     ./simple-torrent.nix
+    ./searx.nix
   ] ++ suites.server ++ suites.base;
 
   boot = {
