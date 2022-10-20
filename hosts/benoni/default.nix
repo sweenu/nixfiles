@@ -10,6 +10,7 @@
     ./calibre-web.nix
     ./simple-torrent.nix
     ./searx.nix
+    ./invidious.nix
   ] ++ suites.server ++ suites.base;
 
   boot = {

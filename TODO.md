@@ -7,4 +7,3 @@ Improvments:
 - [swaylock] unlock with the fingerprint reader without pressing enter first
 - [pdbpp] package it
 - [restic] install on laptop and ease the use for the grunfeld backups
-- deploy invidious: https://docs.invidious.io/installation/#docker-compose-method-production
