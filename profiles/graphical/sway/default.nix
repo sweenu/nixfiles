@@ -138,9 +138,7 @@
       systemdIntegration = false;
     };
 
-    xdg.configFile."swaylock/config".text = ''
-      image=${config.vars.wallpaper}
-    '';
+    programs.swaylock.settings = import ./swaylock.nix { wallpaper = config.vars.wallpaper; };
 
     home.file.".xkb/symbols/custom-us".text = ''
       default partial alphanumeric_keys
