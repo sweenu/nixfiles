@@ -43,4 +43,4 @@ certificatesResolvers:
       email: @email@
       storage: @acmeDirInContainer@/acme.json
       dnsChallenge:
-        provider: digitalocean
+        provider: cloudflare
