@@ -6,6 +6,7 @@ in
 {
   # carokann
   "scw_conf.age".publicKeys = [ carokann ];
+  "proton_vpn_wireguard_private_key.age".publicKeys = [ carokann ];
 
   # benoni
   "benoni_root_key.age".publicKeys = [ carokann benoniHost ];
