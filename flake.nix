@@ -7,7 +7,6 @@
 
     digga.url = "github:divnix/digga";
     digga.inputs.nixpkgs.follows = "nixos";
-    digga.inputs.latest.follows = "nixos";
     digga.inputs.nixlib.follows = "nixos";
     digga.inputs.home-manager.follows = "home";
     digga.inputs.deploy.follows = "deploy";

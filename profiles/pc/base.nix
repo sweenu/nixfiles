@@ -34,7 +34,6 @@
       hledger-iadd
       tmate
       viu
-      wuzz
       you-get
     ];
 
