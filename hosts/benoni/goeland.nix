@@ -1,0 +1,60 @@
+{ self, config, ... }:
+
+let
+  feeds = {
+    xe = "https://xeiaso.net/blog.json";
+    determinate-systems = "https://determinate.systems/posts?format=rss";
+    emersion = "https://emersion.fr/blog/atom.xml";
+    drew-devault = "https://drewdevault.com/blog/index.xml";
+    tailscale = "https://tailscale.com/blog/index.xml";
+    poettering = "https://0pointer.net/blog/index.atom";
+    notion = "https://rss.app/feeds/NsIZtd0vgm0BsqKL.xml";
+  };
+in
+{
+  age.secrets.smtpPassword = {
+    file = "${self}/secrets/smtp_password.age";
+    owner = "goeland";
+    group = "goeland";
+  };
+
+  services.goeland = {
+    enable = true;
+    schedule = "Mon, 00:00:00";
+    settings = {
+      loglevel = "info";
+      email = {
+        host = config.vars.smtpHost;
+        port = config.vars.smtpPort;
+        username = config.vars.smtpUsername;
+        password_file = config.age.secrets.smtpPassword.path;
+        include-header = true;
+        include-footer = true;
+        include-title = true;
+        include-content = false;
+        include-toc = true;
+        encryption = "ssl";
+      };
+      pipes.weekly-digest = {
+        source = "all";
+        destination = "email";
+        email_to = [ config.vars.email ];
+        email_from = "goeland <${config.vars.email}>";
+        email_title = "Weekly digest";
+      };
+      sources =
+        let
+          lastWeekFilter = "lasthours(${toString (7 * 24)})";
+          defaultFilters = [ lastWeekFilter "includelink" "toc(title)" "first" ];
+          makeSource = name: url: { type = "feed"; filters = defaultFilters; url = url; };
+        in
+        (builtins.mapAttrs makeSource feeds) // {
+          all = {
+            type = "merge";
+            filters = [ "digest" ];
+            sources = builtins.attrNames feeds;
+          };
+        };
+    };
+  };
+}

@@ -34,6 +34,7 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 - [Calibre-web](https://github.com/janeczku/calibre-web)
 - [SimpleTorrent](https://github.com/boypt/simple-torrent)
 - [SearXNG](https://docs.searxng.org)
+- [goeland](https://github.com/slurdge/goeland)
 
 Important data is backed up with [Restic](https://restic.net) to a local disk connect to my RaspberryPi.
 
