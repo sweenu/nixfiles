@@ -1,0 +1,4 @@
+[
+  ./programs/goeland.nix
+]
+
