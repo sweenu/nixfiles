@@ -24,6 +24,7 @@ in
   "restic/nextcloud.age".publicKeys = [ carokann benoniHost ];
   "restic/calibre.age".publicKeys = [ carokann benoniHost ];
   "searx/env.age".publicKeys = [ carokann benoniHost ];
+  "n8n/env.age".publicKeys = [ carokann benoniHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];

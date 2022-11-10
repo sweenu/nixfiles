@@ -11,6 +11,7 @@
     ./simple-torrent.nix
     ./searx
     ./goeland.nix
+    ./n8n
   ] ++ suites.server ++ suites.base;
 
   boot = {
