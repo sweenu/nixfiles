@@ -45,7 +45,7 @@
     fwupd.enable = true;
   };
 
-  time.timeZone = "Europe/Paris";
+  time.timeZone = config.vars.timezone;
 
   virtualisation.docker = {
     enable = true;

@@ -31,7 +31,7 @@ in
       ];
       networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
       environment = {
-        TZ = "Europe/Paris";
+        TZ = config.vars.timezone;
         PUID = "0";
         PGID = "0";
       };

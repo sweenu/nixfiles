@@ -26,6 +26,8 @@ in
 
     sshPublicKey = mkOption { type = types.str; };
 
+    timezone = mkOption { type = types.str; };
+
     # Server vars
     domainName = mkOption { type = types.str; };
     smtpUsername = mkOption { type = types.str; };

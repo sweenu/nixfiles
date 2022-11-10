@@ -45,7 +45,7 @@
     config.vars.sshPublicKey
   ];
 
-  time.timeZone = "Europe/Paris";
+  time.timeZone = config.vars.timezone;
 
   virtualisation.docker.enable = true;
   virtualisation.arion.backend = "docker";

@@ -35,7 +35,7 @@ in
       ];
       networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
       environment = {
-        TZ = "Europe/Paris";
+        TZ = config.vars.timezone;
         AUTHELIA_JWT_SECRET_FILE = config.age.secrets."authelia/jwtSecret".path;
         AUTHELIA_SESSION_SECRET_FILE = config.age.secrets."authelia/sessionSecret".path;
         AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE = config.age.secrets."authelia/storageEncryptionKey".path;

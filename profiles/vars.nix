@@ -21,6 +21,8 @@
 
     sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z sweenu@carokann";
 
+    timezone = "Europe/Paris";
+
     # benoni
     domainName = "sweenu.xyz";
     smtpUsername = "contact@sweenu.xyz";

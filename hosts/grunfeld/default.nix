@@ -76,7 +76,7 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
-  time.timeZone = "Europe/Paris";
+  time.timeZone = config.vars.timezone;
 
   system.stateVersion = "22.11";
 }
