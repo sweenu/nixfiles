@@ -19,8 +19,23 @@ in
       repository = "sftp:root@grunfeld:/data/backups/nextcloud";
       paths = [ nextcloudDir ];
       pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
-      timerConfig = { OnCalendar = "*-*-* *:00:00"; RandomizedDelaySec = "5m"; };
+      timerConfig = {
+        OnCalendar = "*-*-* *:00:00"; # every hour
+        RandomizedDelaySec = "5m";
+      };
       passwordFile = config.age.secrets.resticNextcloudPassword.path;
+      backupPrepareCommand =
+        let
+          servicesSettings = config.virtualisation.arion.projects.nextcloud.settings.services;
+          dbContainerName = servicesSettings.db.service.container_name;
+          postgresUser = servicesSettings.db.service.environment.POSTGRES_USER;
+          postgresDatabase = servicesSettings.nextcloud.service.environment.POSTGRES_DB;
+        in
+        ''
+          ${pkgs.docker}/bin/docker exec ${dbContainerName} \
+          pg_dump -U ${postgresUser} -d ${postgresDatabase} > \
+          ${nextcloudDir}/db.dump
+        '';
       backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a";
     };
   };
@@ -33,11 +48,11 @@ in
         container_name = "nextcloud";
         links = [ "db" ];
         networks = [ "default" config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
-        volumes = [
-          "nextcloud:/var/www/html"
-          "${nextcloudDir}/config:/var/www/html/config"
-          "${nextcloudDir}/data:/var/www/html/data"
-          "${nextcloudDir}/custom_apps:/var/www/html/custom_apps"
+        volumes = let nextcloudContainerDir = "/var/www/html"; in [
+          "nextcloud:${nextcloudContainerDir}"
+          "${nextcloudDir}/config:${nextcloudContainerDir}/config"
+          "${nextcloudDir}/data:${nextcloudContainerDir}/data"
+          "${nextcloudDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
           "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
         ];
         environment = {
