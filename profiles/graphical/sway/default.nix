@@ -2,6 +2,7 @@
 
 {
   programs.sway.enable = true; # sets important config values (e.g. swaylock in pam)
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
