@@ -19,6 +19,7 @@
     openssh = {
       enable = true;
       passwordAuthentication = false;
+      openFirewall = false;
     };
     tailscale.enable = true;
   };
