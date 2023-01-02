@@ -14,7 +14,7 @@
     home.url = "github:nix-community/home-manager";
     home.inputs.nixpkgs.follows = "nixos";
 
-    agenix.url = "github:yaxitech/ragenix";
+    agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixos";
 
     deploy.url = "github:serokell/deploy-rs";
@@ -34,7 +34,7 @@
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
-          agenix.overlays.default
+          agenix.overlay
           ./pkgs/default.nix
         ];
       };

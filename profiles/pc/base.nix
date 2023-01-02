@@ -11,6 +11,7 @@
     gitui
     manix
     nixpkgs-review
+    python3Packages.ptpython
     tealdeer
     wol
   ];
@@ -26,12 +27,12 @@
     };
   };
 
+  programs.steam.enable = true;
+
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
       bitwarden-cli
       gpg-tui
-      hledger
-      hledger-iadd
       tmate
       viu
       you-get
