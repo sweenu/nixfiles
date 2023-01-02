@@ -34,7 +34,7 @@
         colors.focused = { border = "#ffffff"; background = "#ffffff"; text = "#ffffff"; indicator = "#ffffff"; childBorder = "#ffffff"; };
         focus.newWindow = "none";
         gaps.inner = 20;
-        fonts = { names = [ "DejaVu" ]; size = 0.0; };
+        fonts = { names = [ "DejaVu" ]; size = 0.1; };
         bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
         floating = {
           titlebar = false;

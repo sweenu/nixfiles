@@ -36,7 +36,7 @@
       [language.python]
       filetypes = ["python"]
       roots = ["pyproject.toml", "requirements.txt", "setup.py", ".git", ".hg"]
-      command = "${pkgs.python310Packages.python-lsp-server}/bin/pylsp"
+      command = "${pkgs.python3Packages.python-lsp-server}/bin/pylsp"
       settings_section = "_"
       [language.python.settings._]
       pylsp.configurationSources = ["flake8"]

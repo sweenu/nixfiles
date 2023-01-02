@@ -145,7 +145,7 @@ rec {
   "${mod}+Shift+Down" = ''exec ${ddcciLight "-U 5"}'';
 
   # turn off laptop screen
-  F9 = "exec swaymsg output eDP-1 dpms toggle";
+  F9 = "exec swaymsg output eDP-1 power toggle";
 
   # Inhibit suspend
   F12 = "exec ${pkgs.sway-inhibit}/bin/sway-inhibit";

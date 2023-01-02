@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
-  boot.kernelModules = [ "ddcci" ];
+  # waiting for https://gitlab.com/ddcci-driver-linux/ddcci-driver-linux/-/merge_requests/11 to be merged
+  # boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+  # boot.kernelModules = [ "ddcci" ];
 
   fonts.fonts = with pkgs; [
     dejavu_fonts
