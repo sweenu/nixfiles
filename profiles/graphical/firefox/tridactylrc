@@ -12,7 +12,7 @@ bind ge current_url tabopen
 bind yt tabduplicate
 
 " Git{Hub,Lab} git clone via SSH yank
-bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/\/?$/,".git") | clipboard yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/(.+?\/.+?\/).*/, "$1").replace(/\/?$/,".git") | clipboard yank
 
 # Scrolling
 bind j scrollline 2
