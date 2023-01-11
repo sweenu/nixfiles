@@ -27,4 +27,5 @@ final: prev: with prev;
     text = (builtins.readFile ./sway/choose-capture.sh);
     runtimeInputs = [ wofi ];
   };
+  a2u = callPackage ./a2u.nix { };
 }
