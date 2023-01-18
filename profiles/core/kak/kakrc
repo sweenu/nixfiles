@@ -16,6 +16,7 @@ addhl global/trailing-whitespaces regex "\h+$" 0:black,red
 map global user c ":comment-line<ret>" -docstring "Comment line"
 map global insert <tab> "<a-;><a-gt>"
 map global insert <s-tab> "<a-;><lt>"
+map global normal <a-%> "*<percent>s<ret>" # select all occurences of the current selection in the file
 
 # scroll with <c-e> and <c-y> like in vim
 map global normal <c-e> "vj"
