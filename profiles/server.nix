@@ -18,8 +18,8 @@
   services = {
     openssh = {
       enable = true;
-      passwordAuthentication = false;
       openFirewall = false;
+      settings.PasswordAuthentication = false;
     };
     tailscale.enable = true;
   };
