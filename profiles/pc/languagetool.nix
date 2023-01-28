@@ -1,6 +1,6 @@
 {
   services.languagetool = {
-    enable = true;
+    enable = false;
     port = 61000;
   };
 }
