@@ -9,6 +9,7 @@ let
     tailscale = "https://tailscale.com/blog/index.xml";
     poettering = "https://0pointer.net/blog/index.atom";
     notion = "https://rss.app/feeds/NsIZtd0vgm0BsqKL.xml";
+    starlwart = "https://stalwartlabs.medium.com/feed";
   };
 in
 {
