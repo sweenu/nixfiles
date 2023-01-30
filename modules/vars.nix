@@ -2,9 +2,6 @@
 
 with lib;
 
-let
-  cfg = config.vars;
-in
 {
   options.vars = {
     email = mkOption { type = types.str; };
