@@ -34,7 +34,7 @@
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
-          agenix.overlay
+          agenix.overlays.default
           ./pkgs/default.nix
         ];
       };
