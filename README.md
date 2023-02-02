@@ -45,7 +45,7 @@ To create a bootstrap ISO for a personal computer run:
 $ nixos-generate --flake '.#bootstrap' --format iso
 ```
 
-To create a ready to boot SD card for a RaspberryPi, do the following:
+To create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
 $ nixos-generate --flake '.#grunfeld' --format sd-aarch64 --system aarch64-linux
 $ unzstd -d {the output path from the command above} -o nixos-sd-image.img

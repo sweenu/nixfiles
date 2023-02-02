@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  nixpkgs.config.firefox.enableTridactylNative = true;
+  nixpkgs.config.firefox = {
+    enableTridactylNative = true;
+    speechSynthesisSupport = true;
+  };
 
   home-manager.users."${config.vars.username}" = {
     programs.firefox = {
