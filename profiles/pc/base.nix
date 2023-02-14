@@ -6,6 +6,7 @@
   environment.defaultPackages = with pkgs; [
     brave
     ffmpeg
+    simple-scan
     spotify
     ethtool
     gitui
