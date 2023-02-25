@@ -2,6 +2,8 @@
 server:
   host: 0.0.0.0
   port: @autheliaPort@
+  buffers:
+    read: 16384
 
 log:
   level: warn
