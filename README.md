@@ -36,7 +36,7 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 - [SearXNG](https://docs.searxng.org)
 - [goeland](https://github.com/slurdge/goeland)
 
-Important data is backed up with [Restic](https://restic.net) to a local disk connect to my RaspberryPi.
+Important data is backed up with [Restic](https://restic.net) to a local disk connected to my RaspberryPi.
 
 
 ## Bootstrap
