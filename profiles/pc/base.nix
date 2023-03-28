@@ -28,6 +28,8 @@
     };
   };
 
+  security.polkit.enable = true;
+
   programs.steam.enable = true;
 
   home-manager.users."${config.vars.username}" = {

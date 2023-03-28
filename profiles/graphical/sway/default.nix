@@ -6,8 +6,6 @@
 
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
-      swayidle
-      swaylock
       wofi
       wdisplays
       wf-recorder
@@ -97,9 +95,10 @@
           };
         };
         startup = [
-          { command = "swayidle -w before-sleep 'swaylock -f' lock 'swaylock -f'"; }
+          { command = "${pkgs.swayidle}/bin/swayidle -w before-sleep '${pkgs.swaylock}/bin/swaylock -f' lock '${pkgs.swaylock}/bin/swaylock -f'"; }
           { command = "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
           { command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
+          { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
         ];
         modifier = "Mod4";
         terminal = "${config.vars.terminalBin}";
