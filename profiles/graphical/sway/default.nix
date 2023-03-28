@@ -117,7 +117,7 @@
           system = {
             r = "exec reboot";
             s = "exec shutdown now";
-            p = "exec systemctl suspend; mode default";
+            p = "exec systemctl suspend-then-hibernate; mode default";
             l = "exec swaylock; mode default";
             Return = "mode default";
             Escape = "mode default";

@@ -2,8 +2,8 @@
 
 {
   services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchExternalPower = "suspend";
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchExternalPower = "suspend-then-hibernate";
     lidSwitchDocked = "ignore";
     extraConfig = ''
       HandlePowerKey=lock
@@ -17,6 +17,7 @@
     };
   };
   powerManagement.powertop.enable = true;
+  systemd.sleep.extraConfig = "HibernateDelaySec=2h";
 
   # Reload ddcci module on monitor hotplug
   services.udev.extraRules =

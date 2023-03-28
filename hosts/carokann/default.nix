@@ -3,19 +3,21 @@
 {
   imports = suites.laptop ++ [ profiles.hercules-ci-agent ];
 
-  boot = {
+  boot = let encryptedRoot = "cryptroot"; in {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "sd_mod" ];
-      luks.devices."cryptroot".device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+      luks.devices.${encryptedRoot}.device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
     };
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "resume_offset=225501184" ];
     loader = {
       systemd-boot.enable = true;
       systemd-boot.editor = false;
       efi.canTouchEfiVariables = true;
     };
+    resumeDevice = "/dev/mapper/${encryptedRoot}";
   };
 
   fileSystems = {
@@ -28,6 +30,13 @@
       fsType = "vfat";
     };
   };
+
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 1024 * 32;
+    }
+  ];
 
   hardware = {
     bluetooth = {
