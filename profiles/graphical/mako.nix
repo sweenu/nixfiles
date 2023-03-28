@@ -1,7 +1,7 @@
 { config, ... }:
 
 {
-  home-manager.users."${config.vars.username}".programs.mako = {
+  home-manager.users."${config.vars.username}".services.mako = {
     enable = true;
     font = "DejaVu Sans Mono Nerd Font Complete 10";
     backgroundColor = "#2D3748";
