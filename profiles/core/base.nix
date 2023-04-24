@@ -2,7 +2,7 @@
 
 {
   systemd.services.NetworkManager-wait-online.enable = false;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   environment = {
     # Using anything other than bash seems to not be recommended in Nix
