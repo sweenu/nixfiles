@@ -14,7 +14,8 @@
     home.url = "github:nix-community/home-manager";
     home.inputs.nixpkgs.follows = "nixos";
 
-    agenix.url = "github:ryantm/agenix";
+    # pin because of some bug
+    agenix.url = "github:ryantm/agenix/2994d002dcff5353ca1ac48ec584c7f6589fe447";
     agenix.inputs.nixpkgs.follows = "nixos";
 
     deploy.url = "github:serokell/deploy-rs";
