@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 
 with lib;
 
@@ -20,6 +20,8 @@ with lib;
     screenshotFolder = mkOption { type = types.str; };
     screencastFolder = mkOption { type = types.str; };
     wallpaper = mkOption { type = types.str; };
+    defaultFont = mkOption { type = types.str; };
+    defaultMonoFont = mkOption { type = types.str; };
 
     sshPublicKey = mkOption { type = types.str; };
 

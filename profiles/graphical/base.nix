@@ -1,14 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
-  boot.kernelModules = [ "ddcci" ];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
+  # boot.kernelModules = [ "ddcci" ];
 
   fonts.fonts = with pkgs; [
-    dejavu_fonts
+    roboto
     font-awesome
+    # only install those fonts from nerdfonts
+    (nerdfonts.override {
+      fonts = [
+        "DejaVuSansMono"
+      ];
+    })
     twitter-color-emoji
-    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
   ];
 
   programs.light.enable = true;

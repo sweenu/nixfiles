@@ -7,7 +7,7 @@
     settings = {
       main = {
         shell = "${pkgs.tmux}/bin/tmux";
-        font = "DejaVuSansMono Nerd Font:size=10";
+        font = "${config.vars.defaultMonoFont}:size=10";
         pad = "10x10";
         selection-target = "both";
       };

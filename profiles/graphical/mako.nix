@@ -3,7 +3,7 @@
 {
   home-manager.users."${config.vars.username}".services.mako = {
     enable = true;
-    font = "DejaVu Sans Mono Nerd Font Complete 10";
+    font = "${config.vars.defaultFont} 10";
     backgroundColor = "#2D3748";
     progressColor = "source #718096";
     textColor = "#F7FAFC";

@@ -15,7 +15,7 @@
       };
       font = {
         size = 10.0;
-        normal = { family = "DejaVuSansMono Nerd Font"; };
+        normal = { family = config.vars.defaultMonoFont; };
       };
       colors = {
         primary = {
