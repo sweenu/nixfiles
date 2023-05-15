@@ -39,12 +39,11 @@
           criteria = [{ app_id = "zoom"; }];
           border = 1;
         };
+        assigns = { "9:" = [{ title = "Spotify"; }]; };
         window = {
           border = 1;
           titlebar = false;
           commands = [
-            # hack around spotify's wm_class bug: https://github.com/swaywm/sway/issues/3793
-            { criteria = { class = "Spotify"; }; command = "move to workspace 9:"; }
             {
               criteria = { title = "^[Pp]icture[- ]in[- ][Pp]icture"; };
               command = ''floating enable; \
