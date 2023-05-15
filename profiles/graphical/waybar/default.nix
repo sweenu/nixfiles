@@ -25,7 +25,7 @@
             max-length = 40;
             format-icons = {
               spotify = "";
-              default = "";
+              default = "";
             };
             escape = true;
             on-click = "playerctl --player='spotify,any' play-pause";
@@ -36,8 +36,8 @@
             # "scroll-step" = 1 // % can be a float;
             format = "{icon} {volume}% {format_source}";
             format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = "婢 {icon} {format_source}";
-            format-muted = "婢 {format_source}";
+            format-bluetooth-muted = "󰝟 {icon} {format_source}";
+            format-muted = "󰝟 {format_source}";
             format-source = " {volume}%";
             format-source-muted = "";
             format-icons = {
@@ -47,7 +47,7 @@
               phone = "";
               portable = "";
               car = "";
-              default = [ "" "" "" ];
+              default = [ " " " " " " ];
             };
             on-click = "pavucontrol";
           };
@@ -62,11 +62,11 @@
               critical = 10;
             };
             format = "{icon} {capacity}%";
-            format-charging = " {capacity}%";
-            format-plugged = " {capacity}%";
+            format-charging = "  {capacity}%";
+            format-plugged = "  {capacity}%";
             format-alt = "{icon} {time}";
             format-time = "{H}h{M}";
-            format-icons = [ "" "" "" "" "" ];
+            format-icons = [ " " " " " " " " " " ];
           };
           clock = {
             interval = 1;
@@ -79,7 +79,7 @@
             format-ethernet = "Ethernet ";
             format-linked = "Ethernet (No IP) ";
             format-disconnected = "Disconnected ";
-            format-alt = "{bandwidthDownBits} {bandwidthUpBits}";
+            format-alt = " {bandwidthDownBits}  {bandwidthUpBits}";
           };
         };
       };
