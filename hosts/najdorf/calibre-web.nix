@@ -23,7 +23,7 @@ in
     enableDefaultNetwork = false;
     networks.traefik.external = true;
     services.calibre.service = {
-      image = "lscr.io/linuxserver/calibre-web:0.6.19";
+      image = "lscr.io/linuxserver/calibre-web:0.6.20";
       container_name = "calibre-web";
       volumes = [
         "${calibreDir}/config:/config"
