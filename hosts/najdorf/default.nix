@@ -11,6 +11,7 @@
     ./simple-torrent.nix
     ./goeland.nix
     ./n8n
+    ./ig-story-fetcher.nix
   ] ++ suites.server ++ suites.base;
 
   boot = {

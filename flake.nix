@@ -24,9 +24,11 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
 
     arion.url = "github:hercules-ci/arion";
+
+    ig-story-fetcher.url = "github:sweenu/ig-story-fetcher";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -35,8 +37,9 @@
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
-          agenix.overlays.default
           ./pkgs/default.nix
+          agenix.overlays.default
+          ig-story-fetcher.overlays.default
         ];
       };
 
@@ -49,6 +52,7 @@
             agenix.nixosModules.age
             home.nixosModules.home-manager
             arion.nixosModules.arion
+            ig-story-fetcher.nixosModules.ig-story-fetcher
           ];
         };
 

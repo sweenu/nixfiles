@@ -25,6 +25,7 @@ in
   "restic/calibre.age".publicKeys = [ carokann najdorfHost ];
   "searx/env.age".publicKeys = [ carokann najdorfHost ];
   "n8n/env.age".publicKeys = [ carokann najdorfHost ];
+  "ig_story_fetcher_config.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
