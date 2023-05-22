@@ -25,7 +25,7 @@
 
     timezone = "Europe/Paris";
 
-    # benoni
+    # najdorf
     domainName = "sweenu.xyz";
     smtpUsername = "contact@sweenu.xyz";
     smtpHost = "smtp.fastmail.com";

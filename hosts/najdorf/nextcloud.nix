@@ -95,11 +95,9 @@ in
         ];
       };
     };
-    docker-compose.raw = {
-      volumes = {
-        nextcloud = { };
-        nextcloud_db = { };
-      };
+    docker-compose.volumes = {
+      nextcloud = { };
+      nextcloud_db = { };
     };
   };
 }

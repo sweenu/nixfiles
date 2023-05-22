@@ -1,6 +1,6 @@
 { lib, pkgs, config, suites, ... }:
 let
-  benoniRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@benoni'';
+  najdorfRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@najdorf'';
 in
 {
   imports = suites.server ++ [ ./snapserver.nix ];
@@ -72,7 +72,7 @@ in
     };
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [ benoniRootKey ];
+  users.users.root.openssh.authorizedKeys.keys = [ najdorfRootKey ];
 
   hardware.enableRedistributableFirmware = true;
 

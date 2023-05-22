@@ -79,7 +79,7 @@
       enable = true;
       pairs.calibre.roots = [
         "${config.vars.home}/books"
-        "ssh://root@benoni//opt/calibre/data"
+        "ssh://root@najdorf//opt/calibre/data"
       ];
     };
   };

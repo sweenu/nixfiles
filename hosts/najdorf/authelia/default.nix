@@ -57,8 +57,6 @@ in
         "traefik.http.routers.to-authelia.middlewares" = "authelia-headers";
       };
     };
-    docker-compose.raw = {
-      volumes.authelia = { };
-    };
+    docker-compose.volumes.authelia = { };
   };
 }

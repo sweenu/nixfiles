@@ -9,29 +9,28 @@
     ./nextcloud.nix
     ./calibre-web.nix
     ./simple-torrent.nix
-    ./searx
     ./goeland.nix
     ./n8n
   ] ++ suites.server ++ suites.base;
 
   boot = {
-    loader.grub = {
-      device = "nodev";
-      efiSupport = true;
-      efiInstallAsRemovable = true;
+    loader.grub.device = "/dev/sda";
+    initrd = {
+      kernelModules = [ "nvme" ];
+      availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" ];
     };
-    initrd.kernelModules = [ "nvme" ];
     kernelPackages = pkgs.linuxPackages_5_10;
   };
 
   fileSystems = {
-    "/" = { device = "/dev/vda1"; fsType = "ext4"; };
-    "/boot" = { device = "/dev/disk/by-uuid/591D-B8EA"; fsType = "vfat"; };
-    "/opt" = { device = "/dev/disk/by-uuid/01a1dc15-ffeb-4237-805c-4b3bc1784738"; fsType = "ext4"; };
+    "/" = { device = "/dev/disk/by-uuid/210d49bd-31f9-45fe-bf0f-eddf87375335"; fsType = "ext4"; };
+    "/boot" = { device = "/dev/disk/by-uuid/88492e50-02a4-4a00-bf63-07b3b3e979a9"; fsType = "ext4"; };
   };
 
+  swapDevices = [{ device = "/dev/disk/by-uuid/73dfbe1b-577d-4fee-b455-5d6366a3c311"; }];
+
   age.secrets.sshPrivateKey = {
-    file = "${self}/secrets/benoni_root_key.age";
+    file = "${self}/secrets/najdorf_root_key.age";
     path = "/root/.ssh/id_ed25519";
     mode = "600";
   };
@@ -51,5 +50,5 @@
   virtualisation.docker.enable = true;
   virtualisation.arion.backend = "docker";
 
-  zramSwap.enable = true;
+  zramSwap.enable = false;
 }

@@ -6,7 +6,7 @@
 
 I have three [NixOS](https://nixos.org) machines:
 - _carokann_: my personal computer ([Framework](https://frame.work) laptop).
-- _benoni_: my server ([Scaleway](https://scaleway.com) DEV1-M) where I deploy my self-hosted apps.
+- _najdorf_: my server ([Scaleway](https://scaleway.com) Dedibox Start-2-S-SATA) where I deploy my self-hosted apps.
 - _grunfeld_: my main RaspberryPi that serves as a [snapcast](https://github.com/badaix/snapcast) server and a local backup.
 
 The hosts communicate through [Tailscale](https://tailscale.com).
@@ -24,7 +24,7 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 - Shell: [fish](https://fishshell.com)
 - Browser: [firefox](https://www.mozilla.org/en-US/firefox)
 
-### Self-hosted apps on my server (benoni)
+### Self-hosted apps on my server (najdorf)
 
 I deploy most services as Docker containers through [Arion](https://github.com/hercules-ci/arion)
 

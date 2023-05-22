@@ -76,13 +76,13 @@
       homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
-        benoni = {
+        najdorf = {
           profilesOrder = [ "system" "sweenu" ];
           profiles.system.sshUser = "root";
           profiles.sweenu = {
             user = "sweenu";
             sshUser = "root";
-            path = deploy.lib.x86_64-linux.activate.home-manager self.homeConfigurations."sweenu@benoni";
+            path = deploy.lib.x86_64-linux.activate.home-manager self.homeConfigurations."sweenu@najdorf";
           };
         };
         grunfeld = {

@@ -137,7 +137,10 @@
       systemdIntegration = false;
     };
 
-    programs.swaylock.settings = import ./swaylock.nix { wallpaper = config.vars.wallpaper; };
+    programs.swaylock = {
+      enable = true;
+      settings = import ./swaylock.nix { wallpaper = config.vars.wallpaper; };
+    };
 
     home.file.".xkb/symbols/custom-us".text = ''
       default partial alphanumeric_keys
