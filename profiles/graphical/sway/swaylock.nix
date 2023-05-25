@@ -9,6 +9,7 @@ let
 in
 {
   image = wallpaper;
+  fingerprint = true;
 
   indicator-radius = 40;
   indicator-thickness = 30;

@@ -27,4 +27,6 @@ final: prev: with prev;
     text = (builtins.readFile ./sway/choose-capture.sh);
     runtimeInputs = [ wofi ];
   };
+
+  swaylock-fprintd = callPackage ./swaylock-fprintd.nix { };
 }

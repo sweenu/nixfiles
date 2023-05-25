@@ -94,7 +94,7 @@
           };
         };
         startup = [
-          { command = "${pkgs.swayidle}/bin/swayidle -w before-sleep '${pkgs.swaylock}/bin/swaylock -f' lock '${pkgs.swaylock}/bin/swaylock -f'"; }
+          { command = "${pkgs.swayidle}/bin/swayidle -w before-sleep '${pkgs.swaylock-fprintd}/bin/swaylock -f' lock '${pkgs.swaylock-fprintd}/bin/swaylock -f'"; }
           { command = "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
           { command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
@@ -116,7 +116,7 @@
             r = "exec reboot";
             s = "exec shutdown now";
             p = "exec systemctl suspend-then-hibernate; mode default";
-            l = "exec swaylock; mode default";
+            l = "exec ${pkgs.swaylock-fprintd}/bin/swaylock; mode default";
             Return = "mode default";
             Escape = "mode default";
           };
@@ -139,6 +139,7 @@
 
     programs.swaylock = {
       enable = true;
+      package = pkgs.swaylock-fprintd;
       settings = import ./swaylock.nix { wallpaper = config.vars.wallpaper; };
     };
 
