@@ -4,10 +4,10 @@
   users = {
     mutableUsers = false;
     users = {
-      root.hashedPassword = "$6$EL4ATFe.5R6PMnR9$R9QAXaiLuyqgSSbEdFqzz.C/wm/t4cFbwYg3un1lhp4bAJfolPISpJVcQlXSqoGKTbO3dbdzLQt7Io6J6C85Z/";
+      root.hashedPassword = "$y$j9T$jMx/XkaWfgV1bsRBjgmvd1$rDi8pFUskXUjlyhJefMZDYp6VwFy.zACp3wVtI7g.IA";
       "${config.vars.username}" = {
         shell = pkgs.fish;
-        hashedPassword = "$6$ZSnhFmZWAGBUh$eFMNPX2F/.6DKag10p1EM9bLsDwhMcRsb9DGg.qrGDBOK40VpDxNfx7jrD6uGOKb.bT2M0WN4YtJWpDy3GORW0";
+        hashedPassword = "$y$j9T$ZjVM7P34OZjC8/o5LI5N7/$nFGR9tfv6TDeIrf7FZ.o5Kb.WJuewOB6THeNBIuY44/";
         isNormalUser = true;
         extraGroups = [ "wheel" ]
           ++ pkgs.lib.optional config.virtualisation.libvirtd.enable "libvirtd"
