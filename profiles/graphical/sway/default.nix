@@ -134,7 +134,7 @@
         export _JAVA_AWT_WM_NONREPARENTING=1
       '';
       wrapperFeatures = { gtk = true; };
-      systemdIntegration = false;
+      systemd.enable = false;
     };
 
     programs.swaylock = {
