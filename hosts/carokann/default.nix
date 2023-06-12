@@ -1,7 +1,7 @@
-{ config, suites, profiles, pkgs, ... }:
+{ config, suites, pkgs, ... }:
 
 {
-  imports = suites.laptop ++ [ profiles.hercules-ci-agent ];
+  imports = suites.laptop;
 
   boot = let encryptedRoot = "cryptroot"; in {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
