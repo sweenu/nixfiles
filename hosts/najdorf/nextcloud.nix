@@ -44,7 +44,7 @@ in
     networks.traefik.external = true;
     services = rec {
       nextcloud.service = {
-        image = "nextcloud:26";
+        image = "nextcloud:27";
         container_name = "nextcloud";
         links = [ "db" ];
         networks = [ "default" config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
