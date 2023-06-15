@@ -3,6 +3,15 @@
 let
   nextcloudDir = "/opt/nextcloud";
   nextcloudSecretsDir = "${config.age.secretsDir}/nextcloud";
+  nextcloudContainerDir = "/var/www/html";
+  nextcloudVolumes = [
+    "nextcloud:${nextcloudContainerDir}"
+    "${nextcloudDir}/config:${nextcloudContainerDir}/config"
+    "${nextcloudDir}/data:${nextcloudContainerDir}/data"
+    "${nextcloudDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
+    "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
+  ];
+
 in
 {
   age.secrets = {
@@ -40,21 +49,15 @@ in
     };
   };
 
-  virtualisation.arion.projects.nextcloud.settings = {
+  virtualisation.arion.projects.nextcloud.settings = let version = "27"; in {
     networks.traefik.external = true;
     services = rec {
       nextcloud.service = {
-        image = "nextcloud:27";
+        image = "nextcloud:${version}";
         container_name = "nextcloud";
-        links = [ "db" ];
+        depends_on = [ "db" ];
         networks = [ "default" config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
-        volumes = let nextcloudContainerDir = "/var/www/html"; in [
-          "nextcloud:${nextcloudContainerDir}"
-          "${nextcloudDir}/config:${nextcloudContainerDir}/config"
-          "${nextcloudDir}/data:${nextcloudContainerDir}/data"
-          "${nextcloudDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
-          "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
-        ];
+        volumes = nextcloudVolumes;
         environment = {
           "POSTGRES_HOST" = "db";
           "POSTGRES_DB" = "nextcloud";
@@ -93,6 +96,12 @@ in
           "nextcloud_db:/var/lib/postgresql/data"
           "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
         ];
+      };
+      cron.service = {
+        image = "nextcloud:${version}";
+        volumes = nextcloudVolumes;
+        entrypoint = "/cron.sh";
+        depends_on = [ "db" ];
       };
     };
     docker-compose.volumes = {
