@@ -22,10 +22,13 @@
     deploy.inputs.nixpkgs.follows = "nixos";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixos";
 
     arion.url = "github:hercules-ci/arion";
+    arion.inputs.nixpkgs.follows = "nixos";
 
     ig-story-fetcher.url = "github:sweenu/ig-story-fetcher";
+    ig-story-fetcher.inputs.nixpkgs.follows = "nixos";
   };
 
   outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher } @ inputs:
@@ -40,6 +43,8 @@
           ./pkgs/default.nix
           agenix.overlays.default
           ig-story-fetcher.overlays.default
+          deploy.overlay
+          (self: super: { deploy = { inherit (nixos) deploy-rs; lib = super.deploy-rs.lib; }; })
         ];
       };
 
