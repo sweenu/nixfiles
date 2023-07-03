@@ -29,4 +29,5 @@ in
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
+  "3proxy_users.age".publicKeys = [ carokann grunfeldHost ];
 }

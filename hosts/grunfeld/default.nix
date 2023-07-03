@@ -3,7 +3,7 @@ let
   najdorfRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@najdorf'';
 in
 {
-  imports = suites.server ++ [ ./snapserver.nix ];
+  imports = suites.server ++ [ ./snapserver.nix ./3proxy.nix ];
 
   boot = {
     loader = {
