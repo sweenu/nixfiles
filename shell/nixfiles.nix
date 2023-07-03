@@ -9,6 +9,6 @@ in
     (nixfiles agenix)
     (nixfiles cachix)
     (nixfiles inputs.deploy.packages.${pkgs.system}.deploy-rs)
-    (nixfiles inputs.nixos-generators.defaultPackage.${pkgs.system})
+    (nixfiles inputs.nixos-generators.packages.${pkgs.system}.nixos-generate)
   ];
 }
