@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 {
-  fonts.fonts = [ pkgs.roboto ];
+  fonts.packages = [ pkgs.roboto ];
 
   home-manager.users."${config.vars.username}" = {
     programs.waybar = {

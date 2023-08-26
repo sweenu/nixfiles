@@ -4,7 +4,7 @@
   # boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
   # boot.kernelModules = [ "ddcci" ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     roboto
     font-awesome
     # only install those fonts from nerdfonts
