@@ -393,11 +393,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1693713564,
-        "narHash": "sha256-00w2uwb4O6Y1e2W5LG5UFyl1ZN3KFG7aoRdYEvT/BqA=",
+        "lastModified": 1693972774,
+        "narHash": "sha256-Dt9UZs0/DaIex598quYRYFuGabUbvFdNrHuvGc6HjBc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8e49b883890ccb52c059abb152b00a416342ec1c",
+        "rev": "b22d7bab30076bbb73744867d6c5bf7d6380570c",
         "type": "github"
       },
       "original": {
@@ -413,11 +413,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1687349120,
-        "narHash": "sha256-th/2intqxRwxoodeb4qfVdQnH/HOeL1N7V3kp1IIHas=",
+        "lastModified": 1694009988,
+        "narHash": "sha256-oGU3SKqp72gUTA2wwquzuc1u3I3cZWAyYixwu0FrrHg=",
         "owner": "sweenu",
         "repo": "ig-story-fetcher",
-        "rev": "186b64f4b2a87432e9ab6586e7cf9852d3a97e31",
+        "rev": "54ad621883ddd3eba321839d9cfb737a23432b4e",
         "type": "github"
       },
       "original": {
