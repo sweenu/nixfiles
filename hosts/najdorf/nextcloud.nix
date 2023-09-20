@@ -11,7 +11,6 @@ let
     "${nextcloudDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
     "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
   ];
-
 in
 {
   age.secrets = {
@@ -74,6 +73,8 @@ in
           "SMTP_SECURE" = "tls";
           "MAIL_FROM_ADDRESS" = config.vars.email;
           "MAIL_DOMAIN" = builtins.elemAt (lib.strings.splitString "@" config.vars.email) 1;
+          "PHP_UPLOAD_LIMIT" = "16G";
+          "APACHE_BODY_LIMIT" = "0";
         };
         env_file = [ config.age.secrets."nextcloud/envFile".path ];
         labels = {
