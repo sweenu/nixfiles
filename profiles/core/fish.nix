@@ -1,8 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [ exa trash-cli ];
+    home.packages = with pkgs; [ eza trash-cli ];
     programs.fish = {
       enable = true;
       interactiveShellInit = ''
@@ -67,9 +67,9 @@
         "..." = "cd ../..";
         "...." = "cd ../../..";
         "....." = "cd ../../../..";
-        ls = "exa $argv";
-        la = "exa -laa $argv";
-        tree = "exa -T $argv";
+        ls = "eza $argv";
+        la = "eza -laa $argv";
+        tree = "eza -T $argv";
         wget = "wget2 $argv";
         bwu = "set -Ux BW_SESSION (bw unlock --raw)";
         genpass = "bw generate -ulns --length 16";

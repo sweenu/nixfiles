@@ -18,8 +18,8 @@
       extraPackages = with pkgs; [
         # preview-tui
         # required dependencies
+        eza
         less
-        exa
         file
         coreutils
         unzip
