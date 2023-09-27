@@ -7,7 +7,7 @@
     brave
     ffmpeg
     simple-scan
-    spotify
+    spotifywm
     ethtool
     gitui
     manix
