@@ -1,22 +1,22 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
-  nixpkgs.config.firefox = {
-    enableTridactylNative = true;
-    speechSynthesisSupport = true;
+  programs.firefox = {
+    enable = true;
+    languagePacks = [ "en-US" "fr" ];
+    preferences = {
+      "services.sync.prefs.sync.browser.uiCustomization.state" = true;
+      "browser.shell.checkDefaultBrowser" = false;
+      "browser.aboutConfig.showWarning" = false;
+      "browser.uidensity" = 2;
+    };
+    nativeMessagingHosts.packages = [ pkgs.tridactyl-native ];
+    wrapperConfig = {
+      speechSynthesisSupport = true;
+    };
   };
 
   home-manager.users."${config.vars.username}" = {
-    programs.firefox = {
-      enable = true;
-      profiles."${config.vars.username}".settings = {
-        "services.sync.prefs.sync.browser.uiCustomization.state" = true;
-        "browser.shell.checkDefaultBrowser" = false;
-        "browser.aboutConfig.showWarning" = false;
-        "browser.uidensity" = 2;
-      };
-    };
-
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       MOZ_DBUS_REMOTE = "1";

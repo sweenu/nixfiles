@@ -109,7 +109,7 @@
     locate = {
       enable = true;
       interval = "daily";
-      locate = pkgs.plocate;
+      package = pkgs.plocate;
       localuser = null;
     };
     resolved = {

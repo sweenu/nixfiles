@@ -10,6 +10,7 @@
     digga.inputs.nixlib.follows = "nixos";
     digga.inputs.home-manager.follows = "home";
     digga.inputs.deploy.follows = "deploy";
+    digga.inputs.flake-utils-plus.follows = "flake-utils-plus";
 
     home.url = "github:nix-community/home-manager";
     home.inputs.nixpkgs.follows = "nixos";
@@ -29,9 +30,11 @@
 
     ig-story-fetcher.url = "github:sweenu/ig-story-fetcher";
     ig-story-fetcher.inputs.nixpkgs.follows = "nixos";
+
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 

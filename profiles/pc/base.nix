@@ -4,7 +4,6 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
-    brave
     ffmpeg
     simple-scan
     spotifywm
