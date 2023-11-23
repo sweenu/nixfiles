@@ -40,6 +40,7 @@
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       channelsConfig.allowUnfree = true;
+      channelsConfig.permittedInsecurePackages = [ "electron-24.8.6" ];
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
