@@ -48,7 +48,7 @@ in
     };
   };
 
-  virtualisation.arion.projects.nextcloud.settings = let version = "27.1.3"; in {
+  virtualisation.arion.projects.nextcloud.settings = let version = "28"; in {
     networks.traefik.external = true;
     services = rec {
       nextcloud.service = {
