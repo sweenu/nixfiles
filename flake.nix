@@ -73,7 +73,7 @@
           with profiles; rec {
             base = (explodeAttrs core) ++ [ vars ];
             server = [ profiles.server vars core.cachix ];
-            desktop = base ++ [ audio snapclient virt-manager ] ++ (explodeAttrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
+            desktop = base ++ [ audio virt-manager ] ++ (explodeAttrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
             laptop = desktop ++ [ profiles.laptop ];
           };
         };

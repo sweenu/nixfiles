@@ -5,8 +5,7 @@
     enable = true;
     settings = {
       shell = { program = "${pkgs.tmux}/bin/tmux"; };
-      tabspace = 4;
-      mouse = { hide_cursor_typing = true; };
+      mouse = { hide_when_typing = true; };
       window = {
         opacity = 1;
         decorations = "none";
