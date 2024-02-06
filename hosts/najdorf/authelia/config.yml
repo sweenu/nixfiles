@@ -38,6 +38,13 @@ access_control:
         - '^/opensearch\.xml(\?.*)?$'
       methods: [ GET ]
       policy: bypass
+    - domain: "n8n.@domainName@"
+      resources:
+        - '^/form/.*'
+      methods:
+        - GET
+        - POST
+      policy: bypass
     - domain: "*.@domainName@"
       subject:
         - "user:sweenu"
