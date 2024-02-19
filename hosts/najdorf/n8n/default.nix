@@ -14,7 +14,6 @@ in
       container_name = "n8n";
       environment = rec {
         N8N_HIRING_BANNER_ENABLED = "false";
-        N8N_USER_MANAGEMENT_DISABLED = "true";
         N8N_PERSONALIZATION_ENABLED = "false";
         WEBHOOK_URL = "https://n8n.${config.vars.domainName}/";
         GENERIC_TIMEZONE = config.vars.timezone;
