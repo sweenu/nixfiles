@@ -45,6 +45,10 @@ access_control:
         - GET
         - POST
       policy: bypass
+    - domain: "n8n.@domainName@"
+      subject:
+        - "user:nunu"
+      policy: one_factor
     - domain: "*.@domainName@"
       subject:
         - "user:sweenu"
