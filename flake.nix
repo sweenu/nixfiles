@@ -3,7 +3,7 @@
 
   inputs = {
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOs/nixos-hardware/master";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     digga.url = "github:divnix/digga";
     digga.inputs.nixpkgs.follows = "nixos";
@@ -40,7 +40,6 @@
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       channelsConfig.allowUnfree = true;
-      channelsConfig.permittedInsecurePackages = [ "electron-24.8.6" ];
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
