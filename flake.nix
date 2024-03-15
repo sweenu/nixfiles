@@ -17,24 +17,22 @@
 
     # pin because of some bug
     agenix.url = "github:ryantm/agenix/2994d002dcff5353ca1ac48ec584c7f6589fe447";
-    agenix.inputs.nixpkgs.follows = "nixos";
 
     deploy.url = "github:serokell/deploy-rs";
-    deploy.inputs.nixpkgs.follows = "nixos";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixos";
 
     arion.url = "github:hercules-ci/arion";
-    arion.inputs.nixpkgs.follows = "nixos";
 
     ig-story-fetcher.url = "github:sweenu/ig-story-fetcher";
     ig-story-fetcher.inputs.nixpkgs.follows = "nixos";
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus, hyprland } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 

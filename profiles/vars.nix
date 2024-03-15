@@ -6,6 +6,7 @@
     username = "sweenu";
     terminal = "alacritty";
     terminalBin = "${pkgs.alacritty}/bin/alacritty";
+    compositor = "sway";
 
     home = "/home/${username}";
     configHome = (builtins.getAttr username config.home-manager.users).xdg.configHome;

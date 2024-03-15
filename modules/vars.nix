@@ -8,6 +8,7 @@ with lib;
     username = mkOption { type = types.str; };
     terminal = mkOption { type = types.str; };
     terminalBin = mkOption { type = types.str; };
+    compositor = mkOption { type = types.str; };
 
     home = mkOption { type = types.str; };
     configHome = mkOption { type = types.str; };
