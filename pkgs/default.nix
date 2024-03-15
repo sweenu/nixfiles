@@ -29,4 +29,6 @@ final: prev: with prev;
   };
 
   swaylock-fprintd = callPackage ./swaylock-fprintd.nix { };
+
+  freeshow = callPackage ./freeshow.nix { };
 }
