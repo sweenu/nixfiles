@@ -47,9 +47,11 @@
     ig-story-fetcher.inputs.nixpkgs.follows = "nixos";
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus, nix-minecraft } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -63,6 +65,7 @@
           ig-story-fetcher.overlays.default
           deploy.overlay
           (self: super: { deploy = { inherit (nixos) deploy-rs; lib = super.deploy-rs.lib; }; })
+          nix-minecraft.overlay
         ];
       };
 
@@ -76,6 +79,7 @@
             home.nixosModules.home-manager
             arion.nixosModules.arion
             ig-story-fetcher.nixosModules.ig-story-fetcher
+            nix-minecraft.nixosModules.minecraft-servers
           ];
         };
 
