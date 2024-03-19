@@ -12,6 +12,7 @@
     ./goeland.nix
     ./n8n
     ./ig-story-fetcher.nix
+    ./minecraft
   ] ++ suites.server ++ suites.base;
 
   boot = {
