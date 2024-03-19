@@ -1,4 +1,4 @@
-{ lib, pkgs, config, suites, ... }:
+{ pkgs, config, suites, ... }:
 let
   najdorfRootKey = ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpe019oujhjgqS0Xif2soaQpxJiZSrMr9rhmII958qU root@najdorf'';
 in
@@ -6,15 +6,8 @@ in
   imports = suites.server ++ [ ./snapserver.nix ./3proxy.nix ];
 
   boot = {
-    loader = {
-      grub.enable = false;
-      raspberryPi = {
-        enable = true;
-        version = 3;
-        uboot.enable = true;
-      };
-      generic-extlinux-compatible.enable = lib.mkForce false; # incompatible with raspberryPi.enable = true
-    };
+    loader.grub.enable = false;
+    loader.generic-extlinux-compatible.enable = true;
     kernelParams = [ "cma=32M" ];
     kernelPackages = pkgs.linuxPackages_5_10;
   };
@@ -63,7 +56,7 @@ in
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     publish = {
       enable = true;
       addresses = true;
