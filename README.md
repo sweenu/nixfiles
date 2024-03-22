@@ -52,6 +52,31 @@ $ unzstd -d {the output path from the command above} -o nixos-sd-image.img
 $ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
 ```
 
+To deploy the server config to a new machine:
+```bash
+# First, comment all services imported in hosts/najdorf/default.nix and uncomment the tailscale-login service line.
+# Then run:
+$ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
+# Copy the old server's host key
+$ scp 'root@najdorf:/etc/ssh/ssh_host_*' root@najdorf-1:/etc/ssh/
+# Stop all running services, then:
+$ ssh root@najdorf 'ssh-keyscan -H najdorf-1 >> ~/.ssh/known_hosts'
+$ ssh -f root@najdorf 'rsync -avz /opt root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
+# I made all Docker volumes bind mounts in /opt in order for this command to be enough for migrating everything important.
+# Uncomment services in hosts/najdorf/default.nix and comment the tailscale-login service line.
+# Remove najdorf from tailscale and change the tailscale name from najdorf-1 to najdorf.
+# Change DNS records to point to the new server (on Cloudflare, change the IP scope of the API token to the new IP).
+# Finally:
+$ deploy '.#najdorf'
+# All done!
+```
+
+### Useful commands
+#### Using restic
+```bash
+$ sudo RESTIC_PASSWORD_FILE=/run/agenix/resticPassword RESTIC_REPOSITORY=sftp:root@grunfeld:/data/backups/<backup_dir> restic
+```
+
 ## Acknowledgment:
 * Thanks to [@KubquoA](https://github.com/KubqoA) for making this [reddit post](https://www.reddit.com/r/unixporn/comments/lepmss/sway_simple_sway_on_nixos) from which I discovered NixOS and from which I stole the Waybar style.
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS.

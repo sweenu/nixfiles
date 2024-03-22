@@ -11,25 +11,58 @@
     ./simple-torrent.nix
     ./goeland.nix
     ./n8n
-    ./ig-story-fetcher.nix
+    # ./ig-story-fetcher.nix
     ./minecraft
   ] ++ suites.server ++ suites.base;
 
+  # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
+  # Generate the auth key here: https://login.tailscale.com/admin/settings/keys
+  # systemd.services.tailscale-login = import ./tailscale-login.nix { tailscalePkg = pkgs.tailscale; authKey = ""; }
+
   boot = {
-    loader.grub.device = "/dev/sda";
     initrd = {
       kernelModules = [ "nvme" ];
-      availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" ];
+      availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
     };
-    kernelPackages = pkgs.linuxPackages_5_10;
+    kernelPackages = pkgs.linuxPackages_6_8;
   };
 
-  fileSystems = {
-    "/" = { device = "/dev/disk/by-uuid/210d49bd-31f9-45fe-bf0f-eddf87375335"; fsType = "ext4"; };
-    "/boot" = { device = "/dev/disk/by-uuid/88492e50-02a4-4a00-bf63-07b3b3e979a9"; fsType = "ext4"; };
+  disko = {
+    devices = {
+      disk.main = {
+        device = "/dev/vda";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            boot = {
+              size = "1M";
+              type = "EF02"; # for grub MBR
+              priority = 0;
+            };
+            ESP = {
+              type = "EF00";
+              size = "512M";
+              priority = 1;
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+              };
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
+          };
+        };
+      };
+    };
   };
-
-  swapDevices = [{ device = "/dev/disk/by-uuid/73dfbe1b-577d-4fee-b455-5d6366a3c311"; }];
 
   environment.defaultPackages = with pkgs; [ restic unison ];
 
@@ -46,7 +79,6 @@
   virtualisation.docker.enable = true;
   virtualisation.arion.backend = "docker";
 
-  zramSwap.enable = false;
-
-  age.secrets.resticPassword.file = "${self}/secrets/restic.age";
+  age.secrets.resticPassword.file = "${self}/secrets/restic_password.age";
+  environment.sessionVariables.RESTIC_PASSWORD = "/run/agenix/resticPassword";
 }
