@@ -1,6 +1,7 @@
 { self, config, pkgs, ... }:
 
 let
+  autheliaDir = "/opt/authelia";
   autheliaDataDir = "/data";
   usersFilePath = "${autheliaSecretsDir}/usersFile";
   autheliaPort = "9091";
@@ -29,7 +30,7 @@ in
       container_name = "authelia";
       expose = [ autheliaPort ];
       volumes = [
-        "authelia:${autheliaDataDir}"
+        "${autheliaDir}:${autheliaDataDir}"
         "${autheliaConfig}:/config/configuration.yml:ro"
         "${autheliaSecretsDir}:${autheliaSecretsDir}:ro"
       ];
@@ -57,6 +58,5 @@ in
         "traefik.http.routers.to-authelia.middlewares" = "authelia-headers";
       };
     };
-    docker-compose.volumes.authelia = { };
   };
 }

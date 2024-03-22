@@ -42,6 +42,13 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixos";
 
+    nixos-anywhere.url = "github:nix-community/nixos-anywhere";
+    nixos-anywhere.inputs.nixpkgs.follows = "nixos";
+    nixos-anywhere.inputs.disko.follows = "disko";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixos";
+
     arion.url = "github:hercules-ci/arion";
     arion.inputs.nixpkgs.follows = "nixos";
 
@@ -53,7 +60,7 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, arion, ig-story-fetcher, flake-utils-plus, nix-minecraft } @ inputs:
+  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, nixos-anywhere, disko, arion, ig-story-fetcher, flake-utils-plus, nix-minecraft } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -78,6 +85,7 @@
           modules = [
             agenix.nixosModules.age
             home.nixosModules.home-manager
+            disko.nixosModules.disko
             arion.nixosModules.arion
             ig-story-fetcher.nixosModules.ig-story-fetcher
             nix-minecraft.nixosModules.minecraft-servers

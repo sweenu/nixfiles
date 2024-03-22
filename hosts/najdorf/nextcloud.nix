@@ -2,13 +2,14 @@
 
 let
   nextcloudDir = "/opt/nextcloud";
+  nextcloudDataDir = "${nextcloudDir}/data";
   nextcloudSecretsDir = "${config.age.secretsDir}/nextcloud";
   nextcloudContainerDir = "/var/www/html";
   nextcloudVolumes = [
     "nextcloud:${nextcloudContainerDir}"
-    "${nextcloudDir}/config:${nextcloudContainerDir}/config"
-    "${nextcloudDir}/data:${nextcloudContainerDir}/data"
-    "${nextcloudDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
+    "${nextcloudDataDir}/config:${nextcloudContainerDir}/config"
+    "${nextcloudDataDir}/data:${nextcloudContainerDir}/data"
+    "${nextcloudDataDir}/custom_apps:${nextcloudContainerDir}/custom_apps"
     "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
   ];
 in
@@ -68,7 +69,7 @@ in
           POSTGRES_PASSWORD_FILE = config.age.secrets."nextcloud/dbPassword".path;
         };
         volumes = [
-          "nextcloud_db:/var/lib/postgresql/data"
+          "${nextcloudDir}/pg_data:/var/lib/postgresql/data"
           "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
         ];
       };
@@ -83,7 +84,6 @@ in
 
     docker-compose.volumes = {
       nextcloud = { };
-      nextcloud_db = { };
     };
   };
 
@@ -97,7 +97,7 @@ in
         OnCalendar = "*-*-* *:00:00"; # every hour
         RandomizedDelaySec = "5m";
       };
-      passwordFile = config.age.secrets.resticNextcloudPassword.path;
+      passwordFile = config.age.secrets.resticPassword.path;
       backupPrepareCommand =
         let
           servicesSettings = config.virtualisation.arion.projects.nextcloud.settings.services;
@@ -105,6 +105,7 @@ in
           postgresUser = servicesSettings.db.service.environment.POSTGRES_USER;
           postgresDatabase = servicesSettings.nextcloud.service.environment.POSTGRES_DB;
         in
+        # To restore from dump: cat /opt/nextcloud/db.dump | sudo docker exec -i nextcloud_db psql -U postgres
         ''
           ${pkgs.docker}/bin/docker exec ${dbContainerName} \
           pg_dump -U ${postgresUser} -d ${postgresDatabase} > \
@@ -114,4 +115,3 @@ in
     };
   };
 }
-

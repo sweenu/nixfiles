@@ -123,5 +123,5 @@
 
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
-  system.stateVersion = lib.mkDefault "23.05";
+  system.stateVersion = lib.mkDefault "24.05";
 }
