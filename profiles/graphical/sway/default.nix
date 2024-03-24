@@ -93,8 +93,8 @@
             repeat_rate = "30";
           };
         };
-        startup = [
-          { command = "${pkgs.swayidle}/bin/swayidle -w before-sleep '${pkgs.swaylock-fprintd}/bin/swaylock -f' lock '${pkgs.swaylock-fprintd}/bin/swaylock -f'"; }
+        startup = let swaylockPkg = config.home-manager.users."${config.vars.username}".programs.swaylock.package; in [
+          { command = "${pkgs.swayidle}/bin/swayidle -w before-sleep '${swaylockPkg}/bin/swaylock -f' lock '${swaylockPkg}/bin/swaylock -f'"; }
           { command = "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
           { command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP"; }
           { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
