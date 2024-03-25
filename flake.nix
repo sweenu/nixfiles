@@ -66,7 +66,6 @@
           agenix.overlays.default
           ig-story-fetcher.overlays.default
           deploy.overlay
-          (self: super: { deploy = { inherit (nixos) deploy-rs; lib = super.deploy-rs.lib; }; })
           nix-minecraft.overlay
         ];
       };
