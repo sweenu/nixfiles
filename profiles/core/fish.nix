@@ -2,7 +2,7 @@
 
 {
   home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [ eza trash-cli ];
+    home.packages = with pkgs; [ eza ];
     programs.fish = {
       enable = true;
       interactiveShellInit = ''
@@ -74,7 +74,8 @@
         bwu = "set -Ux BW_SESSION (bw unlock --raw)";
         genpass = "bw generate -ulns --length 16";
         pyclean = "find . | grep -E '(__pycache__|\.pyc|\.pyo$)' | xargs rm -rf";
-        rm = "trash $argv";
+        tp = "trash put $argv";
+        rm = "echo 'Stop using rm, use trash put (or tp) instead'";
         k = "kak $argv";
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
         mn = ''manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix'';

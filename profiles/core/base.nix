@@ -38,6 +38,7 @@
       skim
       speedtest-cli
       tmux
+      trashy
       unzip
       usbutils
       uutils-coreutils
