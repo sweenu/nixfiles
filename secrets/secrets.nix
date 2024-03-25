@@ -11,6 +11,7 @@ in
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
   "hercules-ci/binary-caches.json.age".publicKeys = [ carokann najdorfHost ];
   "hercules-ci/cluster-join-token.key.age".publicKeys = [ carokann najdorfHost ];
+  "restic_password.age".publicKeys = [ carokann najdorfHost ];
   "traefik/env.age".publicKeys = [ carokann najdorfHost ];
   "authelia/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/session_secret.age".publicKeys = [ carokann najdorfHost ];
@@ -20,8 +21,6 @@ in
   "nextcloud/admin_user.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/db_password.age".publicKeys = [ carokann najdorfHost ];
-  "restic/nextcloud.age".publicKeys = [ carokann najdorfHost ];
-  "restic/calibre.age".publicKeys = [ carokann najdorfHost ];
   "searx/env.age".publicKeys = [ carokann najdorfHost ];
   "n8n/env.age".publicKeys = [ carokann najdorfHost ];
   "ig_story_fetcher_config.age".publicKeys = [ carokann najdorfHost ];

@@ -47,4 +47,6 @@
   virtualisation.arion.backend = "docker";
 
   zramSwap.enable = false;
+
+  age.secrets.resticPassword.file = "${self}/secrets/restic.age";
 }

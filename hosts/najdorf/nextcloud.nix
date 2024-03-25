@@ -18,7 +18,6 @@ in
     "nextcloud/adminPassword".file = "${self}/secrets/nextcloud/admin_password.age";
     "nextcloud/envFile".file = "${self}/secrets/nextcloud/env.age";
     "nextcloud/dbPassword".file = "${self}/secrets/nextcloud/db_password.age";
-    resticNextcloudPassword.file = "${self}/secrets/restic/nextcloud.age";
   };
 
   virtualisation.arion.projects.nextcloud.settings = let version = "28"; in {
