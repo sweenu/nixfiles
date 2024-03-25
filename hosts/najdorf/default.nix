@@ -31,12 +31,6 @@
 
   swapDevices = [{ device = "/dev/disk/by-uuid/73dfbe1b-577d-4fee-b455-5d6366a3c311"; }];
 
-  age.secrets.sshPrivateKey = {
-    file = "${self}/secrets/najdorf_root_key.age";
-    path = "/root/.ssh/id_ed25519";
-    mode = "600";
-  };
-
   environment.defaultPackages = with pkgs; [ restic unison ];
 
   services.journald.extraConfig = ''
