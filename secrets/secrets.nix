@@ -8,7 +8,6 @@ in
   "scw_conf.age".publicKeys = [ carokann ];
 
   # najdorf
-  "najdorf_root_key.age".publicKeys = [ carokann najdorfHost ];
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
   "hercules-ci/binary-caches.json.age".publicKeys = [ carokann najdorfHost ];
   "hercules-ci/cluster-join-token.key.age".publicKeys = [ carokann najdorfHost ];
