@@ -10,7 +10,7 @@ in
     enableDefaultNetwork = false;
     networks.traefik.external = true;
     services.n8n.service = {
-      image = "n8nio/n8n:1.29.0";
+      image = "n8nio/n8n:1.34.1";
       container_name = "n8n";
       environment = rec {
         N8N_HIRING_BANNER_ENABLED = "false";
@@ -22,6 +22,7 @@ in
       # sets N8N_ENCRYPTION_KEY=*****
       env_file = [ config.age.secrets."n8n/envFile".path ];
       volumes = [
+        # you'll need to `chown -R 1000:1000 /opt/n8n`
         "${n8nDir}:/home/node/.n8n"
       ];
       networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
