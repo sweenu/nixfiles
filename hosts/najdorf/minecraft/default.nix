@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let
   modpack = pkgs.fetchPackwizModpack {
@@ -32,18 +32,6 @@ in
         whitelist = true;
         enforce-whitelist = true;
       };
-    };
-  };
-
-  services.restic = {
-    backups.minecraft = {
-      initialize = true;
-      repository = "sftp:root@grunfeld:/data/backups/minecraft";
-      paths = [ "/opt/minecraft" ];
-      pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
-      timerConfig = { OnCalendar = "*-*-* *:00:00"; RandomizedDelaySec = "5m"; };
-      passwordFile = config.age.secrets.resticPassword.path;
-      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/15b910b0-7414-42d8-87b7-d819ec676293";
     };
   };
 }

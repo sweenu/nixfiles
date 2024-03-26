@@ -71,12 +71,6 @@ $ deploy '.#najdorf'
 # All done!
 ```
 
-### Useful commands
-#### Using restic
-```bash
-$ sudo RESTIC_PASSWORD_FILE=/run/agenix/resticPassword RESTIC_REPOSITORY=sftp:root@grunfeld:/data/backups/<backup_dir> restic
-```
-
 ## Acknowledgment:
 * Thanks to [@KubquoA](https://github.com/KubqoA) for making this [reddit post](https://www.reddit.com/r/unixporn/comments/lepmss/sway_simple_sway_on_nixos) from which I discovered NixOS and from which I stole the Waybar style.
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS.
