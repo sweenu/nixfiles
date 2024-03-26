@@ -1,22 +1,10 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   calibreDir = "/opt/calibre";
   calibreDataDir = "${calibreDir}/data";
 in
 {
-  services.restic = {
-    backups.calibre = {
-      initialize = true;
-      repository = "sftp:root@grunfeld:/data/backups/calibre";
-      paths = [ "/opt/calibre" ];
-      pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
-      timerConfig = { OnCalendar = "*-*-* *:00:00"; RandomizedDelaySec = "5m"; };
-      passwordFile = config.age.secrets.resticPassword.path;
-      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/2946b770-8b05-4b75-b254-351f453a358c";
-    };
-  };
-
   virtualisation.arion.projects.calibre-web.settings = {
     enableDefaultNetwork = false;
     networks.traefik.external = true;

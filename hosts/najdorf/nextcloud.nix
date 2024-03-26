@@ -87,31 +87,18 @@ in
     };
   };
 
-  services.restic = {
-    backups.nextcloud = {
-      initialize = true;
-      repository = "sftp:root@grunfeld:/data/backups/nextcloud";
-      paths = [ nextcloudDir ];
-      pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
-      timerConfig = {
-        OnCalendar = "*-*-* *:00:00"; # every hour
-        RandomizedDelaySec = "5m";
-      };
-      passwordFile = config.age.secrets.resticPassword.path;
-      backupPrepareCommand =
-        let
-          servicesSettings = config.virtualisation.arion.projects.nextcloud.settings.services;
-          dbContainerName = servicesSettings.db.service.container_name;
-          postgresUser = servicesSettings.db.service.environment.POSTGRES_USER;
-          postgresDatabase = servicesSettings.nextcloud.service.environment.POSTGRES_DB;
-        in
-        # To restore from dump: cat /opt/nextcloud/db.dump | sudo docker exec -i nextcloud_db psql -U postgres
-        ''
-          ${pkgs.docker}/bin/docker exec ${dbContainerName} \
-          pg_dump -U ${postgresUser} -d ${postgresDatabase} > \
-          ${nextcloudDir}/db.dump
-        '';
-      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a";
-    };
-  };
+  services.restic.backups.opt.backupPrepareCommand =
+    let
+      servicesSettings = config.virtualisation.arion.projects.nextcloud.settings.services;
+      dbContainerName = servicesSettings.db.service.container_name;
+      postgresUser = servicesSettings.db.service.environment.POSTGRES_USER;
+      postgresDatabase = servicesSettings.nextcloud.service.environment.POSTGRES_DB;
+    in
+    lib.mkAfter
+      # To restore from dump: cat /opt/nextcloud/db.dump | sudo docker exec -i nextcloud_db psql -U postgres
+      ''
+        ${pkgs.docker}/bin/docker exec ${dbContainerName} \
+        pg_dump -U ${postgresUser} -d ${postgresDatabase} > \
+        ${nextcloudDir}/db.dump
+      '';
 }

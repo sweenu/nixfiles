@@ -34,15 +34,4 @@ in
       };
     };
   };
-
-  services.restic = {
-    backups.n8n = {
-      initialize = true;
-      repository = "sftp:root@grunfeld:/data/backups/n8n";
-      paths = [ n8nDir ];
-      pruneOpts = [ "--keep-last 4" ];
-      timerConfig.OnCalendar = "daily";
-      passwordFile = config.age.secrets.resticPassword.path;
-    };
-  };
 }

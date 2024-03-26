@@ -23,4 +23,6 @@ in
       };
     };
   };
+
+  services.restic.backups.opt.exclude = [ simpleTorrentDir ];
 }
