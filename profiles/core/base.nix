@@ -29,6 +29,7 @@
       moreutils
       nmap
       nnn
+      nvd
       nix-tree
       pciutils
       psmisc

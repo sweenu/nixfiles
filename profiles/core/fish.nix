@@ -20,7 +20,7 @@
         nepl = "nix repl '<nixpkgs>'";
         nrb = ''nixos-rebuild --use-remote-sudo --flake "$(pwd)#$(hostname)"'';
         nrbs = "${nrb} switch";
-        ndiff = "nix store diff-closures /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system\-' | sed -n '2 p') /nix/var/nix/profiles/system";
+        ndiff = "${pkgs.nvd}/bin/nvd diff /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system-' | sed -n '2 p') /nix/var/nix/profiles/system";
 
         # sudo
         s = "sudo -E";
