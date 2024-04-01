@@ -10,6 +10,7 @@ let
     poettering = "https://0pointer.net/blog/index.atom";
     notion = "https://rss.app/feeds/NsIZtd0vgm0BsqKL.xml";
     starlwart = "https://stalwartlabs.medium.com/feed";
+    alternativeto = "https://feed.alternativeto.net/news/all/";
   };
 in
 {
