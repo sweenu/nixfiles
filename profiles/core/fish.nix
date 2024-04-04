@@ -7,7 +7,6 @@
       enable = true;
       interactiveShellInit = ''
         fish_vi_key_bindings
-        # scw autocomplete script shell=fish | source  # it's slow
       '';
       shellAbbrs = rec {
         # nix

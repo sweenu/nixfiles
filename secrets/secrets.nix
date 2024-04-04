@@ -4,9 +4,6 @@ let
   grunfeldHost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJpAQMxLYp8mkj0EoH7tDw/irV9SirToX8XvzKW3ikSs root@grunfeld";
 in
 {
-  # carokann
-  "scw_conf.age".publicKeys = [ carokann ];
-
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
   "hercules-ci/binary-caches.json.age".publicKeys = [ carokann najdorfHost ];

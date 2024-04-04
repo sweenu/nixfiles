@@ -188,7 +188,3 @@ WHERE pid IN (
 [data_formats]
 decimal = ""
 float = ""
-
-[ssh tunnels]
-^srrcore1-.*\.internal\.scaleway\.com$ = srrcore1-auth-prd-api01.internal.scaleway.com
-^srr1-.*\.internal\.scaleway\.com$ = srr1-auth-stg-api01.internal.scaleway.com
