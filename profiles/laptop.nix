@@ -10,11 +10,8 @@
       LidSwitchIgnoreInhibited=no
     '';
   };
-  services.tlp = {
+  services.auto-cpufreq = {
     enable = true;
-    settings = {
-      USB_AUTOSUSPEND = 0;
-    };
   };
   powerManagement.powertop.enable = true;
   systemd.sleep.extraConfig = "HibernateDelaySec=2h";
