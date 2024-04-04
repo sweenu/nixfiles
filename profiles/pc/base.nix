@@ -10,6 +10,7 @@
     ethtool
     gitui
     manix
+    nix-output-monitor
     nixpkgs-review
     python3Packages.ptpython
     tealdeer

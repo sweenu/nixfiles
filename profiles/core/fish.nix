@@ -18,7 +18,7 @@
         nf = "nix flake";
         nepl = "nix repl '<nixpkgs>'";
         nrb = ''nixos-rebuild --use-remote-sudo --flake "$(pwd)#$(hostname)"'';
-        nrbs = "${nrb} switch";
+        nrbs = "nb $(hostname) && ${nrb} switch";
         ndiff = "${pkgs.nvd}/bin/nvd diff /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system-' | sed -n '2 p') /nix/var/nix/profiles/system";
 
         # sudo
@@ -78,6 +78,7 @@
         k = "kak $argv";
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
         mn = ''manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix'';
+        nb = "${pkgs.nix-output-monitor}/bin/nom build .#nixosConfigurations.$argv.config.system.build.toplevel";
         fwifi = {
           body = "nmcli -t -f SSID device wifi list | grep . | sk | xargs -o -I_ nmcli --ask dev wifi connect '_'";
           description = "Fuzzy connect to a wifi";
