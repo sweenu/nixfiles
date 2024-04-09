@@ -102,8 +102,8 @@ rec {
   ### Apps
   "${mod}+Return" = "exec ${cfg.terminal}";
   "${mod}+t" = "exec ${cfg.menu}";
-  "${mod}+b" = "exec ${pkgs.firefox}/bin/firefox";
-  "${mod}+m" = "exec ${sway-app-or-workspace} ${pkgs.spotifywm}/bin/spotify 9:";
+  "${mod}+b" = "exec firefox";
+  "${mod}+m" = "exec ${sway-app-or-workspace} spotify 9:";
 
   # Mako
   "${mod}+period" = "exec ${makoctl} restore";

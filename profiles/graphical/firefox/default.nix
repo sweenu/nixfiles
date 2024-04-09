@@ -36,7 +36,11 @@
     };
 
     # Tridactyl
-    xdg.configFile."tridactyl/tridactylrc".source = ./tridactylrc;
+    xdg.configFile."tridactyl/tridactylrc".source = pkgs.substituteAll {
+      src = ./tridactylrc;
+      inherit (config.vars) terminalBin;
+      editor = config.environment.variables.EDITOR;
+    };
     xdg.configFile."tridactyl/themes/base16-oceanicnext.css".source = ./tridactyl_style.css;
   };
 }
