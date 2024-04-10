@@ -5,9 +5,9 @@
 ## Presentation
 
 I have three [NixOS](https://nixos.org) machines:
-- _carokann_: my personal computer ([Framework](https://frame.work) laptop).
-- _najdorf_: my server ([Scaleway](https://scaleway.com) Dedibox Start-2-S-SATA) where I deploy my self-hosted apps.
-- _grunfeld_: my main RaspberryPi that serves as a [snapcast](https://github.com/badaix/snapcast) server and a local backup.
+- _carokann_: personal computer ([Framework](https://frame.work) laptop).
+- _najdorf_: server where I deploy my self-hosted apps.
+- _grunfeld_: main RaspberryPi that serves as a [snapcast](https://github.com/badaix/snapcast) server and a local backup.
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 
