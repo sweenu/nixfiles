@@ -25,6 +25,7 @@ in
   "dendrite/matrix_key.age".publicKeys = [ carokann najdorfHost ];
   "dendrite/server_crt.age".publicKeys = [ carokann najdorfHost ];
   "dendrite/server_key.age".publicKeys = [ carokann najdorfHost ];
+  "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
