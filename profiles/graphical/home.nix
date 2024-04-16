@@ -21,7 +21,6 @@
     };
 
     services = {
-      blueman-applet.enable = config.services.blueman.enable;
       gammastep = {
         enable = true;
         latitude = 48.8;

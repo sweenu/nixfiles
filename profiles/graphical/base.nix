@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
@@ -18,8 +18,6 @@
 
   programs.light.enable = true;
   programs.kdeconnect.enable = true;
-
-  services.blueman.enable = config.hardware.bluetooth.enable;
 
   xdg = {
     portal = {

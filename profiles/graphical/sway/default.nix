@@ -64,6 +64,10 @@
               criteria = { app_id = "zoom"; title = "^zoom$"; };
               command = "border none; floating enable";
             }
+            {
+              criteria = { app_id = "floating_window"; };
+              command = "focus; floating enable";
+            }
           ];
         };
         workspaceOutputAssign = [

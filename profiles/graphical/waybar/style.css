@@ -68,6 +68,7 @@ window#waybar.hidden {
 #idle_inhibitor,
 #pulseaudio,
 #network,
+#bluetooth,
 #battery,
 #backlight,
 #clock,
@@ -113,6 +114,7 @@ label:focus {
   background-color: #000000;
 }
 
+#bluetooth.off,
 #network.disconnected,
 #pulseaudio.muted {
   background-color: rgba(74,85,104,0.3);
@@ -131,4 +133,9 @@ label:focus {
 #idle_inhibitor.activated {
   background-color: rgba(247,250,252,0.6);
   color: rgb(74,85,104);
+}
+
+#bluetooth.on,
+#bluetooth.off {
+  font-size: 18px;
 }
