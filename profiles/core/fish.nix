@@ -79,9 +79,13 @@
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
         mn = ''manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix'';
         nb = "${pkgs.nix-output-monitor}/bin/nom build .#nixosConfigurations.$argv.config.system.build.toplevel";
-        fwifi = {
-          body = "nmcli -t -f SSID device wifi list | grep . | sk | xargs -o -I_ nmcli --ask dev wifi connect '_'";
+        nm-wifi = {
+          body = "nmcli -t -f SSID device wifi list | sk | xargs -o -I_ nmcli --ask dev wifi connect '_'";
           description = "Fuzzy connect to a wifi";
+        };
+        nm-con = {
+          body = "nmcli -t -f NAME con show | sk | xargs -o -I_ nmcli con up '_'";
+          description = "Fuzzy activate a connection";
         };
       };
       plugins = [
@@ -101,6 +105,15 @@
             repo = "done";
             rev = "1.16.5";
             sha256 = "E0wveeDw1VzEH2kzn63q9hy1xkccfxQHBV2gVpu2IdQ=";
+          };
+        }
+        {
+          name = "sponge";
+          src = pkgs.fetchFromGitHub {
+            owner = "meaningful-ooo";
+            repo = "sponge";
+            rev = "1.1.0";
+            sha256 = "MdcZUDRtNJdiyo2l9o5ma7nAX84xEJbGFhAVhK+Zm1w=";
           };
         }
       ];
