@@ -57,6 +57,8 @@
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs =
@@ -71,6 +73,7 @@
     , arion
     , ig-story-fetcher
     , nix-minecraft
+    , nix-colors
     , ...
     } @ inputs:
     digga.lib.mkFlake {
@@ -115,6 +118,7 @@
             desktop = base ++ [ audio virt-manager ] ++ (explodeAttrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
             laptop = desktop ++ [ profiles.laptop ];
           };
+          inherit nix-colors;
         };
 
         hosts = {
@@ -125,6 +129,9 @@
 
       home = {
         imports = [ (digga.lib.importExportableModules ./hm-modules) ];
+        modules = [
+          nix-colors.homeManagerModules.default
+        ];
       };
 
       devshell = ./shell;
