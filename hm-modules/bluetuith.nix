@@ -21,12 +21,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home-manager.users."${config.vars.username}" = {
-      home.packages = [ pkgs.bluetuith ];
+    home.packages = [ pkgs.bluetuith ];
 
-      xdg.configFile."bluetuith/bluetuith.conf" = mkIf (cfg.settings != { }) {
-        source = jsonFormat.generate "bluetuith.conf" cfg.settings;
-      };
+    xdg.configFile."bluetuith/bluetuith.conf" = mkIf (cfg.settings != { }) {
+      source = jsonFormat.generate "bluetuith.conf" cfg.settings;
     };
   };
 

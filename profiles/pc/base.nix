@@ -4,7 +4,6 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
-    bluetuith
     devenv
     ffmpeg
     simple-scan
@@ -34,21 +33,6 @@
 
   programs.steam.enable = true;
 
-  programs.bluetuith = {
-    enable = true;
-    settings = {
-      keybindings = {
-        Quit = "q";
-        NavigateRight = "h";
-        NavigateDown = "j";
-        NavigateUp = "k";
-        NavigateLeft = "l";
-        FilebrowserDirForward = "l";
-        FilebrowserDirBack = "h";
-      };
-    };
-  };
-
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
       bitwarden-cli
@@ -67,6 +51,29 @@
       zathura = {
         enable = true;
         options = { selection-clipboard = "clipboard"; };
+      };
+      bluetuith = {
+        enable = true;
+        settings = {
+          keybindings = {
+            Quit = "q";
+            NavigateRight = "h";
+            NavigateDown = "j";
+            NavigateUp = "k";
+            NavigateLeft = "l";
+            FilebrowserDirForward = "l";
+            FilebrowserDirBack = "h";
+          };
+        };
+      };
+      glow = {
+        enable = true;
+        settings = {
+          style = "auto";
+          local = false;
+          width = 100;
+          pager = true;
+        };
       };
     };
 

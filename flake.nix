@@ -123,6 +123,10 @@
         };
       };
 
+      home = {
+        imports = [ (digga.lib.importExportableModules ./hm-modules) ];
+      };
+
       devshell = ./shell;
 
       homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;

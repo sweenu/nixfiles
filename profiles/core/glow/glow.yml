@@ -1,7 +1,0 @@
-# style name or JSON path (default "auto")
-style: "auto"
-# show local files only; no network (TUI-mode only)
-local: false
-# word-wrap at width
-width: 100
-pager: true
