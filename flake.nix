@@ -59,7 +59,20 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
-  outputs = { self, nixos, nixos-hardware, digga, home, agenix, deploy, nixos-generators, nixos-anywhere, disko, arion, ig-story-fetcher, flake-utils-plus, nix-minecraft } @ inputs:
+  outputs =
+    { self
+    , nixos
+    , nixos-hardware
+    , digga
+    , home
+    , agenix
+    , deploy
+    , disko
+    , arion
+    , ig-story-fetcher
+    , nix-minecraft
+    , ...
+    } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
