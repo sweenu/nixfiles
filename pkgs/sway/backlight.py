@@ -14,6 +14,10 @@ def _decrease_brightness(percentage: int) -> None:
     run(["light", "-U", str(percentage)])
 
 
+def _set_brightness(percentage: int) -> None:
+    run(["light", "-S", str(percentage)])
+
+
 def change_backlight(
     action: str,
     limit: int = 10,
@@ -30,12 +34,18 @@ def change_backlight(
 
     if action == "inc":
         if current_brightness < limit:
-            _increase_brightness(small_step)
+            if current_brightness < 1:
+                _set_brightness(1)
+            else:
+                _increase_brightness(small_step)
         else:
             _increase_brightness(big_step)
-    elif action == "dec" and current_brightness > 1:
+    elif action == "dec":
         if current_brightness <= limit:
-            _decrease_brightness(small_step)
+            if current_brightness > 1:
+                _decrease_brightness(small_step)
+            else:
+                _set_brightness(0.01)
         else:
             _decrease_brightness(big_step)
 
