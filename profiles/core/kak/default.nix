@@ -12,7 +12,7 @@
       plugins = with pkgs.kakounePlugins; [
         kak-fzf
         kak-auto-pairs
-        kak-lsp
+        kakoune-lsp
         kak-surround
         kak-sudo-write
         kak-find
