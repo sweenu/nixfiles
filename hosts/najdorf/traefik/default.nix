@@ -20,7 +20,7 @@ in
   virtualisation.arion.projects.traefik.settings = {
     networks.traefik.name = networkName;
     services.traefik.service = {
-      image = "traefik:2.9";
+      image = "traefik:3.0";
       container_name = "traefik";
       volumes = [
         "/var/run/docker.sock:/var/run/docker.sock"
