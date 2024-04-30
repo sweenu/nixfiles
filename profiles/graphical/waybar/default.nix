@@ -47,7 +47,7 @@
               phone = "";
               portable = "";
               car = "";
-              default = [ " " " " " " ];
+              default = [ " " " " "  " ];
             };
             on-click = "pavucontrol";
           };
