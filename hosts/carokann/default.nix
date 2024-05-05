@@ -1,24 +1,40 @@
-{ config, suites, pkgs, ... }:
+{
+  config,
+  suites,
+  pkgs,
+  ...
+}:
 
 {
   imports = suites.laptop;
 
-  boot = let encryptedRoot = "cryptroot"; in {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
-    initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "usb_storage" "sd_mod" ];
-      luks.devices.${encryptedRoot}.device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+  boot =
+    let
+      encryptedRoot = "cryptroot";
+    in
+    {
+      binfmt.emulatedSystems = [ "aarch64-linux" ];
+      initrd = {
+        availableKernelModules = [
+          "xhci_pci"
+          "thunderbolt"
+          "nvme"
+          "uas"
+          "usb_storage"
+          "sd_mod"
+        ];
+        luks.devices.${encryptedRoot}.device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+      };
+      kernelModules = [ "kvm-intel" ];
+      kernelPackages = pkgs.linuxPackages_latest;
+      kernelParams = [ "resume_offset=225501184" ];
+      loader = {
+        systemd-boot.enable = true;
+        systemd-boot.editor = false;
+        efi.canTouchEfiVariables = true;
+      };
+      resumeDevice = "/dev/mapper/${encryptedRoot}";
     };
-    kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "resume_offset=225501184" ];
-    loader = {
-      systemd-boot.enable = true;
-      systemd-boot.editor = false;
-      efi.canTouchEfiVariables = true;
-    };
-    resumeDevice = "/dev/mapper/${encryptedRoot}";
-  };
 
   fileSystems = {
     "/" = {
@@ -66,16 +82,19 @@
 
   home-manager.users."${config.vars.username}" = {
     home.file.".ssh/id_ed25519.pub".text = config.vars.sshPublicKey;
-    services.kanshi.profiles = {
-      undocked.outputs = [
-        {
-          criteria = "eDP-1";
-          status = "enable";
-          scale = 1.5;
-          position = "0,0";
-        }
-      ];
-    };
+    services.kanshi.settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "enable";
+            scale = 1.5;
+            position = "0,0";
+          }
+        ];
+      }
+    ];
     services.unison = {
       enable = true;
       pairs.calibre.roots = [

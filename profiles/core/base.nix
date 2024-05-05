@@ -64,7 +64,7 @@
   };
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     gc.automatic = true;
     optimise.automatic = true;
     settings = {
