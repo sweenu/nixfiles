@@ -1,6 +1,15 @@
-{ self, modulesPath, config, suites, pkgs, ... }:
+{
+  self,
+  modulesPath,
+  config,
+  suites,
+  pkgs,
+  ...
+}:
 
-let resticRepository = "sftp:root@grunfeld:/data/backups/najdorf"; in
+let
+  resticRepository = "sftp:root@grunfeld:/data/backups/najdorf";
+in
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -25,7 +34,13 @@ let resticRepository = "sftp:root@grunfeld:/data/backups/najdorf"; in
   boot = {
     initrd = {
       kernelModules = [ "nvme" ];
-      availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
+      availableKernelModules = [
+        "ata_piix"
+        "uhci_hcd"
+        "virtio_pci"
+        "sr_mod"
+        "virtio_blk"
+      ];
     };
     kernelPackages = pkgs.linuxPackages_6_8;
   };
@@ -67,15 +82,16 @@ let resticRepository = "sftp:root@grunfeld:/data/backups/najdorf"; in
     };
   };
 
-  environment.defaultPackages = with pkgs; [ restic unison ];
+  environment.defaultPackages = with pkgs; [
+    restic
+    unison
+  ];
 
   services.journald.extraConfig = ''
     SystemMaxUse = 2G;
   '';
 
-  users.users."${config.vars.username}".openssh.authorizedKeys.keys = [
-    config.vars.sshPublicKey
-  ];
+  users.users."${config.vars.username}".openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
 
   time.timeZone = config.vars.timezone;
 
@@ -99,16 +115,18 @@ let resticRepository = "sftp:root@grunfeld:/data/backups/najdorf"; in
       initialize = true;
       repository = resticRepository;
       paths = [ "/opt" ];
-      pruneOpts = [ "--keep-last 36" "--keep-daily 14" "--keep-weekly 12" ];
+      pruneOpts = [
+        "--keep-last 36"
+        "--keep-daily 14"
+        "--keep-weekly 12"
+      ];
       timerConfig = {
         OnCalendar = "*-*-* *:00:00"; # every hour
         RandomizedDelaySec = "5m";
       };
       passwordFile = config.age.secrets.resticPassword.path;
       backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a";
-      exclude = [
-        "/opt/containerd"
-      ];
+      exclude = [ "/opt/containerd" ];
     };
   };
 }
