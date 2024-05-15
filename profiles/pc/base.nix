@@ -4,6 +4,7 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
+    comma
     devenv
     ffmpeg
     simple-scan
@@ -25,7 +26,11 @@
     };
     printing = {
       enable = true;
-      drivers = with pkgs; [ gutenprint gutenprintBin hplip ];
+      drivers = with pkgs; [
+        gutenprint
+        gutenprintBin
+        hplip
+      ];
     };
   };
 
@@ -50,7 +55,9 @@
       };
       zathura = {
         enable = true;
-        options = { selection-clipboard = "clipboard"; };
+        options = {
+          selection-clipboard = "clipboard";
+        };
       };
       bluetuith = {
         enable = true;
