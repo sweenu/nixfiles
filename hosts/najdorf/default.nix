@@ -79,7 +79,13 @@ let resticRepository = "sftp:root@grunfeld:/data/backups/najdorf"; in
 
   time.timeZone = config.vars.timezone;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings.dns = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+  };
   virtualisation.arion.backend = "docker";
 
   # Restic backups
