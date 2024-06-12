@@ -67,20 +67,20 @@
               };
               command = ''
                 floating enable; \
-                                sticky enable; \
-                                resize set width 852 height 480'';
+                sticky enable; \
+                resize set width 852 height 480'';
             }
             {
               criteria = {
-                title = "^Signal$";
+                app_id = "signal";
               };
               command = ''
                 focus; \
-                                floating enable; \
-                                resize set width 647 height 490; \
-                                move position center; \
-                                move scratchpad; \
-                                scratchpad show'';
+                floating enable; \
+                resize set width 647 height 490; \
+                move position center; \
+                move scratchpad; \
+                scratchpad show'';
             }
             {
               criteria = {
@@ -174,6 +174,8 @@
               command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP";
             }
             { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
+            # Until https://github.com/signalapp/Signal-Desktop/issues/6368 is fixed
+            { command = "${pkgs.signal-desktop}/bin/signal-desktop"; }
           ];
         modifier = "Mod4";
         terminal = "${config.vars.terminalBin}";
