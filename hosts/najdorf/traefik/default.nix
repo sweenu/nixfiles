@@ -1,4 +1,9 @@
-{ self, config, pkgs, ... }:
+{
+  self,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   traefikDir = "/opt/traefik";
@@ -15,7 +20,10 @@ in
     traefikEnvFile.file = "${self}/secrets/traefik/env.age";
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   virtualisation.arion.projects.traefik.settings = {
     networks.traefik.name = networkName;
@@ -23,7 +31,7 @@ in
       image = "traefik:3.0";
       container_name = "traefik";
       volumes = [
-        "/var/run/docker.sock:/var/run/docker.sock"
+        "/var/run/docker.sock:/var/run/docker.sock:ro"
         "${traefikConfig}:/etc/traefik/traefik.yml:ro"
         "${traefikDir}/acme:${acmeDirInContainer}"
       ];

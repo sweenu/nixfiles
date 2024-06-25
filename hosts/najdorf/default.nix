@@ -17,13 +17,14 @@ in
     # services
     ./traefik
     ./authelia
+    ./portainer.nix
     ./nextcloud.nix
     ./calibre-web.nix
     ./simple-torrent.nix
     ./goeland.nix
     ./n8n
-    # ./ig-story-fetcher.nix
     ./obsidian-livesync.nix
+    # ./ig-story-fetcher.nix
     ./vrising.nix
   ] ++ suites.server ++ suites.base;
 
