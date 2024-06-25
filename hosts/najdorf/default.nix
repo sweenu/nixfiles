@@ -23,7 +23,6 @@ in
     ./goeland.nix
     ./n8n
     # ./ig-story-fetcher.nix
-    ./minecraft
     ./obsidian-livesync.nix
     ./vrising.nix
   ] ++ suites.server ++ suites.base;
