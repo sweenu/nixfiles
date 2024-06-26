@@ -56,30 +56,37 @@
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    nix-colors.url = "github:misterio77/nix-colors";
+
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    vrising-discord-bot.url = "gitlab:Sweenu/vrising-discord-bot";
   };
 
   outputs =
-    { self
-    , nixos
-    , nixos-hardware
-    , digga
-    , home
-    , agenix
-    , deploy
-    , disko
-    , arion
-    , ig-story-fetcher
-    , nix-minecraft
-    , nix-colors
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixos,
+      nixos-hardware,
+      digga,
+      home,
+      agenix,
+      deploy,
+      disko,
+      arion,
+      ig-story-fetcher,
+      nix-colors,
+      nix-minecraft,
+      vrising-discord-bot,
+      ...
+    }@inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       channelsConfig.allowUnfree = true;
       channels.nixos = {
         imports = [ (digga.lib.importOverlays ./overlays) ];
@@ -89,6 +96,7 @@
           ig-story-fetcher.overlays.default
           deploy.overlay
           nix-minecraft.overlay
+          vrising-discord-bot.overlays.default
         ];
       };
 
@@ -104,6 +112,7 @@
             arion.nixosModules.arion
             ig-story-fetcher.nixosModules.ig-story-fetcher
             nix-minecraft.nixosModules.minecraft-servers
+            vrising-discord-bot.nixosModules.vrising-discord-bot
           ];
         };
 
@@ -111,13 +120,30 @@
 
         importables = rec {
           profiles = digga.lib.rakeLeaves ./profiles;
-          suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
-          with profiles; rec {
-            base = (explodeAttrs core) ++ [ vars ];
-            server = [ profiles.server vars ];
-            desktop = base ++ [ audio virt-manager ] ++ (explodeAttrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
-            laptop = desktop ++ [ profiles.laptop ];
-          };
+          suites =
+            with builtins;
+            let
+              explodeAttrs = set: map (a: getAttr a set) (attrNames set);
+            in
+            with profiles;
+            rec {
+              base = (explodeAttrs core) ++ [ vars ];
+              server = [
+                profiles.server
+                vars
+              ];
+              desktop =
+                base
+                ++ [
+                  audio
+                  virt-manager
+                ]
+                ++ (explodeAttrs graphical)
+                ++ (explodeAttrs pc)
+                ++ (explodeAttrs hardware)
+                ++ (explodeAttrs develop);
+              laptop = desktop ++ [ profiles.laptop ];
+            };
           inherit nix-colors;
         };
 
@@ -129,9 +155,7 @@
 
       home = {
         imports = [ (digga.lib.importExportableModules ./hm-modules) ];
-        modules = [
-          nix-colors.homeManagerModules.default
-        ];
+        modules = [ nix-colors.homeManagerModules.default ];
       };
 
       devshell = ./shell;
@@ -140,7 +164,10 @@
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
         najdorf = {
-          profilesOrder = [ "system" "sweenu" ];
+          profilesOrder = [
+            "system"
+            "sweenu"
+          ];
           profiles.system.sshUser = "root";
           profiles.sweenu = {
             user = "sweenu";

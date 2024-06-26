@@ -26,6 +26,7 @@ in
     ./obsidian-livesync.nix
     # ./ig-story-fetcher.nix
     ./vrising.nix
+    ./vrising-discord-bot.nix
   ] ++ suites.server ++ suites.base;
 
   # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.

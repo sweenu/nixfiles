@@ -27,6 +27,8 @@ in
   "dendrite/server_key.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];
   "wordpress/db_password.age".publicKeys = [ carokann najdorfHost ];
+  "vrising_discord_bot/bot_token.age".publicKeys = [ carokann najdorfHost ];
+  "vrising_discord_bot/portainer_access_key.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
