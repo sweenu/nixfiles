@@ -127,7 +127,7 @@ in
         RandomizedDelaySec = "5m";
       };
       passwordFile = config.age.secrets.resticPassword.path;
-      backupCleanupCommand = "${pkgs.curl}/bin/curl https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a";
+      backupCleanupCommand = "${pkgs.curl}/bin/curl -m 10 --retry 5 https://hc-ping.com/3e004d53-809a-4386-bb45-a36fc919120a/$EXIT_STATUS";
       exclude = [ "/opt/containerd" ];
     };
   };
