@@ -29,7 +29,7 @@ in
 
   virtualisation.arion.projects.nextcloud.settings =
     let
-      version = "29";
+      version = "29.0.3";
     in
     {
       networks.traefik.external = true;
@@ -73,19 +73,24 @@ in
           };
         };
 
-        db.service = {
-          image = "postgres:11";
-          container_name = "nextcloud_db";
-          networks = [ "default" ];
-          environment = {
-            POSTGRES_USER = "postgres";
-            POSTGRES_PASSWORD_FILE = config.age.secrets."nextcloud/dbPassword".path;
+        db.service =
+          let
+            version = "16";
+          in
+          {
+            image = "postgres:${version}";
+            container_name = "nextcloud_db";
+            networks = [ "default" ];
+            environment = {
+              POSTGRES_USER = "nextcloud";
+              POSTGRES_PASSWORD_FILE = config.age.secrets."nextcloud/dbPassword".path;
+            };
+            volumes = [
+              # Directory stucture simplifies upgrades with https://github.com/tianon/docker-postgres-upgrade
+              "${nextcloudDir}/pg/${version}/data:/var/lib/postgresql/data"
+              "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
+            ];
           };
-          volumes = [
-            "${nextcloudDir}/pg_data:/var/lib/postgresql/data"
-            "${nextcloudSecretsDir}:${nextcloudSecretsDir}:ro"
-          ];
-        };
 
         cron.service = {
           image = "nextcloud:${version}";
