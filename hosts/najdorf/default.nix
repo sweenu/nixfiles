@@ -20,7 +20,7 @@ in
     ./portainer.nix
     ./nextcloud.nix
     ./calibre-web.nix
-    ./simple-torrent.nix
+    # ./simple-torrent.nix
     ./goeland.nix
     ./n8n
     ./obsidian-livesync.nix
