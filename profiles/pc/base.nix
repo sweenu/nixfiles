@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+
+  boot.plymouth = {
+    enable = true;
+    theme = "breeze";
+  };
+
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
