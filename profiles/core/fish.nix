@@ -89,6 +89,7 @@
           body = "nmcli -t -f NAME con show | sk | xargs -o -I_ nmcli con up '_'";
           description = "Fuzzy activate a connection";
         };
+        activate-combined-output = "pactl load-module module-combine-sink";
       };
       plugins = [
         {
@@ -137,6 +138,8 @@
       };
     };
 
-    home.sessionVariables = { DIRENV_LOG_FORMAT = ""; };
+    home.sessionVariables = {
+      DIRENV_LOG_FORMAT = "";
+    };
   };
 }
