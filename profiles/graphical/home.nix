@@ -7,7 +7,6 @@
       imv
       libnotify
       obsidian
-      paprefs
       pavucontrol
       signal-desktop
       vlc
@@ -25,9 +24,15 @@
         enable = true;
         latitude = 48.8;
         longitude = 2.3;
-        temperature = { day = 6500; night = 3200; };
+        temperature = {
+          day = 6500;
+          night = 3200;
+        };
         settings = {
-          general = { adjustment-method = "wayland"; fade = 1; };
+          general = {
+            adjustment-method = "wayland";
+            fade = 1;
+          };
         };
       };
       kdeconnect = {
@@ -75,6 +80,8 @@
   };
 
   programs.dconf.enable =
-    let cfg = config.home-manager.users."${config.vars.username}";
-    in cfg.services.blueman-applet.enable || cfg.gtk.enable;
+    let
+      cfg = config.home-manager.users."${config.vars.username}";
+    in
+    cfg.services.blueman-applet.enable || cfg.gtk.enable;
 }
