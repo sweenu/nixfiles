@@ -24,7 +24,7 @@ function switch_sink {
 
 function get_card_name_from_sink {
     local sink=$2
-    cat $1 | jq -r '.[] | select(.type=="PipeWire:Interface:Node" and .info.props."media.class"=="Audio/Sink" and .info.props."node.name"=="'$sink'") | .info.props."alsa.card_name"'
+    cat $1 | jq -r '.[] | select(.type=="PipeWire:Interface:Node" and .info.props."media.class"=="Audio/Sink" and .info.props."node.name"=="'$sink'") | .info.props."node.description"'
 }
 
 function get_current_sink {
@@ -74,4 +74,4 @@ function main {
     rm /tmp/pw_dump
 }
 
-main $@
+main "$@"
