@@ -60,7 +60,7 @@
       powerOnBoot = false;
     };
     sane.enable = true;
-    opengl.enable = true;
+    graphics.enable = true;
   };
 
   powerManagement.cpuFreqGovernor = "powersave";
