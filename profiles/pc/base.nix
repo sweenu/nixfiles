@@ -88,6 +88,7 @@
           pager = true;
         };
       };
+      git.package = pkgs.gitFull;
     };
 
     services.playerctld.enable = true;
