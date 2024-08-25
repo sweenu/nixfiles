@@ -51,6 +51,7 @@
       tmate
       viu
       you-get
+      yt-dlp
     ];
 
     programs = {
