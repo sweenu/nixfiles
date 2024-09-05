@@ -44,7 +44,7 @@ in
         "virtio_blk"
       ];
     };
-    kernelPackages = pkgs.linuxPackages_6_8;
+    kernelPackages = pkgs.linuxPackages_6_10;
   };
 
   disko = {

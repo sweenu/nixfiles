@@ -1,12 +1,20 @@
-{ pkgs, config, suites, ... }:
 {
-  imports = suites.server ++ [ ./snapserver.nix ./3proxy.nix ];
+  pkgs,
+  config,
+  suites,
+  ...
+}:
+{
+  imports = suites.server ++ [
+    ./snapserver.nix
+    ./3proxy.nix
+  ];
 
   boot = {
     loader.grub.enable = false;
     loader.generic-extlinux-compatible.enable = true;
     kernelParams = [ "cma=32M" ];
-    kernelPackages = pkgs.linuxPackages_5_10;
+    kernelPackages = pkgs.linuxPackages_rpi3;
   };
 
   fileSystems = {
@@ -17,7 +25,10 @@
     "/data" = {
       device = "/dev/disk/by-uuid/87d6b688-bd27-4466-8824-5d559f6115ec";
       fsType = "ext4";
-      options = [ "nofail" "X-mount.mkdir" ];
+      options = [
+        "nofail"
+        "X-mount.mkdir"
+      ];
     };
   };
 
@@ -29,7 +40,12 @@
     }
   ];
 
-  environment.systemPackages = with pkgs; [ kakoune git curl bottom ];
+  environment.systemPackages = with pkgs; [
+    kakoune
+    git
+    curl
+    bottom
+  ];
 
   services.journald.extraConfig = ''
     Storage = volatile
@@ -45,7 +61,10 @@
     nameservers = [ "1.1.1.1" ];
     interfaces.eth0 = {
       ipv4.addresses = [
-        { address = config.vars.grunfeldIPv4; prefixLength = 24; }
+        {
+          address = config.vars.grunfeldIPv4;
+          prefixLength = 24;
+        }
       ];
       useDHCP = false;
     };

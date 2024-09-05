@@ -29,7 +29,6 @@
   # Server optimization
   documentation.enable = false;
   fonts.fontconfig.enable = false;
-  sound.enable = false;
   environment.stub-ld.enable = false;
 
   # Taken from: https://github.com/nix-community/srvos/blob/b3af8aed091d85e180a861695f2d57b3b2d24ba1/nixos/server/default.nix#L89
