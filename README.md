@@ -54,7 +54,7 @@ $ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
 
 To deploy the server config to a new machine:
 ```bash
-# First, comment all services imported in hosts/najdorf/default.nix and uncomment the tailscale-login service line.
+# First, comment all services imported in hosts/najdorf/default.nix and uncomment the ts-oneshot-login service line.
 # Then run:
 $ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
 # Copy the old server's host key

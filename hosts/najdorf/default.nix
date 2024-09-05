@@ -31,7 +31,7 @@ in
 
   # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
   # Generate the auth key here: https://login.tailscale.com/admin/settings/keys
-  # systemd.services.tailscale-login = import ./tailscale-login.nix { tailscalePkg = pkgs.tailscale; authKey = ""; }
+  # systemd.services.tailscale-login = import "${self}/profiles/ts-oneshot-login.nix" { tailscalePkg = pkgs.tailscale; authKey = ""; }
 
   boot = {
     initrd = {
