@@ -3,6 +3,7 @@
 {
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
+      anki
       calibre
       imv
       libnotify
