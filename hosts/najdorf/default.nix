@@ -24,6 +24,7 @@ in
     ./goeland.nix
     ./n8n
     ./obsidian-livesync.nix
+    ./core-keeper.nix
   ] ++ suites.server ++ suites.base;
 
   # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
@@ -41,7 +42,7 @@ in
         "virtio_blk"
       ];
     };
-    kernelPackages = pkgs.linuxPackages_6_10;
+    kernelPackages = pkgs.linuxPackages_6_12;
   };
 
   disko = {
