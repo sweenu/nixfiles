@@ -7,7 +7,7 @@
 {
   imports = suites.server ++ [
     ./snapserver.nix
-    ./3proxy.nix
+    # ./3proxy.nix
   ];
 
   boot = {
@@ -45,6 +45,7 @@
     git
     curl
     bottom
+    wol
   ];
 
   services.journald.extraConfig = ''
