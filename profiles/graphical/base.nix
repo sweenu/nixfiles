@@ -7,12 +7,7 @@
   fonts.packages = with pkgs; [
     roboto
     font-awesome
-    # only install those fonts from nerdfonts
-    (nerdfonts.override {
-      fonts = [
-        "DejaVuSansMono"
-      ];
-    })
+    nerd-fonts.dejavu-sans-mono
     twitter-color-emoji
   ];
 

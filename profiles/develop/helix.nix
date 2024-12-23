@@ -80,7 +80,7 @@
       marksman
 
       # protobuf
-      buf-language-server
+      buf
       pb
     ];
   };

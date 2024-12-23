@@ -4,17 +4,26 @@
   home-manager.users."${config.vars.username}".programs.alacritty = {
     enable = true;
     settings = {
-      shell = { program = "${pkgs.tmux}/bin/tmux"; };
-      mouse = { hide_when_typing = true; };
+      terminal.shell = {
+        program = "${pkgs.tmux}/bin/tmux";
+      };
+      mouse = {
+        hide_when_typing = true;
+      };
       window = {
         opacity = 1;
         decorations = "none";
-        padding = { x = 10; y = 10; };
+        padding = {
+          x = 10;
+          y = 10;
+        };
         dynamic_padding = true;
       };
       font = {
         size = 10.0;
-        normal = { family = config.vars.defaultMonoFont; };
+        normal = {
+          family = config.vars.defaultMonoFont;
+        };
       };
       colors = {
         primary = {
