@@ -12,7 +12,7 @@ button {
 }
 
 window#waybar {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
 }
 
@@ -20,11 +20,11 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-#waybar > .horizontal {
+#waybar>.horizontal {
   padding: 10px 10px 0;
 }
 
-#waybar > .horizontal > .horizontal:nth-child(1) {
+#waybar>.horizontal>.horizontal:nth-child(1) {
   margin-right: 10px;
 }
 
@@ -33,12 +33,12 @@ window#waybar.hidden {
   font-size: 16px;
   padding: 7px 10px;
   border-radius: 5px;
-  background-color: rgba(74,85,104,0.3);
+  background-color: rgba(74, 85, 104, 0.3);
   color: #ffffff;
 }
 
 #workspaces button:hover {
-  background: rgba(74,85,104,0.9);
+  background: rgba(74, 85, 104, 0.9);
   box-shadow: inherit;
   text-shadow: inherit;
 }
@@ -56,7 +56,7 @@ window#waybar.hidden {
   font-size: 13px;
   padding: 0 10px;
   border-radius: 5px;
-  background-color: rgba(74,85,104,0.6);
+  background-color: rgba(74, 85, 104, 0.6);
   color: #ffffff;
 }
 
@@ -80,7 +80,7 @@ window#waybar.hidden {
   color: #ffffff;
   font-size: 13px;
   border-radius: 5px;
-  background-color: rgba(74,85,104,0.6);
+  background-color: rgba(74, 85, 104, 0.6);
 }
 
 #backlight {
@@ -94,8 +94,8 @@ window#waybar.hidden {
 
 @keyframes blink {
   to {
-      background-color: #ffffff;
-      color: #000000;
+    background-color: #ffffff;
+    color: #000000;
   }
 }
 
@@ -117,7 +117,7 @@ label:focus {
 #bluetooth.off,
 #network.disconnected,
 #pulseaudio.muted {
-  background-color: rgba(74,85,104,0.3);
+  background-color: rgba(74, 85, 104, 0.3);
   color: #E2E8F0;
 }
 
@@ -131,11 +131,19 @@ label:focus {
 }
 
 #idle_inhibitor.activated {
-  background-color: rgba(247,250,252,0.6);
-  color: rgb(74,85,104);
+  background-color: rgba(247, 250, 252, 0.6);
+  color: rgb(74, 85, 104);
 }
 
 #bluetooth.on,
 #bluetooth.off {
   font-size: 18px;
+}
+
+#custom-dualsense.charging {
+  color: #00ff00;
+}
+
+#custom-dualsense.discharging {
+  color: #ff0000;
 }

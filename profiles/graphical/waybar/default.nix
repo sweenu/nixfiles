@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   fonts.packages = [ pkgs.roboto ];
@@ -9,8 +14,20 @@
       settings = {
         mainBar = {
           layer = "top";
-          modules-left = [ "sway/workspaces" "sway/mode" "custom/media" ];
-          modules-right = lib.mkDefault [ "tray" "network" "bluetooth" "pulseaudio" "backlight" "clock" ];
+          modules-left = [
+            "sway/workspaces"
+            "sway/mode"
+            "custom/media"
+          ];
+          modules-right = lib.mkDefault [
+            "custom/dualsense"
+            "tray"
+            "network"
+            "bluetooth"
+            "pulseaudio"
+            "backlight"
+            "clock"
+          ];
           "sway/workspaces" = {
             disable-scroll = true;
             format = "{name}";
@@ -18,7 +35,9 @@
               "spotify" = "";
             };
           };
-          "sway/mode" = { format = "{}"; };
+          "sway/mode" = {
+            format = "{}";
+          };
           "custom/media" = {
             format = "{icon} {}";
             return-type = "json";
@@ -31,7 +50,10 @@
             on-click = "playerctl --player='spotify,any' play-pause";
             exec = "waybar-mediaplayer.py --player spotify 2> /dev/null";
           };
-          tray = { icon-size = 18; spacing = 10; };
+          tray = {
+            icon-size = 18;
+            spacing = 10;
+          };
           pulseaudio = {
             # "scroll-step" = 1 // % can be a float;
             format = "{icon} {volume}% {format_source}";
@@ -47,7 +69,11 @@
               phone = "";
               portable = "";
               car = "";
-              default = [ " " " " "  " ];
+              default = [
+                " "
+                " "
+                "  "
+              ];
             };
             on-click = "pavucontrol";
           };
@@ -66,7 +92,13 @@
             format-plugged = "  {capacity}%";
             format-alt = "{icon} {time}";
             format-time = "{H}h{M}";
-            format-icons = [ " " " " " " " " " " ];
+            format-icons = [
+              " "
+              " "
+              " "
+              " "
+              " "
+            ];
           };
           clock = {
             interval = 1;
@@ -90,6 +122,13 @@
             tooltip-format-enumerate-connected = "{device_alias} ({device_battery_percentage}%)";
             on-click = "bluetoothctl show | test $(grep -Po '(?<=Powered: ).*') = 'no' && bluetoothctl power on || bluetoothctl power off";
             on-click-right = "${config.vars.terminalBin} --class floating_window -e ${pkgs.bluetuith}/bin/bluetuith";
+          };
+          "custom/dualsense" = {
+            format = "{} {}";
+            return-type = "json";
+            interval = "1";
+            escape = true;
+            exec = "${pkgs.waybar-dualsense}/bin/waybar-dualsense";
           };
         };
       };

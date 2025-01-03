@@ -27,7 +27,6 @@
       KERNEL=="card0", SUBSYSTEM=="drm", ACTION=="change", RUN+="${reloadScript}/bin/reload-ddcci"
     '';
 
-
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [ powertop ];
 
@@ -37,6 +36,7 @@
     };
 
     programs.waybar.settings.mainBar.modules-right = lib.mkForce [
+      "custom/dualsense"
       "tray"
       "network"
       "bluetooth"

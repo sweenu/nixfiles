@@ -1,17 +1,25 @@
-final: prev: with prev;
-{
+final: prev: with prev; {
   fedit = writeShellApplication {
     name = "fedit";
     text = (builtins.readFile ./fedit.sh);
-    runtimeInputs = [ fd skim bat git ];
+    runtimeInputs = [
+      fd
+      skim
+      bat
+      git
+    ];
   };
 
   kakounePlugins = kakounePlugins // recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
 
   # Used with sway keybindings
   sway-soundcards = writers.writeBashBin "sway-soundcards" (builtins.readFile ./sway/soundcards.bash);
-  sway-app-or-workspace = writeShellScriptBin "sway-app-or-workspace" (builtins.readFile ./sway/app_or_workspace.sh);
-  sway-backlight = writers.writePython3Bin "sway-backlight" { } (builtins.readFile ./sway/backlight.py);
+  sway-app-or-workspace = writeShellScriptBin "sway-app-or-workspace" (
+    builtins.readFile ./sway/app_or_workspace.sh
+  );
+  sway-backlight = writers.writePython3Bin "sway-backlight" { } (
+    builtins.readFile ./sway/backlight.py
+  );
   sway-inhibit = writeShellApplication {
     name = "sway-inhibit";
     text = (builtins.readFile ./sway/inhibit.sh);
@@ -20,7 +28,13 @@ final: prev: with prev;
   sway-capture = writeShellApplication {
     name = "sway-capture";
     text = (builtins.readFile ./sway/capture.sh);
-    runtimeInputs = [ grim slurp swappy wf-recorder libnotify ];
+    runtimeInputs = [
+      grim
+      slurp
+      swappy
+      wf-recorder
+      libnotify
+    ];
   };
   sway-choose-capture = writeShellApplication {
     name = "sway-choose-capture";
@@ -29,4 +43,13 @@ final: prev: with prev;
   };
 
   swaylock-fprintd = callPackage ./swaylock-fprintd.nix { };
+
+  waybar-dualsense = writeShellApplication {
+    name = "waybar-dualsense";
+    text = (builtins.readFile ./waybar_dualsense.sh);
+    runtimeInputs = [
+      dualsensectl
+      jq
+    ];
+  };
 }
