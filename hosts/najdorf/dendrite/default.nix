@@ -45,7 +45,7 @@ in
           "dendrite_jetstream:/var/dendrite/jetstream"
           "dendrite_search_index:/var/dendrite/searchindex"
         ];
-        networks = [ "default" config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+        networks = [ "default" config.services.traefik.staticConfigOptions.providers.docker.network ];
         ports = [ "8448:8448" ];
         depends_on.db.condition = "service_healthy";
         labels = {

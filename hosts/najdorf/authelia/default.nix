@@ -1,4 +1,9 @@
-{ self, config, pkgs, ... }:
+{
+  self,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   autheliaDir = "/opt/authelia";
@@ -8,7 +13,13 @@ let
   autheliaSecretsDir = "${config.age.secretsDir}/authelia";
   autheliaConfig = pkgs.substituteAll {
     src = ./config.yml;
-    inherit (config.vars) email domainName smtpUsername smtpHost smtpPort;
+    inherit (config.vars)
+      email
+      domainName
+      smtpUsername
+      smtpHost
+      smtpPort
+      ;
     inherit autheliaDataDir autheliaPort usersFilePath;
     ntpAddress = "${builtins.head config.networking.timeServers}:123";
   };
@@ -26,18 +37,20 @@ in
     enableDefaultNetwork = false;
     networks.traefik.external = true;
     services.authelia.service = {
-      image = "authelia/authelia:4.37";
+      image = "authelia/authelia:4.38";
       container_name = "authelia";
       expose = [ autheliaPort ];
+      ports = [ "${autheliaPort}:${autheliaPort}" ];
       volumes = [
         "${autheliaDir}:${autheliaDataDir}"
         "${autheliaConfig}:/config/configuration.yml:ro"
         "${autheliaSecretsDir}:${autheliaSecretsDir}:ro"
       ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       environment = {
         TZ = config.vars.timezone;
-        AUTHELIA_JWT_SECRET_FILE = config.age.secrets."authelia/jwtSecret".path;
+        AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE =
+          config.age.secrets."authelia/jwtSecret".path;
         AUTHELIA_SESSION_SECRET_FILE = config.age.secrets."authelia/sessionSecret".path;
         AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE = config.age.secrets."authelia/storageEncryptionKey".path;
         AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.age.secrets."authelia/smtpPassword".path;
@@ -46,14 +59,17 @@ in
         "traefik.enable" = "true";
 
         # Forward auth
-        "traefik.http.middlewares.authelia.forwardauth.address" = "http://authelia:${autheliaPort}/api/verify?rd=https://authelia.${config.vars.domainName}/";
+        "traefik.http.middlewares.authelia.forwardAuth.address" =
+          "http://localhost:${autheliaPort}/api/authz/forward-auth";
         "traefik.http.middlewares.authelia.forwardauth.trustForwardHeader" = "true";
-        "traefik.http.middlewares.authelia.forwardauth.authResponseHeaders" = "Remote-User, Remote-Groups";
+        "traefik.http.middlewares.authelia.forwardauth.authResponseHeaders" =
+          "Remote-User,Remote-Groups,Remote-Email,Remote-Name";
 
         # Security headers
         "traefik.http.middlewares.authelia-headers.headers.browserXssFilter" = "true";
         "traefik.http.middlewares.authelia-headers.headers.customFrameOptionsValue" = "SAMEORIGIN";
-        "traefik.http.middlewares.authelia-headers.headers.customResponseHeaders.Cache-Control" = "no-store";
+        "traefik.http.middlewares.authelia-headers.headers.customResponseHeaders.Cache-Control" =
+          "no-store";
         "traefik.http.middlewares.authelia-headers.headers.customResponseHeaders.Pragma" = "no-cache";
         "traefik.http.routers.to-authelia.middlewares" = "authelia-headers";
       };

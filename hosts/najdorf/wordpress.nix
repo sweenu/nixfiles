@@ -26,7 +26,7 @@ in
         ];
         networks = [
           "default"
-          config.virtualisation.arion.projects.traefik.settings.networks.traefik.name
+          config.services.traefik.staticConfigOptions.providers.docker.network
         ];
         environment = {
           WORDPRESS_DB_HOST = "db";

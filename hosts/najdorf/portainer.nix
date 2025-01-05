@@ -9,7 +9,7 @@ in
     services.portainer.service = {
       image = "portainer/portainer-ce:latest";
       container_name = "portainer";
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       volumes = [
         "/var/run/docker.sock:/var/run/docker.sock"
         "${portainerDir}:/data"

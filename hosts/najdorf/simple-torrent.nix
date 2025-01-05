@@ -14,7 +14,7 @@ in
         "${simpleTorrentDir}/downloads:/downloads"
         "${simpleTorrentDir}/torrents:/torrents"
       ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.to-simple-torrent.service" = "simple-torrent";

@@ -15,7 +15,7 @@ in
         "${calibreDir}/config:/config"
         "${calibreDataDir}:/books"
       ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       environment = {
         TZ = config.vars.timezone;
         PUID = "0";

@@ -11,21 +11,24 @@ let
   resticRepository = "sftp:root@grunfeld:/data/backups/najdorf";
 in
 {
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+  imports =
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
 
-    # services
-    ./traefik
-    ./authelia
-    ./portainer.nix
-    ./nextcloud.nix
-    ./calibre-web.nix
-    # ./simple-torrent.nix
-    ./goeland.nix
-    ./n8n
-    ./obsidian-livesync.nix
-    ./core-keeper.nix
-  ] ++ suites.server ++ suites.base;
+      # services
+      ./traefik.nix
+      ./authelia
+      ./portainer.nix
+      ./nextcloud.nix
+      ./calibre-web.nix
+      # ./simple-torrent.nix
+      ./goeland.nix
+      ./n8n.nix
+      ./obsidian-livesync.nix
+      ./core-keeper.nix
+    ]
+    ++ suites.server
+    ++ suites.base;
 
   # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
   # Generate the auth key here: https://login.tailscale.com/admin/settings/keys

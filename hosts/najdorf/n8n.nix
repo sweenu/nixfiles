@@ -25,7 +25,7 @@ in
         # you'll need to `chown -R 1000:1000 /opt/n8n`
         "${n8nDir}:/home/node/.n8n"
       ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.to-n8n.service" = "n8n";

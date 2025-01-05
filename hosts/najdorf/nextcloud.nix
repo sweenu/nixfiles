@@ -41,7 +41,7 @@ in
           depends_on = [ "db" ];
           networks = [
             "default"
-            config.virtualisation.arion.projects.traefik.settings.networks.traefik.name
+            config.services.traefik.staticConfigOptions.providers.docker.network
           ];
           volumes = nextcloudVolumes;
           environment = {

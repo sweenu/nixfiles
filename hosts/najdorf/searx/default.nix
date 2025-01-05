@@ -13,7 +13,7 @@ in
       image = "searxng/searxng";
       container_name = "searx";
       volumes = [ "${settingsFile}:/etc/searxng/settings.yml:ro" ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       environment = {
         BASE_URL = "https://searx.${config.vars.domainName}";
       };

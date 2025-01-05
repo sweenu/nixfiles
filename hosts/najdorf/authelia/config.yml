@@ -1,16 +1,18 @@
 ---
 server:
-  host: 0.0.0.0
-  port: @autheliaPort@
+  address: 0.0.0.0:@autheliaPort@
   buffers:
     read: 16384
+  endpoints:
+    authz:
+      forward-auth:
+        implementation: 'ForwardAuth'
 
 log:
   level: warn
 
 theme: auto
 
-default_redirection_url: https://searx.@domainName@/
 
 totp:
   issuer: authelia.@domainName@
@@ -55,11 +57,13 @@ access_control:
       policy: two_factor
 
 session:
-  name: authelia_session
-  domain: @domainName@
   expiration: 1h
   inactivity: 5m
-  remember_me_duration: 3M
+  remember_me: 3M
+  cookies:
+    - domain: '@domainName@'
+      authelia_url: 'https://authelia.@domainName@'
+      default_redirection_url: 'https://searx.@domainName@/'
 
 regulation:
   max_retries: 3
@@ -72,10 +76,10 @@ storage:
 
 notifier:
   smtp:
-    username: @smtpUsername@
-    host: @smtpHost@
-    port: @smtpPort@
-    sender: Authelia <@email@>
+    username: '@smtpUsername@'
+    address: 'submissions://@smtpHost@:@smtpPort@'
+    sender: 'Authelia <@email@>'
+    identifier: '@domainName@'
 
 password_policy:
   standard:

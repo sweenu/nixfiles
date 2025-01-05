@@ -16,7 +16,7 @@ in
         "${obsidianLiveSyncDir}/data:/opt/couchdb/data"
         "${obsidianLiveSyncDir}/etc:/opt/couchdb/etc/local.d"
       ];
-      networks = [ config.virtualisation.arion.projects.traefik.settings.networks.traefik.name ];
+      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network ];
       env_file = [ config.age.secrets."obsidian-livesync/envFile".path ];
       labels = {
         "traefik.enable" = "true";
