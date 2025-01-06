@@ -90,6 +90,7 @@
           description = "Fuzzy activate a connection";
         };
         activate-combined-output = "pactl load-module module-combine-sink";
+        deactivate-combined-output = "pactl unload-module module-combine-sink";
       };
       plugins = [
         {
