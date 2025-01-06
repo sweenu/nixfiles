@@ -35,6 +35,7 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 - [SimpleTorrent](https://github.com/boypt/simple-torrent)
 - [SearXNG](https://docs.searxng.org)
 - [goeland](https://github.com/slurdge/goeland)
+- [Immich](https://immich.app)
 
 Important data is backed up with [Restic](https://restic.net) to a local disk connected to my RaspberryPi.
 
