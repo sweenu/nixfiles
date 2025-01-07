@@ -39,7 +39,7 @@
       skim
       speedtest-cli
       tmux
-      trashy
+      gtrash
       unzip
       usbutils
       uutils-coreutils
@@ -69,7 +69,10 @@
     optimise.automatic = true;
     settings = {
       sandbox = true;
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       auto-optimise-store = true;
       min-free = 536870912;
       keep-outputs = true;
