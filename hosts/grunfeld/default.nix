@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  suites,
-  ...
+{ pkgs
+, config
+, suites
+, ...
 }:
 {
   imports = suites.server ++ [
@@ -31,14 +30,6 @@
       ];
     };
   };
-
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 1024;
-      options = [ "nofail" ];
-    }
-  ];
 
   environment.systemPackages = with pkgs; [
     kakoune
