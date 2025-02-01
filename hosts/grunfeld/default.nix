@@ -1,20 +1,14 @@
-{ pkgs
-, config
-, suites
-, ...
+{
+  pkgs,
+  config,
+  suites,
+  ...
 }:
 {
   imports = suites.server ++ [
     ./snapserver.nix
     # ./3proxy.nix
   ];
-
-  boot = {
-    loader.grub.enable = false;
-    loader.generic-extlinux-compatible.enable = true;
-    kernelParams = [ "cma=32M" ];
-    kernelPackages = pkgs.linuxPackages_rpi3;
-  };
 
   fileSystems = {
     "/" = {
@@ -71,6 +65,11 @@
       domain = true;
       userServices = true;
     };
+  };
+  services.restic.server = {
+    enable = true;
+    dataDir = "/data/backups/";
+    extraFlags = [ "--no-auth" ];
   };
 
   hardware.enableRedistributableFirmware = true;

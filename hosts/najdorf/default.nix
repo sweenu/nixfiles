@@ -1,13 +1,14 @@
-{ self
-, modulesPath
-, config
-, suites
-, pkgs
-, ...
+{
+  self,
+  modulesPath,
+  config,
+  suites,
+  pkgs,
+  ...
 }:
 
 let
-  resticRepository = "sftp:root@grunfeld:/data/backups/najdorf";
+  resticRepository = "rest:http://grunfeld:8000/najdorf";
 in
 {
   imports =
