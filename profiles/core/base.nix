@@ -45,7 +45,6 @@
       uutils-coreutils
       wget2
       whois
-      xsv
       yq
       zip
     ];
@@ -115,7 +114,6 @@
       enable = true;
       interval = "daily";
       package = pkgs.plocate;
-      localuser = null;
     };
     resolved = {
       extraConfig = ''
