@@ -1,10 +1,9 @@
-{
-  self,
-  modulesPath,
-  config,
-  suites,
-  pkgs,
-  ...
+{ self
+, modulesPath
+, config
+, suites
+, pkgs
+, ...
 }:
 
 let
@@ -27,6 +26,7 @@ in
       ./obsidian-livesync.nix
       ./core-keeper.nix
       ./immich.nix
+      ./obsidian-share-note.nix
     ]
     ++ suites.server
     ++ suites.base;

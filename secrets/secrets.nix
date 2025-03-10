@@ -30,6 +30,7 @@ in
   "vrising_discord_bot/bot_token.age".publicKeys = [ carokann najdorfHost ];
   "vrising_discord_bot/portainer_access_key.age".publicKeys = [ carokann najdorfHost ];
   "immich/env.age".publicKeys = [ carokann najdorfHost ];
+  "obsidian-share-note/env.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
