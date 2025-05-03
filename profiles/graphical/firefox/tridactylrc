@@ -33,6 +33,26 @@ set tabopenpos last
 set modeindicatormodes normal false
 set editorcmd @terminalBin@ -e @editor@
 set bmarkweight 10000000 "Makes the bookmarks appear first in :open
+set allowautofocus false
+
+"Blacklist
+unbindurl calendar.notion.so ?
+unbindurl calendar.notion.so c
+unbindurl calendar.notion.so f
+unbindurl calendar.notion.so s
+unbindurl calendar.notion.so o
+unbindurl calendar.notion.so n
+unbindurl calendar.notion.so b
+unbindurl calendar.notion.so /
+unbindurl calendar.notion.so e
+unbindurl calendar.notion.so m
+unbindurl calendar.notion.so .
+unbindurl calendar.notion.so t
+unbindurl calendar.notion.so j
+unbindurl calendar.notion.so k
+unbindurl calendar.notion.so z
+unbindurl calendar.notion.so g
+
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/(.+?\/.+?\/).*/, "$1").replace(/\/?$/,".git") | clipboard yank
