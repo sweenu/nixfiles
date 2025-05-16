@@ -42,8 +42,7 @@
     };
 
     # Tridactyl
-    xdg.configFile."tridactyl/tridactylrc".source = pkgs.substituteAll {
-      src = ./tridactylrc;
+    xdg.configFile."tridactyl/tridactylrc".source = pkgs.replaceVars ./tridactylrc {
       inherit (config.vars) terminalBin;
       editor = config.environment.variables.EDITOR;
     };

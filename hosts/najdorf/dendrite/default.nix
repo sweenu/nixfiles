@@ -2,8 +2,7 @@
 
 let
   dendriteSecretsDir = "${config.age.secretsDir}/dendrite";
-  dendriteConfig = let dbEnv = config.virtualisation.arion.projects.dendrite.settings.services.db.service.environment; in pkgs.substituteAll {
-    src = ./dendrite.yaml;
+  dendriteConfig = let dbEnv = config.virtualisation.arion.projects.dendrite.settings.services.db.service.environment; in pkgs.replaceVars ./dentrite.yaml {
     inherit (config.vars) domainName;
     pgDB = dbEnv.POSTGRES_DB;
     pgUser = dbEnv.POSTGRES_USER;

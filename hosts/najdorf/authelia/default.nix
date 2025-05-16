@@ -1,8 +1,7 @@
-{
-  self,
-  config,
-  pkgs,
-  ...
+{ self
+, config
+, pkgs
+, ...
 }:
 
 let
@@ -11,8 +10,7 @@ let
   usersFilePath = "${autheliaSecretsDir}/usersFile";
   autheliaPort = "9091";
   autheliaSecretsDir = "${config.age.secretsDir}/authelia";
-  autheliaConfig = pkgs.substituteAll {
-    src = ./config.yml;
+  autheliaConfig = pkgs.replaceVars ./config.yml {
     inherit (config.vars)
       email
       domainName
