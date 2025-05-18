@@ -12,20 +12,19 @@ in
   home-manager.users."${config.vars.username}" = {
     services.kanshi.settings = [
       {
-        profile.name = "asus_vg27aq";
+        profile.name = "dell_u2424he";
         profile.outputs = [
           {
             criteria = undockedOutput.criteria;
             scale = undockedOutput.scale;
             status = "enable";
-            position = "2560,0";
+            position = "1920,77";
           }
           {
-            criteria = "ASUSTek COMPUTER INC VG27A RBLMQS030515";
+            criteria = "Dell Inc. DELL U2424HE FF904X3";
             status = "enable";
             position = "0,0";
-            mode = "2560x1440";
-            adaptiveSync = true;
+            mode = "1920x1080";
           }
         ];
       }
