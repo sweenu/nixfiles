@@ -29,6 +29,10 @@ in
         gtk-application-prefer-dark-theme = true;
         gtk-cursor-theme-name = cursorsTheme.name;
       };
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+        gtk-cursor-theme-name = cursorsTheme.name;
+      };
     };
 
     home.file.".icons/default/index.theme".text = ''
@@ -48,6 +52,7 @@ in
         gtk-theme = theme.name;
         icon-theme = iconsTheme.name;
         cursor-theme = cursorsTheme.name;
+        color-scheme = "prefer-dark";
       };
     };
   };
