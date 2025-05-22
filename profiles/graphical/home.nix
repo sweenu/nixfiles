@@ -8,7 +8,7 @@
       imv
       libnotify
       obsidian
-      pavucontrol
+      pwvucontrol
       signal-desktop
       vlc
       xdg-utils

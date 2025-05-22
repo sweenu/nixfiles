@@ -12,7 +12,7 @@ let
   sway-app-or-workspace = "${pkgs.sway-app-or-workspace}/bin/sway-app-or-workspace";
   light = "${pkgs.light}/bin/light";
   makoctl = "${pkgs.mako}/bin/makoctl";
-  pactl = "${pkgs.pulseaudio}/bin/pactl";
+  wpctl = "${pkgs.wireplumber}/bin/wpctl";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   ddcciDeviceQuery = "${light} -L | ${pkgs.ripgrep}/bin/rg ddcci | awk '{$1=$1};1'";
   ddcciLight = action: ''
@@ -114,17 +114,18 @@ rec {
 
   # Volume
   # (un)mute output
-  XF86AudioMute = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
-  # (unmute) microphone
-  XF86AudioMicMute = "exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle";
+  XF86AudioMute = "exec ${wpctl} set-mute @DEFAULT_SINK@ toggle";
+  # (un)mute microphone
+  XF86AudioMicMute = "exec ${wpctl} set-mute @DEFAULT_SOURCE@ toggle";
   # increase output volume
-  XF86AudioRaiseVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +5%";
+  XF86AudioRaiseVolume = "exec ${wpctl} set-volume @DEFAULT_SINK@ 5%+";
   # decrease output volume
-  XF86AudioLowerVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -5%";
+  XF86AudioLowerVolume = "exec ${wpctl} set-volume @DEFAULT_SINK@ 5%-";
 
   # Soundcards
   "${mod}+bracketleft" = "exec ${sway-soundcards} previous";
   "${mod}+bracketright" = "exec ${sway-soundcards} next";
+  F10 = "exec ${sway-soundcards} toggle-hdmi";
 
   # Media control
   XF86AudioPlay = "exec ${playerctl} play-pause";

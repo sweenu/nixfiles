@@ -9,7 +9,16 @@ final: prev: with prev;
   kakounePlugins = kakounePlugins // recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
 
   # Used with sway keybindings
-  sway-soundcards = writers.writeBashBin "sway-soundcards" (builtins.readFile ./sway/soundcards.bash);
+  sway-soundcards = writers.writeBashBin "sway-soundcards"
+    {
+      makeWrapperArgs = [
+        "--prefix"
+        "PATH"
+        ":"
+        "${lib.makeBinPath [ pulseaudio wireplumber ]}"
+      ];
+    }
+    (builtins.readFile ./sway/soundcards.bash);
   sway-app-or-workspace = writeShellScriptBin "sway-app-or-workspace" (builtins.readFile ./sway/app_or_workspace.sh);
   sway-backlight = writers.writePython3Bin "sway-backlight" { } (builtins.readFile ./sway/backlight.py);
   sway-inhibit = writeShellApplication {

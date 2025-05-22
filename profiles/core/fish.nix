@@ -90,8 +90,8 @@
           body = "nmcli -t -f NAME con show | sk | xargs -o -I_ nmcli con up '_'";
           description = "Fuzzy activate a connection";
         };
-        activate-combined-output = "pactl load-module module-combine-sink";
-        deactivate-combined-output = "pactl unload-module module-combine-sink";
+        activate-combined-output = "${pkgs.pulseaudio}/bin/pactl load-module module-combine-sink";
+        deactivate-combined-output = "${pkgs.pulseaudio}/bin/pactl unload-module module-combine-sink";
       };
       plugins = [
         {

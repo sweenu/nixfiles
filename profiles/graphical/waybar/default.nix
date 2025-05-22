@@ -49,7 +49,7 @@
               car = "";
               default = [ " " " " "  " ];
             };
-            on-click = "pavucontrol";
+            on-click = "pwvucontrol";
           };
           backlight = {
             format = "{icon} {percent}%";

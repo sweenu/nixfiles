@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 {
@@ -20,7 +19,6 @@
       grim
       swappy
       playerctl
-      pulseaudio # only for pactl because it's hard to mute or change volume through pw-cli
 
       # custom scripts
       sway-soundcards
@@ -48,14 +46,14 @@
           names = [ config.vars.defaultFont ];
           size = 0.1;
         };
-        bars = [ { command = "${pkgs.waybar}/bin/waybar"; } ];
+        bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
         floating = {
           titlebar = false;
-          criteria = [ { app_id = "zoom"; } ];
+          criteria = [{ app_id = "zoom"; }];
           border = 1;
         };
         assigns = {
-          "9:" = [ { title = "Spotify"; } ];
+          "9:" = [{ title = "Spotify"; }];
         };
         window = {
           border = 1;
