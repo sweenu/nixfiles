@@ -51,34 +51,23 @@
     arion.url = "github:hercules-ci/arion";
     arion.inputs.nixpkgs.follows = "nixos";
 
-    ig-story-fetcher.url = "github:sweenu/ig-story-fetcher";
-    ig-story-fetcher.inputs.nixpkgs.follows = "nixos";
-
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     nix-colors.url = "github:misterio77/nix-colors";
-
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
-    vrising-discord-bot.url = "gitlab:Sweenu/vrising-discord-bot";
   };
 
   outputs =
-    {
-      self,
-      nixos,
-      nixos-hardware,
-      digga,
-      home,
-      agenix,
-      deploy,
-      disko,
-      arion,
-      ig-story-fetcher,
-      nix-colors,
-      nix-minecraft,
-      vrising-discord-bot,
-      ...
+    { self
+    , nixos
+    , nixos-hardware
+    , digga
+    , home
+    , agenix
+    , deploy
+    , disko
+    , arion
+    , nix-colors
+    , ...
     }@inputs:
     digga.lib.mkFlake {
       inherit self inputs;
@@ -93,10 +82,7 @@
         overlays = [
           ./pkgs/default.nix
           agenix.overlays.default
-          ig-story-fetcher.overlays.default
           deploy.overlay
-          nix-minecraft.overlay
-          vrising-discord-bot.overlays.default
         ];
       };
 
@@ -110,9 +96,6 @@
             home.nixosModules.home-manager
             disko.nixosModules.disko
             arion.nixosModules.arion
-            ig-story-fetcher.nixosModules.ig-story-fetcher
-            nix-minecraft.nixosModules.minecraft-servers
-            vrising-discord-bot.nixosModules.vrising-discord-bot
           ];
         };
 
@@ -179,10 +162,6 @@
         grunfeld = {
           profiles.system.sshUser = "root";
         };
-      };
-
-      herculesCI = {
-        ciSystems = [ "x86_64-linux" ];
       };
     };
 }

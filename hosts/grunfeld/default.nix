@@ -1,13 +1,11 @@
-{
-  pkgs,
-  config,
-  suites,
-  ...
+{ pkgs
+, config
+, suites
+, ...
 }:
 {
   imports = suites.server ++ [
     ./snapserver.nix
-    # ./3proxy.nix
   ];
 
   fileSystems = {

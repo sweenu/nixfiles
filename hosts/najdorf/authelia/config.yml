@@ -35,11 +35,6 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
-    - domain: "searx.@domainName@"
-      resources:
-        - '^/opensearch\.xml(\?.*)?$'
-      methods: [ GET ]
-      policy: bypass
     - domain: "n8n.@domainName@"
       resources:
         - '^/form/.*'
@@ -63,7 +58,7 @@ session:
   cookies:
     - domain: '@domainName@'
       authelia_url: 'https://authelia.@domainName@'
-      default_redirection_url: 'https://searx.@domainName@/'
+      default_redirection_url: 'https://@domainName@/'
 
 regulation:
   max_retries: 3

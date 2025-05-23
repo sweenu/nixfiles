@@ -20,13 +20,12 @@ in
       ./portainer.nix
       ./nextcloud.nix
       ./calibre-web.nix
-      # ./simple-torrent.nix
       ./goeland.nix
       ./n8n.nix
-      ./obsidian-livesync.nix
-      ./core-keeper.nix
       ./immich.nix
+      ./obsidian-livesync.nix
       ./obsidian-share-note.nix
+      ./ollama.nix
     ]
     ++ suites.server
     ++ suites.base;
@@ -88,7 +87,6 @@ in
 
   environment.defaultPackages = with pkgs; [
     restic
-    unison
   ];
 
   services.journald.extraConfig = ''

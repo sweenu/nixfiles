@@ -33,7 +33,6 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 - [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
 - [SimpleTorrent](https://github.com/boypt/simple-torrent)
-- [SearXNG](https://docs.searxng.org)
 - [goeland](https://github.com/slurdge/goeland)
 - [Immich](https://immich.app)
 
