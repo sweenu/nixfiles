@@ -1,8 +1,7 @@
-{
-  config,
-  suites,
-  pkgs,
-  ...
+{ config
+, suites
+, pkgs
+, ...
 }:
 
 {
@@ -29,8 +28,11 @@
       kernelPackages = pkgs.linuxPackages_latest;
       kernelParams = [ "resume_offset=225501184" ];
       loader = {
-        systemd-boot.enable = true;
-        systemd-boot.editor = false;
+        systemd-boot = {
+          enable = true;
+          editor = false;
+          configurationLimit = 5;
+        };
         efi.canTouchEfiVariables = true;
       };
       resumeDevice = "/dev/mapper/${encryptedRoot}";
