@@ -11,7 +11,7 @@ in
     networks.traefik.external = true;
     networks.ollama.external = true;
     services.n8n.service = {
-      image = "n8nio/n8n:1.84.0";
+      image = "n8nio/n8n:1.94.0";
       container_name = "n8n";
       environment = rec {
         N8N_HIRING_BANNER_ENABLED = "false";
