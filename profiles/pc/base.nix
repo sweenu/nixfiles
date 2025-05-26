@@ -30,6 +30,7 @@
       extraArgs = [ "--skip-login" ];
       loginOptions = "${config.vars.username}";
     };
+    gnome.gnome-keyring.enable = true;
     printing = {
       enable = true;
       drivers = with pkgs; [
@@ -41,8 +42,6 @@
   };
 
   security.polkit.enable = true;
-
-  programs.steam.enable = true;
 
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
