@@ -39,6 +39,7 @@
         hplip
       ];
     };
+    ollama.enable = true;
   };
 
   security.polkit.enable = true;
