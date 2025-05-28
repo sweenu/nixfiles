@@ -89,7 +89,7 @@
             tooltip-format-connected = "{device_enumerate}";
             tooltip-format-enumerate-connected = "{device_alias} ({device_battery_percentage}%)";
             on-click = "bluetoothctl show | test $(grep -Po '(?<=Powered: ).*') = 'no' && bluetoothctl power on || bluetoothctl power off";
-            on-click-right = "${config.vars.terminalBin} --class floating_window -e ${pkgs.bluetuith}/bin/bluetuith";
+            on-click-right = "${pkgs.alacritty}/bin/alacritty --class floating_window -e ${pkgs.bluetuith}/bin/bluetuith";
           };
         };
       };

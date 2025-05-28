@@ -19,7 +19,7 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 - Wayland bar: [Waybar](https://github.com/Alexays/Waybar) (style copied from [@KubquoA](https://github.com/KubqoA)'s [config](https://github.com/KubqoA/dotfiles))
 - Notification manager: [mako](https://wayland.emersion.fr/mako)
 - Editor: [kakoune](https://github.com/mawww/kakoune)
-- Terminal: [alacritty](https://github.com/alacritty/alacritty)
+- Terminal: [wezterm](https://wezterm.org)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
 - Shell: [fish](https://fishshell.com)
 - Browser: [firefox](https://www.mozilla.org/en-US/firefox)
