@@ -4,8 +4,8 @@
   vars = rec {
     email = "contact@sweenu.xyz";
     username = "sweenu";
-    terminal = "alacritty";
-    terminalBin = "${pkgs.alacritty}/bin/alacritty";
+    terminal = "wezterm";
+    terminalBin = "${pkgs.wezterm}/bin/wezterm";
 
     home = "/home/${username}";
     configHome = (builtins.getAttr username config.home-manager.users).xdg.configHome;
