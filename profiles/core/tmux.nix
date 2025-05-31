@@ -11,7 +11,6 @@
     prefix = "M-g";
     secureSocket = true;
     sensibleOnTop = false;
-    terminal = "tmux-256color";
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.open
@@ -107,8 +106,6 @@
 
       # tmux messages are displayed for 4 seconds
       set -g display-time 4000
-
-      set -ga terminal-overrides ",${config.vars.terminal}:Tc"
 
       ##########
       # VISUAL #
