@@ -82,7 +82,7 @@
         overlays = [
           ./pkgs/default.nix
           agenix.overlays.default
-          deploy.overlay
+          deploy.overlays.default
         ];
       };
 
