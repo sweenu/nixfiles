@@ -106,6 +106,15 @@ in
   };
   virtualisation.arion.backend = "docker";
 
+  # PostgreSQL config and backups
+  services.postgresql = {
+    package = pkgs.postgresql_15;
+  };
+  services.postgresqlBackup = {
+    enable = config.services.postgresql.enable;
+    startAt = "*-*-* 03:17:00";
+  };
+
   # Restic backups
   age.secrets.resticPassword.file = "${self}/secrets/restic_password.age";
   environment.sessionVariables = {
@@ -116,7 +125,9 @@ in
     backups.opt = {
       initialize = true;
       repository = resticRepository;
-      paths = [ "/opt" ];
+      paths = [
+        "/opt"
+      ] ++ (if config.services.postgresqlBackup.enable then [ config.services.postgresqlBackup.location ] else [ ]);
       pruneOpts = [
         "--keep-last 36"
         "--keep-daily 14"
