@@ -30,6 +30,7 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 
 - [Træfik](https://traefik.io/traefik)
 - [Authelia](https://www.authelia.com)
+- [LLDAP](https://github.com/lldap/lldap)
 - [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
 - [SimpleTorrent](https://github.com/boypt/simple-torrent)

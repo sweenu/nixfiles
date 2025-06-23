@@ -14,11 +14,7 @@ let
   };
 in
 {
-  age.secrets.smtpPassword = {
-    file = "${self}/secrets/smtp_password.age";
-    owner = "goeland";
-    group = "goeland";
-  };
+  users.users.goeland.extraGroups = [ "smtp" ];
 
   services.goeland = {
     enable = true;

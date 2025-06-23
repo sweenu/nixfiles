@@ -26,6 +26,7 @@ in
       ./obsidian-livesync.nix
       ./obsidian-share-note.nix
       ./ollama.nix
+      ./lldap.nix
     ]
     ++ suites.server
     ++ suites.base;
@@ -33,6 +34,14 @@ in
   # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
   # Generate the auth key here: https://login.tailscale.com/admin/settings/keys
   # systemd.services.tailscale-login = import "${self}/profiles/ts-oneshot-login.nix" { tailscalePkg = pkgs.tailscale; authKey = ""; }
+
+  users.groups.smtp = { };
+
+  age.secrets.smtpPassword = {
+    file = "${self}/secrets/smtp_password.age";
+    group = "smtp";
+    mode = "440";
+  };
 
   boot = {
     initrd = {
