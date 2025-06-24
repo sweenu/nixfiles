@@ -3,9 +3,6 @@
 , ...
 }:
 
-let
-  domain = "immich.${config.vars.domainName}";
-in
 {
   age.secrets = {
     "immich/envFile".file = "${self}/secrets/immich/env.age";
@@ -27,7 +24,7 @@ in
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-immich = {
-      rule = "Host(`${domain}`)";
+      rule = "Host(`immich.${config.vars.domainName}`)";
       service = "immich";
     };
     services."${routers.to-immich.service}".loadBalancer.servers = [
