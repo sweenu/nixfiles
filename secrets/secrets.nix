@@ -11,7 +11,7 @@ in
   "authelia/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/session_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/storage_encryption_key.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/users.age".publicKeys = [ carokann najdorfHost ];
+  "authelia/ldap_password.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/env.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_user.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];

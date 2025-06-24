@@ -16,7 +16,7 @@ in
 
       # services
       ./traefik.nix
-      ./authelia
+      ./authelia.nix
       ./portainer.nix
       ./nextcloud.nix
       ./calibre-web.nix

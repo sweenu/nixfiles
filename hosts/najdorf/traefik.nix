@@ -1,7 +1,6 @@
-{
-  self,
-  config,
-  ...
+{ self
+, config
+, ...
 }:
 
 {
@@ -84,7 +83,7 @@
         routers.dashboard = {
           rule = "Host(`traefik.sweenu.xyz`)";
           service = "api@internal";
-          middlewares = [ "authelia@docker" ];
+          middlewares = [ "authelia@file" ];
         };
       };
     };

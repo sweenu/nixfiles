@@ -30,7 +30,7 @@ in
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.to-n8n.service" = "n8n";
-        "traefik.http.routers.to-n8n.middlewares" = "authelia@docker";
+        "traefik.http.routers.to-n8n.middlewares" = "authelia@file";
         "traefik.http.services.n8n.loadbalancer.server.port" = "5678";
       };
     };
