@@ -23,6 +23,7 @@ in
   "fastmail/app_password.age".publicKeys = [ carokann najdorfHost ];
   "lldap/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
   "lldap/ldap_user_pass.age".publicKeys = [ carokann najdorfHost ];
+  "grist/env.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];

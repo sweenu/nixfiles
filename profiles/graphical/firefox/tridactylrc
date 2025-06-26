@@ -36,6 +36,7 @@ set bmarkweight 10000000 "Makes the bookmarks appear first in :open
 set allowautofocus false
 
 "Blacklist
+seturl grist.@domainName@ superignore true
 unbindurl calendar.notion.so ?
 unbindurl calendar.notion.so c
 unbindurl calendar.notion.so f
