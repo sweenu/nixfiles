@@ -43,7 +43,7 @@
 
     # Tridactyl
     xdg.configFile."tridactyl/tridactylrc".source = pkgs.replaceVars ./tridactylrc {
-      inherit (config.vars) terminalBin;
+      inherit (config.vars) terminalBin domainName;
       editor = config.environment.variables.EDITOR;
     };
     xdg.configFile."tridactyl/themes/base16-oceanicnext.css".source = ./tridactyl_style.css;
