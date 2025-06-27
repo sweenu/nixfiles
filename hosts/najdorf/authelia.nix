@@ -25,6 +25,14 @@ in
       file = "${self}/secrets/authelia/ldap_password.age";
       owner = config.services.authelia.instances.main.user;
     };
+    "authelia/oidcHmacSecret" = {
+      file = "${self}/secrets/authelia/oidc_hmac_secret.age";
+      owner = config.services.authelia.instances.main.user;
+    };
+    "authelia/oidcJwtPrivateKey" = {
+      file = "${self}/secrets/authelia/oidc_jwt_private_key.age";
+      owner = config.services.authelia.instances.main.user;
+    };
   };
 
   users.users."${config.services.authelia.instances.main.user}".extraGroups = [ "smtp" ];
@@ -35,6 +43,8 @@ in
       storageEncryptionKeyFile = config.age.secrets."authelia/storageEncryptionKey".path;
       jwtSecretFile = config.age.secrets."authelia/jwtSecret".path;
       sessionSecretFile = config.age.secrets."authelia/sessionSecret".path;
+      oidcHmacSecretFile = config.age.secrets."authelia/oidcHmacSecret".path;
+      oidcIssuerPrivateKeyFile = config.age.secrets."authelia/oidcJwtPrivateKey".path;
     };
     environmentVariables = {
       AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.age.secrets.smtpPassword.path;
