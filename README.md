@@ -33,9 +33,9 @@ I deploy most services as Docker containers through [Arion](https://github.com/h
 - [LLDAP](https://github.com/lldap/lldap)
 - [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
-- [SimpleTorrent](https://github.com/boypt/simple-torrent)
 - [goeland](https://github.com/slurdge/goeland)
 - [Immich](https://immich.app)
+- [Grist](https://www.getgrist.com/)
 
 Important data is backed up with [Restic](https://restic.net) to a local disk connected to my RaspberryPi.
 

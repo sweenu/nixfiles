@@ -12,6 +12,8 @@ in
   "authelia/session_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/storage_encryption_key.age".publicKeys = [ carokann najdorfHost ];
   "authelia/ldap_password.age".publicKeys = [ carokann najdorfHost ];
+  "authelia/oidc_hmac_secret.age".publicKeys = [ carokann najdorfHost ];
+  "authelia/oidc_jwt_private_key.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/env.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_user.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
@@ -24,6 +26,7 @@ in
   "lldap/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
   "lldap/ldap_user_pass.age".publicKeys = [ carokann najdorfHost ];
   "grist/env.age".publicKeys = [ carokann najdorfHost ];
+  "grist/oidc_client_secret_digest.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];
