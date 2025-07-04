@@ -172,8 +172,6 @@
               command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP";
             }
             { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
-            # Until https://github.com/signalapp/Signal-Desktop/issues/6368 is fixed
-            { command = "${pkgs.signal-desktop}/bin/signal-desktop"; }
           ];
         modifier = "Mod4";
         terminal = "${config.vars.terminalBin}";
