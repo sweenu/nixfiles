@@ -7,7 +7,7 @@
 }:
 
 let
-  resticRepository = "rest:http://grunfeld:8000/najdorf";
+  resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
 in
 {
   imports =
@@ -126,7 +126,10 @@ in
   };
 
   # Restic backups
-  age.secrets.resticPassword.file = "${self}/secrets/restic_password.age";
+  age.secrets = {
+    resticPassword.file = "${self}/secrets/restic/password.age";
+    resticEnv.file = "${self}/secrets/restic/env.age";
+  };
   environment.sessionVariables = {
     RESTIC_PASSWORD_FILE = config.age.secrets.resticPassword.path;
     RESTIC_REPOSITORY = resticRepository;
@@ -135,13 +138,16 @@ in
     backups.opt = {
       initialize = true;
       repository = resticRepository;
+      environmentFile = config.age.secrets.resticEnv.path;
       paths = [
         "/opt"
       ] ++ (if config.services.postgresqlBackup.enable then [ config.services.postgresqlBackup.location ] else [ ]);
       pruneOpts = [
         "--keep-last 36"
         "--keep-daily 14"
-        "--keep-weekly 12"
+        "--keep-weekly 5"
+        "--keep-monthly 12"
+        "--keep-yearly 3"
       ];
       timerConfig = {
         OnCalendar = "*-*-* *:00:00"; # every hour

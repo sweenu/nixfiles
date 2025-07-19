@@ -6,7 +6,8 @@ in
 {
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
-  "restic_password.age".publicKeys = [ carokann najdorfHost ];
+  "restic/password.age".publicKeys = [ carokann najdorfHost ];
+  "restic/env.age".publicKeys = [ carokann najdorfHost ];
   "traefik/env.age".publicKeys = [ carokann najdorfHost ];
   "authelia/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/session_secret.age".publicKeys = [ carokann najdorfHost ];
