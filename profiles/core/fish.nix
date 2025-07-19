@@ -17,7 +17,7 @@
         ns = "nix search --no-update-lock-file nixpkgs";
         nf = "nix flake";
         nepl = "nix repl '<nixpkgs>'";
-        nrb = ''nixos-rebuild --use-remote-sudo --flake "$(pwd)#$(hostname)"'';
+        nrb = ''nixos-rebuild --sudo --flake "$(pwd)#$(hostname)"'';
         nrbs = "nb $(hostname) && ${nrb} switch";
         ndiff = "${pkgs.nvd}/bin/nvd diff --sort semver /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system-' | sed -n '2 p') /nix/var/nix/profiles/system";
 
