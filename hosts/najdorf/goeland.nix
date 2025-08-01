@@ -1,4 +1,4 @@
-{ self, config, ... }:
+{ config, ... }:
 
 let
   feeds = {
@@ -11,6 +11,7 @@ let
     notion = "https://rss.app/feeds/NsIZtd0vgm0BsqKL.xml";
     starlwart = "https://stalwartlabs.medium.com/feed";
     alternativeto = "https://feed.alternativeto.net/news/all/";
+    home-assistant = "https://www.home-assistant.io/atom.xml";
   };
 in
 {
