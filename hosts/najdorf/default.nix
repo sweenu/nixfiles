@@ -97,6 +97,7 @@ in
 
   environment.defaultPackages = with pkgs; [
     restic
+    redu
   ];
 
   services.journald.extraConfig = ''
