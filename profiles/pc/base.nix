@@ -44,6 +44,10 @@
 
   security.polkit.enable = true;
 
+  programs = {
+    gnupg.agent.enable = true;
+  };
+
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
       bitwarden-cli
