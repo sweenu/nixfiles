@@ -123,7 +123,9 @@
     };
   };
 
-  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+  systemd.settings.Manager = {
+    DefaultLimitNOFILE = 1048576;
+  };
 
   system.stateVersion = lib.mkDefault "24.05";
 }
