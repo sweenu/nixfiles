@@ -38,20 +38,20 @@ window#waybar.hidden {
 }
 
 #workspaces button:hover {
-  background: rgba(74,85,104,0.9);
+  background-color: rgba(74,85,104,1);
   box-shadow: inherit;
   text-shadow: inherit;
 }
 
-#workspaces button.focused {
-  background-color: #2D3748;
+#workspaces button.active {
+  background-color: rgba(74,85,104,0.6);
 }
 
 #workspaces button.urgent {
   background-color: #e3574d;
 }
 
-#mode {
+#submap {
   margin: 10px 0 0 10px;
   font-size: 13px;
   padding: 0 10px;

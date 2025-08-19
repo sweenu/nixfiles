@@ -6,19 +6,23 @@
   home-manager.users."${config.vars.username}" = {
     programs.waybar = {
       enable = true;
+      systemd = {
+        enable = true;
+        target = "hyprland-session";
+      };
       settings = {
         mainBar = {
           layer = "top";
-          modules-left = [ "sway/workspaces" "sway/mode" "custom/media" ];
+          modules-left = [ "hyprland/workspaces" "hyprland/submap" "custom/media" ];
           modules-right = lib.mkDefault [ "tray" "network" "bluetooth" "pulseaudio" "backlight" "clock" ];
-          "sway/workspaces" = {
+          "hyprland/workspaces" = {
             disable-scroll = true;
             format = "{name}";
             format-icons = {
               "spotify" = "";
             };
           };
-          "sway/mode" = { format = "{}"; };
+          "hyprland/submap" = { format = "{}"; };
           "custom/media" = {
             format = "{icon} {}";
             return-type = "json";

@@ -15,7 +15,7 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 
 ### Software I use on my personal computer (carokann)
 
-- Wayland compositor: [sway](https://swaywm.org)
+- Wayland compositor: [hyprland](https://hypr.land)
 - Wayland bar: [Waybar](https://github.com/Alexays/Waybar) (style copied from [@KubquoA](https://github.com/KubqoA)'s [config](https://github.com/KubqoA/dotfiles))
 - Notification manager: [mako](https://wayland.emersion.fr/mako)
 - Editor: [kakoune](https://github.com/mawww/kakoune)

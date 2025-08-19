@@ -7,20 +7,20 @@ let layoutName = "custom-us-keychron"; in
     options hid_apple fnmode=0
   '';
   home-manager.users."${config.vars.username}" = {
-    wayland.windowManager.sway.config.input =
-      let
-        k6Conf = {
-          xkb_layout = layoutName;
-          xkb_options = "caps:escape";
-          repeat_delay = "200";
-          repeat_rate = "30";
-        };
-      in
-      {
-        "1452:591:Keychron_K6_Keyboard" = k6Conf;
-        "1452:591:Keychron_Keychron_K6" = k6Conf;
-        "1452:591:Keychron_K6" = k6Conf;
-      };
+    # wayland.windowManager.hyprland.settings.input =
+    #   let
+    #     k6Conf = {
+    #       xkb_layout = layoutName;
+    #       xkb_options = "caps:escape";
+    #       repeat_delay = "200";
+    #       repeat_rate = "30";
+    #     };
+    #   in
+    #   {
+    #     "1452:591:Keychron_K6_Keyboard" = k6Conf;
+    #     "1452:591:Keychron_Keychron_K6" = k6Conf;
+    #     "1452:591:Keychron_K6" = k6Conf;
+    #   };
 
     home.file.".xkb/symbols/${layoutName}".text = ''
       default partial alphanumeric_keys

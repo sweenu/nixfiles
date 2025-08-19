@@ -42,10 +42,6 @@ in
       Inherits=${cursorsTheme.name}
     '';
 
-    wayland.windowManager.sway.config.seat = {
-      seat0 = { xcursor_theme = "${cursorsTheme.name} ${builtins.toString cursorsTheme.size}"; };
-    };
-
     # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland#setting-values-in-gsettings
     dconf.settings = {
       "org/gnome/desktop/interface" = {

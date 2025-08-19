@@ -7,9 +7,7 @@ final: prev: with prev;
   };
 
   kakounePlugins = kakounePlugins // recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
-
-  # Used with sway keybindings
-  sway-soundcards = writers.writeBashBin "sway-soundcards"
+  soundcards = writers.writeBashBin "soundcards"
     {
       makeWrapperArgs = [
         "--prefix"
@@ -18,24 +16,21 @@ final: prev: with prev;
         "${lib.makeBinPath [ pulseaudio wireplumber ]}"
       ];
     }
-    (builtins.readFile ./sway/soundcards.bash);
-  sway-app-or-workspace = writeShellScriptBin "sway-app-or-workspace" (builtins.readFile ./sway/app_or_workspace.sh);
-  sway-backlight = writers.writePython3Bin "sway-backlight" { } (builtins.readFile ./sway/backlight.py);
-  sway-inhibit = writeShellApplication {
-    name = "sway-inhibit";
-    text = (builtins.readFile ./sway/inhibit.sh);
+    (builtins.readFile ./soundcards.bash);
+  backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
+  inhibit = writeShellApplication {
+    name = "inhibit";
+    text = (builtins.readFile ./inhibit.sh);
     runtimeInputs = [ libnotify ];
   };
-  sway-capture = writeShellApplication {
-    name = "sway-capture";
-    text = (builtins.readFile ./sway/capture.sh);
+  capture = writeShellApplication {
+    name = "capture";
+    text = (builtins.readFile ./capture.sh);
     runtimeInputs = [ grim slurp swappy wf-recorder libnotify ];
   };
-  sway-choose-capture = writeShellApplication {
-    name = "sway-choose-capture";
-    text = (builtins.readFile ./sway/choose-capture.sh);
+  choose-capture = writeShellApplication {
+    name = "choose-capture";
+    text = (builtins.readFile ./choose-capture.sh);
     runtimeInputs = [ wofi ];
   };
-
-  swaylock-fprintd = callPackage ./swaylock-fprintd.nix { };
 }
