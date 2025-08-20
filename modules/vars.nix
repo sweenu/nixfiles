@@ -19,7 +19,7 @@ with lib;
     repositoriesFolder = mkOption { type = types.str; };
     screenshotFolder = mkOption { type = types.str; };
     screencastFolder = mkOption { type = types.str; };
-    wallpaper = mkOption { type = types.str; };
+    wallpapersFolder = mkOption { type = types.str; };
     defaultFont = mkOption { type = types.str; };
     defaultMonoFont = mkOption { type = types.str; };
 

@@ -59,7 +59,6 @@
         py = "ptpython";
         kc = "kdeconnect-cli -n Mamène";
         hs = "nmcli connection up hs";
-        bt = "bluetuith";
       };
       functions = {
         fish_greeting = "";

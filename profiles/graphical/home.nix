@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ self, config, pkgs, ... }:
 
 {
   home-manager.users."${config.vars.username}" = {
@@ -12,30 +12,16 @@
       signal-desktop
       vlc
       xdg-utils
-      zoom-us
     ];
 
     home.file = {
+      ".face".source = "${self}/assets/pp.png";
       "${config.vars.screenshotFolder}/.keep".source = builtins.toFile "keep" "";
       "${config.vars.screencastFolder}/.keep".source = builtins.toFile "keep" "";
+      "${config.vars.wallpapersFolder}/.keep".source = builtins.toFile "keep" "";
     };
 
     services = {
-      gammastep = {
-        enable = true;
-        latitude = 48.8;
-        longitude = 2.3;
-        temperature = {
-          day = 6500;
-          night = 3200;
-        };
-        settings = {
-          general = {
-            adjustment-method = "wayland";
-            fade = 1;
-          };
-        };
-      };
       kdeconnect = {
         enable = true;
         indicator = true;
@@ -79,10 +65,4 @@
       };
     };
   };
-
-  programs.dconf.enable =
-    let
-      cfg = config.home-manager.users."${config.vars.username}";
-    in
-    cfg.services.blueman-applet.enable || cfg.gtk.enable;
 }

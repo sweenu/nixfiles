@@ -9,14 +9,12 @@
       "https://sweenu.cachix.org"
       "https://deploy-rs.cachix.org"
       "https://cache.garnix.io"
-      "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "sweenu.cachix.org-1:DvQl16NWBp41k5IlxTODTOrIThyGRj8/ekrXxEheBQ0="
       "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
@@ -57,7 +55,8 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
+    caelestia-shell.url = "github:caelestia-dots/shell";
+    caelestia-shell.inputs.nixpkgs.follows = "nixos";
   };
 
   outputs =
@@ -71,7 +70,7 @@
     , disko
     , arion
     , nix-colors
-    , hyprland
+    , caelestia-shell
     , ...
     }@inputs:
     digga.lib.mkFlake {
@@ -144,7 +143,7 @@
 
       home = {
         imports = [ (digga.lib.importExportableModules ./hm-modules) ];
-        modules = [ nix-colors.homeManagerModules.default ];
+        modules = [ nix-colors.homeManagerModules.default caelestia-shell.homeManagerModules.default ];
       };
 
       devshell = ./shell;

@@ -3,19 +3,21 @@ from subprocess import run, PIPE
 
 
 def _get_brightness() -> int:
-    return round(float(run(["light", "-G"], stdout=PIPE).stdout))
+    output = run(["brightnessctl", "-m", "i"], stdout=PIPE).stdout
+    percentage = output.decode("utf-8").split(",")[3]
+    return int(percentage[:-1])
 
 
 def _increase_brightness(percentage: int) -> None:
-    run(["light", "-A", str(percentage)])
+    run(["brightnessctl", "s", f"+{str(percentage)}%"])
 
 
 def _decrease_brightness(percentage: int) -> None:
-    run(["light", "-U", str(percentage)])
+    run(["brightnessctl", "s", f"{str(percentage)}%-"])
 
 
-def _set_brightness(percentage: int) -> None:
-    run(["light", "-S", str(percentage)])
+def _set_brightness(value: str) -> None:
+    run(["brightnessctl", "s", value])
 
 
 def change_backlight(
@@ -35,7 +37,7 @@ def change_backlight(
     if action == "inc":
         if current_brightness < limit:
             if current_brightness < 1:
-                _set_brightness(1)
+                _set_brightness("1%")
             else:
                 _increase_brightness(small_step)
         else:
@@ -45,7 +47,7 @@ def change_backlight(
             if current_brightness > 1:
                 _decrease_brightness(small_step)
             else:
-                _set_brightness(0.01)
+                _set_brightness("1")
         else:
             _decrease_brightness(big_step)
 

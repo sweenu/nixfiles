@@ -10,6 +10,7 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
+    brightnessctl
     comma
     devenv
     ffmpeg
@@ -43,6 +44,8 @@
   };
 
   security.polkit.enable = true;
+  security.pam.services.login.fprintAuth = false;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   programs = {
     gnupg.agent.enable = true;
@@ -67,20 +70,6 @@
         enable = true;
         options = {
           selection-clipboard = "clipboard";
-        };
-      };
-      bluetuith = {
-        enable = true;
-        settings = {
-          keybindings = {
-            Quit = "q";
-            NavigateRight = "h";
-            NavigateDown = "j";
-            NavigateUp = "k";
-            NavigateLeft = "l";
-            FilebrowserDirForward = "l";
-            FilebrowserDirBack = "h";
-          };
         };
       };
       glow = {

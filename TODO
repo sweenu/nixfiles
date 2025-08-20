@@ -1,0 +1,11 @@
+caelestia/default.nix:
+- replace sessionGif and mediaGif, then update screenshot
+
+hyprland/keybindings.nix:
+- when changing brightness outside of caelestia, not showing on osd
+
+other:
+- media not working with spotify
+- lockscreen requires both password and fingerprint
+- notify-send not working
+- zoom screensharing and windows don't work well

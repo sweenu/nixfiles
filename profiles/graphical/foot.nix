@@ -2,8 +2,8 @@
 
 {
   home-manager.users."${config.vars.username}".programs.foot = {
-    enable = true;
-    server.enable = true;
+    enable = false;
+    server.enable = false;
     settings = {
       main = {
         shell = "${pkgs.tmux}/bin/tmux";

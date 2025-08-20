@@ -1,6 +1,6 @@
 # NixOS config for my personal computer and servers
 
-![neofetch](./assets/neofetch_2022_10_15.png)
+![screenshot](./assets/screenshot.jpeg)
 
 ## Presentation
 
@@ -16,8 +16,7 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 ### Software I use on my personal computer (carokann)
 
 - Wayland compositor: [hyprland](https://hypr.land)
-- Wayland bar: [Waybar](https://github.com/Alexays/Waybar) (style copied from [@KubquoA](https://github.com/KubqoA)'s [config](https://github.com/KubqoA/dotfiles))
-- Notification manager: [mako](https://wayland.emersion.fr/mako)
+- Desktop shell: [Caelestia](https://github.com/caelestia-dots/shell)
 - Editor: [kakoune](https://github.com/mawww/kakoune)
 - Terminal: [wezterm](https://wezterm.org)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
@@ -73,5 +72,5 @@ $ deploy '.#najdorf'
 ```
 
 ## Acknowledgment:
-* Thanks to [@KubquoA](https://github.com/KubqoA) for making this [reddit post](https://www.reddit.com/r/unixporn/comments/lepmss/sway_simple_sway_on_nixos) from which I discovered NixOS and from which I stole the Waybar style.
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS.
+* Thanks to [soramanew](https://github.com/soramanew) for the amazing [caelestia shell](https://github.com/caelestia-dots/shell) and for the [hyprland config](https://github.com/caelestia-dots/caelestia/tree/e456e8abb90b94f2e6ae859f6e3b3ef2a5e27099/hypr) from which I took liberally.

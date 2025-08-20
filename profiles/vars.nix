@@ -1,4 +1,4 @@
-{ self, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   vars = rec {
@@ -17,7 +17,7 @@
     repositoriesFolder = "repos";
     screenshotFolder = "${picturesFolder}/screenshots";
     screencastFolder = "${videosFolder}/screencasts";
-    wallpaper = "${self}/assets/wallpaper.jpg";
+    wallpapersFolder = "${picturesFolder}/wallpapers";
     defaultFont = "Roboto";
     defaultMonoFont = "DejaVuSansM Nerd Font";
 
