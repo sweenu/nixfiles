@@ -1,11 +1,13 @@
-caelestia/default.nix:
-- replace sessionGif and mediaGif, then update screenshot
+# Hyprland issues
 
-hyprland/keybindings.nix:
+# Caelestia issues
 - when changing brightness outside of caelestia, not showing on osd
 
-other:
-- media not working with spotify
-- lockscreen requires both password and fingerprint
-- notify-send not working
+# Electron app issues
 - zoom screensharing and windows don't work well
+- launching obsidian from the launcher
+
+# Dual-monitor issues
+- laptop monitor should be aligned from the bottom
+- need hyprctl reload after unplugging
+- workspaces on wrong monitor

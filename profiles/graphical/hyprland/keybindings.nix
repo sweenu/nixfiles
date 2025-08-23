@@ -40,8 +40,7 @@ in
     "${mod}, U, workspace, 5"
     "${mod}, I, workspace, 6"
     "${mod}, O, workspace, 7"
-    "${mod}, P, workspace, 8"
-    "${mod}, M, workspace, 9"
+    "${mod}, M, workspace, 8"
 
     # Move to workspace
     "${mod} SHIFT, A, movetoworkspacesilent, 1"
@@ -51,7 +50,6 @@ in
     "${mod} SHIFT, U, movetoworkspacesilent, 5"
     "${mod} SHIFT, I, movetoworkspacesilent, 6"
     "${mod} SHIFT, O, movetoworkspacesilent, 7"
-    "${mod} SHIFT, P, movetoworkspacesilent, 8"
 
     "${mod} CTRL SHIFT, A, movetoworkspace, 1"
     "${mod} CTRL SHIFT, S, movetoworkspace, 2"
@@ -60,7 +58,6 @@ in
     "${mod} CTRL SHIFT, U, movetoworkspace, 5"
     "${mod} CTRL SHIFT, I, movetoworkspace, 6"
     "${mod} CTRL SHIFT, O, movetoworkspace, 7"
-    "${mod} CTRL SHIFT, P, movetoworkspace, 8"
 
     # Layout controls
     "${mod}, V, layoutmsg, togglesplit"

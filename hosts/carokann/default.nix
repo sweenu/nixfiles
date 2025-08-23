@@ -84,6 +84,6 @@
 
   home-manager.users."${config.vars.username}" = {
     home.file.".ssh/id_ed25519.pub".text = config.vars.sshPublicKey;
-    wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 2256x1504, 0x0, 1.6" ];
+    wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 2256x1504, auto-right, 1.6" ];
   };
 }

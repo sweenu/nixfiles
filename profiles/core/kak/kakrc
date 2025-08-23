@@ -90,9 +90,9 @@ hook global ModuleLoaded tmux %{
 
 # Auto-set clipboard
 hook global RegisterModified '"' %{ nop %sh{
-    if [ -n "$DISPLAY" ]; then
+    if [[ -n "$DISPLAY" ]] || [[ -n "$WAYLAND_DISPLAY" ]]; then
         printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
-    elif [ -n "$TMUX" ]; then
+    elif [[ -n "$TMUX" ]]; then
         tmux set-buffer -- "$kak_main_reg_dquote"
     fi
 }}

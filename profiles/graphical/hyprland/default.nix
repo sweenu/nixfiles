@@ -58,7 +58,9 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
 
     wayland.windowManager.hyprland = {
       enable = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+      };
 
       settings = {
         ecosystem = {
@@ -75,10 +77,11 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         };
         binds = {
           movefocus_cycles_fullscreen = true;
+          allow_pin_fullscreen = true; # necessary for fullscreening Picture-in-Picture
         };
         xwayland = {
           enabled = false;
-          # force_zero_scaling = true;
+          force_zero_scaling = true;
         };
         env = [
           # "QT_QPA_PLATFORMTHEME, qt6ct"
@@ -193,16 +196,14 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         };
 
         workspace = let externalMonitors = "{DP-1,DP-2,DP-3,DP-4,HDMI-A-1,HDMI-A-2,HDMI-A-3,HDMI-A-4}"; in [
-          "1, defaultName:a, monitor:${externalMonitors}, monitor:default:true"
-          "1, defaultName:a, monitor:eDP-1, monitor:default:true" # to have "a" be the default also on the laptop monitor
+          "1, defaultName:a, monitor:${externalMonitors}, default:true"
           "2, defaultName:s, monitor:${externalMonitors}"
           "3, defaultName:d, monitor:${externalMonitors}"
           "4, defaultName:f, monitor:${externalMonitors}"
           "5, defaultName:u, monitor:eDP-1"
           "6, defaultName:i, monitor:eDP-1"
           "7, defaultName:o, monitor:eDP-1"
-          "8, defaultName:p, monitor:eDP-1"
-          "9, defaultName:, monitor:eDP-1, on-created-empty:${pkgs.spotify}/bin/spotify"
+          "8, defaultName:, monitor:eDP-1, on-created-empty:${pkgs.spotify}/bin/spotify"
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
           "special:signal, on-created-empty:${pkgs.signal-desktop}/bin/signal-desktop"
@@ -274,7 +275,7 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
 
     programs.fish.interactiveShellInit = lib.mkBefore ''
       if test -z $DISPLAY && test (tty) = "/dev/tty1"
-          exec dbus-run-session Hyprland
+          exec Hyprland
       end
     '';
   };
