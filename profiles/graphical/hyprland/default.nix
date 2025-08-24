@@ -196,7 +196,7 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           "animation fade, selection" # slurp
           "animation fade, wayfreeze"
 
-          # Launcher
+          # Fuzzel
           "animation popin 80%, launcher"
           "blur, launcher"
 

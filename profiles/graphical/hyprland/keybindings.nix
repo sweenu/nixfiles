@@ -102,6 +102,7 @@ in
 
     # Caelestia
     "${mod}, Escape, global, caelestia:session"
+    "${mod}, Period, exec, caelestia emoji -p"
   ];
 
   bindl = [
