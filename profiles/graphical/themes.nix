@@ -13,13 +13,12 @@ in
       iconsTheme.package
     ];
 
-    wayland.windowManager.hyprland.settings.env = [
-      "XCURSOR_THEME, ${cursorTheme.name}"
-      "XCURSOR_SIZE, ${builtins.toString cursorTheme.size}"
-      "HYPRCURSOR_THEME, ${cursorTheme.name}"
-      "HYPRCURSOR_SIZE, ${builtins.toString cursorTheme.size}"
-    ];
-
+    systemd.user.sessionVariables = {
+      XCURSOR_THEME = "${cursorTheme.name}";
+      XCURSOR_SIZE = "${builtins.toString cursorTheme.size}";
+      HYPRCURSOR_THEME = "${cursorTheme.name}";
+      HYPRCURSOR_SIZE = "${builtins.toString cursorTheme.size}";
+    };
 
     gtk = {
       enable = true;

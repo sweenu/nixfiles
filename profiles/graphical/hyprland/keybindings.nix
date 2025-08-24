@@ -66,12 +66,12 @@ in
     ", F11, fullscreen"
 
     # Apps
-    "${mod}, Return, exec, ${config.vars.terminalBin}"
     "${mod}, T, global, caelestia:launcher"
-    "${mod}, B, exec, firefox"
-    "${mod}, N, exec, obsidian"
-    "${mod}, Z, exec, zed-editor"
-    "${mod} SHIFT, Escape, exec, ${pkgs.mission-center}/bin/missioncenter"
+    "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
+    "${mod}, B, exec, app2unit -- firefox"
+    "${mod}, N, exec, app2unit -- obsidian"
+    "${mod}, Z, exec, app2unit -- zed-editor"
+    "${mod} SHIFT, Escape, exec, app2unit -- ${pkgs.mission-center}/bin/missioncenter"
 
     # Notifications
     "${mod}, Space, global, caelestia:clearNotifs"

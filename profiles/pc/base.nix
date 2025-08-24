@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   boot.plymouth = {
     enable = true;
     theme = "breeze";

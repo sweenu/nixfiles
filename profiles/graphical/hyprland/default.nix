@@ -6,10 +6,15 @@
 
 let palette = config.home-manager.users."${config.vars.username}".colorScheme.palette; in
 {
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = false;
+  };
 
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
+      app2unit
       wdisplays
       wf-recorder
       wl-clipboard
@@ -58,10 +63,6 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
 
     wayland.windowManager.hyprland = {
       enable = true;
-      systemd = {
-        enable = true;
-      };
-
       settings = {
         ecosystem = {
           no_update_news = true;
@@ -80,36 +81,10 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           allow_pin_fullscreen = true; # necessary for fullscreening Picture-in-Picture
         };
         xwayland = {
-          enabled = false;
+          enabled = config.programs.hyprland.xwayland.enable;
           force_zero_scaling = true;
         };
-        env = [
-          # "QT_QPA_PLATFORMTHEME, qt6ct"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
-          "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
-
-          ######## Toolkit backends ########
-          "GDK_BACKEND, wayland,x11"
-          "QT_QPA_PLATFORM, wayland;xcb"
-          "SDL_VIDEODRIVER, wayland,x11"
-          "CLUTTER_BACKEND, wayland"
-          "ELECTRON_OZONE_PLATFORM_HINT, auto"
-
-          ####### XDG specifications #######
-          "XDG_CURRENT_DESKTOP, Hyprland"
-          "XDG_SESSION_TYPE, wayland"
-          "XDG_SESSION_DESKTOP, Hyprland"
-
-          ############# Others #############
-          "NIXOS_OZONE_WL, 1"
-          "_JAVA_AWT_WM_NONREPARENTING, 1"
-        ];
-
         monitor = [ ", preferred, auto-left, auto" ];
-
-        exec-once = [
-          "${pkgs.signal-desktop}/bin/signal-desktop --start-in-tray"
-        ];
 
         # Input configuration
         input = {
@@ -248,6 +223,24 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
       '';
     };
 
+    systemd.user.sessionVariables = {
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+
+      GDK_BACKEND = "wayland,x11";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      SDL_VIDEODRIVER = "wayland,x11";
+      CLUTTER_BACKEND = "wayland";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+
+      NIXOS_OZONE_WL = "1";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+    };
+
     home.file.".xkb/symbols/custom-us".text = ''
       default partial alphanumeric_keys
       xkb_symbols "custom-altgr-intl" {
@@ -274,8 +267,8 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
     '';
 
     programs.fish.interactiveShellInit = lib.mkBefore ''
-      if test -z $DISPLAY && test (tty) = "/dev/tty1"
-          exec Hyprland
+      if uwsm check may-start -q
+          exec uwsm start hyprland-uwsm.desktop
       end
     '';
   };
