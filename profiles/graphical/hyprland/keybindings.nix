@@ -40,7 +40,6 @@ in
     "${mod}, U, workspace, 5"
     "${mod}, I, workspace, 6"
     "${mod}, O, workspace, 7"
-    "${mod}, M, workspace, 8"
 
     # Move to workspace
     "${mod} SHIFT, A, movetoworkspacesilent, 1"
@@ -96,6 +95,7 @@ in
 
     # Special workspace
     "${mod}, minus, togglespecialworkspace, signal"
+    "${mod}, M, togglespecialworkspace, spotify"
 
     # Submaps
     "${mod}, W, submap, window"
