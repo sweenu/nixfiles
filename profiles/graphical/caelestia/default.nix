@@ -25,7 +25,7 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
             background = true;
           };
           entries = [
-            { id = "logo"; enabled = true; }
+            { id = "logo"; enabled = false; }
             { id = "workspaces"; enabled = true; }
             { id = "spacer"; enabled = true; }
             { id = "activeWindow"; enabled = true; }
@@ -34,7 +34,7 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
             { id = "idleInhibitor"; enabled = true; }
             { id = "clock"; enabled = true; }
             { id = "statusIcons"; enabled = true; }
-            { id = "power"; enabled = true; }
+            { id = "power"; enabled = false; }
           ];
         };
         services = {
