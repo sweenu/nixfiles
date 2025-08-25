@@ -21,8 +21,16 @@
           "uas"
           "usb_storage"
           "sd_mod"
+          "tpm_tis" # TPM2 kernel module
         ];
-        luks.devices.${encryptedRoot}.device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+        systemd = {
+          enable = true;
+          enableTpm2 = true;
+        };
+        luks.devices.${encryptedRoot} = {
+          device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
+          crypttabExtraOpts = [ "tpm2-device=auto" ]; # Use TPM2 to unlock
+        };
       };
       kernelModules = [ "kvm-intel" ];
       kernelPackages = pkgs.linuxPackages_latest;
@@ -71,6 +79,12 @@
     avahi.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
+  };
+
+  security.tpm2 = {
+    enable = true;
+    pkcs11.enable = true;
+    tctiEnvironment.enable = true;
   };
 
   time.timeZone = config.vars.timezone;

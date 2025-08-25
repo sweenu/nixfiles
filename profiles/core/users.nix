@@ -11,7 +11,8 @@
         isNormalUser = true;
         extraGroups = [ "wheel" ]
           ++ pkgs.lib.optional config.virtualisation.libvirtd.enable "libvirtd"
-          ++ pkgs.lib.optional config.networking.networkmanager.enable "networkmanager";
+          ++ pkgs.lib.optional config.networking.networkmanager.enable "networkmanager"
+          ++ pkgs.lib.optional config.security.tpm2.enable "tss";
       };
     };
   };
