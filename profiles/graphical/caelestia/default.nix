@@ -24,6 +24,7 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
           tray = {
             background = true;
           };
+          clock.showIcon = false;
           entries = [
             { id = "logo"; enabled = false; }
             { id = "workspaces"; enabled = true; }

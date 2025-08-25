@@ -94,16 +94,16 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1756032184,
-        "narHash": "sha256-lSI3Wnk9c1n1Nsm8S8Sfx1QbGT7ILGwFlT5HQmHSzIQ=",
-        "owner": "caelestia-dots",
-        "repo": "shell",
-        "rev": "54921ee354827aac71a435ad9fe903b8667901fc",
+        "lastModified": 1756276346,
+        "narHash": "sha256-dIYFe7bGSrm0cGxfuF0EDMgJ1mPEtmPaaAxI+smIv54=",
+        "owner": "sweenu",
+        "repo": "caelestia-shell",
+        "rev": "93a779ffbd7a31f6a30d9aa235cd9abb37cdbdc2",
         "type": "github"
       },
       "original": {
-        "owner": "caelestia-dots",
-        "repo": "shell",
+        "owner": "sweenu",
+        "repo": "caelestia-shell",
         "type": "github"
       }
     },
