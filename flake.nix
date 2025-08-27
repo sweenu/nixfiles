@@ -135,7 +135,7 @@
         };
 
         hosts = {
-          carokann.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ];
+          carokann.modules = [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
           grunfeld.system = "aarch64-linux";
           grunfeld.modules = [ nixos-hardware.nixosModules.raspberry-pi-3 ];
         };

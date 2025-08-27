@@ -4,57 +4,79 @@
 , ...
 }:
 
+let
+  encryptedRoot = "cryptroot";
+in
 {
   imports = suites.laptop;
 
-  boot =
-    let
-      encryptedRoot = "cryptroot";
-    in
-    {
-      binfmt.emulatedSystems = [ "aarch64-linux" ];
-      initrd = {
-        availableKernelModules = [
-          "xhci_pci"
-          "thunderbolt"
-          "nvme"
-          "uas"
-          "usb_storage"
-          "sd_mod"
-          "tpm_tis" # TPM2 kernel module
-        ];
-        systemd = {
-          enable = true;
-          tpm2.enable = true;
-        };
-        luks.devices.${encryptedRoot} = {
-          device = "/dev/disk/by-uuid/db2abb19-d9d5-4cf6-b27f-02ed9bc8b63a";
-          crypttabExtraOpts = [ "tpm2-device=auto" ]; # Use TPM2 to unlock
+  disko = {
+    devices = {
+      disk.main = {
+        device = "/dev/nvme0n1";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            ESP = {
+              type = "EF00";
+              size = "512M";
+              content = {
+                type = "filesystem";
+                mountpoint = "/boot";
+                format = "vfat";
+                mountOptions = [ "umask=0077" ];
+              };
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = encryptedRoot;
+                content = {
+                  type = "filesystem";
+                  mountpoint = "/";
+                  format = "ext4";
+                };
+              };
+            };
+          };
         };
       };
-      kernelModules = [ "kvm-intel" ];
-      kernelPackages = pkgs.linuxPackages_latest;
-      kernelParams = [ "resume_offset=225501184" ];
-      loader = {
-        systemd-boot = {
-          enable = true;
-          editor = false;
-          configurationLimit = 5;
-        };
-        efi.canTouchEfiVariables = true;
-      };
-      resumeDevice = "/dev/mapper/${encryptedRoot}";
     };
+  };
+  services.fstrim.enable = true;
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/50d06182-1747-42e1-88fa-cadca977e46b";
-      fsType = "ext4";
+  boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "thunderbolt"
+        "nvme"
+        "tpm_tis" # TPM2 kernel module
+      ];
+      systemd = {
+        enable = true;
+        tpm2.enable = true;
+      };
+      luks.devices.${encryptedRoot} = {
+        allowDiscards = true;
+        bypassWorkqueues = true;
+        crypttabExtraOpts = [ "tpm2-device=auto" ]; # Use TPM2 to unlock
+      };
     };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/EC81-FE28";
-      fsType = "vfat";
+    kernelModules = [ "kvm-amd" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        editor = false;
+        configurationLimit = 5;
+      };
+      efi.canTouchEfiVariables = true;
     };
+    resumeDevice = "/dev/mapper/${encryptedRoot}";
   };
 
   swapDevices = [
@@ -95,6 +117,10 @@
   };
 
   age.identityPaths = [ "${config.vars.home}/.ssh/id_ed25519" ];
+
+  environment.defaultPackages = with pkgs; [
+    framework-system-tools
+  ];
 
   home-manager.users."${config.vars.username}" = {
     home.file.".ssh/id_ed25519.pub".text = config.vars.sshPublicKey;

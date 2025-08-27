@@ -40,19 +40,43 @@ Important data is backed up with [Restic](https://restic.net) to a local disk co
 
 
 ## Bootstrap
-To create a bootstrap ISO for a personal computer run:
+### PC
+Create a bootstrap ISO for a personal computer run:
 ```bash
 $ nixos-generate --flake '.#bootstrap' --format iso
 ```
 
-To create a ready-to-boot SD card for a RaspberryPi, do the following:
+Then install NixOS:
+```bash
+$ cd nixfiles
+$ sudo disko --mode destroy,format,mount -f '.#carokann'
+$ sudo mount /dev/mapper/cryptroot /mnt
+$ sudo mkdir /mnt/boot
+$ sudo mount /dev/nvme0n1p1 /mnt/boot
+$ sudo nixos-install --flake '.#carokann' --root /mnt
+
+# Enroll your fingerprint
+$ sudo fprintd-enroll <username>
+# Enroll TPM2 for dm-crypt
+$ sudo systemd-cryptenroll --tpm2-device=auto /dev/nvme0n1p2
+```
+
+After logging in with tailscale and enabling SSH connections (`sudo tailscale set --ssh`), you can backup the important files:
+- ~/.ssh
+- ~/.local/share/fish/fish_history
+- /etc/NetworkManager/system-connections (replace interface names: `sed -i 's/wlp166s0f0/wlp192s0/' *`)
+- All documents from ~ that you want to keep
+
+### Raspberry Pi
+Create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
 $ nixos-generate --flake '.#grunfeld' --format sd-aarch64 --system aarch64-linux
 $ unzstd -d {the output path from the command above} -o nixos-sd-image.img
 $ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
 ```
 
-To deploy the server config to a new machine:
+### Server
+Deploy the server config to a new machine:
 ```bash
 # First, comment all services imported in hosts/najdorf/default.nix and uncomment the ts-oneshot-login service line.
 # Then run:
