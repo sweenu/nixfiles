@@ -5,13 +5,13 @@
 
 {
   services.logind = {
-    lidSwitch = "suspend-then-hibernate";
-    lidSwitchExternalPower = "suspend-then-hibernate";
-    lidSwitchDocked = "ignore";
-    extraConfig = ''
-      HandlePowerKey=lock
-      LidSwitchIgnoreInhibited=no
-    '';
+    settings.Login = {
+      HandlePowerKey = "lock";
+      LidSwitchIgnoreInhibited = "no";
+      HandleLidSwitch = "suspend-then-hibernate";
+      HandleLidSwitchExternalPower = "suspend-then-hibernate";
+      HandleLidSwitchDocked = "ignore";
+    };
   };
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;

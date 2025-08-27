@@ -11,5 +11,6 @@ in
     (nixfiles inputs.deploy.packages.${pkgs.system}.deploy-rs)
     (nixfiles inputs.nixos-generators.packages.${pkgs.system}.nixos-generate)
     (nixfiles inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere)
+    (nixfiles inputs.disko.packages.${pkgs.system}.disko)
   ];
 }
