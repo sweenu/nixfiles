@@ -69,7 +69,7 @@ in
     "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
     "${mod}, B, exec, app2unit -- firefox"
     "${mod}, N, exec, app2unit -- obsidian"
-    "${mod}, Z, exec, app2unit -- zed-editor"
+    "${mod}, Z, exec, app2unit -- zeditor"
     "${mod} SHIFT, Escape, exec, app2unit -- ${pkgs.mission-center}/bin/missioncenter"
 
     # Notifications

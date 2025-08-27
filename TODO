@@ -10,3 +10,6 @@
 - laptop monitor should be aligned from the bottom
 - need hyprctl reload after unplugging
 - workspaces on wrong monitor
+
+# Other
+- add automatic power mode switching depending on wether plugged in or not.

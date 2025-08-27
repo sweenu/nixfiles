@@ -13,6 +13,7 @@
   "float, class:org\.quickshell"
   "float, class:Zoom Workspace, title:menu window"
   "float, class:firefox, title:Extension .* Bitwarden"
+  "float, class:org\.kde\.kdeconnect\.sms"
 
   # Float, resize and center
   "float, class:org\.gnome\.Settings"
@@ -33,9 +34,9 @@
   "float, class:wdisplays"
   "size 1021 622, class:wdisplays"
   "center 1, class:wdisplays"
-  "float, class:io.missioncenter.MissionCenter"
-  "size 60% 60%, class:io.missioncenter.MissionCenter"
-  "center 1, class:io.missioncenter.MissionCenter"
+  "float, class:io\.missioncenter\.MissionCenter"
+  "size 60% 60%, class:io\.missioncenter\.MissionCenter"
+  "center 1, class:io\.missioncenter\.MissionCenter"
 
   # Dialogs
   "float, title:(Select|Open)( a)? (File|Folder)(s)?"

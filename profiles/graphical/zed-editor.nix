@@ -1,76 +1,115 @@
 { config, pkgs, ... }:
 
 {
-  home-manager.users."${config.vars.username}".programs.zed-editor = {
+  home-manager.users."${config.vars.username}".programs.zed-editor = let mod = "ctrl"; in {
     enable = true;
-    extensions = [ ];
-    extraPackages = with pkgs;[
-      nil
+    extensions = [
+      "qml"
     ];
     userSettings = {
       helix_mode = true;
       buffer_font_size = 14;
       auto_signature_help = true;
-      show_whitespace = "trailing";
+      show_whitespaces = "trailing";
     };
     userTasks = [ ];
     userKeymaps = [
       {
         context = "Workspace";
         bindings = {
-          # Window navigation
-          "alt-n" = "workspace::ActivateNextItem";
-          "alt-p" = "workspace::ActivatePrevItem";
-          "alt-enter" = "workspace::NewFile";
-          "alt-shift-x" = "pane::CloseActiveItem";
+          "${mod}-shift-r" = "workspace::Reload";
 
-          # Direct tab selection
-          "alt-1" = [ "workspace::ActivateItem" 0 ];
-          "alt-2" = [ "workspace::ActivateItem" 1 ];
-          "alt-3" = [ "workspace::ActivateItem" 2 ];
-          "alt-4" = [ "workspace::ActivateItem" 3 ];
-          "alt-5" = [ "workspace::ActivateItem" 4 ];
-          "alt-6" = [ "workspace::ActivateItem" 5 ];
-          "alt-7" = [ "workspace::ActivateItem" 6 ];
-          "alt-8" = [ "workspace::ActivateItem" 7 ];
-          "alt-9" = [ "workspace::ActivateItem" 8 ];
-          "alt-0" = [ "workspace::ActivateItem" 9 ];
-          "alt-'" = "pane::ActivateLastItem";
+          "${mod}-g n" = "pane::ActivateNextItem";
+          "${mod}-g p" = "pane::ActivatePreviousItem";
+          "${mod}-g x" = "pane::CloseActiveItem";
+          "${mod}-g X" = "pane::CloseAllItems";
 
-          # Pane navigation
-          "ctrl-h" = "workspace::ActivatePaneInDirection";
-          "ctrl-j" = "workspace::ActivatePaneInDirection";
-          "ctrl-k" = "workspace::ActivatePaneInDirection";
-          "ctrl-l" = "workspace::ActivatePaneInDirection";
+          "${mod}-1" = [ "pane::ActivateItem" 0 ];
+          "${mod}-2" = [ "pane::ActivateItem" 1 ];
+          "${mod}-3" = [ "pane::ActivateItem" 2 ];
+          "${mod}-4" = [ "pane::ActivateItem" 3 ];
+          "${mod}-5" = [ "pane::ActivateItem" 4 ];
+          "${mod}-6" = [ "pane::ActivateItem" 5 ];
+          "${mod}-7" = [ "pane::ActivateItem" 6 ];
+          "${mod}-8" = [ "pane::ActivateItem" 7 ];
+          "${mod}-9" = [ "pane::ActivateItem" 8 ];
+          "${mod}-0" = [ "pane::ActivateItem" 9 ];
+          "${mod}-'" = "pane::ActivateLastItem";
+
+          "${mod}-h" = "workspace::ActivatePaneRight";
+          "${mod}-j" = "workspace::ActivatePaneDown";
+          "${mod}-k" = "workspace::ActivatePaneUp";
+          "${mod}-l" = "workspace::ActivatePaneLeft";
+
+          "${mod}-shift-j" = "workspace::SwapPaneDown";
+          "${mod}-shift-k" = "workspace::SwapPaneUp";
+          "${mod}-shift-h" = "workspace::SwapPaneLeft";
+          "${mod}-shift-l" = "workspace::SwapPaneRight";
 
           # Pane splits
-          "alt-v" = "pane::SplitDown";
-          "alt-h" = "pane::SplitRight";
+          "alt-g v" = "pane::SplitDown";
 
           # Pane management
-          "alt-x" = "pane::CloseActiveItem";
           "alt-tab" = "workspace::ToggleZoom";
-
-          # Session/window picker
-          "alt-s" = "tab_switcher::Toggle";
-
-          # Pane resizing
-          "alt-down" = "workspace::SwapPaneInDirection";
-          "alt-up" = "workspace::SwapPaneInDirection";
-          "alt-left" = "workspace::SwapPaneInDirection";
-          "alt-right" = "workspace::SwapPaneInDirection";
         };
       }
       {
-        context = "Editor";
+        context = "Editor && vim_mode != insert";
         bindings = {
-          # Ensure pane navigation works in editor context too
-          "ctrl-h" = "workspace::ActivatePaneInDirection";
-          "ctrl-j" = "workspace::ActivatePaneInDirection";
-          "ctrl-k" = "workspace::ActivatePaneInDirection";
-          "ctrl-l" = "workspace::ActivatePaneInDirection";
+          "${mod}-h" = "workspace::ActivatePaneLeft";
+          "${mod}-j" = "workspace::ActivatePaneDown";
+          "${mod}-k" = "workspace::ActivatePaneUp";
+          "${mod}-l" = "workspace::ActivatePaneRight";
         };
       }
+    ];
+    extraPackages = with pkgs;[
+      # python
+      ruff
+      ty
+
+      # yaml
+      yaml-language-server
+
+      # go
+      gopls
+      golangci-lint-langserver
+      delve
+
+      # rust
+      rust-analyzer
+      lldb
+
+      # nix
+      nil
+      nixd
+
+      # html, css, json
+      vscode-langservers-extracted
+
+      # yaml
+      yaml-language-server
+
+      # c
+      clang-tools
+
+      # bash
+      nodePackages.bash-language-server
+
+      # javascript
+      nodePackages.typescript-language-server
+
+      # markdown
+      marksman
+
+      # protobuf
+      buf
+      pb
+
+      # qml
+      qt6.qtdeclarative
+      qt6.qtbase
+      qt6.wrapQtAppsHook
     ];
   };
 }

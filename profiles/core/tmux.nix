@@ -16,21 +16,21 @@
       tmuxPlugins.open
       tmuxPlugins.copycat
     ];
-    extraConfig = ''
+    extraConfig = let mod = "C"; in ''
       ############
       # BINDINGS #
       ############
-      bind -n C-h select-pane -L
-      bind -n C-j select-pane -D
-      bind -n C-k select-pane -U
-      bind -n C-l select-pane -R
+      bind -n ${mod}-h select-pane -L
+      bind -n ${mod}-j select-pane -D
+      bind -n ${mod}-k select-pane -U
+      bind -n ${mod}-l select-pane -R
       bind p previous-window
       bind n next-window
 
-      bind -T copy-mode-vi C-h select-pane -L
-      bind -T copy-mode-vi C-j select-pane -D
-      bind -T copy-mode-vi C-k select-pane -U
-      bind -T copy-mode-vi C-l select-pane -R
+      bind -T copy-mode-vi ${mod}-h select-pane -L
+      bind -T copy-mode-vi ${mod}-j select-pane -D
+      bind -T copy-mode-vi ${mod}-k select-pane -U
+      bind -T copy-mode-vi ${mod}-l select-pane -R
 
       # reset scrollback buffer
       bind k clear-history
@@ -42,17 +42,17 @@
       bind w break-pane
 
       # kill pane
-      bind x kill-pane
-      bind X kill-window
+      bind -n ${mod}-x kill-pane
+      bind -n ${mod}-X kill-window
 
       # reload tmux conf
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display-message "Tmux conf reloaded"
 
       # resize panes
-      bind -n -r M-Down resize-pane -D 5
-      bind -n -r M-Up resize-pane -U 5
-      bind -n -r M-Left resize-pane -L 5
-      bind -n -r M-Right resize-pane -R 5
+      bind -n -r M-Down resize-pane -D 2
+      bind -n -r M-Up resize-pane -U 2
+      bind -n -r M-Left resize-pane -L 2
+      bind -n -r M-Right resize-pane -R 2
 
       # Vi copypaste mode
       bind -T copy-mode-vi v send -X begin-selection
