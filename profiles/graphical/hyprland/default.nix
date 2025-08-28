@@ -170,14 +170,14 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           smart_resizing = false;
         };
 
-        workspace = let externalMonitors = "{DP-1,DP-2,DP-3,DP-4,HDMI-A-1,HDMI-A-2,HDMI-A-3,HDMI-A-4}"; in [
-          "1, defaultName:a, monitor:${externalMonitors}, default:true"
-          "2, defaultName:s, monitor:${externalMonitors}"
-          "3, defaultName:d, monitor:${externalMonitors}"
-          "4, defaultName:f, monitor:${externalMonitors}"
-          "5, defaultName:u, monitor:eDP-1"
-          "6, defaultName:i, monitor:eDP-1"
-          "7, defaultName:o, monitor:eDP-1"
+        workspace = [
+          "1, defaultName:a, default:true"
+          "2, defaultName:s"
+          "3, defaultName:d"
+          "4, defaultName:f"
+          "5, defaultName:u"
+          "6, defaultName:i"
+          "7, defaultName:o"
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
           "special:signal, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
