@@ -9,6 +9,7 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
+    bitwarden
     brightnessctl
     comma
     devenv
