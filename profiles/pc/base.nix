@@ -55,7 +55,6 @@
       bitwarden-cli
       gpg-tui
       tmate
-      viu
       you-get
       yt-dlp
     ];
