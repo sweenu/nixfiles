@@ -36,10 +36,10 @@
           "${mod}-0" = [ "pane::ActivateItem" 9 ];
           "${mod}-'" = "pane::ActivateLastItem";
 
-          "${mod}-h" = "workspace::ActivatePaneRight";
+          "${mod}-h" = "workspace::ActivatePaneLeft";
           "${mod}-j" = "workspace::ActivatePaneDown";
           "${mod}-k" = "workspace::ActivatePaneUp";
-          "${mod}-l" = "workspace::ActivatePaneLeft";
+          "${mod}-l" = "workspace::ActivatePaneRight";
 
           "${mod}-shift-j" = "workspace::SwapPaneDown";
           "${mod}-shift-k" = "workspace::SwapPaneUp";
