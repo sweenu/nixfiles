@@ -82,6 +82,8 @@
       git.package = pkgs.gitFull;
     };
 
+    manual.json.enable = true; # To use with manix
+
     services.playerctld.enable = true;
 
     xdg.userDirs = {
