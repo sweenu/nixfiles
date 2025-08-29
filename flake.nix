@@ -57,6 +57,8 @@
 
     caelestia-shell.url = "github:caelestia-dots/shell";
     caelestia-shell.inputs.nixpkgs.follows = "nixos";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixos";
   };
 
   outputs =
@@ -71,6 +73,7 @@
     , arion
     , nix-colors
     , caelestia-shell
+    , zen-browser
     , ...
     }@inputs:
     digga.lib.mkFlake {
@@ -144,7 +147,11 @@
 
       home = {
         imports = [ (digga.lib.importExportableModules ./hm-modules) ];
-        modules = [ nix-colors.homeManagerModules.default caelestia-shell.homeManagerModules.default ];
+        modules = [
+          nix-colors.homeManagerModules.default
+          caelestia-shell.homeManagerModules.default
+          zen-browser.homeModules.twilight
+        ];
       };
 
       devshell = ./shell;
