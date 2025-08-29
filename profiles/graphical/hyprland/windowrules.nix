@@ -12,7 +12,6 @@
   "float, class:system-config-printer"
   "float, class:org\.quickshell"
   "float, class:Zoom Workspace, title:menu window"
-  "float, class:firefox, title:Extension .* Bitwarden"
   "float, class:org\.kde\.kdeconnect\.sms"
 
   # Float, resize and center
@@ -37,6 +36,9 @@
   "float, class:io\.missioncenter\.MissionCenter"
   "size 60% 60%, class:io\.missioncenter\.MissionCenter"
   "center 1, class:io\.missioncenter\.MissionCenter"
+  "float, class:firefox, title:Extension: \(Bitwarden Password Manager)"
+  "size 60% 60%, class:firefox, title:Extension: \(Bitwarden Password Manager\).*"
+  "center 1, class:firefox, title:Extension: \(Bitwarden Password Manager\).*"
 
   # Dialogs
   "float, title:(Select|Open)( a)? (File|Folder)(s)?"
