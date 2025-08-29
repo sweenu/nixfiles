@@ -171,13 +171,14 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         };
 
         workspace = [
-          "1, defaultName:a, default:true"
-          "2, defaultName:s"
-          "3, defaultName:d"
-          "4, defaultName:f"
-          "5, defaultName:u"
-          "6, defaultName:i"
-          "7, defaultName:o"
+          "1, defaultName:a, persistent:true, default:true"
+          "2, defaultName:s, persistent:true"
+          "3, defaultName:d, persistent:true"
+          "4, defaultName:f, persistent:true"
+          "5, defaultName:u, persistent:true"
+          "6, defaultName:i, persistent:true"
+          "7, defaultName:o, persistent:true"
+          "8, defaultName:p, persistent:true"
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
           "special:signal, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
