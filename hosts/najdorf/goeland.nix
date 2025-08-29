@@ -12,6 +12,7 @@ let
     starlwart = "https://stalwartlabs.medium.com/feed";
     alternativeto = "https://feed.alternativeto.net/news/all/";
     home-assistant = "https://www.home-assistant.io/atom.xml";
+    zed = "https://zed.dev/blog.rss";
   };
 in
 {
