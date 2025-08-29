@@ -85,6 +85,7 @@
         imports = [ (digga.lib.importOverlays ./overlays) ];
         overlays = [
           ./pkgs/default.nix
+          ./lib/default.nix
           agenix.overlays.default
           deploy.overlays.default
         ];

@@ -84,7 +84,6 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           enabled = config.programs.hyprland.xwayland.enable;
           force_zero_scaling = true;
         };
-        monitor = [ ", preferred, auto-left, auto" ];
 
         # Input configuration
         input = {

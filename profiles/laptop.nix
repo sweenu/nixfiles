@@ -18,8 +18,5 @@
   powerManagement.powertop.enable = true;
   systemd.sleep.extraConfig = "HibernateDelaySec=2h";
 
-  home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [ powertop ];
-    wayland.windowManager.hyprland.settings.workspace = [ "r[5-20], monitor:eDP-1" ];
-  };
+  environment.defaultPackages = with pkgs; [ powertop ];
 }
