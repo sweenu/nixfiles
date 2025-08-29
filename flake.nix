@@ -55,7 +55,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
-    caelestia-shell.url = "github:sweenu/caelestia-shell";
+    caelestia-shell.url = "github:caelestia-dots/shell";
     caelestia-shell.inputs.nixpkgs.follows = "nixos";
   };
 

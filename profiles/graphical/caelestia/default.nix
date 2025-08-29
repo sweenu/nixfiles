@@ -38,6 +38,11 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
             { id = "power"; enabled = false; }
           ];
         };
+        background = {
+          enabled = true;
+          desktopClock.enabled = false;
+          visualiser.enabled = false;
+        };
         services = {
           useFahrenheit = false;
           useTwelveHourClock = false;
