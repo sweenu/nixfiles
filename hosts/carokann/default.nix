@@ -94,6 +94,7 @@ in
     };
     sane.enable = true;
     graphics.enable = true;
+    i2c.enable = true;
   };
 
   powerManagement.cpuFreqGovernor = "powersave";

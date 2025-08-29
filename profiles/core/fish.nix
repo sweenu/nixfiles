@@ -73,7 +73,7 @@
         wget = "wget2 $argv";
         bwu = "set -Ux BW_SESSION (bw unlock --raw)";
         genpass = "bw generate -ulns --length 16";
-        pyclean = "find . | grep -E '(__pycache__|\.pyc|\.pyo$)' | xargs rm -rf";
+        pyclean = "find . | grep -E '(__pycache__|\\.pyc|\\.pyo$)' | xargs rm -rf";
         trash = "gtrash $argv";
         tp = "trash put $argv";
         rm = "echo 'Stop using rm, use trash put (or tp) instead'";

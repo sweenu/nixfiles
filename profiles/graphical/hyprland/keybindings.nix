@@ -3,9 +3,6 @@ let
   soundcards = "${pkgs.soundcards}/bin/soundcards";
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
   backlight = "${pkgs.backlight}/bin/backlight";
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-  ddcciDeviceQuery = "${brightnessctl} -l | ${pkgs.ripgrep}/bin/rg ddcci | awk '{$1=$1};1'";
-  ddcciLight = action: ''${brightnessctl} -d $(${ddcciDeviceQuery}) ${action} || notify-send "Hyprland" "Could not find ddcci device"'';
   mod = "SUPER";
 in
 {
@@ -123,8 +120,6 @@ in
     # Backlight
     ", XF86MonBrightnessUp, exec, ${backlight} inc"
     ", XF86MonBrightnessDown, exec, ${backlight} dec"
-    "${mod} SHIFT, Up, exec, ${ddcciLight "-s +5%"}"
-    "${mod} SHIFT, Down, exec, ${ddcciLight "-s -5%"}"
   ];
 
   binde = [
