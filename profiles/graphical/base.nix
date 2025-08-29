@@ -26,6 +26,7 @@
       obsidian
       pwvucontrol
       signal-desktop
+      rpi-imager
       vlc
       xdg-utils
     ];
