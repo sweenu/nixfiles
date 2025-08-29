@@ -1,7 +1,6 @@
 { self
 , config
 , pkgs
-, lib
 , ...
 }:
 
@@ -22,7 +21,7 @@
         primary = true;
         flavor = "fastmail.com";
         address = "contact@sweenu.xyz";
-        realName = "Bruno Inec";
+        realName = "Sweenu";
         passwordCommand = "${pkgs.coreutils}/bin/cat ${config.age.secrets.fastmailAppPassword.path}";
         notmuch.enable = true;
         mbsync = {

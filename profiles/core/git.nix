@@ -4,7 +4,7 @@
   home-manager.users."${config.vars.username}".programs.git = {
     enable = true;
     userEmail = config.vars.email;
-    userName = "Bruno Inec";
+    userName = "sweenu";
     ignores = [ "venv" ".env" "pyrightconfig.json" "shell.nix" ".envrc" ".direnv" ];
     extraConfig = {
       pull.rebase = "true";

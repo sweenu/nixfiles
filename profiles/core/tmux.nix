@@ -111,22 +111,24 @@
       # VISUAL #
       ##########
       # jellybeans theme created with tmuxline
-      set -g status-justify "left"
       set -g status "on"
+      set -g status-justify "left"
       set -g status-left-style "none"
-      set -g message-command-style "fg=colour253,bg=colour239"
       set -g status-right-style "none"
-      set -g pane-active-border-style "fg=colour103"
-      set -g status-style "none,bg=colour236"
-      set -g message-style "fg=colour253,bg=colour239"
-      set -g pane-border-style "fg=colour239"
       set -g status-right-length "100"
       set -g status-left-length "100"
       setw -g window-status-activity-style "none"
       setw -g window-status-separator ""
-      setw -g window-status-style "none,fg=colour244,bg=colour236"
+
+      # colors
+      set -g message-command-style "fg=colour253,bg=colour239"
+      set -g pane-active-border-style "fg=colour103"
+      set -g status-style "none,bg=colour236"
+      set -g message-style "fg=colour253,bg=colour239"
+      set -g pane-border-style "fg=colour239"
       set -g status-left "#[fg=colour236,bg=colour103] #S #[fg=colour103,bg=colour236,nobold,nounderscore,noitalics]"
       set -g status-right "#[fg=colour239,bg=colour236,nobold,nounderscore,noitalics]#[fg=colour248,bg=colour239] %Y-%m-%d  %H:%M #[fg=colour246,bg=colour239,nobold,nounderscore,noitalics]#[fg=colour236,bg=colour246] #h "
+      setw -g window-status-style "none,fg=colour244,bg=colour236"
       setw -g window-status-format "#[fg=colour244,bg=colour236] #I #[fg=colour244,bg=colour236] #W "
       setw -g window-status-current-format "#[fg=colour236,bg=colour239,nobold,nounderscore,noitalics]#[fg=colour253,bg=colour239] #I #[fg=colour253,bg=colour239] #W #[fg=colour239,bg=colour236,nobold,nounderscore,noitalics]"
     '';

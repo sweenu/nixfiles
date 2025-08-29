@@ -8,7 +8,7 @@ function switch_sink {
     local node_id=$(get_node_id_from_sink "$1" "$sink")
     local node_description=$(get_node_info "$1" "$node_id" \"node.description\")
     wpctl set-default "$node_id"
-    notify-send "Sound output" "$node_description"
+    notify-send --icon=audio-volume-high "Sound output" "$node_description"
 }
 
 function toggle_hdmi_profile {
@@ -37,7 +37,7 @@ function toggle_hdmi_profile {
     default_sink=$(get_default_sink $1)
     local node_id=$(get_node_id_from_sink "$1" "$default_sink")
     local profile_description=$(get_node_info "$1" "$node_id" \"device.profile.description\")
-    notify-send "Sound profile" "$profile_description"
+    notify-send --icon=audio-volume-high "Sound profile" "$profile_description"
 }
 
 function get_node_info {
