@@ -22,44 +22,72 @@
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    digga.url = "github:divnix/digga";
-    digga.inputs.nixpkgs.follows = "nixos";
-    digga.inputs.nixlib.follows = "nixos";
-    digga.inputs.home-manager.follows = "home";
-    digga.inputs.deploy.follows = "deploy";
-    digga.inputs.flake-utils-plus.follows = "flake-utils-plus";
+    digga = {
+      url = "github:divnix/digga";
+      inputs = {
+        nixpkgs.follows = "nixos";
+        nixlib.follows = "nixos";
+        home-manager.follows = "home";
+        deploy.follows = "deploy";
+        flake-utils-plus.follows = "flake-utils-plus";
+      };
+    };
 
-    home.url = "github:nix-community/home-manager";
-    home.inputs.nixpkgs.follows = "nixos";
+    home = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixos";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    deploy.url = "github:serokell/deploy-rs";
-    deploy.inputs.nixpkgs.follows = "nixos";
+    deploy = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixos";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    nixos-anywhere.url = "github:nix-community/nixos-anywhere";
-    nixos-anywhere.inputs.nixpkgs.follows = "nixos";
-    nixos-anywhere.inputs.disko.follows = "disko";
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
+      inputs = {
+        nixpkgs.follows = "nixos";
+        disko.follows = "disko";
+      };
+    };
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixos";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    arion.url = "github:hercules-ci/arion";
-    arion.inputs.nixpkgs.follows = "nixos";
+    arion = {
+      url = "github:hercules-ci/arion";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    flake-utils-plus = {
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
+    };
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    };
 
-    caelestia-shell.url = "github:caelestia-dots/shell";
-    caelestia-shell.inputs.nixpkgs.follows = "nixos";
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixos";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixos";
+    };
   };
 
   outputs =
