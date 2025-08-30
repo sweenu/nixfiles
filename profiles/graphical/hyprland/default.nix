@@ -181,7 +181,7 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
           "special:signal, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
-          "special:spotify, on-created-empty:app2unit -- ${pkgs.spotify}/bin/spotify"
+          "special:spotify, on-created-empty:app2unit -- spotify"
         ];
 
         # Window rules
