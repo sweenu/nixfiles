@@ -14,7 +14,6 @@
     devenv
     ffmpeg
     simple-scan
-    spotifywm
     ethtool
     gitui
     manix

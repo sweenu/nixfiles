@@ -88,6 +88,8 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs =
@@ -103,6 +105,7 @@
     , nix-colors
     , caelestia-shell
     , zen-browser
+    , spicetify-nix
     , ...
     }@inputs:
     digga.lib.mkFlake {
@@ -133,6 +136,7 @@
             home.nixosModules.home-manager
             disko.nixosModules.disko
             arion.nixosModules.arion
+            spicetify-nix.nixosModules.spicetify
           ];
         };
 
