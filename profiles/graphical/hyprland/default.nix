@@ -6,6 +6,24 @@
 
 let palette = config.home-manager.users."${config.vars.username}".colorScheme.palette; in
 {
+  environment.defaultPackages = with pkgs; [
+    app2unit
+    wdisplays
+    wf-recorder
+    wl-clipboard
+    wev
+    slurp
+    grim
+    swappy
+    playerctl
+    # Hyprland ecosystem tools
+    hypridle
+    hyprpicker
+    # Custom scripts
+    soundcards
+    backlight
+  ];
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -13,24 +31,6 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
   };
 
   home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [
-      app2unit
-      wdisplays
-      wf-recorder
-      wl-clipboard
-      wev
-      slurp
-      grim
-      swappy
-      playerctl
-      # Hyprland ecosystem tools
-      hypridle
-      hyprpicker
-      # Custom scripts
-      soundcards
-      backlight
-    ];
-
     services.hypridle = {
       enable = true;
       settings = {
