@@ -10,19 +10,19 @@
     zoom-us.enable = true;
   };
 
-  home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [
-      calibre
-      imv
-      libnotify
-      obsidian
-      pwvucontrol
-      signal-desktop
-      rpi-imager
-      vlc
-      xdg-utils
-    ];
+  environment.defaultPackages = with pkgs; [
+    calibre
+    imv
+    libnotify
+    obsidian
+    pwvucontrol
+    signal-desktop
+    rpi-imager
+    vlc
+    xdg-utils
+  ];
 
+  home-manager.users."${config.vars.username}" = {
     home.file = {
       ".face".source = "${self}/assets/pp.png";
       "${config.vars.screenshotFolder}/.keep".source = builtins.toFile "keep" "";

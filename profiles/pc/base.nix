@@ -9,19 +9,24 @@
 
   environment.defaultPackages = with pkgs; [
     bitwarden
+    bitwarden-cli
     brightnessctl
     comma
     devenv
-    ffmpeg
-    simple-scan
     ethtool
+    ffmpeg
     gitui
+    gpg-tui
     manix
     nix-output-monitor
     nixpkgs-review
     python3Packages.ptpython
+    simple-scan
     tealdeer
+    tmate
     wol
+    you-get
+    yt-dlp
   ];
 
   services = {
@@ -50,14 +55,6 @@
   };
 
   home-manager.users."${config.vars.username}" = {
-    home.packages = with pkgs; [
-      bitwarden-cli
-      gpg-tui
-      tmate
-      you-get
-      yt-dlp
-    ];
-
     programs = {
       keychain = {
         enable = true;
