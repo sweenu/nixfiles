@@ -79,6 +79,7 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         binds = {
           movefocus_cycles_fullscreen = true;
           allow_pin_fullscreen = true; # necessary for fullscreening Picture-in-Picture
+          hide_special_on_workspace_change = true;
         };
         xwayland = {
           enabled = config.programs.hyprland.xwayland.enable;
