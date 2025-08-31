@@ -18,8 +18,11 @@
     screenshotFolder = "${picturesFolder}/screenshots";
     screencastFolder = "${videosFolder}/screencasts";
     wallpapersFolder = "${picturesFolder}/wallpapers";
-    defaultFont = "Roboto";
-    defaultMonoFont = "DejaVuSansM Nerd Font";
+    defaultFont = { name = "Roboto"; package = pkgs.roboto; };
+    defaultMonoFont = {
+      name = "DejaVuSansM Nerd Font";
+      package = pkgs.nerd-fonts.dejavu-sans-mono;
+    };
 
     sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyqgAJe9NTMN895kztljIIPYIRExKOdDvB6zroete6Z sweenu@carokann";
 

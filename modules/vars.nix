@@ -1,39 +1,53 @@
 { lib, ... }:
 
 with lib;
-
+with lib.types;
 {
   options.vars = {
-    email = mkOption { type = types.str; };
-    username = mkOption { type = types.str; };
-    terminal = mkOption { type = types.str; };
-    terminalBin = mkOption { type = types.str; };
+    email = mkOption { type = str; };
+    username = mkOption { type = str; };
+    terminal = mkOption { type = str; };
+    terminalBin = mkOption { type = str; };
 
-    home = mkOption { type = types.str; };
-    configHome = mkOption { type = types.str; };
-    documentsFolder = mkOption { type = types.str; };
-    downloadFolder = mkOption { type = types.str; };
-    musicFolder = mkOption { type = types.str; };
-    picturesFolder = mkOption { type = types.str; };
-    videosFolder = mkOption { type = types.str; };
-    repositoriesFolder = mkOption { type = types.str; };
-    screenshotFolder = mkOption { type = types.str; };
-    screencastFolder = mkOption { type = types.str; };
-    wallpapersFolder = mkOption { type = types.str; };
-    defaultFont = mkOption { type = types.str; };
-    defaultMonoFont = mkOption { type = types.str; };
+    home = mkOption { type = str; };
+    configHome = mkOption { type = str; };
+    documentsFolder = mkOption { type = str; };
+    downloadFolder = mkOption { type = str; };
+    musicFolder = mkOption { type = str; };
+    picturesFolder = mkOption { type = str; };
+    videosFolder = mkOption { type = str; };
+    repositoriesFolder = mkOption { type = str; };
+    screenshotFolder = mkOption { type = str; };
+    screencastFolder = mkOption { type = str; };
+    wallpapersFolder = mkOption { type = str; };
+    defaultFont = mkOption {
+      type = submodule {
+        options = {
+          name = mkOption { type = str; };
+          package = mkOption { type = package; };
+        };
+      };
+    };
+    defaultMonoFont = mkOption {
+      type = submodule {
+        options = {
+          name = mkOption { type = str; };
+          package = mkOption { type = package; };
+        };
+      };
+    };
 
-    sshPublicKey = mkOption { type = types.str; };
+    sshPublicKey = mkOption { type = str; };
 
-    timezone = mkOption { type = types.str; };
+    timezone = mkOption { type = str; };
 
     # Server vars
-    domainName = mkOption { type = types.str; };
-    smtpUsername = mkOption { type = types.str; };
-    smtpHost = mkOption { type = types.str; };
-    smtpPort = mkOption { type = types.int; };
+    domainName = mkOption { type = str; };
+    smtpUsername = mkOption { type = str; };
+    smtpHost = mkOption { type = str; };
+    smtpPort = mkOption { type = int; };
 
     # RaspberryPi vars
-    grunfeldIPv4 = mkOption { type = types.str; };
+    grunfeldIPv4 = mkOption { type = str; };
   };
 }
