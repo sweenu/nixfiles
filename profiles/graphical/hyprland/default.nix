@@ -41,13 +41,12 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         };
         listener = [
           {
-            timeout = 900; # 15 minutes
+            timeout = 300; # 5 minutes
             on-timeout = "loginctl lock-session";
           }
           {
             timeout = 1200; # 20 minutes
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
+            on-timeout = "systemctl suspend-then-hibernate";
           }
         ];
       };
