@@ -44,18 +44,28 @@ in
       };
       theme = {
         package = theme.package;
-        name = "${theme.name}:dark";
+        name = "${theme.name}";
       };
       font = {
         package = config.vars.defaultFont.package;
         name = config.vars.defaultFont.name;
         size = 12;
       };
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
+      gtk3 = {
+        theme = {
+          package = theme.package;
+          name = "${theme.name}-dark";
+        };
+        extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+        };
       };
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
+    };
+
+    # Till https://github.com/nix-community/home-manager/issues/7154
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
       };
     };
 
