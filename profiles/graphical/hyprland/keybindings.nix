@@ -93,8 +93,8 @@ in
     ", XF86AudioMedia, exec, caelestia shell idleInhibitor toggle"
 
     # Special workspace
-    "${mod}, minus, togglespecialworkspace, signal"
-    "${mod}, M, togglespecialworkspace, spotify"
+    "${mod}, minus, togglespecialworkspace, communication"
+    "${mod}, M, togglespecialworkspace, music"
 
     # Submaps
     "${mod}, W, submap, window"

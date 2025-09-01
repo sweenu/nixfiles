@@ -18,6 +18,7 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
           workspaces = rec {
             shown = 4;
             label = "";
+            showWindowsOnSpecialWorkspaces = false;
             occupiedLabel = "";
             activeLabel = occupiedLabel;
           };

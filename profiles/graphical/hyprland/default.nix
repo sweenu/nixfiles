@@ -75,6 +75,7 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           key_press_enables_dpms = false;
           new_window_takes_over_fullscreen = 1;
           exit_window_retains_fullscreen = true;
+          focus_on_activate = true;
         };
         binds = {
           movefocus_cycles_fullscreen = true;
@@ -181,8 +182,8 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           "8, defaultName:p, persistent:true"
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
-          "special:signal, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
-          "special:spotify, on-created-empty:app2unit -- spotify"
+          "special:communication, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
+          "special:music, on-created-empty:app2unit -- spotify"
         ];
 
         # Window rules
