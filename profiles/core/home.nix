@@ -11,7 +11,7 @@
         VISUAL = "kak";
         PAGER = "less -R";
         TERM = "${config.vars.terminal}";
-        BROWSER = "firefox";
+        BROWSER = "${config.vars.defaultBrowser}";
       };
       packages = with pkgs; [
         neofetch

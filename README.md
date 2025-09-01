@@ -21,7 +21,7 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 - Terminal: [wezterm](https://wezterm.org)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
 - Shell: [fish](https://fishshell.com)
-- Browser: [firefox](https://www.mozilla.org/en-US/firefox)
+- Browser: [zen](https://zen-browser.app/)
 
 ### Self-hosted apps on my server (najdorf)
 

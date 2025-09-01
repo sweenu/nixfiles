@@ -6,6 +6,7 @@
     username = "sweenu";
     terminal = "wezterm";
     terminalBin = "${pkgs.wezterm}/bin/wezterm";
+    defaultBrowser = "zen-twilight";
 
     home = "/home/${username}";
     configHome = (builtins.getAttr username config.home-manager.users).xdg.configHome;

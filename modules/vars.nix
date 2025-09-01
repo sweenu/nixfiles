@@ -8,6 +8,7 @@ with lib.types;
     username = mkOption { type = str; };
     terminal = mkOption { type = str; };
     terminalBin = mkOption { type = str; };
+    defaultBrowser = mkOption { type = str; };
 
     home = mkOption { type = str; };
     configHome = mkOption { type = str; };

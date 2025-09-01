@@ -67,7 +67,7 @@ in
     # Apps
     "${mod}, T, global, caelestia:launcher"
     "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
-    "${mod}, B, exec, app2unit -- firefox"
+    "${mod}, B, exec, app2unit -- ${config.vars.defaultBrowser}"
     "${mod}, N, exec, app2unit -- obsidian"
     "${mod}, Z, exec, app2unit -- zeditor"
     "${mod} SHIFT, Escape, exec, app2unit -- ${pkgs.mission-center}/bin/missioncenter"

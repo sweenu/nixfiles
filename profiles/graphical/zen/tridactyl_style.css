@@ -1,0 +1,333 @@
+:root { /* Theme inspired by the Zen browser's URL bar */
+    --tridactyl-font-family: "Roboto", sans-serif;
+    --tridactyl-bg: #131211;
+    --tridactyl-fg: #ffffff;
+
+    --tridactyl-status-font-size: 12px;
+    --tridactyl-status-font-bg: var(--tridactyl-cmdl-bg);
+    --tridactyl-status-border: 1px solid rgba(255, 255, 255, 0.15);
+    --tridactyl-status-border-radius: 8px;
+
+    --tridactyl-header-font-size: 16px;
+
+    --tridactyl-of-fg: #0d1117;
+    --tridactyl-of-bg: #ffd662;
+
+    --tridactyl-hintspan-fg: white;
+    --tridactyl-hintspan-bg: #204e8a;
+
+    --tridactyl-hint-active-fg: #333;
+    --tridactyl-hint-active-bg: #006e51;
+    --tridactyl-hint-active-outline: 1px solid #000;
+
+    --tridactyl-hint-bg: rgba(13, 31, 54, 0.25);
+    --tridactyl-hint-outline: 1px solid var(--tridactyl-hintspan-bg);
+
+    --tridactyl-cmdl-font-size: 18px;
+    --tridactyl-cmplt-option-height: 2.2em;
+
+    --tridactyl-border-radius: 8px;
+
+    /* Zen-inspired colors */
+    --zen-toolbar-element-bg: #131211;
+    --zen-primary-color: #6cb6ff;
+    --zen-colors-tertiary: #1e1d1c;
+    --zen-element-separation: 8px;
+    --zen-border-radius: 8px;
+}
+
+:root.TridactylOwnNamespace {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+    background: var(--tridactyl-bg) !important;
+}
+
+:root.TridactylOwnNamespace a {
+    color: var(--zen-primary-color);
+}
+
+:root.TridactylOwnNamespace code {
+    background-color: var(--zen-colors-tertiary);
+    padding: 3px 7px;
+    border-radius: 4px;
+}
+
+:root #command-line-holder {
+    order: 1;
+}
+
+:root #command-line-holder {
+    border-radius: var(--zen-border-radius) var(--zen-border-radius) 0 0;
+    border: none;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    background: var(--zen-toolbar-element-bg) !important;
+    backdrop-filter: blur(10px);
+}
+
+:root #tridactyl-input {
+    border: none;
+}
+
+:root #tridactyl-colon::before {
+    content: "";
+}
+
+:root #tridactyl-input {
+    width: 96%;
+    padding: 1rem;
+    background: var(--zen-toolbar-element-bg) !important;
+    color: var(--tridactyl-fg);
+    font-family: var(--tridactyl-font-family);
+    font-size: 18px;
+}
+
+:root #completions table {
+    font-weight: 350;
+    table-layout: fixed;
+    padding: 0.5rem;
+    padding-top: 0;
+    background: var(--zen-toolbar-element-bg) !important;
+    font-size: 16px;
+}
+
+:root #completions > div {
+    max-height: calc(12 * var(--tridactyl-cmplt-option-height));
+    min-height: calc(6 * var(--tridactyl-cmplt-option-height));
+}
+
+:root #completions {
+    border: none !important;
+    font-family: var(--tridactyl-font-family);
+    font-size: 16px;
+    order: 2;
+    border-radius: 0 0 var(--zen-border-radius) var(--zen-border-radius);
+    background: color-mix(
+        in srgb,
+        var(--zen-toolbar-element-bg) 90%,
+        transparent 10%
+    ) !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    color: var(--tridactyl-fg) !important;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+:root #completions::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 1;
+    margin-bottom: 0.5rem;
+}
+
+:root #completions > div {
+    padding-top: 1rem;
+}
+
+:root #completions .HistoryCompletionSource table,
+:root #completions .BmarkCompletionSource table {
+    width: 100%;
+    border-spacing: 0;
+    table-layout: fixed;
+    background: transparent !important;
+}
+
+:root #completions .BufferCompletionSource table {
+    width: unset;
+    font-size: unset;
+    border-spacing: unset;
+    table-layout: unset;
+    background: transparent !important;
+}
+
+:root #completions table tr .title {
+    width: 50% !important;
+    padding-right: 1rem !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+    font-weight: bold !important;
+}
+
+:root #completions tr .documentation {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50% !important;
+    padding-left: 1rem !important;
+    box-sizing: border-box;
+}
+
+:root #completions .sectionHeader {
+    display: none !important;
+}
+
+:root #completions .optionContainer {
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: background-color 0.15s ease;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 0.5rem !important;
+    margin-bottom: 0.3rem !important;
+}
+
+:root #completions .optionContainer:hover {
+    background-color: transparent !important;
+}
+
+/* Disable all hover effects on completion elements */
+:root #completions tr:hover,
+:root #completions tr:hover td,
+:root #completions td:hover,
+:root #completions .option:hover,
+:root #completions .optionContainer:hover,
+:root #completions .optionContainer:hover *,
+:root #completions table:hover,
+:root #completions table tr:hover {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Specifically prevent text dimming on hover */
+:root #completions .optionContainer:hover,
+:root #completions .optionContainer:hover .title,
+:root #completions .optionContainer:hover .documentation,
+:root #completions .optionContainer:hover .url,
+:root #completions tr:hover,
+:root #completions tr:hover td,
+:root #completions tr:hover .title,
+:root #completions tr:hover .documentation,
+:root #completions tr:hover .url {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+:root #completions .optionContainer:hover *,
+:root #completions tr:hover *,
+:root #completions td:hover,
+:root #completions td:hover * {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Ensure hover doesn't override selection state */
+:root #completions .optionContainer[data-selected]:hover,
+:root #completions .optionContainer.focused:hover,
+:root #completions .optionContainer.selected:hover,
+:root #completions tr.focused:hover,
+:root #completions tr[data-focused]:hover,
+:root #completions tr[selected]:hover {
+    background-color: #3f4070 !important;
+    color: #ffffff !important;
+}
+
+:root #completions .optionContainer[data-selected],
+:root #completions .optionContainer.focused {
+    background-color: #3f4070 !important;
+    color: #ffffff !important;
+}
+
+:root #completions .optionContainer.selected {
+    background-color: #3f4070 !important;
+    color: #ffffff !important;
+}
+
+:root #completions .url {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+:root #completions .optionContainer[data-selected] .url,
+:root #completions .optionContainer.focused .url,
+:root #completions .optionContainer.selected .url {
+    color: #ffffff !important;
+}
+
+/* More comprehensive selection styling */
+:root #completions tr.focused,
+:root #completions tr[data-focused],
+:root #completions tr[selected],
+:root #completions .focused,
+:root #completions [data-focused] {
+    background-color: #3f4070 !important;
+    color: #ffffff !important;
+}
+
+:root #completions tr.focused td,
+:root #completions tr[data-focused] td,
+:root #completions tr[selected] td,
+:root #completions .focused td,
+:root #completions [data-focused] td {
+    background-color: #3f4070 !important;
+    color: #ffffff !important;
+}
+
+/* Override the default focused/selected colors */
+:root #completions .option:focus,
+:root #completions .option[data-focused],
+:root #completions .option.focused {
+    background-color: #3f4070 !important;
+}
+
+/* Ensure all elements have proper dark backgrounds */
+:root #completions td {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 500;
+    padding: 0.4rem 0.2rem !important;
+}
+
+:root #completions tr {
+    background: transparent !important;
+    margin-bottom: 0.3rem !important;
+}
+
+:root #completions .optionContainer td {
+    background: transparent !important;
+    border: none !important;
+    padding: 0.4rem 0.2rem !important;
+}
+
+:root #cmdline_iframe {
+    position: fixed !important;
+    bottom: unset;
+    top: 25% !important;
+    left: 10% !important;
+    z-index: 2147483647 !important;
+    width: 80% !important;
+    filter: drop-shadow(0px 0px 50px rgba(0, 0, 0, 0.9)) !important;
+    color-scheme: only dark;
+    background: rgba(19, 18, 17, 0.95) !important;
+    border-radius: var(--zen-border-radius) !important;
+    backdrop-filter: blur(15px) saturate(180%);
+}
+
+:root #completions * {
+    background-color: transparent !important;
+}
+
+:root #completions,
+:root #completions table,
+:root #completions > div {
+    background-color: var(--zen-toolbar-element-bg) !important;
+}
+
+:root #command-line-holder * {
+    background-color: transparent !important;
+}
+
+:root .TridactylStatusIndicator {
+    position: fixed !important;
+    bottom: 10px !important;
+    right: 10px !important;
+    font-weight: 200 !important;
+    padding: 8px 12px !important;
+    background: rgba(15, 14, 13, 0.9) !important;
+    border: none !important;
+    border-radius: var(--zen-border-radius) !important;
+    color: var(--tridactyl-fg) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px);
+}
