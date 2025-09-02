@@ -188,7 +188,14 @@ in
                       x = 1920;
                       y = 141;
                     }; # Align bottom corners
-                    exec = [ "hyprctl keyword workspace r[5-8],monitor:$SHIKANE_OUTPUT_NAME" ];
+                    exec =
+                      (map (ws: lib.hyprMoveWsToMonitor ws "$SHIKANE_OUTPUT_NAME") [
+                        "u"
+                        "i"
+                        "o"
+                        "p"
+                      ])
+                      ++ [ "hyprctl keyword workspace r[5-8],monitor:$SHIKANE_OUTPUT_NAME" ];
                   }
                 )
                 {
