@@ -1,23 +1,24 @@
 import sys
 from subprocess import run, PIPE
 
+BACKLIGHT_CMD = ["caelestia-shell", "ipc", "call", "brightness"]
+
 
 def _get_brightness() -> int:
-    output = run(["brightnessctl", "-m", "i"], stdout=PIPE).stdout
-    percentage = output.decode("utf-8").split(",")[3]
-    return int(percentage[:-1])
+    output = run(BACKLIGHT_CMD + ["get"], stdout=PIPE).stdout
+    return float(output.decode("utf-8")) * 100
 
 
 def _increase_brightness(percentage: int) -> None:
-    run(["brightnessctl", "s", f"+{str(percentage)}%"])
+    run(BACKLIGHT_CMD + ["set", f"+{str(percentage)}%"])
 
 
 def _decrease_brightness(percentage: int) -> None:
-    run(["brightnessctl", "s", f"{str(percentage)}%-"])
+    run(BACKLIGHT_CMD + ["set", f"{str(percentage)}%-"])
 
 
 def _set_brightness(value: str) -> None:
-    run(["brightnessctl", "s", value])
+    run(BACKLIGHT_CMD + ["set", value])
 
 
 def change_backlight(
@@ -47,7 +48,7 @@ def change_backlight(
             if current_brightness > 1:
                 _decrease_brightness(small_step)
             else:
-                _set_brightness("1")
+                _set_brightness("0")
         else:
             _decrease_brightness(big_step)
 
