@@ -77,7 +77,6 @@ in
       };
       efi.canTouchEfiVariables = true;
     };
-    resumeDevice = "/dev/mapper/${encryptedRoot}";
   };
 
   swapDevices = [
