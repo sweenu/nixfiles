@@ -80,7 +80,6 @@
         k = "kak $argv";
         h = "hx $argv";
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
-        mn = ''manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix'';
         nb = "${pkgs.nix-output-monitor}/bin/nom build .#nixosConfigurations.$argv.config.system.build.toplevel";
         nm-wifi = {
           body = "nmcli -t -f SSID device wifi list | sk | xargs -o -I_ nmcli --ask dev wifi connect '_'";
