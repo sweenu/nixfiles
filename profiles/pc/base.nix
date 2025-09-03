@@ -17,7 +17,7 @@
     ffmpeg
     gitui
     gpg-tui
-    manix
+    nix-search-tv
     nix-output-monitor
     nixpkgs-review
     python3Packages.ptpython
