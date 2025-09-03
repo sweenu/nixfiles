@@ -69,5 +69,10 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
       "CAELESTIA_SCREENSHOTS_DIR, ${config.vars.home}/${config.vars.screenshotFolder}"
       "CAELESTIA_RECORDINGS_DIR, ${config.vars.home}/${config.vars.screencastFolder}"
     ];
+
+    # Use caelestia's dynamically generated theme in the terminal
+    programs.fish.interactiveShellInit = ''
+      cat ~/.local/state/caelestia/sequences.txt 2> /dev/null
+    '';
   };
 }
