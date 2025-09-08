@@ -78,7 +78,6 @@ in
     # Soundcards
     "${mod}, bracketleft, exec, ${soundcards} previous"
     "${mod}, bracketright, exec, ${soundcards} next"
-    ", F10, exec, ${soundcards} toggle-hdmi"
 
     # Screen capture
     ", Print, exec, caelestia screenshot" # Fullscreen screenshot

@@ -20,7 +20,6 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
     # Custom scripts
     soundcards
     backlight
-    soundcardspy
   ];
 
   programs.hyprland = {

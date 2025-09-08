@@ -7,6 +7,7 @@ final: prev: with prev;
   };
 
   kakounePlugins = kakounePlugins // recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
+
   soundcards = writers.writeBashBin "soundcards"
     {
       makeWrapperArgs = [
@@ -17,5 +18,6 @@ final: prev: with prev;
       ];
     }
     (builtins.readFile ./soundcards.bash);
+
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
 }
