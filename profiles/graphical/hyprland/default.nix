@@ -8,20 +8,19 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
 {
   environment.defaultPackages = with pkgs; [
     app2unit
+    grim
+    hyprpicker
+    playerctl
+    slurp
+    swappy
     wdisplays
+    wev
     wf-recorder
     wl-clipboard
-    wev
-    slurp
-    grim
-    swappy
-    playerctl
-    # Hyprland ecosystem tools
-    hypridle
-    hyprpicker
     # Custom scripts
     soundcards
     backlight
+    soundcardspy
   ];
 
   programs.hyprland = {
@@ -41,12 +40,8 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         };
         listener = [
           {
-            timeout = 300; # 5 minutes
+            timeout = 600; # 10 minutes
             on-timeout = "loginctl lock-session";
-          }
-          {
-            timeout = 1200; # 20 minutes
-            on-timeout = "systemctl suspend-then-hibernate";
           }
         ];
       };
