@@ -65,7 +65,7 @@ in
     ", F11, fullscreen"
 
     # Apps
-    "${mod}, T, global, caelestia:launcher"
+    "${mod}, Space, global, caelestia:launcher"
     "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
     "${mod}, B, exec, app2unit -- ${config.vars.defaultBrowser}"
     "${mod}, N, exec, app2unit -- obsidian"
@@ -73,7 +73,7 @@ in
     "${mod} SHIFT, Escape, exec, app2unit -- ${pkgs.mission-center}/bin/missioncenter"
 
     # Notifications
-    "${mod}, Space, global, caelestia:clearNotifs"
+    "${mod}, Comma, global, caelestia:clearNotifs"
 
     # Soundcards
     "${mod}, bracketleft, exec, ${soundcards} previous"
