@@ -24,6 +24,12 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
           };
           tray = {
             background = true;
+            iconSubs = [
+              {
+                id = "spotify-client";
+                image = "${self}/assets/spotify-light.svg";
+              }
+            ];
           };
           clock.showIcon = false;
           entries = [
