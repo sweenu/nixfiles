@@ -19,7 +19,6 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 - Desktop shell: [Caelestia](https://github.com/caelestia-dots/shell)
 - Editor: [kakoune](https://github.com/mawww/kakoune)
 - Terminal: [wezterm](https://wezterm.org)
-- Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
 - Shell: [fish](https://fishshell.com)
 - Browser: [zen](https://zen-browser.app/)
 
