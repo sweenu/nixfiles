@@ -1,11 +1,11 @@
 { self, config, lib, ... }:
 
 let
-  autheliaPort = 9091;
-  fqdn = "authelia.${config.vars.domainName}";
-  lldapConfig = config.services.lldap.settings;
-  dbUser = config.services.authelia.instances.main.user;
   dbName = dbUser;
+  dbUser = config.services.authelia.instances.main.user;
+  fqdn = "authelia.${config.vars.domainName}";
+  autheliaPort = 9091;
+  lldapConfig = config.services.lldap.settings;
 in
 {
   age.secrets = {
