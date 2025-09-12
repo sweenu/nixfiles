@@ -121,6 +121,7 @@ in
   # PostgreSQL config and backups
   services.postgresql = {
     package = pkgs.postgresql_15;
+    settings.log_timezone = config.time.timeZone;
   };
   services.postgresqlBackup = {
     enable = config.services.postgresql.enable;

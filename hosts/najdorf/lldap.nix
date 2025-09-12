@@ -24,6 +24,7 @@ in
       LLDAP_LDAP_USER_PASS_FILE = "%d/${ldapUserPassCredName}";
       LLDAP_SMTP_OPTIONS__PASSWORD_FILE = "%d/${smtpPasswordCredName}";
     };
+    silenceForceUserPassResetWarning = true;
     settings = {
       database_url = "postgresql:///${dbName}?host=/run/postgresql";
       http_host = "127.0.0.1";
