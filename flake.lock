@@ -677,6 +677,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-otbr": {
+      "locked": {
+        "lastModified": 1751030343,
+        "narHash": "sha256-IE/baB+h2Ezfh1lrK6zgqUR1cfDtjBf+M8R+MBVgF/E=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4971153bbe7fdc3d61074b77a5ccd6e4817a7b38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/332296/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1672791794,
@@ -729,6 +745,7 @@
         "nixos-anywhere": "nixos-anywhere",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
+        "nixpkgs-otbr": "nixpkgs-otbr",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
       }

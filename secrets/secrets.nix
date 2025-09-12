@@ -28,6 +28,7 @@ in
   "lldap/ldap_user_pass.age".publicKeys = [ carokann najdorfHost ];
   "grist/env.age".publicKeys = [ carokann najdorfHost ];
   "grist/oidc_client_secret_digest.age".publicKeys = [ carokann najdorfHost ];
+  "hass/secrets.age".publicKeys = [ carokann najdorfHost ];
 
   # grunfeld
   "snapserver/env_file.age".publicKeys = [ carokann grunfeldHost ];

@@ -25,6 +25,7 @@ in
       ./obsidian-share-note.nix
       ./lldap.nix
       ./grist.nix
+      ./hass.nix
     ]
     ++ suites.base
     ++ suites.server;
@@ -160,6 +161,7 @@ in
     };
     fstrim.enable = true;
     fwupd.enable = true;
+    ollama.enable = true;
   };
 
   # Restic backups
