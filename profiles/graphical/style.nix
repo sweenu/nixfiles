@@ -38,6 +38,7 @@ in
 
     gtk = {
       enable = true;
+      colorScheme = "dark";
       iconTheme = {
         package = iconsTheme.package;
         name = iconsTheme.name;
@@ -56,16 +57,6 @@ in
           package = theme.package;
           name = "${theme.name}-dark";
         };
-        extraConfig = {
-          gtk-application-prefer-dark-theme = true;
-        };
-      };
-    };
-
-    # Till https://github.com/nix-community/home-manager/issues/7154
-    dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
       };
     };
 
