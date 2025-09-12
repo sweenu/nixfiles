@@ -28,6 +28,7 @@ in
       ./ollama.nix
       ./lldap.nix
       ./grist.nix
+      ./hass.nix
     ]
     ++ suites.server
     ++ suites.base;
