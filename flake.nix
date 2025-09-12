@@ -73,6 +73,8 @@
     };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    nixpkgs-otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
   };
 
   outputs =
@@ -89,6 +91,7 @@
     , caelestia-shell
     , zen-browser
     , spicetify-nix
+    , nixpkgs-otbr
     , ...
     }@inputs:
     digga.lib.mkFlake {
@@ -120,6 +123,7 @@
             disko.nixosModules.disko
             arion.nixosModules.arion
             spicetify-nix.nixosModules.spicetify
+            "${nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
           ];
         };
 
