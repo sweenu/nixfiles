@@ -27,6 +27,7 @@ in
       ./grist.nix
       ./nocodb.nix
       ./netdata.nix
+      ./hass.nix
     ]
     ++ suites.base
     ++ suites.server;
@@ -162,6 +163,7 @@ in
     };
     fstrim.enable = true;
     fwupd.enable = true;
+    ollama.enable = true;
   };
 
   # Restic backups
