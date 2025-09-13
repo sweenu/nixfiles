@@ -39,7 +39,6 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
             { id = "activeWindow"; enabled = true; }
             { id = "spacer"; enabled = true; }
             { id = "tray"; enabled = true; }
-            { id = "idleInhibitor"; enabled = true; }
             { id = "clock"; enabled = true; }
             { id = "statusIcons"; enabled = true; }
             { id = "power"; enabled = false; }
@@ -65,6 +64,9 @@ let wallpapersDir = "${config.vars.home}/${config.vars.picturesFolder}/wallpaper
           wallpaperDir = wallpapersDir;
           sessionGif = "${self}/assets/bird.gif";
           # mediaGif = "${self}/assets/.gif";
+        };
+        utilities = {
+          enabled = true;
         };
       };
       cli.enable = true;
