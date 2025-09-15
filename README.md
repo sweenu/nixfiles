@@ -52,6 +52,8 @@ $ sudo disko --mode destroy,format,mount -f '.#carokann'
 $ sudo mount /dev/mapper/cryptroot /mnt
 $ sudo mkdir /mnt/boot
 $ sudo mount /dev/nvme0n1p1 /mnt/boot
+# Generate the hardware config for reference, change what you need before install
+$ sudo nixos-generate-config --root /mnt --dir /home/sweenu
 $ sudo nixos-install --flake '.#carokann' --root /mnt
 
 # Enroll your fingerprint
@@ -93,6 +95,8 @@ $ ssh -f root@najdorf 'rsync -avz /opt root@najdorf-1:/opt > /home/sweenu/rsync.
 $ deploy '.#najdorf'
 # All done!
 ```
+
+sudo ssh-keygen -t ed25519 -N "" -f /etc/ssh/initrd_ssh_host_ed25519_key
 
 ## Acknowledgment:
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS.
