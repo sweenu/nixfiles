@@ -13,6 +13,12 @@
     optimise.automatic = true;
   };
 
+  networking = {
+    useDHCP = false;
+    useNetworkd = true;
+    networkmanager.enable = false;
+  };
+
   programs.mosh.enable = true;
 
   services = {
@@ -20,6 +26,12 @@
       enable = true;
       openFirewall = false;
       settings.PasswordAuthentication = false;
+    };
+    resolved = {
+      enable = true;
+      dnssec = "allow-downgrade";
+      dnsovertls = "opportunistic";
+      fallbackDns = config.vars.dnsResolvers;
     };
     tailscale.enable = true;
   };

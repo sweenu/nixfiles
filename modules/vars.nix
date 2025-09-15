@@ -42,6 +42,8 @@ with lib.types;
 
     timezone = mkOption { type = str; };
 
+    dnsResolvers = mkOption { type = listOf str; };
+
     # Server vars
     domainName = mkOption { type = str; };
     smtpUsername = mkOption { type = str; };

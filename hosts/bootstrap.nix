@@ -12,6 +12,16 @@
 
   networking.wireless.enable = false;
 
+  services = {
+    openssh = {
+      enable = true;
+      openFirewall = true;
+      settings.PasswordAuthentication = false;
+    };
+  };
+
+  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
+
   # Required, but will be overridden in the resulting installer ISO.
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
 

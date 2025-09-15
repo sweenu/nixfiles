@@ -1,5 +1,4 @@
 { self
-, modulesPath
 , config
 , suites
 , pkgs
@@ -8,13 +7,12 @@
 
 let
   resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
+  encryptedRoot = "cryptroot";
 in
 {
   imports =
     [
-      (modulesPath + "/profiles/qemu-guest.nix")
-
-      # services
+      # Services
       ./traefik.nix
       ./authelia.nix
       ./portainer.nix
@@ -29,65 +27,85 @@ in
       ./lldap.nix
       ./grist.nix
     ]
-    ++ suites.server
-    ++ suites.base;
-
-  # Service to uncomment only when commissioning a new server to be able to connect to tailscale unattended. Don't forget to recomment afterwards.
-  # Generate the auth key here: https://login.tailscale.com/admin/settings/keys
-  # systemd.services.tailscale-login = import "${self}/profiles/ts-oneshot-login.nix" { tailscalePkg = pkgs.tailscale; authKey = ""; }
+    ++ suites.base
+    ++ suites.server;
 
   users.groups.smtp = { };
-
-  age.secrets.smtpPassword = {
-    file = "${self}/secrets/smtp_password.age";
-    group = "smtp";
-    mode = "440";
+  age.secrets = {
+    smtpPassword = {
+      file = "${self}/secrets/smtp_password.age";
+      group = "smtp";
+      mode = "440";
+    };
   };
 
   boot = {
     initrd = {
-      kernelModules = [ "nvme" ];
       availableKernelModules = [
-        "ata_piix"
-        "uhci_hcd"
-        "virtio_pci"
-        "sr_mod"
-        "virtio_blk"
+        "nvme"
+        "xhci_pci"
+        "thunderbolt"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+        "r8152" # for framework eth adapter
       ];
+      luks.devices.${encryptedRoot} = {
+        allowDiscards = true;
+      };
+      # Allows decrypting the drive over SSH
+      network = {
+        enable = true;
+        ssh = {
+          enable = true;
+          hostKeys = [ "/etc/ssh/initrd_ssh_host_ed25519_key" ];
+        };
+      };
+      systemd = {
+        enable = true;
+        users.root.shell = "/bin/systemd-tty-ask-password-agent";
+      };
     };
-    kernelPackages = pkgs.linuxPackages_6_12;
+    kernelPackages = pkgs.linuxPackages_6_16;
+    kernelModules = [ "kvm-amd" ];
+    loader = {
+      systemd-boot = {
+        enable = true;
+        editor = false;
+        configurationLimit = 5;
+      };
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   disko = {
     devices = {
       disk.main = {
-        device = "/dev/vda";
+        device = "/dev/nvme0n1";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            boot = {
-              size = "1M";
-              type = "EF02"; # for grub MBR
-              priority = 0;
-            };
             ESP = {
               type = "EF00";
               size = "512M";
-              priority = 1;
               content = {
                 type = "filesystem";
-                format = "vfat";
                 mountpoint = "/boot";
+                format = "vfat";
                 mountOptions = [ "umask=0077" ];
               };
             };
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+                type = "luks";
+                name = encryptedRoot;
+                content = {
+                  type = "filesystem";
+                  mountpoint = "/";
+                  format = "ext4";
+                };
               };
             };
           };
@@ -96,36 +114,53 @@ in
     };
   };
 
+  zramSwap.enable = true;
+
   environment.defaultPackages = with pkgs; [
+    framework-system-tools
     restic
     redu
+    wol
   ];
-
-  services.journald.extraConfig = ''
-    SystemMaxUse = 2G;
-  '';
 
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
 
   time.timeZone = config.vars.timezone;
 
-  virtualisation.docker = {
-    enable = true;
-    daemon.settings.dns = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
+  systemd.network.networks."10-wired" = {
+    matchConfig.Name = "en*";
+    networkConfig = {
+      DHCP = "yes";
+      DNS = config.vars.dnsResolvers;
+    };
+    linkConfig.RequiredForOnline = "yes";
   };
-  virtualisation.arion.backend = "docker";
 
-  # PostgreSQL config and backups
-  services.postgresql = {
-    package = pkgs.postgresql_15;
-    settings.log_timezone = config.time.timeZone;
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      daemon.settings.dns = config.vars.dnsResolvers;
+    };
+    arion.backend = "docker";
   };
-  services.postgresqlBackup = {
-    enable = config.services.postgresql.enable;
-    startAt = "*-*-* 03:17:00";
+
+  services = {
+    avahi.enable = true;
+    journald.extraConfig = ''
+      SystemMaxUse = 10G;
+    '';
+    # PostgreSQL config and backups
+    postgresql = {
+      package = pkgs.postgresql_15;
+      settings.log_timezone = config.time.timeZone;
+    };
+    postgresqlBackup = {
+      enable = config.services.postgresql.enable;
+      startAt = "*-*-* 03:17:00";
+    };
+    fstrim.enable = true;
+    fwupd.enable = true;
   };
 
   # Restic backups
