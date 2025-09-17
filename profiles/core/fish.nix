@@ -40,7 +40,7 @@
         gp = "git push";
         gpf = "git push --force-with-lease";
         grc = "git rebase --continue";
-        gri = "git rebase --interactive";
+        gri = "git rebase --interactive --committer-date-is-author-date";
         gra = "git rebase --abort";
         grs = "git rebase --skip";
         gs = "git status --short";
