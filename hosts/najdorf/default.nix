@@ -64,11 +64,6 @@ in
       systemd = {
         enable = true;
         users.root.shell = "/bin/systemd-tty-ask-password-agent";
-        network.networks."10-wired" = {
-          matchConfig.Name = "en*";
-          networkConfig.DHCP = "yes";
-          linkConfig.RequiredForOnline = "yes";
-        };
       };
     };
     kernelPackages = pkgs.linuxPackages_6_16;
@@ -132,13 +127,25 @@ in
 
   time.timeZone = config.vars.timezone;
 
+  systemd.network.networks."10-wired" = {
+    matchConfig.Name = "en*";
+    networkConfig = {
+      DHCP = "yes";
+      DNS = config.vars.dnsResolvers;
+    };
+    linkConfig.RequiredForOnline = "yes";
+    # Preserve local domain resolution
+    # dhcpV4Config = {
+    #   UseDomains = true; # Accept router's domain from DHCP
+    #   UseRoutes = true; # Keep router DNS for local queries
+    # };
+  };
+
+
   virtualisation = {
     docker = {
       enable = true;
-      daemon.settings.dns = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
+      daemon.settings.dns = config.vars.dnsResolvers;
     };
     arion.backend = "docker";
   };
