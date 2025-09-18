@@ -29,6 +29,8 @@
 
     timezone = "Europe/Paris";
 
+    dnsResolvers = [ "9.9.9.9" "1.1.1.1" ];
+
     # najdorf
     domainName = "sweenu.xyz";
     smtpUsername = "contact@sweenu.xyz";

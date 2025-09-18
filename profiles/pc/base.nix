@@ -50,6 +50,11 @@
   security.pam.services.login.fprintAuth = false;
   security.pam.services.login.enableGnomeKeyring = true;
 
+  networking.networkmanager = {
+    enable = true;
+    insertNameservers = config.vars.dnsResolvers;
+  };
+
   programs = {
     gnupg.agent.enable = true;
   };
