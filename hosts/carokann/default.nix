@@ -102,10 +102,6 @@ in
     avahi.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
-    ollama = {
-      acceleration = "rocm"; # Enables AMD ROCm GPU + NPU acceleration
-      rocmOverrideGfx = "gfx1150"; # Specific target for Ryzen AI 300 iGPU
-    };
   };
 
   security.tpm2 = {
