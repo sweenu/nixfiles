@@ -23,7 +23,6 @@ in
       ./immich.nix
       ./obsidian-livesync.nix
       ./obsidian-share-note.nix
-      ./ollama.nix
       ./lldap.nix
       ./grist.nix
     ]

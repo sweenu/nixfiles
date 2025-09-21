@@ -9,7 +9,6 @@ in
   virtualisation.arion.projects.n8n.settings = {
     enableDefaultNetwork = false;
     networks.traefik.external = true;
-    networks.ollama.external = true;
     services.n8n.service = {
       image = "n8nio/n8n:1.94.0";
       container_name = "n8n";
@@ -26,7 +25,6 @@ in
         # you'll need to `chown -R 1000:1000 /opt/n8n`
         "${n8nDir}:/home/node/.n8n"
       ];
-      networks = [ config.services.traefik.staticConfigOptions.providers.docker.network "ollama" ];
       labels = {
         "traefik.enable" = "true";
         "traefik.http.routers.to-n8n.service" = "n8n";
