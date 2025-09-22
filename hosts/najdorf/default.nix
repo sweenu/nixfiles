@@ -25,6 +25,7 @@ in
       ./obsidian-share-note.nix
       ./lldap.nix
       ./grist.nix
+      ./nocodb.nix
     ]
     ++ suites.base
     ++ suites.server;
