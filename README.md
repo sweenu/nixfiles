@@ -80,13 +80,18 @@ $ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
 Deploy the server config to a new machine:
 ```bash
 # First, comment all services imported in hosts/najdorf/default.nix and uncomment the ts-oneshot-login service line.
+# Make sure tailscale's access control allow the two servers to establish an SSH connection.
 # Then run:
 $ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
 # Copy the old server's host key
 $ scp 'root@najdorf:/etc/ssh/ssh_host_*' root@najdorf-1:/etc/ssh/
 # Stop all running services, then:
 $ ssh root@najdorf 'ssh-keyscan -H najdorf-1 >> ~/.ssh/known_hosts'
-$ ssh -f root@najdorf 'rsync -avz /opt root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
+$ ssh -f root@najdorf 'rsync -avz /opt/ root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
+# Transfer Postgres database
+$ ssh root@najdorf 'sudo -u postgres pg_dumpall > /root/pgdump_all.sql'
+$ scp root@najdorf:/root/pgdump_all.sql root@najdorf-1:/root/
+$ ssh root@najdorf-1 'sudo -u postgres psql -f /root/pgdump_all.sql'
 # I made all Docker volumes bind mounts in /opt in order for this command to be enough for migrating everything important.
 # Uncomment services in hosts/najdorf/default.nix and comment the tailscale-login service line.
 # Remove najdorf from tailscale and change the tailscale name from najdorf-1 to najdorf.
