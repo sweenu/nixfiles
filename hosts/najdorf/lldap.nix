@@ -10,11 +10,13 @@ let
   jwtSecretCredName = "jwt_secret";
   ldapUserPassCredName = "ldap_user_pass";
   smtpPasswordCredName = "smtp_password";
+  serverKeyCredName = "server_key";
 in
 {
   age.secrets = {
     "lldap/jwtSecret".file = "${self}/secrets/lldap/jwt_secret.age";
     "lldap/ldapUserPass".file = "${self}/secrets/lldap/ldap_user_pass.age";
+    "lldap/serverKey".file = "${self}/secrets/lldap/server_key.age";
   };
 
   services.lldap = {
@@ -23,6 +25,7 @@ in
       LLDAP_JWT_SECRET_FILE = "%d/${jwtSecretCredName}";
       LLDAP_LDAP_USER_PASS_FILE = "%d/${ldapUserPassCredName}";
       LLDAP_SMTP_OPTIONS__PASSWORD_FILE = "%d/${smtpPasswordCredName}";
+      LLDAP_KEY_FILE = "%d/${serverKeyCredName}";
     };
     silenceForceUserPassResetWarning = true;
     settings = {
@@ -57,6 +60,7 @@ in
     LoadCredential = [
       "${jwtSecretCredName}:${config.age.secrets."lldap/jwtSecret".path}"
       "${ldapUserPassCredName}:${config.age.secrets."lldap/ldapUserPass".path}"
+      "${serverKeyCredName}:${config.age.secrets."lldap/serverKey".path}"
       "${smtpPasswordCredName}:${config.age.secrets.smtpPassword.path}"
     ];
   };
