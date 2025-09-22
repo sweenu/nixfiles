@@ -1,36 +1,34 @@
 { self, config, ... }:
 
 let
-  n8nDir = "/opt/n8n";
+  fqdn = "n8n.${config.vars.domainName}";
+  url = "https://${fqdn}";
 in
 {
-  age.secrets."n8n/envFile".file = "${self}/secrets/n8n/env.age";
+  age.secrets.n8nEncryptionKey.file = "${self}/secrets/n8n/encryption_key.age";
 
-  virtualisation.arion.projects.n8n.settings = {
-    enableDefaultNetwork = false;
-    networks.traefik.external = true;
-    services.n8n.service = {
-      image = "n8nio/n8n:1.111.0";
-      container_name = "n8n";
-      environment = rec {
-        N8N_HIRING_BANNER_ENABLED = "false";
-        N8N_PERSONALIZATION_ENABLED = "false";
-        WEBHOOK_URL = "https://n8n.${config.vars.domainName}/";
-        GENERIC_TIMEZONE = config.vars.timezone;
-        TZ = GENERIC_TIMEZONE;
-      };
-      # sets N8N_ENCRYPTION_KEY=*****
-      env_file = [ config.age.secrets."n8n/envFile".path ];
-      volumes = [
-        # you'll need to `chown -R 1000:1000 /opt/n8n`
-        "${n8nDir}:/home/node/.n8n"
-      ];
-      labels = {
-        "traefik.enable" = "true";
-        "traefik.http.routers.to-n8n.service" = "n8n";
-        "traefik.http.routers.to-n8n.middlewares" = "authelia@file";
-        "traefik.http.services.n8n.loadbalancer.server.port" = "5678";
-      };
+  services.n8n = {
+    enable = true;
+    webhookUrl = url;
+    settings = {
+      hiringBanner.enabled = false;
+      personalization.enabled = false;
+      generic.timezone = config.vars.timezone;
     };
+  };
+
+  systemd.services.n8n.environment.N8N_ENCRYPTION_KEY_FILE = config.age.secrets.n8nEncryptionKey.path;
+
+  services.traefik.dynamicConfigOptions.http = rec {
+    routers.to-n8n = {
+      rule = "Host(`${fqdn}`)";
+      service = "n8n";
+      middlewares = "authelia@file";
+    };
+    services."${routers.to-n8n.service}".loadBalancer.servers = [
+      {
+        url = "http://127.0.0.1:${builtins.toString config.services.n8n.settings.port}";
+      }
+    ];
   };
 }
