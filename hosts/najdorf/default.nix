@@ -26,6 +26,7 @@ in
       ./lldap.nix
       ./grist.nix
       ./nocodb.nix
+      ./netdata.nix
     ]
     ++ suites.base
     ++ suites.server;
