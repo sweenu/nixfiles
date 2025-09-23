@@ -29,7 +29,7 @@ in
 
   virtualisation.arion.projects.nextcloud.settings =
     let
-      version = "29.0.3";
+      version = "31";
     in
     {
       networks.traefik.external = true;
