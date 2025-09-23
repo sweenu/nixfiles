@@ -49,8 +49,5 @@ with lib.types;
     smtpUsername = mkOption { type = str; };
     smtpHost = mkOption { type = str; };
     smtpPort = mkOption { type = int; };
-
-    # RaspberryPi vars
-    grunfeldIPv4 = mkOption { type = str; };
   };
 }
