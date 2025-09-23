@@ -20,6 +20,7 @@
     mediaLocation = "/opt/immich";
     port = 2283;
     settings = null;
+    database.enableVectors = false;
   };
 
   services.traefik.dynamicConfigOptions.http = rec {
