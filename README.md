@@ -24,18 +24,20 @@ This repo is structured with the [digga](https://digga.divnix.com) flake library
 
 ### Self-hosted apps on my server (najdorf)
 
-I deploy most services as Docker containers through [Arion](https://github.com/hercules-ci/arion)
-
+Here's the list of the main services deployed through their NixOS modules:
 - [Træfik](https://traefik.io/traefik)
 - [Authelia](https://www.authelia.com)
 - [LLDAP](https://github.com/lldap/lldap)
+- [Immich](https://immich.app)
+- [Home Assistant](https://www.home-assistant.io/)
+- [goeland](https://github.com/slurdge/goeland)
+
+I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
 - [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
-- [goeland](https://github.com/slurdge/goeland)
-- [Immich](https://immich.app)
 - [Grist](https://www.getgrist.com/)
 
-Important data is backed up with [Restic](https://restic.net) to a local disk connected to my RaspberryPi.
+Important data is backed up with [Restic](https://restic.net).
 
 
 ## Bootstrap
@@ -87,7 +89,7 @@ $ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
 $ scp 'root@najdorf:/etc/ssh/ssh_host_*' root@najdorf-1:/etc/ssh/
 # Stop all running services, then:
 $ ssh root@najdorf 'ssh-keyscan -H najdorf-1 >> ~/.ssh/known_hosts'
-$ ssh -f root@najdorf 'rsync -avz /opt/ root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
+$ ssh -f root@najdorf 'rsync -Aavz /opt/ root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
 # Transfer Postgres database
 $ ssh root@najdorf 'sudo -u postgres pg_dumpall > /root/pgdump_all.sql'
 $ scp root@najdorf:/root/pgdump_all.sql root@najdorf-1:/root/
@@ -98,6 +100,7 @@ $ ssh root@najdorf-1 'sudo -u postgres psql -f /root/pgdump_all.sql'
 # Change DNS records to point to the new server (on Cloudflare, change the IP scope of the API token to the new IP).
 # Finally:
 $ deploy '.#najdorf'
+$ ssh root@najdorf docker network create traefik
 # All done!
 ```
 
