@@ -36,6 +36,7 @@
         "esphome"
         "google"
         "isal" # fast compression
+        "ipp"
         "matter"
         "music_assistant"
         "open_router"
@@ -96,6 +97,7 @@
           enable = true;
           voice = "en_GB-jenny_dioco-medium";
           uri = "tcp://0.0.0.0:10200";
+          useCUDA = false;
         };
       };
       faster-whisper = {
@@ -109,5 +111,25 @@
     };
   };
 
+  services.traefik.dynamicConfigOptions.http = rec {
+    routers.to-hass = {
+      rule = "Host(`hass.${config.vars.domainName}`)";
+      service = "hass";
+    };
+    services."${routers.to-hass.service}".loadBalancer.servers = [
+      {
+        url = "http://127.0.0.1:8123";
+      }
+    ];
+    routers.to-mass = {
+      rule = "Host(`mass.${config.vars.domainName}`)";
+      service = "mass";
+    };
+    services."${routers.to-mass.service}".loadBalancer.servers = [
+      {
+        url = "http://127.0.0.1:8095";
+      }
+    ];
+  };
 
 }
