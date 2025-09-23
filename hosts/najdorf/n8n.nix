@@ -10,7 +10,7 @@ in
     enableDefaultNetwork = false;
     networks.traefik.external = true;
     services.n8n.service = {
-      image = "n8nio/n8n:1.94.0";
+      image = "n8nio/n8n:1.111.0";
       container_name = "n8n";
       environment = rec {
         N8N_HIRING_BANNER_ENABLED = "false";
