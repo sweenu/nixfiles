@@ -4,22 +4,12 @@
 , ...
 }:
 {
-  imports = suites.server ++ [
-    ./snapserver.nix
-  ];
+  imports = suites.server;
 
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-    };
-    "/data" = {
-      device = "/dev/disk/by-uuid/87d6b688-bd27-4466-8824-5d559f6115ec";
-      fsType = "ext4";
-      options = [
-        "nofail"
-        "X-mount.mkdir"
-      ];
     };
   };
 
@@ -36,24 +26,6 @@
     RuntimeMaxFileSize = 10M;
   '';
 
-  networking = {
-    useDHCP = false;
-    defaultGateway = {
-      address = "192.168.0.1";
-      interface = "eth0";
-    };
-    nameservers = [ "1.1.1.1" ];
-    interfaces.eth0 = {
-      ipv4.addresses = [
-        {
-          address = config.vars.grunfeldIPv4;
-          prefixLength = 24;
-        }
-      ];
-      useDHCP = false;
-    };
-  };
-
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -64,11 +36,8 @@
       userServices = true;
     };
   };
-  services.restic.server = {
-    enable = true;
-    dataDir = "/data/backups/";
-    extraFlags = [ "--no-auth" ];
-  };
+
+  programs.mosh.enable = true;
 
   hardware.enableRedistributableFirmware = true;
 
