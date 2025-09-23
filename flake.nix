@@ -176,6 +176,7 @@
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
         najdorf = {
+          remoteBuild = true;
           profilesOrder = [
             "system"
             "sweenu"
