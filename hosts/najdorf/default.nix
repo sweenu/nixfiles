@@ -163,7 +163,6 @@ in
     };
     fstrim.enable = true;
     fwupd.enable = true;
-    ollama.enable = true;
   };
 
   # Restic backups
