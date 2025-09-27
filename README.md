@@ -81,8 +81,7 @@ $ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
 ### Server
 Deploy the server config to a new machine:
 ```bash
-# First, comment all services imported in hosts/najdorf/default.nix and uncomment the ts-oneshot-login service line.
-# Make sure tailscale's access control allow the two servers to establish an SSH connection.
+# Add an auth key file to the tailscale module for unattended login.
 # Then run:
 $ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
 # Copy the old server's host key

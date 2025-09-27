@@ -33,7 +33,11 @@
       dnsovertls = "opportunistic";
       fallbackDns = config.vars.dnsResolvers;
     };
-    tailscale.enable = true;
+    tailscale = {
+      extraUpFlags = [
+        "--ssh"
+      ];
+    };
   };
 
   users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
