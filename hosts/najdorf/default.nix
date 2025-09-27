@@ -2,12 +2,22 @@
 , config
 , suites
 , pkgs
+, lib
 , ...
 }:
 
 let
   resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
   encryptedRoot = "cryptroot";
+  network = {
+    matchConfig.Name = "en*";
+    networkConfig = {
+      DHCP = "yes";
+      DNS = config.vars.dnsResolvers;
+      IPv6AcceptRA = true;
+    };
+    linkConfig.RequiredForOnline = "yes";
+  };
 in
 {
   imports =
@@ -66,6 +76,7 @@ in
       systemd = {
         enable = true;
         users.root.shell = "/bin/systemd-tty-ask-password-agent";
+        network.networks."10-wired" = network;
       };
     };
     kernelPackages = pkgs.linuxPackages_6_16;
@@ -129,15 +140,9 @@ in
 
   time.timeZone = config.vars.timezone;
 
-  systemd.network.networks."10-wired" = {
-    matchConfig.Name = "en*";
-    networkConfig = {
-      DHCP = "yes";
-      DNS = config.vars.dnsResolvers;
-    };
-    linkConfig.RequiredForOnline = "yes";
-  };
+  systemd.network.networks."10-wired" = network;
 
+  networking.firewall.extraCommands = lib.openTCPPortForLAN 22;
 
   virtualisation = {
     docker = {
