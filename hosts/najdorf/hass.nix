@@ -34,9 +34,11 @@ in
       extraComponents = [
         "esphome"
         "google"
+        "google_translate" # TTS fallback for wyoming-piper
         "isal" # fast compression
         "ipp"
         "matter"
+        "met"
         "music_assistant"
         "open_router"
         "otbr"
