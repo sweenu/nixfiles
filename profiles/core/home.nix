@@ -20,6 +20,15 @@
     };
     programs = {
       bottom.enable = true;
+      btop = {
+        enable = true;
+        settings = {
+          theme_background = false;
+          vim_keys = true;
+          update_ms = 1000;
+          proc_tree = true;
+        };
+      };
       broot = {
         enable = true;
         settings.modal = true;
