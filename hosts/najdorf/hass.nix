@@ -8,7 +8,7 @@ let
 in
 {
   # Till https://github.com/NixOS/nixpkgs/pull/444238
-  systemd.services.music-assistant.path = [ pkgs.librespot-ma ];
+  systemd.services.music-assistant.path = lib.mkForce (with pkgs; [ lsof librespot-ma ]);
   networking.firewall.extraCommands = ''
     ${lib.openTCPPortForLAN 8081} # Thread
     ${lib.openTCPPortForLAN 8082} # Thread
