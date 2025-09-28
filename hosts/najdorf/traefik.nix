@@ -83,7 +83,7 @@
         routers.dashboard = {
           rule = "Host(`traefik.sweenu.xyz`)";
           service = "api@internal";
-          middlewares = [ "authelia@file" ];
+          middlewares = [ "authelia" ];
         };
       };
     };

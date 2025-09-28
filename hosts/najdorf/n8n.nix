@@ -23,7 +23,7 @@ in
     routers.to-n8n = {
       rule = "Host(`${fqdn}`)";
       service = "n8n";
-      middlewares = "authelia@file";
+      middlewares = "authelia";
     };
     services."${routers.to-n8n.service}".loadBalancer.servers = [
       {

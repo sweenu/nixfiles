@@ -129,14 +129,29 @@ in
       }
     ];
     routers.to-mass = {
-      rule = "Host(`mass.${config.vars.domainName}`)";
+      rule = routers.to-hass.rule + " && PathPrefix(`/mass`)";
       service = "mass";
+      middlewares = [ "mass-strip" "mass-prefix-headers" "mass-allow" ];
     };
     services."${routers.to-mass.service}".loadBalancer.servers = [
       {
         url = "http://127.0.0.1:${builtins.toString massWebPort}";
       }
     ];
+    middlewares = {
+      mass-strip.stripPrefix.prefixes = [ "/mass" ];
+      mass-prefix-headers.headers.customRequestHeaders = {
+        "X-Forwarded-Prefix" = "/mass";
+        "X-Forwarded-Proto" = "https";
+        "X-Forwarded-Host" = fqdn;
+      };
+      mass-allow.ipAllowList.sourceRange = [
+        "127.0.0.1/32"
+        "192.168.0.0/16"
+        "10.0.0.0/8"
+        "172.16.0.0/12"
+      ];
+    };
   };
 
 }

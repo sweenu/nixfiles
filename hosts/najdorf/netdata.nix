@@ -15,7 +15,7 @@
     routers.to-netdata = {
       rule = "Host(`netdata.${config.vars.domainName}`)";
       service = "netdata";
-      middlewares = [ "authelia@file" ];
+      middlewares = [ "authelia" ];
     };
     services."${routers.to-netdata.service}".loadBalancer.servers = [
       {
