@@ -21,6 +21,7 @@
       user.signingKey = "${config.vars.sshPublicKey}";
       commit.gpgSign = "true";
       tag.gpgSign = "true";
+      blame.ignoreRevsFile = ".git-blame-ignore-revs";
     };
     aliases = {
       ll = "log --graph --date='short' --color=always --pretty=format:'%Cgreen%h %Cred%<(15,trunc)%an %Cblue%cd %Creset%s'";
