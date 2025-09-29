@@ -81,7 +81,7 @@ hook global WinSetOption filetype=go %{
     hook buffer BufWritePost .* format
 }
 hook global WinSetOption filetype=nix %{
-    set-option window formatcmd "nixpkgs-fmt"
+    set-option window formatcmd "nixfmt"
     hook buffer BufWritePost .* format
 }
 hook global ModuleLoaded tmux %{
