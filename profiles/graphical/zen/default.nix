@@ -28,6 +28,7 @@
           DisableAppUpdate = true;
           DisableMasterPasswordCreation = true;
           DisableSetDesktopBackground = true;
+          DisablePrivateBrowsing = true;
           DisplayBookmarksToolbar = "never";
           DontCheckDefaultBrowser = true;
           DownloadDirectory = config.vars.downloadFolder;
