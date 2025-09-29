@@ -54,6 +54,8 @@
     insertNameservers = config.vars.dnsResolvers;
   };
 
+  boot.enableContainers = true;
+
   programs = {
     gnupg.agent.enable = true;
   };
