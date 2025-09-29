@@ -7,8 +7,16 @@ let
   massWebPort = 8095;
 in
 {
-  # Till https://github.com/NixOS/nixpkgs/pull/444238
+  # Till https://github.com/NixOS/nixpkgs/pull/447147
   systemd.services.music-assistant.path = lib.mkForce (with pkgs; [ lsof librespot-ma ]);
+
+  # Until https://github.com/NixOS/nixpkgs/issues/445723#issuecomment-3346697567 merged upstream
+  systemd.services."wyoming-piper-main" = {
+    serviceConfig = {
+      ProcSubset = lib.mkForce "all";
+    };
+  };
+
   networking.firewall.extraCommands = ''
     ${lib.openTCPPortForLAN 8081} # Thread
     ${lib.openTCPPortForLAN 8082} # Thread
@@ -44,6 +52,7 @@ in
         "otbr"
         "overkiz" # needed for somfy
         "somfy"
+        "spotify"
         "thread"
         "wyoming"
       ];
@@ -104,7 +113,6 @@ in
           enable = true;
           voice = "en_GB-jenny_dioco-medium";
           uri = "tcp://0.0.0.0:10200";
-          useCUDA = false;
         };
       };
       faster-whisper = {

@@ -2,7 +2,7 @@
 
 {
   home-manager.users."${config.vars.username}".programs.helix = rec {
-    enable = true;
+    enable = false;
 
     settings = {
       theme = "material_oceanic_transparent";
