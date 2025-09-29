@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, suites
-, ...
+{
+  pkgs,
+  config,
+  suites,
+  ...
 }:
 {
   imports = suites.server;

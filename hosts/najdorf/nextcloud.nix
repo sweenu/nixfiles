@@ -68,8 +68,10 @@ in
             "traefik.enable" = "true";
             "traefik.http.routers.to-nextcloud.middlewares" = "nextcloud-redirectregex";
             "traefik.http.middlewares.nextcloud-redirectregex.redirectregex.permanent" = "true";
-            "traefik.http.middlewares.nextcloud-redirectregex.redirectregex.regex" = "https://(.*)/.well-known/(card|cal)dav";
-            "traefik.http.middlewares.nextcloud-redirectregex.redirectregex.replacement" = "https://\$\${1}/remote.php/dav/";
+            "traefik.http.middlewares.nextcloud-redirectregex.redirectregex.regex" =
+              "https://(.*)/.well-known/(card|cal)dav";
+            "traefik.http.middlewares.nextcloud-redirectregex.redirectregex.replacement" =
+              "https://\$\${1}/remote.php/dav/";
           };
         };
 

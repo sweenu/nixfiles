@@ -45,10 +45,20 @@ in
       sources =
         let
           lastWeekFilter = "lasthours(${toString (7 * 24)})";
-          defaultFilters = [ lastWeekFilter "includelink" "toc(title)" "first" ];
-          makeSource = name: url: { type = "feed"; filters = defaultFilters; url = url; };
+          defaultFilters = [
+            lastWeekFilter
+            "includelink"
+            "toc(title)"
+            "first"
+          ];
+          makeSource = name: url: {
+            type = "feed";
+            filters = defaultFilters;
+            url = url;
+          };
         in
-        (builtins.mapAttrs makeSource feeds) // {
+        (builtins.mapAttrs makeSource feeds)
+        // {
           all = {
             type = "merge";
             filters = [ "digest" ];

@@ -1,7 +1,8 @@
-{ self
-, config
-, pkgs
-, ...
+{
+  self,
+  config,
+  pkgs,
+  ...
 }:
 
 {

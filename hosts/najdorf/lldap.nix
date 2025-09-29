@@ -1,4 +1,9 @@
-{ self, config, lib, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 
 let
   dbName = "lldap";
@@ -49,10 +54,12 @@ in
   services.postgresql = {
     enable = true;
     ensureDatabases = [ dbName ];
-    ensureUsers = [{
-      name = dbUser;
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = dbUser;
+        ensureDBOwnership = true;
+      }
+    ];
   };
 
   systemd.services.lldap.serviceConfig = {

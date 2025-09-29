@@ -1,4 +1,9 @@
-{ self, config, lib, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 
 let
   dbName = dbUser;
@@ -48,7 +53,8 @@ in
     };
     environmentVariables = {
       AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.age.secrets.smtpPassword.path;
-      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = config.age.secrets."authelia/ldapPassword".path;
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
+        config.age.secrets."authelia/ldapPassword".path;
     };
     settings = {
       theme = "auto";
@@ -103,7 +109,10 @@ in
           {
             domain = "n8n.${config.vars.domainName}";
             resources = [ "^/form/.*" ];
-            methods = [ "GET" "POST" ];
+            methods = [
+              "GET"
+              "POST"
+            ];
             policy = "bypass";
           }
         ];
@@ -181,9 +190,11 @@ in
   services.postgresql = {
     enable = true;
     ensureDatabases = [ dbName ];
-    ensureUsers = [{
-      name = dbUser;
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = dbUser;
+        ensureDBOwnership = true;
+      }
+    ];
   };
 }

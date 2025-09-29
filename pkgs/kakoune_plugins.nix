@@ -1,4 +1,8 @@
-{ lib, kakouneUtils, fetchFromGitHub }:
+{
+  lib,
+  kakouneUtils,
+  fetchFromGitHub,
+}:
 
 let
   inherit (kakouneUtils) buildKakounePluginFrom2Nix;

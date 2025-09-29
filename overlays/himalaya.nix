@@ -1,5 +1,10 @@
 final: prev: {
   himalaya = prev.himalaya.override {
-    withFeatures = [ "notmuch" "imap" "maildir" "smtp" ];
+    withFeatures = [
+      "notmuch"
+      "imap"
+      "maildir"
+      "smtp"
+    ];
   };
 }

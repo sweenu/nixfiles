@@ -5,7 +5,14 @@
     enable = true;
     userEmail = config.vars.email;
     userName = "sweenu";
-    ignores = [ "venv" ".env" "pyrightconfig.json" "shell.nix" ".envrc" ".direnv" ];
+    ignores = [
+      "venv"
+      ".env"
+      "pyrightconfig.json"
+      "shell.nix"
+      ".envrc"
+      ".direnv"
+    ];
     extraConfig = {
       pull.rebase = "true";
       branch.autosetuprebase = "always";

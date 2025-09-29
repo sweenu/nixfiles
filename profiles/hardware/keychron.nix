@@ -1,6 +1,8 @@
 { config, ... }:
 
-let layoutName = "custom-us-keychron"; in
+let
+  layoutName = "custom-us-keychron";
+in
 {
   boot.extraModprobeConfig = ''
     # fix the F* keys on the Keychron K6

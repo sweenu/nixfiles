@@ -1,10 +1,13 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 
-let palette = config.home-manager.users."${config.vars.username}".colorScheme.palette; in
+let
+  palette = config.home-manager.users."${config.vars.username}".colorScheme.palette;
+in
 {
   environment.defaultPackages = with pkgs; [
     app2unit
@@ -182,7 +185,8 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
         # Window rules
         windowrule = [
           "bordercolor rgb(${palette.base0E}), fullscreen:1"
-        ] ++ import ./windowrules.nix;
+        ]
+        ++ import ./windowrules.nix;
 
         # Layer rules
         layerrule = [
@@ -202,7 +206,8 @@ let palette = config.home-manager.users."${config.vars.username}".colorScheme.pa
           "blur, caelestia-drawers"
           "ignorealpha 0.57, caelestia-drawers"
         ];
-      } // (import ./keybindings.nix { inherit config pkgs; });
+      }
+      // (import ./keybindings.nix { inherit config pkgs; });
 
       # Submaps configuration
       extraConfig = ''

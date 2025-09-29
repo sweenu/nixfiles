@@ -1,9 +1,10 @@
-{ self
-, config
-, suites
-, pkgs
-, lib
-, ...
+{
+  self,
+  config,
+  suites,
+  pkgs,
+  lib,
+  ...
 }:
 
 let
@@ -20,27 +21,26 @@ let
   };
 in
 {
-  imports =
-    [
-      # Services
-      ./traefik.nix
-      ./authelia.nix
-      ./portainer.nix
-      ./nextcloud.nix
-      ./calibre-web.nix
-      ./goeland.nix
-      ./n8n.nix
-      ./immich.nix
-      ./obsidian-livesync.nix
-      ./obsidian-share-note.nix
-      ./lldap.nix
-      ./grist.nix
-      ./nocodb.nix
-      ./netdata.nix
-      ./hass.nix
-    ]
-    ++ suites.base
-    ++ suites.server;
+  imports = [
+    # Services
+    ./traefik.nix
+    ./authelia.nix
+    ./portainer.nix
+    ./nextcloud.nix
+    ./calibre-web.nix
+    ./goeland.nix
+    ./n8n.nix
+    ./immich.nix
+    ./obsidian-livesync.nix
+    ./obsidian-share-note.nix
+    ./lldap.nix
+    ./grist.nix
+    ./nocodb.nix
+    ./netdata.nix
+    ./hass.nix
+  ]
+  ++ suites.base
+  ++ suites.server;
 
   users.groups.smtp = { };
   age.secrets = {
@@ -186,7 +186,13 @@ in
       environmentFile = config.age.secrets.resticEnv.path;
       paths = [
         "/opt"
-      ] ++ (if config.services.postgresqlBackup.enable then [ config.services.postgresqlBackup.location ] else [ ]);
+      ]
+      ++ (
+        if config.services.postgresqlBackup.enable then
+          [ config.services.postgresqlBackup.location ]
+        else
+          [ ]
+      );
       pruneOpts = [
         "--keep-last 36"
         "--keep-daily 14"
