@@ -78,21 +78,22 @@
   };
 
   outputs =
-    { self
-    , nixos
-    , nixos-hardware
-    , digga
-    , home
-    , agenix
-    , deploy
-    , disko
-    , arion
-    , nix-colors
-    , caelestia-shell
-    , zen-browser
-    , spicetify-nix
-    , nixpkgs-otbr
-    , ...
+    {
+      self,
+      nixos,
+      nixos-hardware,
+      digga,
+      home,
+      agenix,
+      deploy,
+      disko,
+      arion,
+      nix-colors,
+      caelestia-shell,
+      zen-browser,
+      spicetify-nix,
+      nixpkgs-otbr,
+      ...
     }@inputs:
     digga.lib.mkFlake {
       inherit self inputs;

@@ -1,10 +1,23 @@
 { config, pkgs, ... }:
 
 let
-  theme = { name = "Adwaita"; package = pkgs.gnome-themes-extra; };
-  themeQt = { name = "adwaita-dark"; package = pkgs.adwaita-qt; };
-  cursorTheme = { name = "capitaine-cursors-white"; size = 24; package = pkgs.capitaine-cursors; };
-  iconsTheme = { name = "Papirus-Dark"; package = pkgs.papirus-icon-theme; };
+  theme = {
+    name = "Adwaita";
+    package = pkgs.gnome-themes-extra;
+  };
+  themeQt = {
+    name = "adwaita-dark";
+    package = pkgs.adwaita-qt;
+  };
+  cursorTheme = {
+    name = "capitaine-cursors-white";
+    size = 24;
+    package = pkgs.capitaine-cursors;
+  };
+  iconsTheme = {
+    name = "Papirus-Dark";
+    package = pkgs.papirus-icon-theme;
+  };
   homeCfg = config.home-manager.users."${config.vars.username}";
 in
 {

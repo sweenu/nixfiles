@@ -1,4 +1,11 @@
-{ self, config, pkgs, inputs, lib, ... }:
+{
+  self,
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 let
   fqdn = "hass.${config.vars.domainName}";
@@ -8,7 +15,13 @@ let
 in
 {
   # Till https://github.com/NixOS/nixpkgs/pull/447147
-  systemd.services.music-assistant.path = lib.mkForce (with pkgs; [ lsof librespot-ma ]);
+  systemd.services.music-assistant.path = lib.mkForce (
+    with pkgs;
+    [
+      lsof
+      librespot-ma
+    ]
+  );
 
   # Until https://github.com/NixOS/nixpkgs/issues/445723#issuecomment-3346697567 merged upstream
   systemd.services."wyoming-piper-main" = {
@@ -72,7 +85,10 @@ in
         };
         http = {
           use_x_forwarded_for = true;
-          trusted_proxies = [ "127.0.0.1" serverIP ];
+          trusted_proxies = [
+            "127.0.0.1"
+            serverIP
+          ];
         };
       };
       configWritable = true;
@@ -139,7 +155,11 @@ in
     routers.to-mass = {
       rule = routers.to-hass.rule + " && PathPrefix(`/mass`)";
       service = "mass";
-      middlewares = [ "mass-strip" "mass-prefix-headers" "mass-allow" ];
+      middlewares = [
+        "mass-strip"
+        "mass-prefix-headers"
+        "mass-allow"
+      ];
     };
     services."${routers.to-mass.service}".loadBalancer.servers = [
       {

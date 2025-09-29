@@ -1,5 +1,4 @@
-final: prev:
-{
+final: prev: {
   librespot-ma = final.rustPlatform.buildRustPackage {
     pname = "librespot";
     version = "ma-fork";
@@ -12,7 +11,10 @@ final: prev:
     };
     cargoHash = "sha256-Lujz2revTAok9B0hzdl8NVQ5XMRY9ACJzoQHIkIgKMg=";
 
-    nativeBuildInputs = [ final.pkg-config final.makeWrapper ];
+    nativeBuildInputs = [
+      final.pkg-config
+      final.makeWrapper
+    ];
     buildInputs = [ final.openssl ];
   };
 }

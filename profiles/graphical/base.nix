@@ -1,4 +1,9 @@
-{ self, pkgs, config, ... }:
+{
+  self,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
@@ -50,10 +55,9 @@
         enable = true;
         entries = [
           (builtins.toFile "signal.desktop" (
-            builtins.replaceStrings
-              [ "Exec=signal-desktop" ]
-              [ "Exec=signal-desktop --start-in-tray" ]
-              (builtins.readFile "${pkgs.signal-desktop}/share/applications/signal.desktop")
+            builtins.replaceStrings [ "Exec=signal-desktop" ] [ "Exec=signal-desktop --start-in-tray" ] (
+              builtins.readFile "${pkgs.signal-desktop}/share/applications/signal.desktop"
+            )
           ))
         ];
       };
@@ -95,4 +99,3 @@
     };
   };
 }
-

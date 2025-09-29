@@ -19,7 +19,10 @@
     screenshotFolder = "${picturesFolder}/screenshots";
     screencastFolder = "${videosFolder}/screencasts";
     wallpapersFolder = "${picturesFolder}/wallpapers";
-    defaultFont = { name = "Roboto"; package = pkgs.roboto; };
+    defaultFont = {
+      name = "Roboto";
+      package = pkgs.roboto;
+    };
     defaultMonoFont = {
       name = "DejaVuSansM Nerd Font";
       package = pkgs.nerd-fonts.dejavu-sans-mono;
@@ -29,7 +32,10 @@
 
     timezone = "Europe/Paris";
 
-    dnsResolvers = [ "9.9.9.9" "1.1.1.1" ];
+    dnsResolvers = [
+      "9.9.9.9"
+      "1.1.1.1"
+    ];
 
     # najdorf
     domainName = "sweenu.xyz";

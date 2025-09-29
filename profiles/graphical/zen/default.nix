@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home-manager.users."${config.vars.username}" = {
@@ -9,10 +15,12 @@
       ];
       policies =
         let
-          mkLockedAttrs = builtins.mapAttrs (_: value: {
-            Value = value;
-            Status = "locked";
-          });
+          mkLockedAttrs = builtins.mapAttrs (
+            _: value: {
+              Value = value;
+              Status = "locked";
+            }
+          );
         in
         {
           AutofillAddressEnabled = false;
@@ -45,37 +53,39 @@
 
     xdg.mimeApps =
       let
-        associations = builtins.listToAttrs (map
-          (name: {
-            inherit name;
-            value =
-              let
-                zen-browser = inputs.zen-browser.packages.${pkgs.system}.twilight;
-              in
-              zen-browser.meta.desktopFileName;
-          }) [
-          "application/x-extension-shtml"
-          "application/x-extension-xhtml"
-          "application/x-extension-html"
-          "application/x-extension-xht"
-          "application/x-extension-htm"
-          "x-scheme-handler/unknown"
-          "x-scheme-handler/mailto"
-          "x-scheme-handler/chrome"
-          "x-scheme-handler/about"
-          "x-scheme-handler/https"
-          "x-scheme-handler/http"
-          "application/xhtml+xml"
-          "application/json"
-          "text/plain"
-          "text/html"
-        ]);
+        associations = builtins.listToAttrs (
+          map
+            (name: {
+              inherit name;
+              value =
+                let
+                  zen-browser = inputs.zen-browser.packages.${pkgs.system}.twilight;
+                in
+                zen-browser.meta.desktopFileName;
+            })
+            [
+              "application/x-extension-shtml"
+              "application/x-extension-xhtml"
+              "application/x-extension-html"
+              "application/x-extension-xht"
+              "application/x-extension-htm"
+              "x-scheme-handler/unknown"
+              "x-scheme-handler/mailto"
+              "x-scheme-handler/chrome"
+              "x-scheme-handler/about"
+              "x-scheme-handler/https"
+              "x-scheme-handler/http"
+              "application/xhtml+xml"
+              "application/json"
+              "text/plain"
+              "text/html"
+            ]
+        );
       in
-      lib.mkIf (lib.strings.hasPrefix "zen" config.vars.defaultBrowser)
-        {
-          associations.added = associations;
-          defaultApplications = associations;
-        };
+      lib.mkIf (lib.strings.hasPrefix "zen" config.vars.defaultBrowser) {
+        associations.added = associations;
+        defaultApplications = associations;
+      };
 
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
