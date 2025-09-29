@@ -3,6 +3,6 @@
 {
   home-manager.users."${config.vars.username}".programs.go = {
     enable = true;
-    goPath = ".go";
+    env.GOPATH = "${config.vars.home}/.go";
   };
 }

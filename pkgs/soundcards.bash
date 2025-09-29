@@ -11,7 +11,7 @@ function switch_sink {
     fi
 
     wpctl set-default "$node_id"
-    notify-send --icon=audio-volume-high "Sound output" "$node_nick"
+    # notify-send --icon=audio-volume-high "Sound output" "$node_nick"
 }
 
 function get_node_info {
