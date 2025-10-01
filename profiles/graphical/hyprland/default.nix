@@ -32,23 +32,6 @@ in
   };
 
   home-manager.users."${config.vars.username}" = {
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          lock_cmd = "caelestia shell lock lock";
-        };
-        listener = [
-          {
-            timeout = 600; # 10 minutes
-            on-timeout = "loginctl lock-session";
-          }
-        ];
-      };
-    };
-
     services.hyprsunset = {
       enable = true;
     };

@@ -17,6 +17,14 @@ in
             terminal = config.vars.terminalBin;
             audio = "${pkgs.pwvucontrol}/bin/pwvucontrol";
           };
+          idle = {
+            timeouts = [
+              {
+                timeout = 300; # 5 minutes
+                idleAction = "lock";
+              }
+            ];
+          };
         };
         bar = {
           status = {
