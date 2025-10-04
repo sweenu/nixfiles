@@ -112,11 +112,11 @@ in
     };
 
     openthread-border-router = {
-      enable = false;
+      enable = true;
       package = inputs.nixpkgs-otbr.legacyPackages.${pkgs.system}.openthread-border-router;
       backboneInterface = "enp192s0f3u1";
-      rest.listenAddress = "0.0.0.0";
-      web.listenAddress = "0.0.0.0";
+      rest.listenAddress = "::";
+      web.listenAddress = "::";
       radio = {
         device = "/dev/serial/by-id/usb-Nabu_Casa_Home_Assistant_Connect_ZBT-1_a47f43e6f769ef11bee8a976d9b539e6-if00-port0";
         baudRate = 460800;
