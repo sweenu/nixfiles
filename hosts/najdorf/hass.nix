@@ -55,9 +55,11 @@ in
       enable = true;
       extraComponents = [
         "apple_tv" # looks for it for some reason
+        "default_config"
         "esphome"
         "google"
         "google_translate" # TTS fallback for wyoming-piper
+        "improv_ble"
         "isal" # fast compression
         "ipp"
         "matter"
@@ -66,13 +68,13 @@ in
         "open_router"
         "otbr"
         "overkiz" # needed for somfy
+        "shelly"
         "somfy"
         "spotify"
         "thread"
         "wyoming"
       ];
       config = {
-        default_config = { };
         automation = "!include automations.yaml";
         script = "!include scripts.yaml";
         homeassistant = {
@@ -94,6 +96,28 @@ in
             serverIPv6
           ];
         };
+
+        # Default config except `backup`, `cloud`, `go2rtc`
+        assist_pipeline = { };
+        bluetooth = { };
+        config = { };
+        conversation = { };
+        dhcp = { };
+        energy = { };
+        history = { };
+        homeassistant_alerts = { };
+        image_upload = { };
+        logbook = { };
+        media_source = { };
+        mobile_app = { };
+        my = { };
+        ssdp = { };
+        stream = { };
+        sun = { };
+        usage_prediction = { };
+        usb = { };
+        webhook = { };
+        zeroconf = { };
       };
       configWritable = true;
       openFirewall = true;
@@ -188,4 +212,6 @@ in
       ];
     };
   };
+
+  services.restic.backups.opt.paths = [ config.services.home-assistant.configDir ];
 }
