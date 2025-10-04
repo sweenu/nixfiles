@@ -135,7 +135,7 @@ in
       faster-whisper = {
         servers.main = {
           enable = true;
-          model = "base";
+          model = "small";
           language = "en";
           uri = "tcp://0.0.0.0:10300";
         };
