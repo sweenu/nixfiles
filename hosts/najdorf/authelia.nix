@@ -6,8 +6,10 @@
 }:
 
 let
+  instance = "main";
+  autheliaUser = config.services.authelia.instances."${instance}".user;
+  dbUser = autheliaUser;
   dbName = dbUser;
-  dbUser = config.services.authelia.instances.main.user;
   fqdn = "authelia.${config.vars.domainName}";
   autheliaPort = 9091;
   lldapConfig = config.services.lldap.settings;
@@ -16,33 +18,35 @@ in
   age.secrets = {
     "authelia/jwtSecret" = {
       file = "${self}/secrets/authelia/jwt_secret.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
     "authelia/sessionSecret" = {
       file = "${self}/secrets/authelia/session_secret.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
     "authelia/storageEncryptionKey" = {
       file = "${self}/secrets/authelia/storage_encryption_key.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
     "authelia/ldapPassword" = {
       file = "${self}/secrets/authelia/ldap_password.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
     "authelia/oidcHmacSecret" = {
       file = "${self}/secrets/authelia/oidc_hmac_secret.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
     "authelia/oidcJwtPrivateKey" = {
       file = "${self}/secrets/authelia/oidc_jwt_private_key.age";
-      owner = config.services.authelia.instances.main.user;
+      owner = autheliaUser;
     };
   };
 
-  users.users."${config.services.authelia.instances.main.user}".extraGroups = [ "smtp" ];
+  users.users."${autheliaUser}".extraGroups = [ "smtp" ];
 
-  services.authelia.instances.main = {
+  systemd.services."authelia-${instance}".after = [ "lldap.service" ];
+
+  services.authelia.instances."${instance}" = {
     enable = true;
     secrets = {
       storageEncryptionKeyFile = config.age.secrets."authelia/storageEncryptionKey".path;
@@ -105,15 +109,6 @@ in
           {
             domain_regex = "^(?P<Group>\\w+)\\.${lib.strings.escapeRegex config.vars.domainName}$";
             policy = "one_factor";
-          }
-          {
-            domain = "n8n.${config.vars.domainName}";
-            resources = [ "^/form/.*" ];
-            methods = [
-              "GET"
-              "POST"
-            ];
-            policy = "bypass";
           }
         ];
       };

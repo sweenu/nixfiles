@@ -100,7 +100,6 @@ in
   powerManagement.cpuFreqGovernor = "powersave";
 
   services = {
-    avahi.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
   };

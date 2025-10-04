@@ -30,6 +30,7 @@
   ];
 
   services = {
+    avahi.enable = true;
     getty = {
       extraArgs = [ "--skip-login" ];
       loginOptions = "${config.vars.username}";

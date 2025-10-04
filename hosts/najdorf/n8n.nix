@@ -31,4 +31,22 @@ in
       }
     ];
   };
+
+  services.authelia.instances.main.settings.access_control.rules = [
+    {
+      domain = fqdn;
+      resources = [ "^/webhook/.*" ];
+      methods = [ "POST" ];
+      policy = "bypass";
+    }
+    {
+      domain = fqdn;
+      resources = [ "^/form/.*" ];
+      methods = [
+        "GET"
+        "POST"
+      ];
+      policy = "bypass";
+    }
+  ];
 }
