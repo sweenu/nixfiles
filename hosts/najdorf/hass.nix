@@ -10,6 +10,7 @@
 let
   fqdn = "hass.${config.vars.domainName}";
   serverIP = "192.168.1.41";
+  serverIPv6 = "2001:861:3884:4fd0:8ceb:7d56:bf25:5a17";
   hassPort = config.services.home-assistant.config.http.server_port;
   massWebPort = 8095;
 in
@@ -89,6 +90,8 @@ in
           trusted_proxies = [
             "127.0.0.1"
             serverIP
+            "::1"
+            serverIPv6
           ];
         };
       };
@@ -179,8 +182,10 @@ in
         "192.168.0.0/16"
         "10.0.0.0/8"
         "172.16.0.0/12"
+        "::1/128"
+        "fc00::/7"
+        "2001:861:3884:4fd0::/64"
       ];
     };
   };
-
 }
