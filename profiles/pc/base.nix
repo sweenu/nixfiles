@@ -44,6 +44,12 @@
         hplip
       ];
     };
+    resolved = {
+      enable = true;
+      dnssec = "allow-downgrade";
+      dnsovertls = "opportunistic";
+      fallbackDns = config.vars.dnsResolvers;
+    };
   };
 
   security.polkit.enable = true;
@@ -52,7 +58,7 @@
 
   networking.networkmanager = {
     enable = true;
-    insertNameservers = config.vars.dnsResolvers;
+    dns = "systemd-resolved";
   };
 
   boot.enableContainers = true;
