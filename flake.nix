@@ -75,6 +75,8 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     nixpkgs-otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
+
+    music-assistant.url = "github:NixOS/nixpkgs/pull/447147/head";
   };
 
   outputs =
@@ -93,6 +95,7 @@
       zen-browser,
       spicetify-nix,
       nixpkgs-otbr,
+      music-assistant,
       ...
     }@inputs:
     digga.lib.mkFlake {
@@ -110,6 +113,9 @@
           ./lib/default.nix
           agenix.overlays.default
           deploy.overlays.default
+          (self: super: {
+            music-assistant = inputs.music-assistant.legacyPackages.${self.system}.music-assistant;
+          })
         ];
       };
 
@@ -119,12 +125,14 @@
           channelName = "nixos";
           imports = [ (digga.lib.importExportableModules ./modules) ];
           modules = [
+            { disabledModules = [ "services/audio/music-assistant.nix" ]; }
             agenix.nixosModules.age
             home.nixosModules.home-manager
             disko.nixosModules.disko
             arion.nixosModules.arion
             spicetify-nix.nixosModules.spicetify
             "${nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
+            "${music-assistant}/nixos/modules/services/audio/music-assistant.nix"
           ];
         };
 
