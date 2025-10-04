@@ -24,6 +24,9 @@ in
     "lldap/serverKey".file = "${self}/secrets/lldap/server_key.age";
   };
 
+  # Until https://github.com/NixOS/nixpkgs/pull/447164
+  systemd.services.lldap.after = [ "postgresql.target" ];
+
   services.lldap = {
     enable = true;
     environment = {

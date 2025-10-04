@@ -53,6 +53,7 @@ in
     home-assistant = {
       enable = true;
       extraComponents = [
+        "apple_tv" # looks for it for some reason
         "esphome"
         "google"
         "google_translate" # TTS fallback for wyoming-piper
