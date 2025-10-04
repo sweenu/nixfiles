@@ -15,15 +15,6 @@ let
   massWebPort = 8095;
 in
 {
-  # Till https://github.com/NixOS/nixpkgs/pull/447147
-  systemd.services.music-assistant.path = lib.mkForce (
-    with pkgs;
-    [
-      lsof
-      librespot-ma
-    ]
-  );
-
   # Until https://github.com/NixOS/nixpkgs/issues/445723#issuecomment-3346697567 merged upstream
   systemd.services."wyoming-piper-main" = {
     serviceConfig = {

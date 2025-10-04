@@ -469,6 +469,22 @@
         "type": "github"
       }
     },
+    "music-assistant": {
+      "locked": {
+        "lastModified": 1759742185,
+        "narHash": "sha256-kR6s8/AipeVz4CHZ+ZikeY7/O2BNNqhXeSYe7T+onNM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b8726a79ba08ab2f5c6d97202cf71e8fbec614a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/447147/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -740,6 +756,7 @@
         "disko": "disko",
         "flake-utils-plus": "flake-utils-plus",
         "home": "home",
+        "music-assistant": "music-assistant",
         "nix-colors": "nix-colors",
         "nixos": "nixos",
         "nixos-anywhere": "nixos-anywhere",
