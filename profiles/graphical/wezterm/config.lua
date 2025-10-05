@@ -99,6 +99,11 @@ config.keys = {
   -- Last tab
   { key = ",", mods = 'LEADER', action = act.ActivateLastTab },
 
+  -- Change font size
+  { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+  { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+  { key = "0", mods = "CTRL", action = act.ResetFontSize },
+
   -- Copy and quick select modes
   { key = ' ', mods = 'CTRL|ALT', action = act.ActivateCopyMode },
   { key = 'O', mods = 'CTRL|ALT', action = act.QuickSelect },
