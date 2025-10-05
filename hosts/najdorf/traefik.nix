@@ -14,6 +14,11 @@
     443
   ];
 
+  # HTTP/3
+  networking.firewall.allowedUDPPorts = [
+    443
+  ];
+
   services.traefik = {
     enable = true;
     dataDir = "/opt/traefik";
