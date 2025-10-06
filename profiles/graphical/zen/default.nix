@@ -48,6 +48,7 @@
             "browser.tabs.insertRelatedAfterCurrent" = false;
             "browser.urlbar.resultMenu.keyboardAccessible" = true;
             "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = true;
+            "zen.view.experimental-no-window-controls" = true;
           };
         };
     };
