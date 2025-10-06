@@ -9,7 +9,6 @@
       "venv"
       ".env"
       "pyrightconfig.json"
-      "shell.nix"
       ".envrc"
       ".direnv"
     ];

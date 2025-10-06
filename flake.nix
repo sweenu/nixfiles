@@ -5,15 +5,11 @@
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    digga = {
-      url = "github:divnix/digga";
-      inputs = {
-        nixpkgs.follows = "nixos";
-        nixlib.follows = "nixos";
-        home-manager.follows = "home";
-        deploy.follows = "deploy";
-        flake-utils-plus.follows = "flake-utils-plus";
-      };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixos";
     };
 
     home = {
@@ -54,10 +50,6 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    flake-utils-plus = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-    };
-
     nix-colors = {
       url = "github:misterio77/nix-colors";
     };
@@ -82,134 +74,252 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixos,
-      nixos-hardware,
-      digga,
-      home,
-      agenix,
-      deploy,
-      disko,
-      arion,
-      nix-colors,
-      caelestia-shell,
-      zen-browser,
-      spicetify-nix,
-      nixpkgs-otbr,
-      music-assistant,
-      hyprland,
+      flake-parts,
+      haumea,
       ...
-    }@inputs:
-    digga.lib.mkFlake {
-      inherit self inputs;
-
-      supportedSystems = [
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
-      channelsConfig.allowUnfree = true;
-      channels.nixos = {
-        imports = [ (digga.lib.importOverlays ./overlays) ];
-        overlays = [
-          ./pkgs/default.nix
-          ./lib/default.nix
-          agenix.overlays.default
-          deploy.overlays.default
-          (self: super: {
-            librespot-ma = inputs.music-assistant.legacyPackages.${self.system}.librespot-ma;
-          })
-          (self: super: {
-            music-assistant = inputs.music-assistant.legacyPackages.${self.system}.music-assistant;
-          })
-        ];
-      };
 
-      nixos = {
-        hostDefaults = {
-          system = "x86_64-linux";
-          channelName = "nixos";
-          imports = [ (digga.lib.importExportableModules ./modules) ];
-          modules = [
-            agenix.nixosModules.age
-            home.nixosModules.home-manager
-            disko.nixosModules.disko
-            arion.nixosModules.arion
-            spicetify-nix.nixosModules.spicetify
-            "${nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
-            { disabledModules = [ "services/audio/music-assistant.nix" ]; }
-            "${music-assistant}/nixos/modules/services/audio/music-assistant.nix"
-          ];
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixos {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          devShells.default = import ./shell.nix { inherit pkgs inputs'; };
         };
 
-        imports = [ (digga.lib.importHosts ./hosts) ];
+      flake =
+        let
+          inherit (nixos) lib;
 
-        importables = rec {
-          profiles = digga.lib.rakeLeaves ./profiles;
+          rakeLeaves =
+            path:
+            let
+              loaded = haumea.lib.load {
+                src = path;
+                loader = haumea.lib.loaders.path;
+              };
+              liftDefaults =
+                tree:
+                lib.mapAttrs (
+                  name: value:
+                  if lib.isAttrs value then
+                    if value ? default && lib.isPath value.default then value.default else liftDefaults value
+                  else
+                    value
+                ) tree;
+            in
+            liftDefaults loaded;
+
+          profiles = rakeLeaves ./profiles;
+
+          overlaysFromDir =
+            path:
+            let
+              content = builtins.readDir path;
+              overlayFiles = lib.filterAttrs (
+                name: type: type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix"
+              ) content;
+            in
+            map (name: import (path + "/${name}")) (builtins.attrNames overlayFiles);
+
+          importModules =
+            path:
+            let
+              entries = lib.filesystem.listFilesRecursive path;
+              nixFiles = builtins.filter (path: lib.hasSuffix ".nix" path) entries;
+            in
+            map import nixFiles;
+
+          importHosts =
+            path:
+            let
+              hostDirs = builtins.readDir path;
+              validHosts = lib.filterAttrs (
+                name: type: type == "directory" && builtins.pathExists (path + "/${name}/default.nix")
+              ) hostDirs;
+            in
+            lib.mapAttrs (name: _: import (path + "/${name}")) validHosts;
+
+          hosts = importHosts ./hosts;
+          customModules = importModules ./modules;
+          hmModules = importModules ./hm-modules;
+
+          pkgsOverlay = import ./pkgs/default.nix;
+
+          overlays = [
+            pkgsOverlay
+            inputs.agenix.overlays.default
+            inputs.deploy.overlays.default
+            (final: prev: {
+              librespot-ma = inputs.music-assistant.legacyPackages.${final.system}.librespot-ma;
+            })
+            (final: prev: {
+              music-assistant = inputs.music-assistant.legacyPackages.${final.system}.music-assistant;
+            })
+          ]
+          ++ (overlaysFromDir ./overlays);
+
+          extendedLib = lib.extend (final: prev: import ./lib.nix);
+
+          commonModules = [
+            inputs.agenix.nixosModules.age
+            inputs.home.nixosModules.home-manager
+            inputs.disko.nixosModules.disko
+            inputs.arion.nixosModules.arion
+            inputs.spicetify-nix.nixosModules.spicetify
+            "${inputs.nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
+            { disabledModules = [ "services/audio/music-assistant.nix" ]; }
+            "${inputs.music-assistant}/nixos/modules/services/audio/music-assistant.nix"
+            {
+              nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
+            }
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = hmModules ++ [
+                inputs.nix-colors.homeManagerModules.default
+                inputs.caelestia-shell.homeManagerModules.default
+                inputs.zen-browser.homeModules.twilight
+              ];
+            }
+          ]
+          ++ customModules;
+
           suites =
             with builtins;
             let
               explodeAttrs = set: map (a: getAttr a set) (attrNames set);
             in
-            with profiles;
             rec {
-              base = (explodeAttrs core) ++ [ vars ];
+              base = (explodeAttrs profiles.core) ++ [ profiles.vars ];
               server = [
                 profiles.server
-                vars
+                profiles.vars
               ];
               desktop =
                 base
                 ++ [
-                  audio
-                  virt-manager
+                  profiles.audio
+                  profiles.virt-manager
                 ]
-                ++ (explodeAttrs graphical)
-                ++ (explodeAttrs pc)
-                ++ (explodeAttrs hardware)
-                ++ (explodeAttrs develop);
+                ++ (explodeAttrs profiles.graphical)
+                ++ (explodeAttrs profiles.pc)
+                ++ (explodeAttrs profiles.hardware)
+                ++ (explodeAttrs profiles.develop);
               laptop = desktop ++ [ profiles.laptop ];
             };
-          inherit nix-colors;
-        };
 
-        hosts = {
-          carokann.modules = [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
-          grunfeld.system = "aarch64-linux";
-          grunfeld.modules = [ nixos-hardware.nixosModules.raspberry-pi-3 ];
-        };
-      };
+          mkHost =
+            {
+              hostname,
+              system ? "x86_64-linux",
+              extraModules ? [ ],
+            }:
+            extendedLib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  self
+                  inputs
+                  suites
+                  profiles
+                  ;
+                lib = extendedLib;
+                nix-colors = inputs.nix-colors;
+              };
+              modules = commonModules ++ [ hosts.${hostname} ] ++ extraModules;
+            };
 
-      home = {
-        imports = [ (digga.lib.importExportableModules ./hm-modules) ];
-        modules = [
-          nix-colors.homeManagerModules.default
-          caelestia-shell.homeManagerModules.default
-          zen-browser.homeModules.twilight
-        ];
-      };
+        in
+        {
+          nixosConfigurations = {
+            carokann = mkHost {
+              hostname = "carokann";
+              extraModules = [ inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series ];
+            };
 
-      devshell = ./shell;
+            najdorf = mkHost {
+              hostname = "najdorf";
+            };
 
-      homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
-
-      deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
-        najdorf = {
-          remoteBuild = true;
-          profilesOrder = [
-            "system"
-            "sweenu"
-          ];
-          profiles.system.sshUser = "root";
-          profiles.sweenu = {
-            user = "sweenu";
-            sshUser = "root";
-            path = deploy.lib.x86_64-linux.activate.home-manager self.homeConfigurations."sweenu@najdorf";
+            grunfeld = mkHost {
+              hostname = "grunfeld";
+              system = "aarch64-linux";
+              extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-3 ];
+            };
           };
+
+          homeConfigurations =
+            let
+              mkHomeConfigs =
+                name: config:
+                let
+                  hmUsers = config.config.home-manager.users or { };
+                in
+                lib.mapAttrs' (user: cfg: lib.nameValuePair "${user}@${name}" cfg.home) hmUsers;
+            in
+            lib.foldl' (acc: name: acc // (mkHomeConfigs name self.nixosConfigurations.${name})) { } (
+              builtins.attrNames self.nixosConfigurations
+            );
+
+          deploy.nodes = {
+            najdorf = {
+              hostname = "najdorf";
+              remoteBuild = true;
+              profilesOrder = [
+                "system"
+                "sweenu"
+              ];
+              profiles = {
+                system = {
+                  sshUser = "root";
+                  path = inputs.deploy.lib.x86_64-linux.activate.nixos self.nixosConfigurations.najdorf;
+                  user = "root";
+                };
+                sweenu = {
+                  user = "sweenu";
+                  sshUser = "root";
+                  path =
+                    inputs.deploy.lib.x86_64-linux.activate.home-manager
+                      self.homeConfigurations."sweenu@najdorf";
+                };
+              };
+            };
+
+            grunfeld = {
+              hostname = "grunfeld";
+              profiles = {
+                system = {
+                  sshUser = "root";
+                  path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.grunfeld;
+                  user = "root";
+                };
+              };
+            };
+          };
+
+          checks = builtins.mapAttrs (
+            system: deployLib: deployLib.deployChecks self.deploy
+          ) inputs.deploy.lib;
         };
-        grunfeld = {
-          profiles.system.sshUser = "root";
-        };
-      };
     };
 }

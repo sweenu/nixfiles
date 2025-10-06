@@ -11,7 +11,20 @@ I have three [NixOS](https://nixos.org) machines:
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 
-This repo is structured with the [digga](https://digga.divnix.com) flake library.
+This repo is structured with [flake-parts](https://flake.parts/) and [haumea](https://github.com/nix-community/haumea) for automatic module/profile discovery, preserving all the convenience features from the original [digga](https://github.com/divnix/digga) setup.
+
+### Directory Structure
+```
+nixfiles/
+├── hosts/          → Host configurations
+├── modules/        → Custom NixOS modules
+├── hm-modules/     → Custom home-manager modules
+├── profiles/       → Reusable configuration profiles
+├── pkgs/           → Custom packages
+├── lib/            → Custom lib functions
+├── overlays/       → Additional overlays
+└── shell/          → Development shell
+```
 
 ### Software I use on my personal computer (carokann)
 
