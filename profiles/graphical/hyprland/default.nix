@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
@@ -27,6 +28,9 @@ in
 
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     withUWSM = true;
     xwayland.enable = false;
   };
@@ -42,6 +46,8 @@ in
 
     wayland.windowManager.hyprland = {
       enable = true;
+      package = config.programs.hyprland.package;
+      portalPackage = config.programs.hyprland.portalPackage;
       settings = {
         ecosystem = {
           no_update_news = true;

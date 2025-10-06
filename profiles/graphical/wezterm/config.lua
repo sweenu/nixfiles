@@ -46,7 +46,6 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.quick_select_remove_styling = true
 config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.5 }
-config.dpi = 384 -- Until https://github.com/wezterm/wezterm/issues/7156
 
 -- Keys
 config.leader = { key = 'g', mods = 'ALT' }
