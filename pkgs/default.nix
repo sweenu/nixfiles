@@ -25,4 +25,6 @@ final: prev: with prev; {
   } (builtins.readFile ./soundcards.bash);
 
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
+
+  opodsync = callPackage ./opodsync.nix { };
 }

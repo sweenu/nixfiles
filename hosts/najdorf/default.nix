@@ -30,6 +30,7 @@ in
     ./calibre-web.nix
     ./goeland.nix
     ./n8n.nix
+    ./opodsync.nix
     ./immich.nix
     ./obsidian-livesync.nix
     ./obsidian-share-note.nix
