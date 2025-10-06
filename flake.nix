@@ -77,6 +77,8 @@
     nixpkgs-otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
 
     music-assistant.url = "github:NixOS/nixpkgs/pull/447147/head";
+
+    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
   };
 
   outputs =
@@ -96,6 +98,7 @@
       spicetify-nix,
       nixpkgs-otbr,
       music-assistant,
+      hyprland,
       ...
     }@inputs:
     digga.lib.mkFlake {
