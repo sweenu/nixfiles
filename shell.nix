@@ -1,8 +1,10 @@
-{ pkgs, inputs' }:
+{
+  config,
+  pkgs,
+  inputs',
+}:
 
 pkgs.mkShell {
-  name = "nixfiles";
-
   packages =
     with pkgs;
     [
@@ -12,6 +14,7 @@ pkgs.mkShell {
       nvd
     ]
     ++ [
+      config.treefmt.build.wrapper
       inputs'.agenix.packages.default
       inputs'.deploy.packages.default
       inputs'.nixos-generators.packages.default
@@ -22,6 +25,7 @@ pkgs.mkShell {
   shellHook = ''
     echo ""
     echo "🚀 Welcome to nixfiles devshell"
+    echo ""
     echo "Available tools:"
     echo "  - agenix: Secret management"
     echo "  - deploy-rs: Deployment tool"

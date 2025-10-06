@@ -17,6 +17,8 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixos";
@@ -87,6 +89,10 @@
         "aarch64-linux"
       ];
 
+      imports = [
+        inputs.treefmt-nix.flakeModule
+      ];
+
       perSystem =
         {
           config,
@@ -102,7 +108,16 @@
             config.allowUnfree = true;
           };
 
-          devShells.default = import ./shell.nix { inherit pkgs inputs'; };
+          treefmt = {
+            programs = {
+              nixfmt = {
+                enable = true;
+                excludes = [ "secrets/secrets.nix" ];
+              };
+            };
+          };
+
+          devShells.default = import ./shell.nix { inherit config pkgs inputs'; };
         };
 
       flake =
