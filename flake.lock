@@ -1028,6 +1028,7 @@
         "nixpkgs-otbr": "nixpkgs-otbr",
         "spicetify-nix": "spicetify-nix",
         "treefmt-nix": "treefmt-nix_2",
+        "wezterm": "wezterm",
         "zen-browser": "zen-browser"
       }
     },
@@ -1164,6 +1165,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "wezterm": {
+      "locked": {
+        "lastModified": 1759930078,
+        "narHash": "sha256-ONrtc5/fZQh6g7OmiHRjIrSfnfCf+hOPCqMJleRBnhc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f554ccd861cc23200af69b68f2daf6bb74593a80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/449928/head",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },

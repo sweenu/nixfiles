@@ -72,6 +72,8 @@
 
     music-assistant.url = "github:NixOS/nixpkgs/pull/447147/head";
 
+    wezterm.url = "github:NixOS/nixpkgs/pull/449928/head";
+
     hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
   };
 
@@ -188,6 +190,9 @@
             })
             (final: prev: {
               music-assistant = inputs.music-assistant.legacyPackages.${final.system}.music-assistant;
+            })
+            (final: prev: {
+              wezterm = inputs.wezterm.legacyPackages.${final.system}.wezterm;
             })
           ]
           ++ (overlaysFromDir ./overlays);
