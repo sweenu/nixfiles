@@ -1008,6 +1008,22 @@
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       }
     },
+    "restic": {
+      "locked": {
+        "lastModified": 1759030519,
+        "narHash": "sha256-xWaWcEHuooNNVohee9b/L+rxM8/rPFoHfRCZERnGuoo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a46949cbf54cba4283b4d7c8d9ea581dc41f44d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/446825/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -1026,6 +1042,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-otbr": "nixpkgs-otbr",
+        "restic": "restic",
         "spicetify-nix": "spicetify-nix",
         "treefmt-nix": "treefmt-nix_2",
         "wezterm": "wezterm",

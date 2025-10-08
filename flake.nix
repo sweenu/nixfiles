@@ -74,6 +74,8 @@
 
     wezterm.url = "github:NixOS/nixpkgs/pull/449928/head";
 
+    restic.url = "github:NixOS/nixpkgs/pull/446825/head";
+
     hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
   };
 
@@ -206,8 +208,14 @@
             inputs.arion.nixosModules.arion
             inputs.spicetify-nix.nixosModules.spicetify
             "${inputs.nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
-            { disabledModules = [ "services/audio/music-assistant.nix" ]; }
             "${inputs.music-assistant}/nixos/modules/services/audio/music-assistant.nix"
+            "${inputs.restic}/nixos/modules/services/backup/restic.nix"
+            {
+              disabledModules = [
+                "services/audio/music-assistant.nix"
+                "services/backup/restic.nix"
+              ];
+            }
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
