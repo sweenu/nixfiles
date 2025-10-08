@@ -266,7 +266,13 @@
                 lib = extendedLib;
                 nix-colors = inputs.nix-colors;
               };
-              modules = commonModules ++ [ hosts.${hostname} ] ++ extraModules;
+              modules =
+                commonModules
+                ++ [
+                  { networking.hostName = hostname; }
+                  hosts.${hostname}
+                ]
+                ++ extraModules;
             };
 
         in
