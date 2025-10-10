@@ -11,6 +11,7 @@
         isNormalUser = true;
         extraGroups = [
           "wheel"
+          "dialout"
         ]
         ++ pkgs.lib.optional config.virtualisation.libvirtd.enable "libvirtd"
         ++ pkgs.lib.optional config.networking.networkmanager.enable "networkmanager"
