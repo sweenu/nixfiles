@@ -29,6 +29,7 @@ in
     ${lib.openTCPPortForLAN 8097} # MA web socket
     ${lib.openTCPPortForLAN 3483} # Squeezelite
     ${lib.openUDPPortForLAN 3483} # Squeezelite
+    ${lib.openTCPPortForLAN 9090} # Squeezelite
   '';
 
   age.secrets = {
