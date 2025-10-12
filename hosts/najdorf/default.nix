@@ -38,6 +38,7 @@ in
     ./nocodb.nix
     ./netdata.nix
     ./hass.nix
+    ./windmill.nix
   ]
   ++ suites.base
   ++ suites.server;
