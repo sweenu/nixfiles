@@ -72,6 +72,15 @@ in
             forward-auth = {
               implementation = "ForwardAuth";
             };
+            basic-auth = {
+              implementation = "ForwardAuth";
+              authn_strategies = [
+                {
+                  name = "HeaderAuthorization";
+                  schemes = [ "Basic" ];
+                }
+              ];
+            };
           };
         };
       };
@@ -145,29 +154,33 @@ in
   };
 
   services.traefik.dynamicConfigOptions.http = rec {
-    middlewares = {
-      authelia.forwardAuth = {
-        address = "http://localhost:${builtins.toString autheliaPort}/api/authz/forward-auth";
-        trustForwardHeader = true;
-        authResponseHeaders = [
-          "Remote-User"
-          "Remote-Groups"
-          "Remote-Email"
-          "Remote-Name"
-        ];
-      };
-
-      authelia-headers = {
-        headers = {
-          browserXssFilter = true;
-          customFrameOptionsValue = "SAMEORIGIN";
-          customResponseHeaders = {
-            "Cache-Control" = "no-store";
-            "Pragma" = "no-cache";
+    middlewares =
+      let
+        forwardAuth = endpoint: {
+          address = "http://localhost:${builtins.toString autheliaPort}/api/authz/${endpoint}";
+          trustForwardHeader = true;
+          authResponseHeaders = [
+            "Remote-User"
+            "Remote-Groups"
+            "Remote-Email"
+            "Remote-Name"
+          ];
+        };
+      in
+      {
+        authelia.forwardAuth = forwardAuth "forward-auth";
+        authelia-basic.forwardAuth = forwardAuth "basic-auth";
+        authelia-headers = {
+          headers = {
+            browserXssFilter = true;
+            customFrameOptionsValue = "SAMEORIGIN";
+            customResponseHeaders = {
+              "Cache-Control" = "no-store";
+              "Pragma" = "no-cache";
+            };
           };
         };
       };
-    };
 
     routers.to-authelia = {
       rule = "Host(`${fqdn}`)";
