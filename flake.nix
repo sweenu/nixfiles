@@ -77,6 +77,8 @@
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
     hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
+
+    immich.url = "github:NixOS/nixpkgs/pull/453604/head";
   };
 
   outputs =
@@ -210,10 +212,12 @@
             "${inputs.nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.music-assistant}/nixos/modules/services/audio/music-assistant.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
+            "${inputs.immich}/nixos/modules/services/web-apps/immich.nix"
             {
               disabledModules = [
                 "services/audio/music-assistant.nix"
                 "services/backup/restic.nix"
+                "services/web-apps/immich.nix"
               ];
             }
             {
