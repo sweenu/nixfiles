@@ -41,12 +41,12 @@ Here's the list of the main services deployed through their NixOS modules:
 - [Træfik](https://traefik.io/traefik)
 - [Authelia](https://www.authelia.com)
 - [LLDAP](https://github.com/lldap/lldap)
+- [Nextcloud](https://nextcloud.com)
 - [Immich](https://immich.app)
 - [Home Assistant](https://www.home-assistant.io/)
 - [goeland](https://github.com/slurdge/goeland)
 
 I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
-- [Nextcloud](https://nextcloud.com)
 - [Calibre-web](https://github.com/janeczku/calibre-web)
 - [Grist](https://www.getgrist.com/)
 

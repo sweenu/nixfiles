@@ -2,7 +2,7 @@
 
 let
   nocodbDir = "/opt/nocodb";
-  basePort = 8080;
+  basePort = 8097;
   exposedPort = 12876;
 in
 {

@@ -160,7 +160,7 @@ in
     '';
     # PostgreSQL config and backups
     postgresql = {
-      package = pkgs.postgresql_15;
+      package = pkgs.postgresql_16;
       settings.log_timezone = config.time.timeZone;
     };
     postgresqlBackup = {

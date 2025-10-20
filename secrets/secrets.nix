@@ -14,10 +14,8 @@ in
   "authelia/ldap_password.age".publicKeys = [ carokann najdorfHost ];
   "authelia/oidc_hmac_secret.age".publicKeys = [ carokann najdorfHost ];
   "authelia/oidc_jwt_private_key.age".publicKeys = [ carokann najdorfHost ];
-  "nextcloud/env.age".publicKeys = [ carokann najdorfHost ];
-  "nextcloud/admin_user.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
-  "nextcloud/db_password.age".publicKeys = [ carokann najdorfHost ];
+  "nextcloud/secrets.age".publicKeys = [ carokann najdorfHost ];
   "n8n/encryption_key.age".publicKeys = [ carokann najdorfHost ];
   "immich/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];

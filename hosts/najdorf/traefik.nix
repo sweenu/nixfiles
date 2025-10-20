@@ -62,7 +62,10 @@
           };
         };
       };
-      api.dashboard = true;
+      api = {
+        dashboard = true;
+        insecure = false;
+      };
       ping = { };
       accessLog = { };
       certificatesResolvers = {
@@ -87,7 +90,7 @@
           };
         };
         routers.dashboard = {
-          rule = "Host(`traefik.sweenu.xyz`)";
+          rule = "Host(`traefik.${config.vars.domainName}`)";
           service = "api@internal";
           middlewares = [ "authelia" ];
         };
