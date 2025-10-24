@@ -29,7 +29,7 @@
     };
     resolved = {
       enable = true;
-      dnssec = "allow-downgrade";
+      dnssec = "false"; # DNS resolution stops working after a while with `allow-downgrade`
       dnsovertls = "opportunistic";
       fallbackDns = config.vars.dnsResolvers;
     };
