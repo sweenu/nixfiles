@@ -6,7 +6,7 @@ let
     package = pkgs.gnome-themes-extra;
   };
   themeQt = {
-    name = "adwaita-dark";
+    name = "Adwaita-dark";
     package = pkgs.adwaita-qt;
   };
   cursorTheme = {

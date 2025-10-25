@@ -47,6 +47,7 @@ in
       enable = true;
       extraComponents = [
         "apple_tv" # looks for it for some reason
+        "bbox"
         "default_config"
         "esphome"
         "google"
