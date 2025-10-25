@@ -15,13 +15,6 @@ let
   massWebPort = 8095;
 in
 {
-  # Until https://github.com/NixOS/nixpkgs/issues/445723#issuecomment-3346697567 merged upstream
-  systemd.services."wyoming-piper-main" = {
-    serviceConfig = {
-      ProcSubset = lib.mkForce "all";
-    };
-  };
-
   networking.firewall.extraCommands = ''
     ${lib.openTCPPortForLAN 8081} # Thread
     ${lib.openTCPPortForLAN 8082} # Thread

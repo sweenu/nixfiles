@@ -70,15 +70,11 @@
 
     nixpkgs-otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
 
-    music-assistant.url = "github:NixOS/nixpkgs/pull/447147/head";
-
-    wezterm.url = "github:NixOS/nixpkgs/pull/449928/head";
-
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.50.1";
+    hyprland.url = "github:hyprwm/Hyprland?rev=aa5a239ac92a6bd6947cce2ca3911606df392cb6";
 
-    immich.url = "github:NixOS/nixpkgs/pull/453604/head";
+    nextcloud-client.url = "github:NixOS/nixpkgs/pull/454716/head";
   };
 
   outputs =
@@ -190,13 +186,7 @@
             inputs.agenix.overlays.default
             inputs.deploy.overlays.default
             (final: prev: {
-              librespot-ma = inputs.music-assistant.legacyPackages.${final.system}.librespot-ma;
-            })
-            (final: prev: {
-              music-assistant = inputs.music-assistant.legacyPackages.${final.system}.music-assistant;
-            })
-            (final: prev: {
-              wezterm = inputs.wezterm.legacyPackages.${final.system}.wezterm;
+              nextcloud-client = inputs.nextcloud-client.legacyPackages.${final.system}.nextcloud-client;
             })
           ]
           ++ (overlaysFromDir ./overlays);
@@ -210,14 +200,10 @@
             inputs.arion.nixosModules.arion
             inputs.spicetify-nix.nixosModules.spicetify
             "${inputs.nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
-            "${inputs.music-assistant}/nixos/modules/services/audio/music-assistant.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
-            "${inputs.immich}/nixos/modules/services/web-apps/immich.nix"
             {
               disabledModules = [
-                "services/audio/music-assistant.nix"
                 "services/backup/restic.nix"
-                "services/web-apps/immich.nix"
               ];
             }
             {
@@ -323,6 +309,7 @@
             najdorf = {
               hostname = "najdorf";
               remoteBuild = true;
+              fastConnection = true;
               profilesOrder = [
                 "system"
                 "sweenu"

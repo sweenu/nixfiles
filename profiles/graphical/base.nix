@@ -22,7 +22,8 @@
     obsidian
     pwvucontrol
     signal-desktop
-    rpi-imager
+    # TODO: need https://github.com/NixOS/nixpkgs/pull/454282
+    # rpi-imager
     vlc
     xdg-utils
   ];
