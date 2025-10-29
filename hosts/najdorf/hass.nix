@@ -50,6 +50,7 @@ in
         "ipp"
         "matter"
         "met"
+        "meteo_france"
         "music_assistant"
         "open_router"
         "otbr"
