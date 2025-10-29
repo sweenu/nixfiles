@@ -7,9 +7,11 @@
       ignores = [
         "venv"
         ".env"
-        "pyrightconfig.json"
         ".envrc"
         ".direnv"
+        "devenv.*"
+        ".devenv.*"
+        ".devenv/"
       ];
       settings = {
         user = {
@@ -24,7 +26,7 @@
         gpg.format = "ssh";
         commit.gpgSign = "true";
         tag.gpgSign = "true";
-        aliases = {
+        alias = {
           ll = "log --graph --date='short' --color=always --pretty=format:'%Cgreen%h %Cred%<(15,trunc)%an %Cblue%cd %Creset%s'";
         };
       };
