@@ -66,6 +66,9 @@
 
   programs = {
     gnupg.agent.enable = true;
+    nix-ld = {
+      enable = true;
+    };
   };
 
   home-manager.users."${config.vars.username}" = {
