@@ -7,9 +7,11 @@
       ignores = [
         "venv"
         ".env"
-        "pyrightconfig.json"
         ".envrc"
         ".direnv"
+        "devenv.*"
+        ".devenv.*"
+        ".devenv/"
       ];
       settings = {
         user = {
