@@ -102,6 +102,7 @@ in
   services = {
     fprintd.enable = true;
     fwupd.enable = true;
+    tailscale.useRoutingFeatures = "client";
   };
 
   security.tpm2 = {

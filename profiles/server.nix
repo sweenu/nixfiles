@@ -34,8 +34,10 @@
       fallbackDns = config.vars.dnsResolvers;
     };
     tailscale = {
+      useRoutingFeatures = "server";
       extraUpFlags = [
         "--ssh"
+        "--advertise-exit-node"
       ];
     };
   };
