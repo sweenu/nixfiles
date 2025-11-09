@@ -14,9 +14,19 @@ let
     matchConfig.Name = "en*";
     networkConfig = {
       DHCP = "yes";
-      DNS = config.vars.dnsResolvers;
       IPv6AcceptRA = true;
+      DNSDefaultRoute = true;
     };
+    dhcpV4Config = {
+      UseDNS = false;
+      UseDomains = true;
+    };
+    domains = [
+      "~lan"
+      "~local"
+      "~bytel.fr" # Bbox
+    ];
+    dns = [ "192.168.1.254" ];
     linkConfig.RequiredForOnline = "yes";
   };
 in
