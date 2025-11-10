@@ -10,7 +10,7 @@ final: prev: with prev; {
     ];
   };
 
-  kakounePlugins = kakounePlugins // recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
+  kakounePlugins = kakounePlugins // lib.recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
 
   soundcards = writers.writeBashBin "soundcards" {
     makeWrapperArgs = [

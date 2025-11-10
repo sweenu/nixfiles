@@ -90,7 +90,7 @@ in
         network.networks."10-wired" = network;
       };
     };
-    kernelPackages = pkgs.linuxPackages_6_16;
+    kernelPackages = pkgs.linuxPackages_6_17;
     kernelModules = [ "kvm-amd" ];
     loader = {
       systemd-boot = {
@@ -141,7 +141,7 @@ in
   zramSwap.enable = true;
 
   environment.defaultPackages = with pkgs; [
-    framework-system-tools
+    framework-tool
     restic
     redu
     wol

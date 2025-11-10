@@ -12,7 +12,7 @@
       binutils
       curl
       dua
-      du-dust
+      dust
       dnsutils
       entr
       fd

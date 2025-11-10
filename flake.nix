@@ -73,8 +73,6 @@
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
     hyprland.url = "github:hyprwm/Hyprland?rev=aa5a239ac92a6bd6947cce2ca3911606df392cb6";
-
-    nextcloud-client.url = "github:NixOS/nixpkgs/pull/454716/head";
   };
 
   outputs =
@@ -185,9 +183,6 @@
             pkgsOverlay
             inputs.agenix.overlays.default
             inputs.deploy.overlays.default
-            (final: prev: {
-              nextcloud-client = inputs.nextcloud-client.legacyPackages.${final.system}.nextcloud-client;
-            })
           ]
           ++ (overlaysFromDir ./overlays);
 

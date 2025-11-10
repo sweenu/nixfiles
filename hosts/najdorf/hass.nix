@@ -127,7 +127,8 @@ in
 
     openthread-border-router = {
       enable = true;
-      package = inputs.nixpkgs-otbr.legacyPackages.${pkgs.system}.openthread-border-router;
+      package =
+        inputs.nixpkgs-otbr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.openthread-border-router;
       backboneInterface = "enp192s0f3u1";
       rest.listenAddress = "::";
       web.listenAddress = "::";

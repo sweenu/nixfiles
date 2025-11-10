@@ -61,7 +61,7 @@
               inherit name;
               value =
                 let
-                  zen-browser = inputs.zen-browser.packages.${pkgs.system}.twilight;
+                  zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
                 in
                 zen-browser.meta.desktopFileName;
             })

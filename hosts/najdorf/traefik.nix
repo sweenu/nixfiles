@@ -47,7 +47,9 @@
         };
         websecure = {
           address = ":443";
-          http3 = { };
+          http3 = {
+            advertisedPort = 443;
+          };
           http = {
             middlewares = [ "sts-header@file" ];
             tls = {

@@ -121,7 +121,7 @@ in
   age.identityPaths = [ "${config.vars.home}/.ssh/id_ed25519" ];
 
   environment.defaultPackages = with pkgs; [
-    framework-system-tools
+    framework-tool
   ];
 
   services.pipewire.wireplumber.extraConfig."5-built-in-speakers-rename" = {

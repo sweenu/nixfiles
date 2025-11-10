@@ -9,15 +9,19 @@ in
 
   services.n8n = {
     enable = true;
-    webhookUrl = url;
-    settings = {
-      hiringBanner.enabled = false;
-      personalization.enabled = false;
-      generic.timezone = config.vars.timezone;
+    environment = {
+      WEBHOOK_URL = url;
+      N8N_ENCRYPTION_KEY_FILE = "%d/encryption_key";
+      N8N_PERSONALIZATION_ENABLED = "false";
+      N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
+      N8N_HIRING_BANNER_ENABLED = "false";
+      N8N_DIAGNOSTICS_ENABLED = "false";
     };
   };
 
-  systemd.services.n8n.environment.N8N_ENCRYPTION_KEY_FILE = config.age.secrets.n8nEncryptionKey.path;
+  systemd.services.n8n.serviceConfig.LoadCredential = [
+    "encryption_key:${config.age.secrets.n8nEncryptionKey.path}"
+  ];
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-n8n = {
@@ -27,7 +31,7 @@ in
     };
     services."${routers.to-n8n.service}".loadBalancer.servers = [
       {
-        url = "http://127.0.0.1:${builtins.toString config.services.n8n.settings.port}";
+        url = "http://127.0.0.1:${builtins.toString config.services.n8n.environment.N8N_PORT}";
       }
     ];
   };
