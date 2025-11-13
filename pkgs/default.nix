@@ -25,4 +25,8 @@ final: prev: with prev; {
   } (builtins.readFile ./soundcards.bash);
 
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
+
+  aiobbox = pkgs.python3Packages.callPackage ./aiobbox.nix { };
+
+  bbox = callPackage ./bbox.nix { };
 }

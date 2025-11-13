@@ -61,6 +61,7 @@ in
         "thread"
         "wyoming"
       ];
+      customComponents = [ pkgs.bbox ];
       config = {
         automation = "!include automations.yaml";
         script = "!include scripts.yaml";
