@@ -167,7 +167,7 @@ in
           "8, defaultName:p, persistent:true"
           "w[tv1]s[false], gapsout:20"
           "f[1]s[false], gapsout:20"
-          "special:communication, on-created-empty:app2unit -- ${pkgs.signal-desktop}/bin/signal-desktop"
+          "special:communication, on-created-empty:app2unit -- ${pkgs.beeper}/bin/beeper"
           "special:music, on-created-empty:app2unit -- spotify"
         ];
 

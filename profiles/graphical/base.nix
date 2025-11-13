@@ -21,7 +21,6 @@
     libnotify
     obsidian
     pwvucontrol
-    signal-desktop
     # TODO: need https://github.com/NixOS/nixpkgs/pull/454282
     # rpi-imager
     vlc
@@ -54,13 +53,6 @@
 
       autostart = {
         enable = true;
-        entries = [
-          (builtins.toFile "signal.desktop" (
-            builtins.replaceStrings [ "Exec=signal-desktop" ] [ "Exec=signal-desktop --start-in-tray" ] (
-              builtins.readFile "${pkgs.signal-desktop}/share/applications/signal.desktop"
-            )
-          ))
-        ];
       };
 
       desktopEntries = {
