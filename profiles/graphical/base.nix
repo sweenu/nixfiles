@@ -21,6 +21,7 @@
     libnotify
     obsidian
     pwvucontrol
+    beeper
     signal-desktop
     # TODO: need https://github.com/NixOS/nixpkgs/pull/454282
     # rpi-imager

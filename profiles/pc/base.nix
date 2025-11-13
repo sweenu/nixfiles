@@ -10,6 +10,7 @@
   environment.defaultPackages = with pkgs; [
     bitwarden-cli
     bitwarden-desktop
+    beeper
     brightnessctl
     comma
     devenv
