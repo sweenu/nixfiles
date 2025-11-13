@@ -20,6 +20,8 @@
     gpg-tui
     nix-search-tv
     nix-output-monitor
+    nix-prefetch-git
+    nix-prefetch-github
     nixpkgs-review
     python3Packages.ptpython
     simple-scan
