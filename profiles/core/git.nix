@@ -20,6 +20,7 @@
           signingKey = "${config.vars.sshPublicKey}";
         };
         pull.rebase = "true";
+        push.autoSetupRemote = "true";
         branch.autosetuprebase = "always";
         blame.ignoreRevsFile = ".git-blame-ignore-revs";
         init.defaultBranch = "main";
