@@ -16,13 +16,19 @@ let
 in
 {
   networking.firewall.extraCommands = ''
-    ${lib.openTCPPortForLAN 8081} # Thread
-    ${lib.openTCPPortForLAN 8082} # Thread
-    ${lib.openTCPPortForLAN massWebPort} # MA web interface
-    ${lib.openTCPPortForLAN 8097} # MA web socket
-    ${lib.openTCPPortForLAN 3483} # Squeezelite
-    ${lib.openUDPPortForLAN 3483} # Squeezelite
-    ${lib.openTCPPortForLAN 9090} # Squeezelite
+    # Thread
+    ${lib.openTCPPortForLAN 8081}
+    ${lib.openTCPPortForLAN 8082}
+    # Music Assistant
+    ${lib.openTCPPortForLAN massWebPort} # web interface
+    ${lib.openTCPPortForLAN 8097} # web socket
+    # Squeezlite
+    ${lib.openTCPPortForLAN 3483}
+    ${lib.openUDPPortForLAN 3483}
+    ${lib.openTCPPortForLAN 9090}
+    # Spotify Connect & more (ephemeral ports)
+    ${lib.openTCPPortRangeForLAN 32768 65535}
+    ${lib.openUDPPortRangeForLAN 32768 65535}
   '';
 
   age.secrets = {
