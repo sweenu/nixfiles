@@ -18,11 +18,36 @@ in
   networking.firewall.extraCommands = ''
     ${lib.openTCPPortForLAN 8081} # Thread
     ${lib.openTCPPortForLAN 8082} # Thread
+    ${lib.openTCPPortForLAN config.services.matter-server.port} # Matter
+    ${lib.openUDPPortForLAN config.services.matter-server.port} # Matter
     ${lib.openTCPPortForLAN massWebPort} # MA web interface
     ${lib.openTCPPortForLAN 8097} # MA web socket
     ${lib.openTCPPortForLAN 3483} # Squeezelite
     ${lib.openUDPPortForLAN 3483} # Squeezelite
     ${lib.openTCPPortForLAN 9090} # Squeezelite
+    # Allow forwarding for Thread network (wpan0)
+    iptables -A FORWARD -i wpan0 -j ACCEPT
+    iptables -A FORWARD -o wpan0 -j ACCEPT
+    ip6tables -A FORWARD -i wpan0 -j ACCEPT
+    ip6tables -A FORWARD -o wpan0 -j ACCEPT
+
+    # Allow forwarding for nat64 interface
+    iptables -A FORWARD -i nat64 -j ACCEPT
+    iptables -A FORWARD -o nat64 -j ACCEPT
+
+    # IPv4 NAT for Tayga translated packets going to the internet
+    # Replace 'enp192s0f3u1' with your actual internet interface
+    iptables -t nat -A POSTROUTING -s 192.168.255.0/24 -o enp192s0f3u1 -j MASQUERADE
+  '';
+
+  networking.firewall.extraStopCommands = ''
+    iptables -D FORWARD -i wpan0 -j ACCEPT 2>/dev/null || true
+    iptables -D FORWARD -o wpan0 -j ACCEPT 2>/dev/null || true
+    ip6tables -D FORWARD -i wpan0 -j ACCEPT 2>/dev/null || true
+    ip6tables -D FORWARD -o wpan0 -j ACCEPT 2>/dev/null || true
+    iptables -D FORWARD -i nat64 -j ACCEPT 2>/dev/null || true
+    iptables -D FORWARD -o nat64 -j ACCEPT 2>/dev/null || true
+    iptables -t nat -D POSTROUTING -s 192.168.255.0/24 -o enp192s0f3u1 -j MASQUERADE 2>/dev/null || true
   '';
 
   age.secrets = {
@@ -154,6 +179,41 @@ in
           model = "small";
           language = "en";
           uri = "tcp://0.0.0.0:10300";
+        };
+      };
+    };
+
+    tayga = {
+      enable = true;
+      ipv4 = {
+        # The IPv4 address assigned to the tayga router itself
+        address = "192.168.255.1";
+
+        router = {
+          # The router address for IPv4 side
+          address = "192.168.255.1";
+        };
+
+        pool = {
+          # Pool of IPv4 addresses used for dynamic NAT64 translation
+          address = "192.168.255.0";
+          prefixLength = 24;
+        };
+      };
+
+      ipv6 = {
+        # The IPv6 address assigned to the tayga router itself
+        address = "fdaa:bb:1::1";
+
+        router = {
+          # The router address for IPv6 side
+          address = "fdaa:bb:1::1";
+        };
+
+        pool = {
+          # Use your actual NAT64 prefix from: ot-ctl netdata show
+          address = "fd92:4bb0:7548:2::";
+          prefixLength = 96;
         };
       };
     };
