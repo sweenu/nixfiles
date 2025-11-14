@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -27,4 +28,7 @@ in
   environment.defaultPackages = [
     config.programs.spicetify.spicetifyPackage
   ];
+
+  # For spotify connect
+  networking.firewall.extraCommands = lib.openTCPPortForLAN 4070;
 }
