@@ -65,6 +65,7 @@ in
         "somfy"
         "spotify"
         "thread"
+        "upnp"
         "wyoming"
       ];
       customComponents = [ pkgs.bbox ];
