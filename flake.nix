@@ -72,7 +72,7 @@
 
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
-    hyprland.url = "github:hyprwm/Hyprland?rev=aa5a239ac92a6bd6947cce2ca3911606df392cb6";
+    hyprland.url = "github:hyprwm/Hyprland/v0.52.1";
   };
 
   outputs =
