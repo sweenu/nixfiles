@@ -2,6 +2,7 @@
   self,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -11,6 +12,9 @@ in
   home-manager.users."${config.vars.username}" = {
     programs.caelestia = {
       enable = true;
+      package = inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+        hyprland = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      };
       settings = {
         general = {
           apps = {
