@@ -1,7 +1,13 @@
 import sys
 from subprocess import run, PIPE
 
-BACKLIGHT_CMD = ["caelestia-shell", "ipc", "call", "brightness"]
+BACKLIGHT_CMD = [
+    "caelestia-shell",
+    "ipc",
+    "--any-display",
+    "call",
+    "brightness"
+]
 
 
 def _get_brightness() -> int:
