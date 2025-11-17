@@ -105,9 +105,9 @@ config.keys = {
 
   -- Copy and quick select modes
   { key = ' ', mods = 'CTRL|ALT', action = act.ActivateCopyMode },
-  { key = 'O', mods = 'CTRL|ALT', action = act.QuickSelect },
+  { key = 'o', mods = 'CTRL|ALT', action = act.QuickSelect },
   {
-    key = 'o',
+    key = 'O',
     mods = 'CTRL|ALT',
     action = wezterm.action.QuickSelectArgs {
       label = 'Open',
