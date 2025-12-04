@@ -49,6 +49,7 @@ in
     ./qgis.nix
     ./cockpit.nix
     ./dawarich.nix
+    ./minecraft.nix
 
     # Extra config
     ./realtek-eth-adapter.nix

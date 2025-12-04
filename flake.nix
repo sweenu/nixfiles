@@ -75,6 +75,11 @@
     hyprland.url = "github:hyprwm/Hyprland/v0.52.1";
 
     dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
+
+    nix-minecraft = {
+      url = "github:sweenu/nix-minecraft";
+      inputs.nixpkgs.follows = "nixos";
+    };
   };
 
   outputs =
@@ -185,6 +190,7 @@
             pkgsOverlay
             inputs.agenix.overlays.default
             inputs.deploy.overlays.default
+            inputs.nix-minecraft.overlay
             (final: prev: {
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
@@ -202,6 +208,7 @@
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
             inputs.spicetify-nix.nixosModules.spicetify
+            inputs.nix-minecraft.nixosModules.minecraft-servers
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
             "${inputs.dawarich}/nixos/modules/services/web-apps/dawarich.nix"
