@@ -163,6 +163,22 @@
         "type": "github"
       }
     },
+    "dawarich": {
+      "locked": {
+        "lastModified": 1764601710,
+        "narHash": "sha256-wvKrkXSRg74Ezq2b5dn4zAZ/F3cgXRbjRn9HJDQOIUE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b21622433a4691631010665f634cdcbce6b75f0d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/423867/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "deploy": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -952,22 +968,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-otbr": {
-      "locked": {
-        "lastModified": 1759887431,
-        "narHash": "sha256-6JS3NFBtoD8WgOtF+sNhgFjkQ4Q3aaZl/VpoxfqFXwc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "9efbbbe4c9d46642ba27454f9d70e99178aa749f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "pull/332296/head",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1762363567,
@@ -996,6 +996,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "otbr": {
+      "locked": {
+        "lastModified": 1759887431,
+        "narHash": "sha256-6JS3NFBtoD8WgOtF+sNhgFjkQ4Q3aaZl/VpoxfqFXwc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9efbbbe4c9d46642ba27454f9d70e99178aa749f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/332296/head",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1065,6 +1081,7 @@
         "agenix": "agenix",
         "arion": "arion",
         "caelestia-shell": "caelestia-shell",
+        "dawarich": "dawarich",
         "deploy": "deploy",
         "disko": "disko",
         "flake-parts": "flake-parts_2",
@@ -1076,7 +1093,7 @@
         "nixos-anywhere": "nixos-anywhere",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs-otbr": "nixpkgs-otbr",
+        "otbr": "otbr",
         "restic": "restic",
         "spicetify-nix": "spicetify-nix",
         "treefmt-nix": "treefmt-nix_2",

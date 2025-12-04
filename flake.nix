@@ -68,11 +68,13 @@
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
-    nixpkgs-otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
+    otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
 
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
     hyprland.url = "github:hyprwm/Hyprland/v0.52.1";
+
+    dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
   };
 
   outputs =
@@ -187,6 +189,7 @@
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+              dawarich = inputs.dawarich.legacyPackages.${prev.stdenv.hostPlatform.system}.dawarich;
             })
           ]
           ++ (overlaysFromDir ./overlays);
@@ -199,8 +202,9 @@
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
             inputs.spicetify-nix.nixosModules.spicetify
-            "${inputs.nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
+            "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
+            "${inputs.dawarich}/nixos/modules/services/web-apps/dawarich.nix"
             {
               disabledModules = [
                 "services/backup/restic.nix"

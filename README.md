@@ -45,6 +45,7 @@ Here's the list of the main services deployed through their NixOS modules:
 - [Immich](https://immich.app)
 - [Home Assistant](https://www.home-assistant.io/)
 - [goeland](https://github.com/slurdge/goeland)
+- [Dawarich](https://dawarich.app/)
 
 I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
 - [Calibre-web](https://github.com/janeczku/calibre-web)

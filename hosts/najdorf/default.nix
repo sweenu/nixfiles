@@ -50,6 +50,7 @@ in
     ./hass.nix
     ./qgis.nix
     ./cockpit.nix
+    ./dawarich.nix
   ]
   ++ suites.base
   ++ suites.server;
