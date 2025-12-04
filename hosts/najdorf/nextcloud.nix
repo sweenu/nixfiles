@@ -35,7 +35,7 @@ in
     notify_push.enable = true;
     notify_push.nextcloudUrl = "http://localhost:${builtins.toString port}";
 
-    autoUpdateApps.enable = true;
+    autoUpdateApps.enable = false;
     autoUpdateApps.startAt = "05:00:00";
 
     phpOptions = {
