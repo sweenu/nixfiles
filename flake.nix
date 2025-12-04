@@ -57,7 +57,7 @@
     };
 
     caelestia-shell = {
-      url = "github:caelestia-dots/shell";
+      url = "github:caelestia-dots/shell/pull/915/head";
       inputs.nixpkgs.follows = "nixos";
     };
 
