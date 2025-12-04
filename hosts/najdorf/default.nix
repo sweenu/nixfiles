@@ -49,6 +49,7 @@ in
     ./netdata.nix
     ./hass.nix
     ./qgis.nix
+    ./cockpit.nix
   ]
   ++ suites.base
   ++ suites.server;
