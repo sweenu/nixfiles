@@ -49,6 +49,7 @@ in
     ./qgis.nix
     ./cockpit.nix
     ./dawarich.nix
+    ./minecraft.nix
   ]
   ++ suites.base
   ++ suites.server;
