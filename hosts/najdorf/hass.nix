@@ -46,7 +46,6 @@ in
       enable = true;
       extraComponents = [
         "apple_tv" # looks for it for some reason
-        "bbox"
         "default_config"
         "esphome"
         "google"
@@ -68,7 +67,10 @@ in
         "upnp"
         "wyoming"
       ];
-      customComponents = [ pkgs.bbox ];
+      customComponents = [
+        pkgs.bbox
+        pkgs.dawarich-ha
+      ];
       config = {
         automation = "!include automations.yaml";
         script = "!include scripts.yaml";

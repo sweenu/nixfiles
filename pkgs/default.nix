@@ -27,6 +27,8 @@ final: prev: with prev; {
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
 
   aiobbox = pkgs.python3Packages.callPackage ./aiobbox.nix { };
-
   bbox = callPackage ./bbox.nix { };
+
+  dawarich-api = pkgs.python3Packages.callPackage ./dawarich-api.nix { };
+  dawarich-ha = callPackage ./dawarich-ha.nix { };
 }
