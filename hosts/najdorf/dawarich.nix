@@ -44,6 +44,8 @@ in
       OIDC_PROVIDER_NAME = "Authelia";
       OIDC_AUTO_REGISTER = "false";
       ALLOW_EMAIL_PASSWORD_REGISTRATION = "false";
+      PHOTON_API_HOST = "127.0.0.1:2322";
+      PHOTON_API_USE_HTTPS = "false";
     };
     extraEnvFiles = [
       config.age.secrets."dawarich/oidcClientSecretEnvFile".path
@@ -89,4 +91,25 @@ in
       }
     ];
   };
+
+  virtualisation.arion.projects.photon.settings =
+    let
+      volume = "photon_data";
+    in
+    {
+      docker-compose.volumes.${volume} = { };
+      services.photon.service = {
+        image = "rtuszik/photon-docker:latest";
+        container_name = "photon";
+        network_mode = "host";
+        volumes = [ "${volume}:/photon/data" ];
+        restart = "unless-stopped";
+        environment = {
+          UPDATE_INTERVAL = "720h";
+          PUID = "0";
+          PGID = "0";
+          REGION = "europe";
+        };
+      };
+    };
 }
