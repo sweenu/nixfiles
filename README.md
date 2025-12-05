@@ -42,9 +42,11 @@ Here's the list of the main services deployed through their NixOS modules:
 - [Authelia](https://www.authelia.com)
 - [LLDAP](https://github.com/lldap/lldap)
 - [Nextcloud](https://nextcloud.com)
+- [n8n](https://n8n.io/)
 - [Immich](https://immich.app)
 - [Home Assistant](https://www.home-assistant.io/)
 - [goeland](https://github.com/slurdge/goeland)
+- [Cockpit](https://cockpit-project.org/)
 - [Dawarich](https://dawarich.app/)
 
 I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
