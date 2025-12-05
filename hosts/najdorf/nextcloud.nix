@@ -55,9 +55,9 @@ in
       maintenance_window_start = 1;
 
       mail_smtpmode = "smtp";
-      mail_smtphost = config.vars.smtpHost;
-      mail_smtpport = config.vars.smtpPort;
-      mail_smtpname = config.vars.smtpUsername;
+      mail_smtphost = config.vars.smtp.host;
+      mail_smtpport = config.vars.smtp.port;
+      mail_smtpname = config.vars.smtp.user;
       mail_smtpsecure = "tls";
       mail_from_address = config.vars.email;
       mail_domain = builtins.elemAt (lib.strings.splitString "@" config.vars.email) 1;

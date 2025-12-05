@@ -24,9 +24,9 @@ in
     settings = {
       loglevel = "info";
       email = {
-        host = config.vars.smtpHost;
-        port = config.vars.smtpPort;
-        username = config.vars.smtpUsername;
+        host = config.vars.smtp.host;
+        port = config.vars.smtp.port;
+        username = config.vars.smtp.user;
         password_file = config.age.secrets.smtpPassword.path;
         include-header = true;
         include-footer = true;

@@ -31,9 +31,9 @@ in
     redis.createLocally = true;
     database.createLocally = true;
     smtp = {
-      host = config.vars.smtpHost;
-      port = config.vars.smtpPort;
-      user = config.vars.smtpUsername;
+      host = config.vars.smtp.host;
+      port = config.vars.smtp.port;
+      user = config.vars.smtp.user;
       passwordFile = config.age.secrets.smtpPassword.path;
       fromAddress = "Dawarich <${config.vars.email}>";
     };

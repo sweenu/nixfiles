@@ -139,8 +139,8 @@ in
         ban_time = "10m";
       };
       notifier.smtp = {
-        username = config.vars.smtpUsername;
-        address = "submissions://${config.vars.smtpHost}:${toString config.vars.smtpPort}";
+        username = config.vars.smtp.user;
+        address = "submissions://${config.vars.smtp.host}:${toString config.vars.smtp.port}";
         sender = "Authelia <${config.vars.email}>";
         identifier = config.vars.domainName;
       };

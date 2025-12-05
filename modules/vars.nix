@@ -46,8 +46,14 @@ with lib.types;
 
     # Server vars
     domainName = mkOption { type = str; };
-    smtpUsername = mkOption { type = str; };
-    smtpHost = mkOption { type = str; };
-    smtpPort = mkOption { type = int; };
+    smtp = mkOption {
+      type = submodule {
+        options = {
+          user = mkOption { type = str; };
+          host = mkOption { type = str; };
+          port = mkOption { type = int; };
+        };
+      };
+    };
   };
 }

@@ -39,8 +39,10 @@
 
     # najdorf
     domainName = "sweenu.xyz";
-    smtpUsername = "contact@sweenu.xyz";
-    smtpHost = "smtp.fastmail.com";
-    smtpPort = 465;
+    smtp = {
+      user = "contact@sweenu.xyz";
+      host = "smtp.fastmail.com";
+      port = 465;
+    };
   };
 }

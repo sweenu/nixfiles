@@ -45,9 +45,9 @@ in
       ldap_user_dn = "admin";
       ldap_user_email = config.vars.email;
       smtp_options = {
-        server = config.vars.smtpHost;
-        port = config.vars.smtpPort;
-        user = config.vars.smtpUsername;
+        server = config.vars.smtp.host;
+        port = config.vars.smtp.port;
+        user = config.vars.smtp.user;
         from = "LLDAP Admin <${config.vars.email}>";
         reply_to = "Do not reply <noreply@${config.vars.domainName}>";
       };
