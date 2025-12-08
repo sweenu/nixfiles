@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   vars = rec {
@@ -38,6 +43,9 @@
     ];
 
     # najdorf
+    defaultGateway = "192.168.1.254";
+    staticIPWithSubnet = "192.168.1.41/24";
+    staticIP = builtins.head (lib.splitString "/" staticIPWithSubnet);
     domainName = "sweenu.xyz";
     smtp = {
       user = "contact@sweenu.xyz";

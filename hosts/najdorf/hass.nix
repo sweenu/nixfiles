@@ -9,7 +9,7 @@
 
 let
   fqdn = "hass.${config.vars.domainName}";
-  serverIP = "192.168.1.41";
+  serverIP = config.vars.staticIP;
   serverIPv6 = "2001:861:3884:4fd0:8ceb:7d56:bf25:5a17";
   hassPort = config.services.home-assistant.config.http.server_port;
   massWebPort = 8095;

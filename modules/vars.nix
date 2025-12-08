@@ -45,6 +45,10 @@ with lib.types;
     dnsResolvers = mkOption { type = listOf str; };
 
     # Server vars
+    defaultGateway = mkOption { type = str; };
+    staticIPWithSubnet = mkOption { type = str; };
+    staticIP = mkOption { type = str; };
+
     domainName = mkOption { type = str; };
     smtp = mkOption {
       type = submodule {

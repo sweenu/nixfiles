@@ -13,20 +13,18 @@ let
   network = {
     matchConfig.Name = "en*";
     networkConfig = {
-      DHCP = "yes";
+      DHCP = "no";
+      Address = config.vars.staticIPWithSubnet;
+      Gateway = config.vars.defaultGateway;
       IPv6AcceptRA = true;
       DNSDefaultRoute = true;
-    };
-    dhcpV4Config = {
-      UseDNS = false;
-      UseDomains = true;
     };
     domains = [
       "~lan"
       "~local"
       "~bytel.fr" # Bbox
     ];
-    dns = [ "192.168.1.254" ];
+    dns = [ config.vars.defaultGateway ];
     linkConfig.RequiredForOnline = "yes";
   };
 in
