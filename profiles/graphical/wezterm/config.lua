@@ -50,7 +50,7 @@ config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.5 }
 -- Keys
 config.leader = { key = 'g', mods = 'ALT' }
 config.keys = {
-  -- Your existing copy/paste
+  -- Copy/paste
   { key = 'c', mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
   { key = 'v', mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
 
@@ -102,6 +102,9 @@ config.keys = {
   { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
   { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
   { key = "0", mods = "CTRL", action = act.ResetFontSize },
+
+  -- Search
+  { key = "/", mods = "ALT", action = act.Search {CaseSensitiveString=""} },
 
   -- Copy and quick select modes
   { key = ' ', mods = 'CTRL|ALT', action = act.ActivateCopyMode },
