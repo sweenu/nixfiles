@@ -49,6 +49,9 @@ in
     ./qgis.nix
     ./cockpit.nix
     ./dawarich.nix
+
+    # Extra config
+    ./realtek-eth-adapter.nix
   ]
   ++ suites.base
   ++ suites.server;
@@ -71,7 +74,6 @@ in
         "usb_storage"
         "usbhid"
         "sd_mod"
-        "r8152" # for framework eth adapter
       ];
       luks.devices.${encryptedRoot} = {
         allowDiscards = true;
