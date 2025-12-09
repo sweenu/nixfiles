@@ -138,7 +138,7 @@ in
     openthread-border-router = {
       enable = true;
       package = inputs.otbr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.openthread-border-router;
-      backboneInterface = "enp192s0f3u1";
+      backboneInterface = "eth0";
       rest.listenAddress = "::";
       web.listenAddress = "::";
       radio = {

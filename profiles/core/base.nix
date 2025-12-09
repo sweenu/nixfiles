@@ -15,6 +15,7 @@
       dust
       dnsutils
       entr
+      ethtool
       fd
       file
       gdu

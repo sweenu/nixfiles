@@ -11,7 +11,7 @@ let
   resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
   encryptedRoot = "cryptroot";
   network = {
-    matchConfig.Name = "en*";
+    matchConfig.Name = "en* eth*";
     networkConfig = {
       DHCP = "no";
       Address = config.vars.staticIPWithSubnet;
@@ -154,6 +154,7 @@ in
   systemd.network.networks."10-wired" = network;
 
   networking.firewall.extraCommands = lib.openTCPPortForLAN 22;
+  networking.usePredictableInterfaceNames = false;
 
   virtualisation = {
     docker = {
