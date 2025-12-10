@@ -39,7 +39,10 @@
       extraArgs = [ "--skip-login" ];
       loginOptions = "${config.vars.username}";
     };
-    gnome.gnome-keyring.enable = true;
+    gnome = {
+      gnome-keyring.enable = true;
+      gcr-ssh-agent.enable = true;
+    };
     printing = {
       enable = true;
       drivers = with pkgs; [

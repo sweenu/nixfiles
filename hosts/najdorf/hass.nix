@@ -140,7 +140,10 @@ in
       package = inputs.otbr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.openthread-border-router;
       backboneInterface = "eth0";
       rest.listenAddress = "::";
-      web.listenAddress = "::";
+      web = {
+        enable = true;
+        listenAddress = "::";
+      };
       radio = {
         device = "/dev/serial/by-id/usb-Nabu_Casa_Home_Assistant_Connect_ZBT-1_a47f43e6f769ef11bee8a976d9b539e6-if00-port0";
         baudRate = 460800;
@@ -152,6 +155,7 @@ in
       piper = {
         servers."main" = {
           enable = true;
+          zeroconf.enable = false;
           voice = "en_GB-jenny_dioco-medium";
           uri = "tcp://0.0.0.0:10200";
         };

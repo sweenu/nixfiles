@@ -42,12 +42,10 @@ in
     ./obsidian-livesync.nix
     ./obsidian-share-note.nix
     ./lldap.nix
-    ./grist.nix
     ./nocodb.nix
     ./netdata.nix
     ./hass.nix
     ./cockpit.nix
-    ./dawarich.nix
     ./minecraft.nix
   ]
   ++ suites.base
