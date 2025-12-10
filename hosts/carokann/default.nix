@@ -57,16 +57,13 @@ in
         "xhci_pci"
         "thunderbolt"
         "nvme"
-        "tpm_tis" # TPM2 kernel module
       ];
       systemd = {
         enable = true;
-        tpm2.enable = true;
       };
       luks.devices.${encryptedRoot} = {
         allowDiscards = true;
         bypassWorkqueues = true;
-        crypttabExtraOpts = [ "tpm2-device=auto" ]; # Use TPM2 to unlock
       };
     };
     kernelModules = [ "kvm-amd" ];
@@ -105,12 +102,6 @@ in
     fprintd.enable = true;
     fwupd.enable = true;
     tailscale.useRoutingFeatures = "client";
-  };
-
-  security.tpm2 = {
-    enable = true;
-    pkcs11.enable = true;
-    tctiEnvironment.enable = true;
   };
 
   time.timeZone = config.vars.timezone;
