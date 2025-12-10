@@ -2,7 +2,6 @@
   config,
   suites,
   pkgs,
-  lib,
   ...
 }:
 
@@ -10,7 +9,9 @@ let
   encryptedRoot = "cryptroot";
 in
 {
-  imports = suites.laptop;
+  imports = suites.laptop ++ [
+    ./shikane.nix
+  ];
 
   disko = {
     devices = {
@@ -147,100 +148,5 @@ in
 
   home-manager.users."${config.vars.username}" = {
     home.file.".ssh/id_ed25519.pub".text = config.vars.sshPublicKey;
-
-    services.shikane = {
-      enable = true;
-      settings = {
-        profile =
-          let
-            resWidth = 2256;
-            resHeight = 1504;
-            laptopOutput = {
-              search = "n=eDP-1";
-              enable = true;
-              mode = {
-                width = resWidth;
-                height = resHeight;
-                refresh = 60;
-              };
-              scale = 1.6;
-            };
-          in
-          [
-            {
-              name = "laptop-only";
-              output = [ laptopOutput ];
-            }
-            # Put a default external monitor to the right and assign workspaces u, i, o and p.
-            {
-              name = "external-output-default";
-              output = [
-                (laptopOutput // { exec = [ "hyprctl keyword workspace r[1-4],monitor:$SHIKANE_OUTPUT_NAME" ]; })
-                {
-                  search = "n/(DP-[1-9]|HDMI-[A-C]-[1-9])";
-                  enable = true;
-                  position = {
-                    x = resWidth;
-                    y = 0;
-                  };
-                  mode = "preferred";
-                  exec =
-                    (map (ws: lib.hyprMoveWsToMonitor ws "$SHIKANE_OUTPUT_NAME") [
-                      "u"
-                      "i"
-                      "o"
-                      "p"
-                    ])
-                    ++ [ "hyprctl keyword workspace r[5-8],monitor:$SHIKANE_OUTPUT_NAME" ];
-                }
-              ];
-            }
-            # At home, put laptop monitor on the right and give the main monitor a, s, d and f
-            {
-              name = "home";
-              output = [
-                (
-                  laptopOutput
-                  // {
-                    position = {
-                      x = 1920;
-                      y = 141;
-                    }; # Align bottom corners
-                    exec =
-                      (map (ws: lib.hyprMoveWsToMonitor ws "$SHIKANE_OUTPUT_NAME") [
-                        "u"
-                        "i"
-                        "o"
-                        "p"
-                      ])
-                      ++ [ "hyprctl keyword workspace r[5-8],monitor:$SHIKANE_OUTPUT_NAME" ];
-                  }
-                )
-                {
-                  search = [
-                    "v=Dell Inc."
-                    "m=DELL U2424HE"
-                    "s=FF904X3"
-                  ];
-                  enable = true;
-                  position = {
-                    x = 0;
-                    y = 0;
-                  };
-                  mode = "1920x1080";
-                  exec =
-                    (map (ws: lib.hyprMoveWsToMonitor ws "$SHIKANE_OUTPUT_NAME") [
-                      "a"
-                      "s"
-                      "d"
-                      "f"
-                    ])
-                    ++ [ "hyprctl keyword workspace r[1-4],monitor:$SHIKANE_OUTPUT_NAME" ];
-                }
-              ];
-            }
-          ];
-      };
-    };
   };
 }
