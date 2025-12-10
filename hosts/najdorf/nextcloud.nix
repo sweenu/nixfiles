@@ -58,7 +58,7 @@ in
       mail_smtphost = config.vars.smtp.host;
       mail_smtpport = config.vars.smtp.port;
       mail_smtpname = config.vars.smtp.user;
-      mail_smtpsecure = "tls";
+      mail_smtpsecure = "ssl";
       mail_from_address = config.vars.email;
       mail_domain = builtins.elemAt (lib.strings.splitString "@" config.vars.email) 1;
     };
