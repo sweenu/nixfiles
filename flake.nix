@@ -66,8 +66,6 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
 
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
@@ -207,7 +205,6 @@
             inputs.home.nixosModules.home-manager
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
-            inputs.spicetify-nix.nixosModules.spicetify
             inputs.nix-minecraft.nixosModules.minecraft-servers
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
