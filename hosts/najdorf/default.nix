@@ -46,7 +46,6 @@ in
     ./nocodb.nix
     ./netdata.nix
     ./hass.nix
-    ./qgis.nix
     ./cockpit.nix
     ./dawarich.nix
     ./minecraft.nix
