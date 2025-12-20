@@ -1,9 +1,33 @@
-{ config, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [ ./core/tailscale.nix ];
 
-  environment.variables.BROWSER = "echo";
+  boot.loader = {
+    grub.configurationLimit = 5;
+    systemd-boot.configurationLimit = 5;
+  };
+
+  environment = {
+    variables.BROWSER = "echo";
+    stub-ld.enable = false;
+    systemPackages = with pkgs; [
+      kakoune
+      gitMinimal
+      dnsutils
+      ethtool
+      curl
+      btop
+      jq
+      tmux
+      wol
+    ];
+  };
 
   nix = {
     gc = {
@@ -14,7 +38,7 @@
   };
 
   networking = {
-    useDHCP = false;
+    useDHCP = lib.mkDefault false;
     useNetworkd = true;
     networkmanager.enable = false;
   };
@@ -24,7 +48,7 @@
   services = {
     openssh = {
       enable = true;
-      openFirewall = false;
+      openFirewall = lib.mkDefault false;
       settings.PasswordAuthentication = false;
     };
     resolved = {
@@ -32,6 +56,7 @@
       dnssec = "false"; # DNS resolution stops working after a while with `allow-downgrade`
       dnsovertls = "opportunistic";
       fallbackDns = config.vars.dnsResolvers;
+      llmnr = "false"; # Prevent LLMNR poisoning attacks
     };
     tailscale = {
       useRoutingFeatures = "server";
@@ -42,16 +67,17 @@
     };
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
-
   # Server optimization
   documentation.enable = false;
   fonts.fontconfig.enable = false;
-  environment.stub-ld.enable = false;
-
-  # Taken from: https://github.com/nix-community/srvos/blob/b3af8aed091d85e180a861695f2d57b3b2d24ba1/nixos/server/default.nix#L89
-  boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_congestion_control" = "bbr";
+  programs.command-not-found.enable = false;
+  xdg = {
+    autostart.enable = false;
+    icons.enable = false;
+    menus.enable = false;
+    mime.enable = false;
+    sounds.enable = false;
   };
+
+  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
 }

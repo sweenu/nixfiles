@@ -7,7 +7,7 @@
 I have three [NixOS](https://nixos.org) machines:
 - _carokann_: personal computer ([Framework](https://frame.work) laptop).
 - _najdorf_: server where I deploy my self-hosted apps.
-- _grunfeld_: main RaspberryPi that serves as a [snapcast](https://github.com/badaix/snapcast) server and a local backup.
+- _ginko_: RaspberryPi used as tailscale exit node.
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 
@@ -91,9 +91,9 @@ After logging in with tailscale and enabling SSH connections (`sudo tailscale se
 ### Raspberry Pi
 Create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
-$ nixos-generate --flake '.#grunfeld' --format sd-aarch64 --system aarch64-linux
+$ nixos-generate --flake '.#ginko' --format sd-aarch64 --system aarch64-linux
 $ unzstd -d {the output path from the command above} -o nixos-sd-image.img
-$ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress
+$ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress oflag=sync
 ```
 
 ### Server

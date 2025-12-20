@@ -293,8 +293,8 @@
               hostname = "najdorf";
             };
 
-            grunfeld = mkHost {
-              hostname = "grunfeld";
+            ginko = mkHost {
+              hostname = "ginko";
               system = "aarch64-linux";
               extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-3 ];
             };
@@ -338,12 +338,14 @@
               };
             };
 
-            grunfeld = {
-              hostname = "grunfeld";
+            ginko = {
+              hostname = "ginko";
+              remoteBuild = false;
+              fastConnection = true;
               profiles = {
                 system = {
                   sshUser = "root";
-                  path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.grunfeld;
+                  path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ginko;
                   user = "root";
                 };
               };
