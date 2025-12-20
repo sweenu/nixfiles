@@ -13,6 +13,22 @@ let
   fqdn = "authelia.${config.vars.domainName}";
   autheliaPort = 9091;
   lldapConfig = config.services.lldap.settings;
+  oidcClients =
+    lib.attrByPath
+      [
+        "services"
+        "authelia"
+        "instances"
+        instance
+        "settings"
+        "identity_providers"
+        "oidc"
+        "clients"
+      ]
+      [ ]
+      config;
+
+  oidcEnabled = oidcClients != [ ];
 in
 {
   age.secrets = {
@@ -32,6 +48,8 @@ in
       file = "${self}/secrets/authelia/ldap_password.age";
       owner = autheliaUser;
     };
+  }
+  // lib.optionalAttrs oidcEnabled {
     "authelia/oidcHmacSecret" = {
       file = "${self}/secrets/authelia/oidc_hmac_secret.age";
       owner = autheliaUser;
@@ -52,6 +70,8 @@ in
       storageEncryptionKeyFile = config.age.secrets."authelia/storageEncryptionKey".path;
       jwtSecretFile = config.age.secrets."authelia/jwtSecret".path;
       sessionSecretFile = config.age.secrets."authelia/sessionSecret".path;
+    }
+    // lib.optionalAttrs oidcEnabled {
       oidcHmacSecretFile = config.age.secrets."authelia/oidcHmacSecret".path;
       oidcIssuerPrivateKeyFile = config.age.secrets."authelia/oidcJwtPrivateKey".path;
     };
