@@ -28,7 +28,7 @@ in
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayland.enable = false;
+    xwayland.enable = true;
   };
 
   home-manager.users."${config.vars.username}" = {
