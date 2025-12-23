@@ -13,6 +13,7 @@ let
     alternativeto = "https://feed.alternativeto.net/news/all/";
     home-assistant = "https://www.home-assistant.io/atom.xml";
     zed = "https://zed.dev/blog.rss";
+    matter-alpha = "https://www.matteralpha.com/feed";
   };
 in
 {
