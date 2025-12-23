@@ -39,8 +39,11 @@ in
   services.authelia.instances.main.settings.access_control.rules = [
     {
       domain = fqdn;
-      resources = [ "^/webhook/.*" ];
-      methods = [ "POST" ];
+      resources = [ "^/webhook(-test)?/.*" ];
+      methods = [
+        "GET"
+        "POST"
+      ];
       policy = "bypass";
     }
     {
