@@ -117,7 +117,6 @@ $ ssh root@najdorf-1 'sudo -u postgres psql -f /root/pgdump_all.sql'
 # Change DNS records to point to the new server (on Cloudflare, change the IP scope of the API token to the new IP).
 # Finally:
 $ deploy '.#najdorf'
-$ ssh root@najdorf docker network create traefik
 # All done!
 ```
 

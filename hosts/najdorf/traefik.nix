@@ -1,9 +1,14 @@
 {
   self,
   config,
+  pkgs,
+  lib,
   ...
 }:
-
+let
+  docker = lib.getExe pkgs.docker;
+  sh = pkgs.runtimeShell;
+in
 {
   age.secrets = {
     traefikEnvFile.file = "${self}/secrets/traefik/env.age";
@@ -97,6 +102,19 @@
           middlewares = [ "authelia" ];
         };
       };
+    };
+  };
+
+  systemd.services.docker-traefik-network = {
+    description = "Ensure external Docker network 'traefik' exists";
+    after = [ "docker.service" ];
+    requires = [ "docker.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${sh} -c '${docker} network inspect traefik >/dev/null 2>&1 || ${docker} network create traefik'";
     };
   };
 }
