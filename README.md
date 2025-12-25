@@ -76,9 +76,10 @@ $ sudo mount /dev/nvme0n1p1 /mnt/boot
 $ sudo nixos-generate-config --root /mnt --dir /home/sweenu
 $ sudo nixos-install --flake '.#carokann' --root /mnt
 
+# Optional:
 # Enroll your fingerprint
 $ sudo fprintd-enroll <username>
-# Enroll TPM2 for dm-crypt
+# Enroll TPM2 for dm-crypt (if enabled in config)
 $ sudo systemd-cryptenroll --tpm2-device=auto /dev/nvme0n1p2
 ```
 
@@ -93,14 +94,14 @@ Create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
 $ nixos-generate --flake '.#ginko' --format sd-aarch64 --system aarch64-linux
 $ unzstd -d {the output path from the command above} -o nixos-sd-image.img
-$ sudo dd if=nixos-sd-image.img of=/dev/sda bs=64K status=progress oflag=sync
+$ sudo dd if=nixos-sd-image.img of=/dev/sda bs=4M status=progress oflag=direct
 ```
 
 ### Server
 Deploy the server config to a new machine:
 ```bash
-# Add an auth key file to the tailscale module for unattended login.
-# Then run:
+# Generate a tailscale auth key for unattended login: https://login.tailscale.com/admin/settings/keys
+# Add it through `services.tailscale.authKeyFile`. Then run:
 $ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
 # Copy the old server's host key
 $ scp 'root@najdorf:/etc/ssh/ssh_host_*' root@najdorf-1:/etc/ssh/
@@ -112,7 +113,7 @@ $ ssh root@najdorf 'sudo -u postgres pg_dumpall > /root/pgdump_all.sql'
 $ scp root@najdorf:/root/pgdump_all.sql root@najdorf-1:/root/
 $ ssh root@najdorf-1 'sudo -u postgres psql -f /root/pgdump_all.sql'
 # I made all Docker volumes bind mounts in /opt in order for this command to be enough for migrating everything important.
-# Uncomment services in hosts/najdorf/default.nix and comment the tailscale-login service line.
+# Uncomment services in hosts/najdorf/default.nix.
 # Remove najdorf from tailscale and change the tailscale name from najdorf-1 to najdorf.
 # Change DNS records to point to the new server (on Cloudflare, change the IP scope of the API token to the new IP).
 # Finally:
