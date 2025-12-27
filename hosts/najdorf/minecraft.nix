@@ -2,8 +2,8 @@
 
 let
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/sweenu/Create-Co/raw/1c01cb29911aeaa1713c6881f00e957a91d4b2c4/pack.toml";
-    packHash = "sha256-C6rpzs+IdbJ5S9QgZvBjyHnJHw3HoMXH2HbmENsWEwI=";
+    url = "https://github.com/TGros-Dubois/Create-Co/raw/c0d4bafcf046a5ba139af3d6136c9cd3adf911fa/pack.toml";
+    packHash = "sha256-8qldwp9EtJyu/fKRTYcGXqiUQXKUjAW+I3w3nu4AXLg=";
   };
 in
 {
@@ -29,6 +29,7 @@ in
         max-players = 10;
         online-mode = true;
         server-port = 25565;
+        view-distance = 18;
       };
 
       symlinks = {
