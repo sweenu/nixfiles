@@ -70,7 +70,7 @@
 
     restic.url = "github:NixOS/nixpkgs/pull/446825/head";
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.52.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.53.0";
 
     dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
 

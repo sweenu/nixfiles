@@ -54,7 +54,7 @@ in
           disable_splash_rendering = true;
           mouse_move_enables_dpms = true;
           key_press_enables_dpms = false;
-          new_window_takes_over_fullscreen = 1;
+          on_focus_under_fullscreen = 1;
           exit_window_retains_fullscreen = true;
           focus_on_activate = true;
         };
@@ -167,30 +167,11 @@ in
           "special:music, on-created-empty:app2unit -- spotify"
         ];
 
-        # Window rules
         windowrule = [
-          "bordercolor rgb(${palette.base0E}), fullscreen:1"
+          "match:fullscreen true, border_color rgb(${palette.base0E})"
         ]
         ++ import ./windowrules.nix;
-
-        # Layer rules
-        layerrule = [
-          "animation fade, hyprpicker" # Colour picker out animation
-          "animation fade, logout_dialog" # wlogout
-          "animation fade, selection" # slurp
-          "animation fade, wayfreeze"
-
-          # Fuzzel
-          "animation popin 80%, launcher"
-          "blur, launcher"
-
-          # Shell
-          "noanim, caelestia-(border-exclusion|area-picker)"
-          "animation fade, caelestia-(drawers|background)"
-
-          "blur, caelestia-drawers"
-          "ignorealpha 0.57, caelestia-drawers"
-        ];
+        layoutrule = import ./layoutrules.nix;
       }
       // (import ./keybindings.nix { inherit config pkgs; });
 
