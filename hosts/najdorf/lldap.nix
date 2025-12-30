@@ -6,8 +6,6 @@
 }:
 
 let
-  dbName = "lldap";
-  dbUser = "lldap";
   fqdn = "lldap.${config.vars.domainName}";
   domainParts = lib.strings.splitString "\\." config.vars.domainName;
   dcParts = map (part: "dc=${part}") domainParts;
@@ -24,11 +22,9 @@ in
     "lldap/serverKey".file = "${self}/secrets/lldap/server_key.age";
   };
 
-  # Until https://github.com/NixOS/nixpkgs/pull/447164
-  systemd.services.lldap.after = [ "postgresql.target" ];
-
   services.lldap = {
     enable = true;
+    createLocalDatabase = true;
     environment = {
       LLDAP_JWT_SECRET_FILE = "%d/${jwtSecretCredName}";
       LLDAP_LDAP_USER_PASS_FILE = "%d/${ldapUserPassCredName}";
@@ -37,7 +33,6 @@ in
     };
     silenceForceUserPassResetWarning = true;
     settings = {
-      database_url = "postgresql:///${dbName}?host=/run/postgresql";
       http_host = "127.0.0.1";
       http_url = "https://${fqdn}";
       ldap_host = "127.0.0.1";
@@ -52,17 +47,6 @@ in
         reply_to = "Do not reply <noreply@${config.vars.domainName}>";
       };
     };
-  };
-
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [ dbName ];
-    ensureUsers = [
-      {
-        name = dbUser;
-        ensureDBOwnership = true;
-      }
-    ];
   };
 
   systemd.services.lldap.serviceConfig = {

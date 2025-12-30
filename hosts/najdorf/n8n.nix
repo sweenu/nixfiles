@@ -11,17 +11,13 @@ in
     enable = true;
     environment = {
       WEBHOOK_URL = url;
-      N8N_ENCRYPTION_KEY_FILE = "%d/encryption_key";
+      N8N_ENCRYPTION_KEY_FILE = config.age.secrets.n8nEncryptionKey.path;
       N8N_PERSONALIZATION_ENABLED = "false";
       N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
       N8N_HIRING_BANNER_ENABLED = "false";
       N8N_DIAGNOSTICS_ENABLED = "false";
     };
   };
-
-  systemd.services.n8n.serviceConfig.LoadCredential = [
-    "encryption_key:${config.age.secrets.n8nEncryptionKey.path}"
-  ];
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-n8n = {
