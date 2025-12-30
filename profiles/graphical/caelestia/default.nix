@@ -113,6 +113,9 @@ in
         };
         utilities = {
           enabled = true;
+          toasts = {
+            kbLayoutChanged = false;
+          };
         };
       };
       cli.enable = true;
