@@ -66,18 +66,19 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
-
-    restic.url = "github:NixOS/nixpkgs/pull/446825/head";
-
     hyprland.url = "github:hyprwm/Hyprland/v0.53.0";
-
-    dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
 
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    # PRs
+    otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
+    restic.url = "github:NixOS/nixpkgs/pull/446825/head";
+    dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
+    n8n.url = "github:NixOS/nixpkgs/pull/460626/head";
+    lldap.url = "github:NixOS/nixpkgs/pull/474570/head";
   };
 
   outputs =
@@ -209,9 +210,13 @@
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"
             "${inputs.dawarich}/nixos/modules/services/web-apps/dawarich.nix"
+            "${inputs.n8n}/nixos/modules/services/misc/n8n.nix"
+            "${inputs.lldap}/nixos/modules/services/databases/lldap.nix"
             {
               disabledModules = [
                 "services/backup/restic.nix"
+                "services/misc/n8n.nix"
+                "services/databases/lldap.nix"
               ];
             }
             {

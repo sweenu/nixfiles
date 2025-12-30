@@ -788,6 +788,38 @@
         "type": "github"
       }
     },
+    "lldap": {
+      "locked": {
+        "lastModified": 1767090706,
+        "narHash": "sha256-9imw7gzDz8DEQO5tgkPAseKBGquV4REt1YtUzyxJSAA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7e4443c48381de62058f75a22e12a97014a48f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/474570/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "n8n": {
+      "locked": {
+        "lastModified": 1766834784,
+        "narHash": "sha256-j1rzwKCPG2v10tH9LGNld36sp0/PaaAAhxYgz0Emr+Q=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6ef54c585b8a2d61b4b54784e50031ddaff14ecf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/460626/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -1137,6 +1169,8 @@
         "haumea": "haumea",
         "home": "home",
         "hyprland": "hyprland",
+        "lldap": "lldap",
+        "n8n": "n8n",
         "nix-colors": "nix-colors",
         "nix-minecraft": "nix-minecraft",
         "nixos": "nixos",
