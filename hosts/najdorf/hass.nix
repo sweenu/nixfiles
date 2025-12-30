@@ -128,6 +128,7 @@ in
         "spotify"
         "spotify_connect"
         "squeezelite"
+        "sendspin"
       ];
     };
 
