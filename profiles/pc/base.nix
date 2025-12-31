@@ -103,7 +103,10 @@
 
     manual.json.enable = true; # To use with manix
 
-    services.playerctld.enable = true;
+    services = {
+      playerctld.enable = true;
+      tailscale-systray.enable = true;
+    };
 
     xdg.userDirs = {
       enable = true;
