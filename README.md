@@ -8,6 +8,7 @@ Here are my [NixOS](https://nixos.org) machines:
 - _carokann_: personal computer ([Framework](https://frame.work) laptop).
 - _najdorf_: server where I deploy my self-hosted apps.
 - _ginko_: RaspberryPi used as tailscale exit node.
+- _soundboxN_: RaspberryPis with Hifiberry Amp2 hats as [Sendspin](https://www.sendspin-audio.com/) clients.
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 

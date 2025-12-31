@@ -31,4 +31,25 @@ final: prev: with prev; {
 
   dawarich-api = pkgs.python3Packages.callPackage ./dawarich-api.nix { };
   dawarich-ha = callPackage ./dawarich-ha.nix { };
+
+  # Override python3Packages to include our custom aiosendspin
+  python3Packages = prev.python3Packages.overrideScope (
+    pyFinal: pyPrev: {
+      aiosendspin = import ./aiosendspin.nix {
+        inherit (prev) lib fetchPypi;
+        buildPythonPackage = pyFinal.buildPythonPackage;
+        inherit (pyFinal)
+          setuptools
+          aiohttp
+          av
+          mashumaro
+          orjson
+          pillow
+          zeroconf
+          ;
+      };
+    }
+  );
+
+  sendspin-cli = callPackage ./sendspin-cli.nix { };
 }

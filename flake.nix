@@ -256,6 +256,7 @@
                 profiles.server
                 profiles.rpi
               ];
+              soundbox = rpi ++ [ profiles.soundbox ];
               desktop =
                 base
                 ++ [
@@ -312,6 +313,12 @@
               hostname = "ginko";
               system = "aarch64-linux";
               extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-3 ];
+            };
+
+            soundbox = mkHost {
+              hostname = "soundbox";
+              system = "aarch64-linux";
+              extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-4 ];
             };
           };
 
