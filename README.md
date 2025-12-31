@@ -4,7 +4,7 @@
 
 ## Presentation
 
-I have three [NixOS](https://nixos.org) machines:
+Here are my [NixOS](https://nixos.org) machines:
 - _carokann_: personal computer ([Framework](https://frame.work) laptop).
 - _najdorf_: server where I deploy my self-hosted apps.
 - _ginko_: RaspberryPi used as tailscale exit node.
@@ -17,20 +17,20 @@ This repo is structured with [flake-parts](https://flake.parts/) and [haumea](ht
 ```
 nixfiles/
 ├── hosts/          → Host configurations
+├── profiles/       → Reusable configuration profiles
 ├── modules/        → Custom NixOS modules
 ├── hm-modules/     → Custom home-manager modules
-├── profiles/       → Reusable configuration profiles
 ├── pkgs/           → Custom packages
-├── lib/            → Custom lib functions
 ├── overlays/       → Additional overlays
-└── shell/          → Development shell
+├── lib.nix         → Custom lib functions
+└── shell.nix       → Development shell
 ```
 
 ### Software I use on my personal computer (carokann)
 
 - Wayland compositor: [hyprland](https://hypr.land)
 - Desktop shell: [Caelestia](https://github.com/caelestia-dots/shell)
-- Editor: [kakoune](https://github.com/mawww/kakoune)
+- Editor: [kakoune](https://github.com/mawww/kakoune) and [Zed](https://zed.dev/)
 - Terminal: [wezterm](https://wezterm.org)
 - Shell: [fish](https://fishshell.com)
 - Browser: [zen](https://zen-browser.app/)
@@ -60,27 +60,28 @@ Important data is backed up with [Restic](https://restic.net).
 
 ## Bootstrap
 ### PC
-Create a bootstrap ISO for a personal computer run:
+Create a bootstrap ISO and put it on your usb key:
 ```bash
-$ nixos-generate --flake '.#bootstrap' --format iso
+nixos-generate --flake '.#bootstrap' --format iso
+sudo dd if=your.iso of=/dev/sda bs=4M status=progress oflag=direct
 ```
 
-Then install NixOS:
+Then, from that key, install NixOS:
 ```bash
-$ cd nixfiles
-$ sudo disko --mode destroy,format,mount -f '.#carokann'
-$ sudo mount /dev/mapper/cryptroot /mnt
-$ sudo mkdir /mnt/boot
-$ sudo mount /dev/nvme0n1p1 /mnt/boot
+cd nixfiles
+sudo disko --mode destroy,format,mount -f '.#carokann'
+sudo mount /dev/mapper/cryptroot /mnt
+sudo mkdir /mnt/boot
+sudo mount /dev/nvme0n1p1 /mnt/boot
 # Generate the hardware config for reference, change what you need before install
-$ sudo nixos-generate-config --root /mnt --dir /home/sweenu
-$ sudo nixos-install --flake '.#carokann' --root /mnt
+sudo nixos-generate-config --root /mnt --dir /home/sweenu
+sudo nixos-install --flake '.#carokann' --root /mnt
 
 # Optional:
 # Enroll your fingerprint
-$ sudo fprintd-enroll <username>
+sudo fprintd-enroll sweenu
 # Enroll TPM2 for dm-crypt (if enabled in config)
-$ sudo systemd-cryptenroll --tpm2-device=auto /dev/nvme0n1p2
+sudo systemd-cryptenroll --tpm2-device=auto /dev/nvme0n1p2
 ```
 
 After logging in with tailscale and enabling SSH connections (`sudo tailscale set --ssh`), you can backup the important files:
@@ -92,37 +93,53 @@ After logging in with tailscale and enabling SSH connections (`sudo tailscale se
 ### Raspberry Pi
 Create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
-$ nixos-generate --flake '.#ginko' --format sd-aarch64 --system aarch64-linux
-$ unzstd -d {the output path from the command above} -o nixos-sd-image.img
-$ sudo dd if=nixos-sd-image.img of=/dev/sda bs=4M status=progress oflag=direct
+nixos-generate --flake '.#ginko' --format sd-aarch64 --system aarch64-linux
+unzstd -d {the output path from the command above} -o nixos-sd-image.img
+sudo dd if=nixos-sd-image.img of=/dev/sda bs=4M status=progress oflag=direct
 ```
 
 ### Server
 Deploy the server config to a new machine:
 ```bash
-# Generate a tailscale auth key for unattended login: https://login.tailscale.com/admin/settings/keys
-# Add it through `services.tailscale.authKeyFile`. Then run:
-$ nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
-# Copy the old server's host key
-$ scp 'root@najdorf:/etc/ssh/ssh_host_*' root@najdorf-1:/etc/ssh/
-# Stop all running services, then:
-$ ssh root@najdorf 'ssh-keyscan -H najdorf-1 >> ~/.ssh/known_hosts'
-$ ssh -f root@najdorf 'rsync -Aavz /opt/ root@najdorf-1:/opt > /home/sweenu/rsync.log 2>&1 &'
-# Transfer Postgres database
-$ ssh root@najdorf 'sudo -u postgres pg_dumpall > /root/pgdump_all.sql'
-$ scp root@najdorf:/root/pgdump_all.sql root@najdorf-1:/root/
-$ ssh root@najdorf-1 'sudo -u postgres psql -f /root/pgdump_all.sql'
-# I made all Docker volumes bind mounts in /opt in order for this command to be enough for migrating everything important.
-# Uncomment services in hosts/najdorf/default.nix.
+# 0) Preperation
+# Uncomment all services in hosts/najdorf/default.nix to have a minimal deployment at first.
+# Generate a tailscale auth key for unattended login here: https://login.tailscale.com/admin/settings/keys, and add it through `services.tailscale.authKeyFile`. This way, your old and new server have direct access to each other.
+
+# 1) Provision
+# We use --copy-host-keys to temporarily allow agenix to decrypt the secrets.
+nixos-anywhere --copy-host-keys --flake '.#najdorf' root@<ip-address>
+
+# 2) Preserve SSH host identity
+scp -p root@najdorf:/etc/ssh/ssh_host_* root@najdorf-1:/etc/ssh/
+
+# 2b) (Optional) Generate an initrd SSH host key (only needed for remote LUKS unlock)
+# See https://nixos.org/manual/nixos/unstable/options#opt-boot.initrd.network.ssh.hostKeys
+ssh root@najdorf-1 'sudo ssh-keygen -t ed25519 -N "" -f /etc/ssh/initrd_ssh_host_ed25519_key'
+
+# 3) Pre-populate known_hosts
+ssh root@najdorf 'ssh-keyscan -H najdorf-1 >> ~/.ssh/known_hosts'
+
+# 4) Freeze writes (stop apps that write into /opt + Postgres)
+ssh root@najdorf 'systemctl stop docker || true; systemctl stop postgresql || true'  # adapt to your services
+
+# 5) Copy /opt to new server
+# Start a detached tmux session that runs the rsync
+ssh root@najdorf 'tmux new-session -d -s migration "rsync -aAXH --numeric-ids --partial --info=progress2 --log-file=/root/rsync-opt.log /opt/ root@najdorf-1:/opt/"'
+# Later: check progress by reattaching
+ssh root@najdorf 'tmux attach-session -t migration'
+# (Ctrl+B then D to detach again without stopping it)
+
+# 6) Postgres migration
+ssh root@najdorf 'sudo -u postgres pg_dumpall --clean --if-exists --no-role-passwords' \
+  | ssh root@najdorf-1 'sudo -u postgres psql -X -v ON_ERROR_STOP=1 -d postgres'
+
+# 7) Deploy all services
 # Remove najdorf from tailscale and change the tailscale name from najdorf-1 to najdorf.
 # Change DNS records to point to the new server (on Cloudflare, change the IP scope of the API token to the new IP).
-# Finally:
-$ deploy '.#najdorf'
-# All done!
+# Uncomment the services in hosts/najdorf/default.nix
+deploy '.#najdorf'
 ```
 
-sudo ssh-keygen -t ed25519 -N "" -f /etc/ssh/initrd_ssh_host_ed25519_key
-
 ## Acknowledgment:
-* Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS.
+* Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS and from which the current structure of the repo is still heavily inspired.
 * Thanks to [soramanew](https://github.com/soramanew) for the amazing [caelestia shell](https://github.com/caelestia-dots/shell) and for the [hyprland config](https://github.com/caelestia-dots/caelestia/tree/e456e8abb90b94f2e6ae859f6e3b3ef2a5e27099/hypr) from which I took liberally.

@@ -1,4 +1,25 @@
+{ lib, config, ... }:
+
 {
+  hardware = {
+    enableAllFirmware = true;
+    enableAllHardware = true;
+  };
+
+  networking.firewall = {
+    enable = lib.mkDefault true;
+    trustedInterfaces = [ config.services.tailscale.interfaceName ];
+  };
+
+  time.timeZone = lib.mkDefault config.vars.timezone;
+
+  system.stateVersion = "26.05";
+
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
+
   nix.settings = {
     extra-experimental-features = "nix-command flakes";
     extra-substituters = [
@@ -14,4 +35,5 @@
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
+
 }

@@ -6,8 +6,6 @@
 }:
 
 {
-  imports = [ ./core/tailscale.nix ];
-
   boot.loader = {
     grub.configurationLimit = 5;
     systemd-boot.configurationLimit = 5;
@@ -25,7 +23,6 @@
       btop
       jq
       tmux
-      wol
     ];
   };
 
@@ -48,7 +45,6 @@
   services = {
     openssh = {
       enable = true;
-      openFirewall = lib.mkDefault false;
       settings.PasswordAuthentication = false;
     };
     resolved = {

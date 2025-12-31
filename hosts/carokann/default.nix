@@ -101,10 +101,7 @@ in
     fstrim.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
-    tailscale.useRoutingFeatures = "client";
   };
-
-  time.timeZone = config.vars.timezone;
 
   virtualisation.docker = {
     enable = true;

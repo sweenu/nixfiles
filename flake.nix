@@ -179,7 +179,13 @@
             in
             lib.mapAttrs (name: _: import (path + "/${name}")) validHosts;
 
-          hosts = importHosts ./hosts;
+          hosts = importHosts ./hosts // {
+            ginko =
+              { suites, ... }:
+              {
+                imports = suites.rpi;
+              };
+          };
           customModules = importModules ./modules;
           hmModules = importModules ./hm-modules;
 
@@ -236,15 +242,19 @@
           ++ customModules;
 
           suites =
-            with builtins;
             let
-              explodeAttrs = set: map (a: getAttr a set) (attrNames set);
+              explodeAttrs = set: map (a: builtins.getAttr a set) (builtins.attrNames set);
             in
             rec {
-              base = (explodeAttrs profiles.core) ++ [ profiles.vars ];
-              server = [
-                profiles.server
+              common = [
+                profiles.common
                 profiles.vars
+              ];
+              base = common ++ (explodeAttrs profiles.core);
+              server = base ++ [ profiles.server ];
+              rpi = common ++ [
+                profiles.server
+                profiles.rpi
               ];
               desktop =
                 base
