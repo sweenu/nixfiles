@@ -3,7 +3,6 @@
   config,
   suites,
   pkgs,
-  lib,
   ...
 }:
 
@@ -48,7 +47,6 @@ in
     ./cockpit.nix
     ./minecraft.nix
   ]
-  ++ suites.base
   ++ suites.server;
 
   users.groups.smtp = { };
@@ -146,8 +144,6 @@ in
   ];
 
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
-
-  time.timeZone = config.vars.timezone;
 
   systemd.network.networks."10-wired" = network;
 

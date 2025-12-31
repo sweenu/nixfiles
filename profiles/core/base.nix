@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -54,12 +54,7 @@
     };
   };
 
-  hardware.enableAllFirmware = true;
-
-  networking = {
-    useDHCP = false;
-    firewall.enable = true;
-  };
+  networking.useDHCP = false;
 
   nix = {
     package = pkgs.nixVersions.latest;
@@ -125,6 +120,4 @@
   systemd.settings.Manager = {
     DefaultLimitNOFILE = 1048576;
   };
-
-  system.stateVersion = lib.mkDefault "24.05";
 }
