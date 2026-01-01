@@ -56,8 +56,8 @@
       url = "github:misterio77/nix-colors";
     };
 
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell/pull/915/head";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixos";
     };
 
@@ -234,7 +234,7 @@
               home-manager.useUserPackages = true;
               home-manager.sharedModules = hmModules ++ [
                 inputs.nix-colors.homeManagerModules.default
-                inputs.caelestia-shell.homeManagerModules.default
+                inputs.dms.homeModules.dank-material-shell
                 inputs.zen-browser.homeModules.twilight
               ];
             }

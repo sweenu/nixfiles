@@ -75,7 +75,7 @@ in
 
     qt = {
       enable = true;
-      platformTheme.name = "gtk3"; # https://github.com/caelestia-dots/shell/issues/390
+      platformTheme.name = "gtk3";
       style = {
         name = themeQt.name;
         package = themeQt.package;

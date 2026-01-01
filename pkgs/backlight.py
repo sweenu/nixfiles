@@ -1,30 +1,32 @@
 import sys
+import re
 from subprocess import run, PIPE
 
 BACKLIGHT_CMD = [
-    "caelestia-shell",
+    "dms",
     "ipc",
-    "--any-display",
     "call",
     "brightness"
 ]
 
 
 def _get_brightness() -> int:
-    output = run(BACKLIGHT_CMD + ["get"], stdout=PIPE).stdout
-    return float(output.decode("utf-8")) * 100
+    output = run(BACKLIGHT_CMD + ["status"], stdout=PIPE).stdout
+    output = output.decode("utf-8")
+    brightness = re.search(r"Brightness:\s*(\d+)%", output).group(1)
+    return int(brightness)
 
 
 def _increase_brightness(percentage: int) -> None:
-    run(BACKLIGHT_CMD + ["set", f"+{str(percentage)}%"])
+    run(BACKLIGHT_CMD + ["increment", str(percentage), ""])
 
 
 def _decrease_brightness(percentage: int) -> None:
-    run(BACKLIGHT_CMD + ["set", f"{str(percentage)}%-"])
+    run(BACKLIGHT_CMD + ["decrement", str(percentage), ""])
 
 
-def _set_brightness(value: str) -> None:
-    run(BACKLIGHT_CMD + ["set", value])
+def _set_brightness(value: int) -> None:
+    run(BACKLIGHT_CMD + ["set", str(value), ""])
 
 
 def change_backlight(
@@ -44,7 +46,7 @@ def change_backlight(
     if action == "inc":
         if current_brightness < limit:
             if current_brightness < 1:
-                _set_brightness("1%")
+                _set_brightness(1)
             else:
                 _increase_brightness(small_step)
         else:
@@ -54,7 +56,7 @@ def change_backlight(
             if current_brightness > 1:
                 _decrease_brightness(small_step)
             else:
-                _set_brightness("0")
+                _set_brightness(0)
         else:
             _decrease_brightness(big_step)
 

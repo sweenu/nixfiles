@@ -1,8 +1,7 @@
 { config, pkgs }:
 let
-  soundcards = "${pkgs.soundcards}/bin/soundcards";
-  wpctl = "${pkgs.wireplumber}/bin/wpctl";
   backlight = "${pkgs.backlight}/bin/backlight";
+  dms = "dms ipc call";
   mod = "SUPER";
 in
 {
@@ -65,31 +64,31 @@ in
     ", F11, fullscreen"
 
     # Apps
-    "${mod}, Space, global, caelestia:launcher"
+    "${mod}, Space, exec, ${dms} spotlight toggle"
     "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
     "${mod}, B, exec, app2unit -- ${config.vars.defaultBrowser}"
     "${mod}, N, exec, app2unit -- obsidian"
     "${mod}, Z, exec, app2unit -- zeditor"
-    "${mod} SHIFT, Escape, exec, app2unit -- ${pkgs.mission-center}/bin/missioncenter"
+    "${mod} SHIFT, Escape, exec, app2unit -- ${dms} processlist open"
 
     # Notifications
-    "${mod}, Comma, global, caelestia:clearNotifs"
+    "${mod}, Comma, exec, ${dms} notifications dismissAllPopups"
+    "${mod}, Dot, exec, ${dms} notifications open"
 
     # Soundcards
-    "${mod}, bracketleft, exec, ${soundcards} previous"
-    "${mod}, bracketright, exec, ${soundcards} next"
+    "${mod}, bracketleft, exec, ${dms} audio cycleoutput"
+    "${mod}, bracketright, exec, ${dms} audio cycleoutput"
 
     # Screen capture
-    ", Print, exec, caelestia screenshot" # Fullscreen screenshot
-    "${mod}, Print, global, caelestia:screenshot"
-    "${mod} SHIFT, Print, global, caelestia:screenshotFreeze"
+    ", Print, exec, dms screenshot full" # Fullscreen screenshot
+    "${mod}, Print, exec, dms screenshot"
 
     # Turn off laptop screen
     ", F9, exec, hyprctl dispatch dpms toggle eDP-1"
 
     # Inhibit suspend
-    ", F12, exec, caelestia shell idleInhibitor toggle"
-    ", XF86AudioMedia, exec, caelestia shell idleInhibitor toggle"
+    ", F12, exec, ${dms} inhibit toggle"
+    ", XF86AudioMedia, exec, ${dms} inhibit toggle"
 
     # Special workspace
     "${mod}, minus, togglespecialworkspace, communication"
@@ -98,24 +97,24 @@ in
     # Submaps
     "${mod}, W, submap, window"
 
-    # Caelestia
-    "${mod}, Escape, global, caelestia:session"
-    "${mod}, Period, exec, caelestia emoji -p"
+    # DMS
+    "${mod}, ?, exec, ${dms} keybinds toggle hyprland"
+    "${mod}, Escape, exec, ${dms} powermenu toggle"
   ];
 
   bindl = [
-    ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_SINK@ toggle"
-    ", XF86AudioMicMute, exec, ${wpctl} set-mute @DEFAULT_SOURCE@ toggle"
-    ", XF86AudioPlay, global, caelestia:mediaToggle"
-    ", XF86AudioNext, global, caelestia:mediaNext"
-    ", XF86AudioPrev, global, caelestia:mediaPrev"
-    ", XF86AudioStop, global, caelestia:mediaStop"
+    ", XF86AudioMute, exec, ${dms} audio mute"
+    ", XF86AudioMicMute, exec, ${dms} audio micmute"
+    ", XF86AudioPlay, exec, ${dms} mpris playPause"
+    ", XF86AudioNext, exec, ${dms} mpris next"
+    ", XF86AudioPrev, exec, ${dms} mpris previous"
+    ", XF86AudioStop, exec, ${dms} mpris stop"
   ];
 
   bindle = [
     # Volume
-    ", XF86AudioRaiseVolume, exec, ${wpctl} set-volume @DEFAULT_SINK@ 5%+"
-    ", XF86AudioLowerVolume, exec, ${wpctl} set-volume @DEFAULT_SINK@ 5%-"
+    ", XF86AudioRaiseVolume, exec, ${dms} audio increment 5"
+    ", XF86AudioLowerVolume, exec, ${dms} audio decrement 5"
     # Backlight
     ", XF86MonBrightnessUp, exec, ${backlight} inc"
     ", XF86MonBrightnessDown, exec, ${backlight} dec"

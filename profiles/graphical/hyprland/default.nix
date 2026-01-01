@@ -12,8 +12,6 @@ in
   environment.defaultPackages = with pkgs; [
     app2unit
     grim
-    hyprpicker
-    playerctl
     slurp
     swappy
     wdisplays
@@ -21,7 +19,6 @@ in
     wf-recorder
     wl-clipboard
     # Custom scripts
-    soundcards
     backlight
   ];
 
@@ -32,14 +29,6 @@ in
   };
 
   home-manager.users."${config.vars.username}" = {
-    services.hyprsunset = {
-      enable = true;
-    };
-
-    services.hyprpolkitagent = {
-      enable = true;
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
       package = config.programs.hyprland.package;
@@ -97,14 +86,17 @@ in
           rounding = 10;
           blur = {
             enabled = true;
-            xray = false;
-            special = false;
-            ignore_opacity = true; # Allows opacity blurring
+            size = 10;
+            passes = 4;
+
+            ignore_opacity = true;
             new_optimizations = true;
-            popups = true;
-            input_methods = true;
-            size = 8;
-            passes = 2;
+            xray = false;
+
+            noise = 0.02;
+            contrast = 1.1;
+            vibrancy = 0.2;
+            vibrancy_darkness = 0.3;
           };
 
           shadow = {

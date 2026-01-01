@@ -29,7 +29,7 @@ nixfiles/
 ### Software I use on my personal computer (carokann)
 
 - Wayland compositor: [hyprland](https://hypr.land)
-- Desktop shell: [Caelestia](https://github.com/caelestia-dots/shell)
+- Desktop shell: [DankMaterialShell](https://danklinux.com/)
 - Editor: [kakoune](https://github.com/mawww/kakoune) and [Zed](https://zed.dev/)
 - Terminal: [wezterm](https://wezterm.org)
 - Shell: [fish](https://fishshell.com)
@@ -142,4 +142,3 @@ deploy '.#najdorf'
 
 ## Acknowledgment:
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS and from which the current structure of the repo is still heavily inspired.
-* Thanks to [soramanew](https://github.com/soramanew) for the amazing [caelestia shell](https://github.com/caelestia-dots/shell) and for the [hyprland config](https://github.com/caelestia-dots/caelestia/tree/e456e8abb90b94f2e6ae859f6e3b3ef2a5e27099/hypr) from which I took liberally.

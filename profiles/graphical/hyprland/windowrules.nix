@@ -42,10 +42,6 @@
   "size 1021 622, match:class wdisplays"
   "center on, match:class wdisplays"
 
-  "float on, match:class io\\.missioncenter\\.MissionCenter"
-  "size (monitor_w*0.6) (monitor_h*0.6), match:class io\\.missioncenter\\.MissionCenter"
-  "center on, match:class io\\.missioncenter\\.MissionCenter"
-
   # Dialogs
   "float on, match:title (Select|Open)( a)? (File|Folder)(s)?"
   "float on, match:title File (Operation|Upload)( Progress)?"
