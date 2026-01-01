@@ -214,6 +214,7 @@
             inputs.home.nixosModules.home-manager
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
+            inputs.dms.nixosModules.greeter
             inputs.nix-minecraft.nixosModules.minecraft-servers
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             "${inputs.restic}/nixos/modules/services/backup/restic.nix"

@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -221,12 +220,6 @@ in
           key <AE04> { [ 4,            dollar,      EuroSign                        ] };
           key <AE06> { [ 6,            asciicircum, dead_circumflex                 ] };
       };
-    '';
-
-    programs.fish.interactiveShellInit = lib.mkBefore ''
-      if uwsm check may-start -q
-          exec uwsm start -e -D Hyprland ${config.programs.hyprland.package}/share/wayland-sessions/hyprland.desktop
-      end
     '';
   };
 }

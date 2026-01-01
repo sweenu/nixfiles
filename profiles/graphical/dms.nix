@@ -3,6 +3,12 @@
 {
   environment.defaultPackages = [ pkgs.linux-wallpaperengine ];
 
+  programs.dank-material-shell.greeter = {
+    enable = true;
+    compositor.name = "hyprland";
+    configHome = config.vars.home;
+  };
+
   programs.dsearch.enable = true;
 
   home-manager.users."${config.vars.username}".programs.dank-material-shell = {
