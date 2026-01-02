@@ -79,6 +79,7 @@
     dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
     n8n.url = "github:NixOS/nixpkgs/pull/460626/head";
     lldap.url = "github:NixOS/nixpkgs/pull/474570/head";
+    uwsm.url = "github:NixOS/nixpkgs/pull/475312/head";
   };
 
   outputs =
@@ -201,6 +202,7 @@
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
               dawarich = inputs.dawarich.legacyPackages.${prev.stdenv.hostPlatform.system}.dawarich;
+              uwsm = inputs.uwsm.legacyPackages.${prev.stdenv.hostPlatform.system}.uwsm;
             })
           ]
           ++ (overlaysFromDir ./overlays);
