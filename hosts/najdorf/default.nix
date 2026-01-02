@@ -140,7 +140,6 @@ in
     framework-tool
     restic
     redu
-    wol
   ];
 
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
