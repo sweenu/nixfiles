@@ -70,7 +70,7 @@ config.keys = {
   { key = 'v', mods = 'LEADER',  action = act.SplitVertical   { domain = 'CurrentPaneDomain' } },
   { key = 'h', mods = 'LEADER',  action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
 
-  { key = 'Enter', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+  { key = 'Enter', mods = 'ALT', action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir } },
 
   -- Zoom/unzoom focused pane
   { key = 'Tab', mods = 'ALT', action = act.TogglePaneZoomState },
