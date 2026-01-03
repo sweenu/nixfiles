@@ -66,7 +66,7 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.53.0";
+    hyprland.url = "github:hyprwm/Hyprland/v0.53.1";
 
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft";
