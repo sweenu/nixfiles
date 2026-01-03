@@ -72,8 +72,8 @@ in
     "${mod} SHIFT, Escape, exec, app2unit -- ${dms} processlist open"
 
     # Notifications
-    "${mod}, Comma, exec, ${dms} notifications dismissAllPopups"
-    "${mod}, Dot, exec, ${dms} notifications open"
+    "${mod}, Comma, exec, ${dms} notifications clearAll"
+    "${mod}, Period, exec, ${dms} notifications open"
 
     # Soundcards
     "${mod}, bracketleft, exec, ${dms} audio cycleoutput"
