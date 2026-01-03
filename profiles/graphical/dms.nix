@@ -151,7 +151,8 @@
           width = 50;
         }
       ];
-      showWorkspaceIndex = true;
+      showWorkspaceIndex = false;
+      showWorkspaceName = true;
       showWorkspacePadding = false;
       workspaceScrolling = false;
       showWorkspaceApps = false;
@@ -377,6 +378,7 @@
             {
               id = "clock";
               enabled = true;
+              clockCompactModed = true;
             }
           ];
           spacing = 0;
