@@ -274,7 +274,7 @@
       dockBorderOpacity = 1;
       dockBorderThickness = 1;
       dockIsolateDisplays = false;
-      notificationOverlayEnabled = false;
+      notificationOverlayEnabled = true;
       modalDarkenBackground = true;
       lockScreenShowPowerActions = false;
       lockScreenShowSystemIcons = true;
