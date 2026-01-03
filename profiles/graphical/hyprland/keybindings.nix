@@ -118,6 +118,8 @@ in
     # Backlight
     ", XF86MonBrightnessUp, exec, ${backlight} inc"
     ", XF86MonBrightnessDown, exec, ${backlight} dec"
+    "SHIFT, XF86MonBrightnessUp, exec, ${dms} brightness increment 5 'ddc:i2c-15'"
+    "SHIFT, XF86MonBrightnessDown, exec, ${dms} brightness decrement 5 'ddc:i2c-15'"
   ];
 
   binde = [
