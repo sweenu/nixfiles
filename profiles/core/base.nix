@@ -50,7 +50,7 @@
     ];
     variables = {
       EDITOR = "kak";
-      VISUAL = "less";
+      VISUAL = "kak";
     };
   };
 
