@@ -86,7 +86,7 @@ in
         network.networks."10-wired" = network;
       };
     };
-    kernelPackages = pkgs.linuxPackages_6_17;
+    kernelPackages = pkgs.linuxPackages_6_18;
     kernelModules = [ "kvm-amd" ];
     loader = {
       systemd-boot = {

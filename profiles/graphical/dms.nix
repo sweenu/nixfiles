@@ -51,8 +51,8 @@
         };
       };
 
-    default.settings = {
-      configVersion = 4;
+    settings = {
+      configVersion = 5;
       currentThemeName = "dynamic";
       currentThemeCategory = "dynamic";
       customThemeFile = "";
@@ -165,8 +165,8 @@
       waveProgressEnabled = true;
       scrollTitleEnabled = true;
       audioVisualizerEnabled = true;
-      audioScrollEnabled = false;
-      clockCompactMode = false;
+      audioScrollMode = "volume";
+      clockCompactMode = true;
       focusedWindowCompactMode = false;
       runningAppsCompactMode = true;
       keyboardLayoutNameCompactMode = false;
@@ -177,16 +177,14 @@
       lockDateFormat = "";
       mediaSize = 1;
       appLauncherViewMode = "list";
-      spotlightModalViewMode = "list";
+      spotlightModalViewMode = "grid";
       sortAppsAlphabetically = false;
       appLauncherGridColumns = 4;
       spotlightCloseNiriOverview = true;
       niriOverviewOverlayEnabled = true;
-      weatherLocation = "New York, NY";
-      weatherCoordinates = "40.7128,-74.0060";
       useAutoLocation = true;
       weatherEnabled = true;
-      networkPreference = "auto";
+      networkPreference = "wifi";
       vpnLastConnected = "";
       iconTheme = "System Default";
       launcherLogoMode = "os";
@@ -255,7 +253,7 @@
       matugenTemplateFoot = false;
       matugenTemplateAlacritty = false;
       matugenTemplateNeovim = false;
-      matugenTemplateWezterm = false;
+      matugenTemplateWezterm = true;
       matugenTemplateDgop = true;
       matugenTemplateKcolorscheme = false;
       matugenTemplateVscode = false;
@@ -274,7 +272,7 @@
       dockBorderOpacity = 1;
       dockBorderThickness = 1;
       dockIsolateDisplays = false;
-      notificationOverlayEnabled = true;
+      notificationOverlayEnabled = false;
       modalDarkenBackground = true;
       lockScreenShowPowerActions = false;
       lockScreenShowSystemIcons = true;
@@ -292,7 +290,7 @@
       notificationTimeoutCritical = 0;
       notificationPopupPosition = 0;
       osdAlwaysShowValue = true;
-      osdPosition = 7;
+      osdPosition = 5;
       osdVolumeEnabled = true;
       osdMediaVolumeEnabled = true;
       osdBrightnessEnabled = true;
