@@ -29,6 +29,7 @@
         DankActions.src = "${DMSPlugins}/DankActions";
         DankBatteryAlerts.src = "${DMSPlugins}/DankBatteryAlerts";
         DankHooks.src = "${DMSPlugins}/DankHooks";
+        DankPomodoroTimer.src = "${DMSPlugins}/DankPomodoroTimer";
 
         # Community plugins
         DankCalculator.src = pkgs.fetchFromGitHub {
