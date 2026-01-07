@@ -33,6 +33,7 @@ in
       enable = true;
       package = config.programs.hyprland.package;
       portalPackage = config.programs.hyprland.portalPackage;
+      systemd.variables = [ "--all" ];
       settings = {
         ecosystem = {
           no_update_news = true;
