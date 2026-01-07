@@ -12,6 +12,7 @@
         extraGroups = [
           "wheel"
           "dialout"
+          "input" # for evdev manager integration with shell
         ]
         ++ pkgs.lib.optional config.virtualisation.libvirtd.enable "libvirtd"
         ++ pkgs.lib.optional config.networking.networkmanager.enable "networkmanager"
