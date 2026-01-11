@@ -30,4 +30,5 @@ in
   "dawarich/secret_key_base.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/oidc_client_secret_digest.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/oidc_client_secret_env.age".publicKeys = [ carokann najdorfHost ];
+  "nocodb/env.age".publicKeys = [ carokann najdorfHost ];
 }

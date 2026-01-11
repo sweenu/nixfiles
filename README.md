@@ -54,6 +54,7 @@ I deploy some service as Docker containers through [Arion](https://github.com/he
 - [Grist](https://www.getgrist.com/)
 - [Obsidian Livesync](https://github.com/vrtmrz/obsidian-livesync)
 - [Obsidian share-note](https://github.com/alangrainger/share-note)
+- [NocoDB](https://nocodb.com/)
 
 Important data is backed up with [Restic](https://restic.net).
 
