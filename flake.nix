@@ -78,6 +78,11 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    pretix-postfinance = {
+      url = "github:sweenu/pretix-postfinance";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
     # PRs
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
     dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";

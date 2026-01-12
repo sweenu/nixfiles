@@ -34,6 +34,7 @@ in
     ./authelia.nix
     ./portainer.nix
     ./nextcloud.nix
+    ./pretix.nix
     ./calibre-web.nix
     ./goeland.nix
     ./n8n.nix

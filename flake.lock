@@ -1099,6 +1099,26 @@
         "type": "github"
       }
     },
+    "pretix-postfinance": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768555078,
+        "narHash": "sha256-bVu/9qbfdbP7MjPx/HM19Zdskzi4YJqN32JlFPmaGAY=",
+        "owner": "sweenu",
+        "repo": "pretix-postfinance",
+        "rev": "95b2cea6a4ae31ad2718045db17fa73ebb339e41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "pretix-postfinance",
+        "type": "github"
+      }
+    },
     "quickshell": {
       "inputs": {
         "nixpkgs": [
@@ -1142,6 +1162,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "otbr": "otbr",
+        "pretix-postfinance": "pretix-postfinance",
         "treefmt-nix": "treefmt-nix_2",
         "zen-browser": "zen-browser"
       }
