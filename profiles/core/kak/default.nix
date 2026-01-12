@@ -2,7 +2,7 @@
 {
   home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
-      pkgs.nixfmt-rfc-style
+      pkgs.nixfmt
       fedit
     ];
 

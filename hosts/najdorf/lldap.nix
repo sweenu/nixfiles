@@ -24,7 +24,10 @@ in
 
   services.lldap = {
     enable = true;
-    createLocalDatabase = true;
+    database = {
+      type = "postgresql";
+      createLocally = true;
+    };
     environment = {
       LLDAP_JWT_SECRET_FILE = "%d/${jwtSecretCredName}";
       LLDAP_LDAP_USER_PASS_FILE = "%d/${ldapUserPassCredName}";
