@@ -17,6 +17,8 @@ in
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/secrets.age".publicKeys = [ carokann najdorfHost ];
   "n8n/encryption_key.age".publicKeys = [ carokann najdorfHost ];
+  "n8n/runners_auth_token.age".publicKeys = [ carokann najdorfHost ];
+  "n8n/runners_env_file.age".publicKeys = [ carokann najdorfHost ];
   "immich/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-share-note/env.age".publicKeys = [ carokann najdorfHost ];
