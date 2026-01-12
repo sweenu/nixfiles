@@ -21,6 +21,7 @@
         nrb = ''nixos-rebuild --sudo --flake "$(pwd)#$(hostname)"'';
         nrbs = "nb $(hostname) && ${nrb} switch";
         ndiff = "${pkgs.nvd}/bin/nvd diff --sort semver /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system-' | sed -n '2 p') /nix/var/nix/profiles/system";
+        dep = "deploy .#najdorf -s --auto-rollback=false --magic-rollback=false";
 
         # sudo
         s = "sudo -E";
