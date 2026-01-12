@@ -73,7 +73,7 @@ in
 
     # Notifications
     "${mod}, Comma, exec, ${dms} notifications clearAll"
-    "${mod}, Period, exec, ${dms} notifications open"
+    "${mod}, Period, exec, ${dms} notifications toggle"
 
     # Soundcards
     "${mod}, bracketleft, exec, ${dms} audio cycleoutput"
