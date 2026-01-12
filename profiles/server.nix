@@ -63,6 +63,9 @@
     };
   };
 
+  # Choose to restart manually so that we can deploy without being cut out from the server we deploy to
+  systemd.services.tailscaled.restartIfChanged = false;
+
   # Server optimization
   documentation.enable = false;
   fonts.fontconfig.enable = false;
