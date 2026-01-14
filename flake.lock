@@ -182,16 +182,37 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1768189409,
-        "narHash": "sha256-kTYh1ggJEupsBXX4Z3TcyzaihQXIoQYjFZlUAy5oM6Y=",
+        "lastModified": 1768341488,
+        "narHash": "sha256-SzTvX80I1K7utBB1XG4gkyao5piyP8kt0eLE90rpqy4=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "1280bd047d9d9efb312c3bcfc860bcfb8c754451",
+        "rev": "b76d0ce97d697fbc8b7b015e5939c65d642208e0",
         "type": "github"
       },
       "original": {
         "owner": "AvengeMedia",
+        "ref": "v1.2.1",
         "repo": "DankMaterialShell",
+        "type": "github"
+      }
+    },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768368326,
+        "narHash": "sha256-gz+55oZAYr6Xyqsl57UmfMIhuo2kVTEfxe2y25fm6lE=",
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "rev": "4ed63a33b78fdf078fe57799a68459c6403f4b29",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
         "type": "github"
       }
     },
@@ -1108,6 +1129,7 @@
         "deploy": "deploy",
         "disko": "disko",
         "dms": "dms",
+        "dms-plugin-registry": "dms-plugin-registry",
         "flake-parts": "flake-parts_2",
         "haumea": "haumea",
         "home": "home",

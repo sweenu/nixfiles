@@ -1,59 +1,61 @@
-{ config, pkgs, ... }:
-
 {
-  environment.defaultPackages = [ pkgs.linux-wallpaperengine ];
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  cfg = config.home-manager.users."${config.vars.username}".programs.dank-material-shell;
+in
+{
+  environment.defaultPackages = lib.mkIf cfg.plugins.linuxWallpaperEngine.enable [
+    pkgs.linux-wallpaperengine
+  ];
 
   programs.dsearch.enable = true;
 
   home-manager.users."${config.vars.username}".programs.dank-material-shell = {
     enable = true;
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      restartIfChanged = true;
+    };
 
     enableSystemMonitoring = true;
     enableVPN = false;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
     enableCalendarEvents = true;
+    enableClipboardPaste = true;
 
-    plugins =
-      let
-        DMSPlugins = pkgs.fetchFromGitHub {
-          owner = "AvengeMedia";
-          repo = "dms-plugins";
-          rev = "8fa7c5286171c66a209dd74e9a47d6e72ccfdad6";
-          sha256 = "sha256-0RXRgUXXoX+C0q+drsShjx2rCTdmqFzOCR/1rGB/W2E=";
+    plugins = {
+      # Official plugins
+      dankActions.enable = true;
+      dankBatteryAlerts = {
+        enable = true;
+        settings = {
+          criticalThreshold = 10;
         };
-      in
-      {
-        # Official plugins
-        DankActions.src = "${DMSPlugins}/DankActions";
-        DankBatteryAlerts.src = "${DMSPlugins}/DankBatteryAlerts";
-        DankHooks.src = "${DMSPlugins}/DankHooks";
-        DankPomodoroTimer.src = "${DMSPlugins}/DankPomodoroTimer";
-
-        # Community plugins
-        DankCalculator.src = pkgs.fetchFromGitHub {
-          owner = "rochacbruno";
-          repo = "DankCalculator";
-          rev = "de6dbd59b7630e897a50e107f704c1cd4a131128";
-          sha256 = "sha256-Vq+E2F2Ym5JdzjpCusRMDXd6uuAhhjAehyD/tO3omdY=";
-        };
-        DMSEmojiLauncher.src = pkgs.fetchFromGitHub {
-          owner = "devnullvoid";
-          repo = "dms-emoji-launcher";
-          rev = "2951ec7f823c983c11b6b231403581a386a7c9f6";
-          sha256 = "sha256-aub5pXRMlMs7dxiv5P+/Rz/dA4weojr+SGZAItmbOvo=";
-        };
-        DMSWallpaperEngine.src = pkgs.fetchFromGitHub {
-          owner = "sgtaziz";
-          repo = "dms-wallpaperengine";
-          rev = "95628dde134ec7ce4e01e58e1bb5f6dfc4c2baac";
-          sha256 = "sha256-jGLgc+OTSkO1D2RwRXAy75jyWmRREkFa86rMqS2PZfg=";
+      };
+      dankPomodoroTimer = {
+        enable = false;
+        settings = {
+          enabled = true;
+          autoSetDND = true;
+          autoStartBreaks = true;
+          autoStartPomodoros = true;
         };
       };
 
+      # Community plugins
+      calculator.enable = true;
+      emojiLauncher.enable = true;
+      powerUsagePlugin.enable = true;
+      voxtype.enable = false;
+      linuxWallpaperEngine.enable = false;
+    };
+
     settings = {
-      configVersion = 5;
       currentThemeName = "dynamic";
       currentThemeCategory = "dynamic";
       customThemeFile = "";
@@ -68,6 +70,13 @@
       cornerRadius = 12;
       niriLayoutGapsOverride = -1;
       niriLayoutRadiusOverride = -1;
+      niriLayoutBorderSize = -1;
+      hyprlandLayoutGapsOverride = -1;
+      hyprlandLayoutRadiusOverride = -1;
+      hyprlandLayoutBorderSize = -1;
+      mangoLayoutGapsOverride = -1;
+      mangoLayoutRadiusOverride = -1;
+      mangoLayoutBorderSize = -1;
       use24HourClock = true;
       showSeconds = false;
       useFahrenheit = false;
@@ -112,43 +121,43 @@
       privacyShowScreenShareIcon = false;
       controlCenterWidgets = [
         {
+          enabled = true;
           id = "volumeSlider";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "brightnessSlider";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "wifi";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "bluetooth";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "audioOutput";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "audioInput";
-          enabled = true;
           width = 50;
         }
         {
+          enabled = true;
           id = "nightMode";
-          enabled = true;
           width = 50;
         }
         {
-          id = "darkMode";
           enabled = true;
+          id = "darkMode";
           width = 50;
         }
       ];
@@ -158,10 +167,17 @@
       workspaceScrolling = false;
       showWorkspaceApps = false;
       maxWorkspaceIcons = 3;
-      workspacesPerMonitor = true;
+      groupWorkspaceApps = true;
+      workspaceFollowFocus = false;
       showOccupiedWorkspacesOnly = true;
       reverseScrolling = false;
       dwlShowAllTags = false;
+      workspaceColorMode = "default";
+      workspaceUnfocusedColorMode = "default";
+      workspaceUrgentColorMode = "default";
+      workspaceFocusedBorderEnabled = false;
+      workspaceFocusedBorderColor = "primary";
+      workspaceFocusedBorderThickness = 2;
       workspaceNameIcons = { };
       waveProgressEnabled = true;
       scrollTitleEnabled = true;
@@ -173,6 +189,33 @@
       keyboardLayoutNameCompactMode = false;
       runningAppsCurrentWorkspace = false;
       runningAppsGroupByApp = false;
+      appIdSubstitutions = [
+        {
+          pattern = "Spotify";
+          replacement = "spotify";
+          type = "exact";
+        }
+        {
+          pattern = "beepertexts";
+          replacement = "beeper";
+          type = "exact";
+        }
+        {
+          pattern = "home assistant desktop";
+          replacement = "homeassistant-desktop";
+          type = "exact";
+        }
+        {
+          pattern = "com.transmissionbt.transmission";
+          replacement = "transmission-gtk";
+          type = "contains";
+        }
+        {
+          pattern = "^steam_app_(\d+)$";
+          replacement = "steam_icon_$1";
+          type = "regex";
+        }
+      ];
       centeringMode = "index";
       clockDateFormat = "";
       lockDateFormat = "";
@@ -188,6 +231,20 @@
       networkPreference = "wifi";
       vpnLastConnected = "";
       iconTheme = "System Default";
+      cursorSettings = {
+        theme = "System Default";
+        size = 24;
+        niri = {
+          hideWhenTyping = false;
+          hideAfterInactiveMs = 0;
+        };
+        hyprland = {
+          hideOnKeyPress = false;
+          hideOnTouch = false;
+          inactiveTimeout = 0;
+        };
+        dwl.cursorHideTimeout = 0;
+      };
       launcherLogoMode = "os";
       launcherLogoCustomPath = "";
       launcherLogoColorOverride = "";
@@ -225,14 +282,12 @@
       loginctlLockIntegration = true;
       fadeToLockEnabled = false;
       fadeToLockGracePeriod = 5;
+      fadeToDpmsEnabled = true;
+      fadeToDpmsGracePeriod = 5;
       launchPrefix = "";
       brightnessDevicePins = { };
-      wifiNetworkPins = {
-        preferredWifi = "LeFauxCep";
-      };
-      bluetoothDevicePins = {
-        preferredDevice = "94:DB:56:73:D4:C8";
-      };
+      wifiNetworkPins.preferredWifi = "LeFauxCep";
+      bluetoothDevicePins.preferredDevice = "94:DB:56:73:D4:C8";
       audioInputDevicePins = { };
       audioOutputDevicePins = { };
       gtkThemingEnabled = false;
@@ -242,6 +297,8 @@
       runDmsMatugenTemplates = true;
       matugenTemplateGtk = true;
       matugenTemplateNiri = false;
+      matugenTemplateHyprland = true;
+      matugenTemplateMangowc = true;
       matugenTemplateQt5ct = true;
       matugenTemplateQt6ct = true;
       matugenTemplateFirefox = false;
@@ -285,11 +342,19 @@
       maxFprintTries = 15;
       lockScreenActiveMonitor = "all";
       lockScreenInactiveColor = "#000000";
+      lockScreenNotificationMode = 0;
       hideBrightnessSlider = false;
       notificationTimeoutLow = 5000;
       notificationTimeoutNormal = 5000;
       notificationTimeoutCritical = 0;
+      notificationCompactMode = false;
       notificationPopupPosition = 0;
+      notificationHistoryEnabled = true;
+      notificationHistoryMaxCount = 50;
+      notificationHistoryMaxAgeDays = 7;
+      notificationHistorySaveLow = true;
+      notificationHistorySaveNormal = true;
+      notificationHistorySaveCritical = true;
       osdAlwaysShowValue = true;
       osdPosition = 5;
       osdVolumeEnabled = true;
@@ -324,92 +389,96 @@
       updaterCustomCommand = "";
       updaterTerminalAdditionalParams = "";
       displayNameMode = "system";
-      screenPreferences = {
-        dock = [
-          "all"
-        ];
-      };
-      showOnLastDisplay = {
-        dock = true;
-      };
+      screenPreferences.dock = [
+        "all"
+      ];
+      showOnLastDisplay.dock = true;
       niriOutputSettings = { };
       hyprlandOutputSettings = { };
       barConfigs = [
         {
-          id = "default";
-          name = "Main Bar";
+          autoHide = false;
+          autoHideDelay = 250;
+          borderColor = "surfaceText";
+          borderEnabled = false;
+          borderOpacity = 1;
+          borderThickness = 1;
+          bottomGap = -4;
+          centerWidgets = [
+            {
+              enabled = true;
+              id = "systemTray";
+            }
+            {
+              id = "dankPomodoroTimer";
+              enabled = true;
+            }
+          ];
           enabled = true;
+          fontScale = 1.17;
+          gothCornerRadiusOverride = false;
+          gothCornerRadiusValue = 12;
+          gothCornersEnabled = true;
+          id = "default";
+          innerPadding = 17;
+          leftWidgets = [
+            {
+              enabled = true;
+              id = "workspaceSwitcher";
+            }
+            {
+              enabled = true;
+              id = "music";
+              mediaSize = 1;
+            }
+            {
+              enabled = true;
+              id = "privacyIndicator";
+            }
+          ];
+          maximizeDetection = false;
+          name = "Main Bar";
+          noBackground = false;
+          openOnOverview = false;
+          popupGapsAuto = true;
+          popupGapsManual = 4;
           position = 2;
+          rightWidgets = [
+            {
+              enabled = true;
+              id = "notificationButton";
+            }
+            {
+              enabled = true;
+              id = "battery";
+            }
+            {
+              enabled = true;
+              id = "controlCenterButton";
+            }
+            {
+              clockCompactModed = true;
+              enabled = true;
+              id = "clock";
+            }
+          ];
           screenPreferences = [
             "all"
           ];
-          showOnLastDisplay = true;
-          leftWidgets = [
-            {
-              id = "workspaceSwitcher";
-              enabled = true;
-            }
-            {
-              id = "music";
-              enabled = true;
-              mediaSize = 1;
-            }
-          ];
-          centerWidgets = [
-            {
-              id = "systemTray";
-              enabled = true;
-            }
-          ];
-          rightWidgets = [
-            {
-              id = "notificationButton";
-              enabled = true;
-            }
-            {
-              id = "battery";
-              enabled = true;
-            }
-            {
-              id = "controlCenterButton";
-              enabled = true;
-            }
-            {
-              id = "clock";
-              enabled = true;
-              clockCompactModed = true;
-            }
-          ];
-          spacing = 0;
-          innerPadding = 17;
-          bottomGap = -4;
-          transparency = 1;
-          widgetTransparency = 1;
-          squareCorners = true;
-          noBackground = false;
-          gothCornersEnabled = true;
-          gothCornerRadiusOverride = false;
-          gothCornerRadiusValue = 12;
-          borderEnabled = false;
-          borderColor = "surfaceText";
-          borderOpacity = 1;
-          borderThickness = 1;
-          widgetOutlineEnabled = false;
-          widgetOutlineColor = "primary";
-          widgetOutlineOpacity = 1;
-          widgetOutlineThickness = 1;
-          fontScale = 1.17;
-          autoHide = false;
-          autoHideDelay = 250;
-          showOnWindowsOpen = false;
-          openOnOverview = false;
-          visible = true;
-          popupGapsAuto = true;
-          popupGapsManual = 4;
-          maximizeDetection = false;
           scrollEnabled = false;
           scrollXBehavior = "column";
           scrollYBehavior = "workspace";
+          showOnLastDisplay = true;
+          showOnWindowsOpen = false;
+          spacing = 0;
+          squareCorners = true;
+          transparency = 1;
+          visible = true;
+          widgetOutlineColor = "primary";
+          widgetOutlineEnabled = false;
+          widgetOutlineOpacity = 1;
+          widgetOutlineThickness = 1;
+          widgetTransparency = 1;
         }
       ];
       desktopClockEnabled = false;
@@ -436,7 +505,9 @@
       desktopClockY = -1;
       desktopClockWidth = 280;
       desktopClockHeight = 180;
-      desktopClockDisplayPreferences = [ "all" ];
+      desktopClockDisplayPreferences = [
+        "all"
+      ];
       systemMonitorEnabled = false;
       systemMonitorShowHeader = true;
       systemMonitorTransparency = 0.8;
@@ -473,11 +544,16 @@
       systemMonitorY = -1;
       systemMonitorWidth = 320;
       systemMonitorHeight = 480;
-      systemMonitorDisplayPreferences = [ "all" ];
+      systemMonitorDisplayPreferences = [
+        "all"
+      ];
       systemMonitorVariants = [ ];
       desktopWidgetPositions = { };
       desktopWidgetGridSettings = { };
       desktopWidgetInstances = [ ];
+      desktopWidgetGroups = [ ];
+      builtInPluginSettings = { };
+      configVersion = 5;
     };
   };
 }

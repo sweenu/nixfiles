@@ -57,7 +57,12 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/v1.2.1";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixos";
     };
 
@@ -229,6 +234,7 @@
               home-manager.sharedModules = hmModules ++ [
                 inputs.nix-colors.homeManagerModules.default
                 inputs.dms.homeModules.dank-material-shell
+                inputs.dms-plugin-registry.modules.default
                 inputs.zen-browser.homeModules.twilight
               ];
             }
