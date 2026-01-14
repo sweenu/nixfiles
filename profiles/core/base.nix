@@ -20,6 +20,7 @@
       file
       gdu
       git
+      git-filter-repo
       highlight
       inetutils
       iputils
