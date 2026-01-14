@@ -40,6 +40,8 @@ set completions.History.statusstylepretty true
 
 "Blacklist
 seturl grist.@domainName@ superignore true
+seturl n8n.@domainName@ superignore true
+seturl nocodb.@domainName@ superignore true
 unbindurl calendar.notion.so ?
 unbindurl calendar.notion.so c
 unbindurl calendar.notion.so f
