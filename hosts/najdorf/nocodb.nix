@@ -16,7 +16,7 @@ in
 
     services = {
       nocodb.service = {
-        image = "nocodb/nocodb:0.265.1";
+        image = "nocodb/nocodb:0.301.1";
         container_name = "nocodb";
         networks = [
           "default"
