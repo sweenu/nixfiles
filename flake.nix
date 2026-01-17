@@ -57,7 +57,7 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/v1.2.1";
+      url = "github:AvengeMedia/DankMaterialShell?rev=27f0df07af950c378054264eda384978d95c7f80";
       inputs.nixpkgs.follows = "nixos";
     };
 
