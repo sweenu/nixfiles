@@ -38,7 +38,7 @@ in
         };
       };
       dankPomodoroTimer = {
-        enable = false;
+        enable = true;
         settings = {
           enabled = true;
           autoSetDND = true;
