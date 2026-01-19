@@ -147,6 +147,8 @@ in
 
   systemd.network.networks."10-wired" = network;
 
+  # Many issues with IOT, rely on router's firewall
+  networking.firewall.enable = false;
   networking.usePredictableInterfaceNames = false;
 
   virtualisation = {
