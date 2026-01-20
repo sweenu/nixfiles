@@ -68,9 +68,10 @@ in
         "upnp"
         "wyoming"
       ];
-      customComponents = [
-        pkgs.bbox
-        pkgs.dawarich-ha
+      customComponents = with pkgs; [
+        bbox
+        dawarich-ha
+        home-assistant-custom-components.adaptive_lighting
       ];
       config = {
         automation = "!include automations.yaml";
