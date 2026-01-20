@@ -180,12 +180,23 @@
           importHosts =
             path:
             let
-              hostDirs = builtins.readDir path;
+              entries = builtins.readDir path;
               validHosts = lib.filterAttrs (
-                name: type: type == "directory" && builtins.pathExists (path + "/${name}/default.nix")
-              ) hostDirs;
+                name: type:
+                (type == "directory" && builtins.pathExists (path + "/${name}/default.nix"))
+                || (type == "regular" && lib.hasSuffix ".nix" name)
+              ) entries;
+
+              hostConfigs = lib.mapAttrs' (
+                name: type:
+                let
+                  hostName = if type == "regular" then lib.removeSuffix ".nix" name else name;
+                  hostPath = if type == "regular" then path + "/${name}" else path + "/${name}";
+                in
+                lib.nameValuePair hostName (import hostPath)
+              ) validHosts;
             in
-            lib.mapAttrs (name: _: import (path + "/${name}")) validHosts;
+            hostConfigs;
 
           hosts = importHosts ./hosts // {
             ginko =
@@ -304,6 +315,10 @@
         in
         {
           nixosConfigurations = {
+            bootstrap = mkHost {
+              hostname = "bootstrap";
+            };
+
             carokann = mkHost {
               hostname = "carokann";
               extraModules = [ inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series ];

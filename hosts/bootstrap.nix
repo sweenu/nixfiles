@@ -1,5 +1,6 @@
 {
   self,
+  lib,
   config,
   pkgs,
   suites,
@@ -7,6 +8,14 @@
 }:
 {
   imports = suites.base;
+
+  services.getty.autologinUser = config.vars.username;
+  users.users."${config.vars.username}" = {
+    password = null;
+    initialPassword = null;
+    hashedPassword = lib.mkForce null;
+    initialHashedPassword = "";
+  };
 
   boot.loader.systemd-boot.enable = true;
 
@@ -16,7 +25,10 @@
     parted
   ];
 
-  networking.wireless.enable = false;
+  networking = {
+    useDHCP = false;
+    networkmanager.enable = true;
+  };
 
   services = {
     openssh = {

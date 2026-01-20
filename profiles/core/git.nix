@@ -16,7 +16,7 @@
       settings = {
         user = {
           email = config.vars.email;
-          name = "sweenu";
+          name = config.vars.username;
           signingKey = "${config.vars.sshPublicKey}";
         };
         pull.rebase = "true";
