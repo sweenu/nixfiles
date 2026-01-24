@@ -19,4 +19,6 @@ final: prev: with prev; {
 
   dawarich-api = pkgs.python3Packages.callPackage ./dawarich-api.nix { };
   dawarich-ha = callPackage ./dawarich-ha.nix { };
+
+  extended_openai_conversation = callPackage ./extended_openai_conversation.nix { };
 }

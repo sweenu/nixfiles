@@ -72,6 +72,7 @@ in
         bbox
         dawarich-ha
         home-assistant-custom-components.adaptive_lighting
+        extended_openai_conversation
       ];
       config = {
         automation = "!include automations.yaml";
