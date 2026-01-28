@@ -54,9 +54,11 @@
     };
     resolved = {
       enable = true;
-      dnssec = "allow-downgrade";
-      dnsovertls = "opportunistic";
-      fallbackDns = config.vars.dnsResolvers;
+      settings.Resolve = {
+        DNSSEC = "allow-downgrade";
+        DNSOverTLS = "opportunistic";
+        FallbackDNS = config.vars.dnsResolvers;
+      };
     };
   };
 

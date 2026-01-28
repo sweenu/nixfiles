@@ -63,7 +63,7 @@ Important data is backed up with [Restic](https://restic.net).
 ### PC
 Create a bootstrap ISO and put it on your usb key:
 ```bash
-nixos-generate --flake '.#bootstrap' --format iso
+nixos-rebuild build-image --image-variant iso --flake '.#bootstrap'
 sudo dd if=your.iso of=/dev/sda bs=4M status=progress oflag=direct
 ```
 
@@ -94,7 +94,7 @@ After logging in with tailscale and enabling SSH connections (`sudo tailscale se
 ### Raspberry Pi
 Create a ready-to-boot SD card for a RaspberryPi, do the following:
 ```bash
-nixos-generate --flake '.#ginko' --format sd-aarch64 --system aarch64-linux
+nixos-rebuild build-image --image-variant sd-card --flake '.#ginko'
 unzstd -d {the output path from the command above} -o nixos-sd-image.img
 sudo dd if=nixos-sd-image.img of=/dev/sda bs=4M status=progress oflag=direct
 ```

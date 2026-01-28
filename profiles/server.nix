@@ -49,10 +49,12 @@
     };
     resolved = {
       enable = true;
-      dnssec = "false"; # DNS resolution stops working after a while with `allow-downgrade`
-      dnsovertls = "opportunistic";
-      fallbackDns = config.vars.dnsResolvers;
-      llmnr = "false"; # Prevent LLMNR poisoning attacks
+      settings.Resolve = {
+        DNSSEC = "false"; # DNS resolution stops working after a while with `allow-downgrade`
+        DNSOverTLS = "opportunistic";
+        FallbackDNS = config.vars.dnsResolvers;
+        LLMNR = "false"; # Prevent LLMNR poisoning attacks
+      };
     };
     tailscale = {
       useRoutingFeatures = "server";

@@ -17,7 +17,6 @@ pkgs.mkShell {
       config.treefmt.build.wrapper
       inputs'.agenix.packages.default
       inputs'.deploy.packages.default
-      inputs'.nixos-generators.packages.default
       inputs'.nixos-anywhere.packages.default
       inputs'.disko.packages.default
     ];
@@ -29,7 +28,6 @@ pkgs.mkShell {
     echo "Available tools:"
     echo "  - agenix: Secret management"
     echo "  - deploy-rs: Deployment tool"
-    echo "  - nixos-generate: Generate NixOS images"
     echo "  - nixos-anywhere: Remote NixOS installation"
     echo "  - disko: Declarative disk partitioning"
     echo ""

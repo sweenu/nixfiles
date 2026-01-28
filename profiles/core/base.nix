@@ -111,10 +111,10 @@
       package = pkgs.plocate;
     };
     resolved = {
-      extraConfig = ''
+      settings.Resolve = {
         # No need when using Avahi
-        MulticastDNS=no
-      '';
+        MulticastDNS = "no";
+      };
     };
   };
 

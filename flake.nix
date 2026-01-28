@@ -29,11 +29,6 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixos";
-    };
-
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
       inputs = {
@@ -85,8 +80,6 @@
 
     # PRs
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
-    dawarich.url = "github:NixOS/nixpkgs/pull/423867/head";
-    lldap.url = "github:NixOS/nixpkgs/pull/474570/head";
   };
 
   outputs =
@@ -219,7 +212,6 @@
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-              dawarich = inputs.dawarich.legacyPackages.${prev.stdenv.hostPlatform.system}.dawarich;
             })
           ]
           ++ (overlaysFromDir ./overlays);
@@ -233,13 +225,6 @@
             inputs.arion.nixosModules.arion
             inputs.nix-minecraft.nixosModules.minecraft-servers
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
-            "${inputs.dawarich}/nixos/modules/services/web-apps/dawarich.nix"
-            "${inputs.lldap}/nixos/modules/services/databases/lldap.nix"
-            {
-              disabledModules = [
-                "services/databases/lldap.nix"
-              ];
-            }
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
