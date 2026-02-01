@@ -32,12 +32,6 @@
           DisplayBookmarksToolbar = "never";
           DontCheckDefaultBrowser = true;
           DownloadDirectory = config.vars.downloadFolder;
-          EnableTrackingProtection = {
-            Value = true;
-            Locked = true;
-            Cryptomining = true;
-            Fingerprinting = true;
-          };
           NoDefaultBookmarks = true;
           OfferToSaveLogins = false;
           PasswordManagerEnabled = false;
