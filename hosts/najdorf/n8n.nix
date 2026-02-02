@@ -1,6 +1,7 @@
 {
   self,
   config,
+  pkgs,
   ...
 }:
 
@@ -17,6 +18,9 @@ in
 
   services.n8n = {
     enable = true;
+    customNodes = with pkgs; [
+      n8n-nodes-carbonejs
+    ];
     environment = {
       WEBHOOK_URL = url;
       N8N_ENCRYPTION_KEY_FILE = config.age.secrets."n8n/encryptionKey".path;
