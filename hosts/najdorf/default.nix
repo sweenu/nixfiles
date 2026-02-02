@@ -8,7 +8,6 @@
 
 let
   resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
-  encryptedRoot = "cryptroot";
   network = {
     matchConfig.Name = "en* eth*";
     networkConfig = {
@@ -70,9 +69,6 @@ in
         "sd_mod"
         "r8152" # for framework eth adapter
       ];
-      luks.devices.${encryptedRoot} = {
-        allowDiscards = true;
-      };
       # Allows decrypting the drive over SSH
       network = {
         enable = true;
@@ -121,7 +117,8 @@ in
               size = "100%";
               content = {
                 type = "luks";
-                name = encryptedRoot;
+                name = "cryptroot";
+                settings.allowDiscards = true;
                 content = {
                   type = "filesystem";
                   mountpoint = "/";
