@@ -73,6 +73,7 @@ in
         dawarich-ha
         home-assistant-custom-components.adaptive_lighting
         extended_openai_conversation
+        openai-whisper-cloud
       ];
       config = {
         automation = "!include automations.yaml";
