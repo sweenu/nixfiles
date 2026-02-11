@@ -36,11 +36,10 @@ nixfiles/
 - Browser: [zen](https://zen-browser.app/)
 
 ### Self-hosted apps on my server (najdorf)
+Most services are exposed with Tailscale Serve.
 
 Here's the list of the main services deployed through their NixOS modules:
 - [Træfik](https://traefik.io/traefik)
-- [Authelia](https://www.authelia.com)
-- [LLDAP](https://github.com/lldap/lldap)
 - [Nextcloud](https://nextcloud.com)
 - [n8n](https://n8n.io/)
 - [Immich](https://immich.app)

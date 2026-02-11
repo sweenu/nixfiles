@@ -8,11 +8,10 @@
 }:
 
 let
-  fqdn = "hass.${config.vars.domainName}";
+  fqdn = "hass.${config.vars.tailnetName}";
   serverIP = config.vars.staticIP;
   serverIPv6 = "2001:861:3884:4fd0:8ceb:7d56:bf25:5a17";
   hassPort = config.services.home-assistant.config.http.server_port;
-  massFqdn = "mass.${config.vars.domainName}";
   massWebPort = 8095;
 in
 {
@@ -176,29 +175,11 @@ in
     };
   };
 
-  services.traefik.dynamicConfigOptions.http = rec {
-    # HA
-    routers.to-hass = {
-      rule = "Host(`${fqdn}`)";
-      service = "hass";
-    };
-    services."${routers.to-hass.service}".loadBalancer.servers = [
-      {
-        url = "http://127.0.0.1:${builtins.toString hassPort}";
-      }
-    ];
-
-    # MA
-    routers.to-mass = {
-      rule = "Host(`${massFqdn}`)";
-      service = "mass";
-    };
-    services."${routers.to-mass.service}".loadBalancer.servers = [
-      {
-        url = "http://127.0.0.1:${builtins.toString massWebPort}";
-      }
-    ];
-  };
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services = {
+  #   hass.https."443" = "http://localhost:${builtins.toString hassPort}";
+  #   mass.https."443" = "http://localhost:${builtins.toString massWebPort}";
+  # };
 
   services.restic.backups.opt.paths = [ config.services.home-assistant.configDir ];
 }

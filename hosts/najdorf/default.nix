@@ -28,24 +28,29 @@ let
 in
 {
   imports = [
-    # Services
+    ### Services ###
+    # Core
     ./traefik.nix
-    ./authelia.nix
-    ./portainer.nix
-    ./nextcloud.nix
-    ./pretix.nix
-    ./calibre-web.nix
-    ./goeland.nix
+    ./tsidp.nix
+
     ./n8n.nix
+    ./goeland.nix
+    ./hass.nix
+    ./nextcloud.nix
+    ./calibre-web.nix
     ./immich.nix
+
+    # Monitoring & Control
+    ./netdata.nix
+    ./cockpit.nix
+
+    # Obsidian
     ./obsidian-livesync.nix
     ./obsidian-share-note.nix
-    ./lldap.nix
+
+    # Testing
     ./nocodb.nix
-    ./netdata.nix
-    ./hass.nix
-    ./cockpit.nix
-    ./minecraft.nix
+    # ./pretix.nix
   ]
   ++ suites.server;
 
@@ -157,6 +162,8 @@ in
   };
 
   services = {
+    # TODO: https://github.com/tailscale/tailscale/issues/18381
+    # tailscale.serve.enable = true;
     avahi.enable = true;
     journald.extraConfig = ''
       SystemMaxUse = 10G;

@@ -48,6 +48,7 @@
     staticIP = builtins.head (lib.splitString "/" staticIPWithSubnet);
     lanSubnet = "192.168.1.0/24";
     domainName = "sweenu.xyz";
+    tailnetName = "taila5f2.ts.net";
     smtp = {
       user = "contact@sweenu.xyz";
       host = "smtp.fastmail.com";

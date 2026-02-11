@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.netdata = {
@@ -11,16 +11,6 @@
     };
   };
 
-  services.traefik.dynamicConfigOptions.http = rec {
-    routers.to-netdata = {
-      rule = "Host(`netdata.${config.vars.domainName}`)";
-      service = "netdata";
-      middlewares = [ "authelia" ];
-    };
-    services."${routers.to-netdata.service}".loadBalancer.servers = [
-      {
-        url = "http://localhost:19999";
-      }
-    ];
-  };
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services.netdata.https."443" = "http://localhost:19999";
 }

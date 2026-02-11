@@ -1,8 +1,7 @@
 { config, ... }:
 
 let
-  fqdn = "cockpit.${config.vars.domainName}";
-  url = "https://${fqdn}";
+  url = "https://cockpit.${config.vars.tailnetName}";
 in
 {
   services.cockpit = {
@@ -11,16 +10,6 @@ in
     port = 12431;
   };
 
-  services.traefik.dynamicConfigOptions.http = rec {
-    routers.to-cockpit = {
-      rule = "Host(`${fqdn}`)";
-      service = "cockpit";
-      middlewares = "authelia";
-    };
-    services."${routers.to-cockpit.service}".loadBalancer.servers = [
-      {
-        url = "http://127.0.0.1:${builtins.toString config.services.cockpit.port}";
-      }
-    ];
-  };
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services.cockpit.https."443" = "http://localhost:${builtins.toString config.services.cockpit.port}";
 }

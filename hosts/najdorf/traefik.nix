@@ -69,7 +69,7 @@ in
       };
       entryPoints = {
         web = {
-          address = ":80";
+          address = "${config.vars.staticIP}:80";
           forwardedHeaders.trustedIPs = cloudflareIPs;
           http = {
             redirections = {
@@ -81,7 +81,7 @@ in
           };
         };
         websecure = {
-          address = ":443";
+          address = "${config.vars.staticIP}:443";
           forwardedHeaders.trustedIPs = cloudflareIPs;
           http3 = {
             advertisedPort = 443;
@@ -105,8 +105,7 @@ in
         };
       };
       api = {
-        dashboard = true;
-        insecure = false;
+        dashboard = false;
       };
       ping = { };
       accessLog.filePath = accessLogPath;
@@ -138,11 +137,6 @@ in
           "cloudflare-only".ipAllowList = {
             sourceRange = cloudflareIPs;
           };
-        };
-        routers.dashboard = {
-          rule = "Host(`traefik.${config.vars.domainName}`)";
-          service = "api@internal";
-          middlewares = [ "authelia" ];
         };
       };
     };
