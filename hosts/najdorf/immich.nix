@@ -4,6 +4,9 @@
   ...
 }:
 
+let
+  fqdn = "immich.${config.vars.domainName}";
+in
 {
   age.secrets = {
     "immich/envFile".file = "${self}/secrets/immich/env.age";
@@ -20,13 +23,12 @@
     secretsFile = config.age.secrets."immich/envFile".path;
     mediaLocation = "/opt/immich";
     port = 2283;
-    settings = null;
     database.enableVectors = false;
   };
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-immich = {
-      rule = "Host(`immich.${config.vars.domainName}`)";
+      rule = "Host(`${fqdn}`) && PathPrefix(`/share`)";
       service = "immich";
     };
     services."${routers.to-immich.service}".loadBalancer.servers = [
@@ -35,4 +37,8 @@
       }
     ];
   };
+
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services.immich.https."443" =
+  #   "http://localhost:${builtins.toString config.services.immich.port}";
 }

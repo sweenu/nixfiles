@@ -5,30 +5,19 @@ in
 {
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
+  "fastmail/app_password.age".publicKeys = [ carokann najdorfHost ];
   "restic/password.age".publicKeys = [ carokann najdorfHost ];
   "restic/env.age".publicKeys = [ carokann najdorfHost ];
   "traefik/env.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/session_secret.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/storage_encryption_key.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/ldap_password.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/oidc_hmac_secret.age".publicKeys = [ carokann najdorfHost ];
-  "authelia/oidc_jwt_private_key.age".publicKeys = [ carokann najdorfHost ];
+  "hass/secrets.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/secrets.age".publicKeys = [ carokann najdorfHost ];
   "n8n/encryption_key.age".publicKeys = [ carokann najdorfHost ];
   "n8n/runners_auth_token.age".publicKeys = [ carokann najdorfHost ];
-  "n8n/runners_env_file.age".publicKeys = [ carokann najdorfHost ];
   "immich/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-share-note/env.age".publicKeys = [ carokann najdorfHost ];
-  "fastmail/app_password.age".publicKeys = [ carokann najdorfHost ];
-  "lldap/jwt_secret.age".publicKeys = [ carokann najdorfHost ];
-  "lldap/ldap_user_pass.age".publicKeys = [ carokann najdorfHost ];
-  "lldap/server_key.age".publicKeys = [ carokann najdorfHost ];
-  "hass/secrets.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/secret_key_base.age".publicKeys = [ carokann najdorfHost ];
-  "dawarich/oidc_client_secret_digest.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/oidc_client_secret_env.age".publicKeys = [ carokann najdorfHost ];
   "nocodb/env.age".publicKeys = [ carokann najdorfHost ];
   "pretix/env.age".publicKeys = [ carokann najdorfHost ];

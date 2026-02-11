@@ -6,7 +6,9 @@
 }:
 
 let
-  fqdn = "n8n.${config.vars.domainName}";
+  publicFqdn = "n8n.${config.vars.domainName}";
+  publicUrl = "https://${publicFqdn}";
+  fqdn = "n8n.${config.vars.tailnetName}";
   url = "https://${fqdn}";
 in
 {
@@ -22,7 +24,8 @@ in
       n8n-nodes-carbonejs
     ];
     environment = {
-      WEBHOOK_URL = url;
+      WEBHOOK_URL = publicUrl;
+      N8N_EDITOR_BASE_URL = url;
       N8N_ENCRYPTION_KEY_FILE = config.age.secrets."n8n/encryptionKey".path;
       N8N_PERSONALIZATION_ENABLED = "false";
       N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
@@ -47,9 +50,8 @@ in
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-n8n = {
-      rule = "Host(`${fqdn}`)";
+      rule = "Host(`${publicFqdn}`) && (PathRegexp(`^/webhook(-test)?/.*`) || PathRegexp(`^/form/.*`))";
       service = "n8n";
-      middlewares = "authelia";
     };
     services."${routers.to-n8n.service}".loadBalancer.servers = [
       {
@@ -58,24 +60,6 @@ in
     ];
   };
 
-  services.authelia.instances.main.settings.access_control.rules = [
-    {
-      domain = fqdn;
-      resources = [ "^/webhook(-test)?/.*" ];
-      methods = [
-        "GET"
-        "POST"
-      ];
-      policy = "bypass";
-    }
-    {
-      domain = fqdn;
-      resources = [ "^/form/.*" ];
-      methods = [
-        "GET"
-        "POST"
-      ];
-      policy = "bypass";
-    }
-  ];
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services.n8n.https."443" = "http://localhost:${builtins.toString config.services.n8n.environment.N8N_PORT}";
 }

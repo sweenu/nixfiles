@@ -51,6 +51,7 @@ with lib.types;
 
     lanSubnet = mkOption { type = str; };
     domainName = mkOption { type = str; };
+    tailnetName = mkOption { type = str; };
     smtp = mkOption {
       type = submodule {
         options = {
