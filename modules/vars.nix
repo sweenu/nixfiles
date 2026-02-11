@@ -49,6 +49,7 @@ with lib.types;
     staticIPWithSubnet = mkOption { type = str; };
     staticIP = mkOption { type = str; };
 
+    lanSubnet = mkOption { type = str; };
     domainName = mkOption { type = str; };
     smtp = mkOption {
       type = submodule {

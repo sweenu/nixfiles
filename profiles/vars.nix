@@ -46,6 +46,7 @@
     defaultGateway = "192.168.1.254";
     staticIPWithSubnet = "192.168.1.41/24";
     staticIP = builtins.head (lib.splitString "/" staticIPWithSubnet);
+    lanSubnet = "192.168.1.0/24";
     domainName = "sweenu.xyz";
     smtp = {
       user = "contact@sweenu.xyz";

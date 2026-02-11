@@ -8,6 +8,35 @@
 let
   docker = lib.getExe pkgs.docker;
   sh = pkgs.runtimeShell;
+
+  cloudflareIPs = [
+    # IPv4 — https://www.cloudflare.com/ips-v4/
+    "173.245.48.0/20"
+    "103.21.244.0/22"
+    "103.22.200.0/22"
+    "103.31.4.0/22"
+    "141.101.64.0/18"
+    "108.162.192.0/18"
+    "190.93.240.0/20"
+    "188.114.96.0/20"
+    "197.234.240.0/22"
+    "198.41.128.0/17"
+    "162.158.0.0/15"
+    "104.16.0.0/13"
+    "104.24.0.0/14"
+    "172.64.0.0/13"
+    "131.0.72.0/22"
+    # IPv6 — https://www.cloudflare.com/ips-v6/
+    "2400:cb00::/32"
+    "2606:4700::/32"
+    "2803:f800::/32"
+    "2405:b500::/32"
+    "2405:8100::/32"
+    "2a06:98c0::/29"
+    "2c0f:f248::/32"
+  ];
+
+  accessLogPath = "${config.services.traefik.dataDir}/access.log";
 in
 {
   age.secrets = {
@@ -41,6 +70,7 @@ in
       entryPoints = {
         web = {
           address = ":80";
+          forwardedHeaders.trustedIPs = cloudflareIPs;
           http = {
             redirections = {
               entryPoint = {
@@ -52,11 +82,16 @@ in
         };
         websecure = {
           address = ":443";
+          forwardedHeaders.trustedIPs = cloudflareIPs;
           http3 = {
             advertisedPort = 443;
           };
           http = {
-            middlewares = [ "sts-header@file" ];
+            middlewares = [
+              "sts-header@file"
+              "rate-limit@file"
+              "cloudflare-only@file"
+            ];
             tls = {
               certResolver = "default";
               domains = [
@@ -74,7 +109,7 @@ in
         insecure = false;
       };
       ping = { };
-      accessLog = { };
+      accessLog.filePath = accessLogPath;
       certificatesResolvers = {
         default = {
           acme = {
@@ -95,12 +130,45 @@ in
               stsSeconds = 63072000;
             };
           };
+          "rate-limit".rateLimit = {
+            average = 100;
+            burst = 50;
+            period = "1m";
+          };
+          "cloudflare-only".ipAllowList = {
+            sourceRange = cloudflareIPs;
+          };
         };
         routers.dashboard = {
           rule = "Host(`traefik.${config.vars.domainName}`)";
           service = "api@internal";
           middlewares = [ "authelia" ];
         };
+      };
+    };
+  };
+
+  services.fail2ban = {
+    enable = true;
+    bantime = "1h";
+    bantime-increment = {
+      enable = true;
+      maxtime = "48h";
+    };
+    ignoreIP = [ config.vars.lanSubnet ];
+    jails.traefik = {
+      filter = {
+        Definition = {
+          failregex = ''^<HOST> - \S+ \[.*\] \".*\" (401|403|429) .*$'';
+          ignoreregex = "";
+        };
+      };
+      settings = {
+        backend = "auto";
+        logpath = accessLogPath;
+        maxretry = 10;
+        findtime = 300;
+        bantime = 3600;
       };
     };
   };
