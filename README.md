@@ -51,7 +51,6 @@ Here's the list of the main services deployed through their NixOS modules:
 
 I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
 - [Calibre-web](https://github.com/janeczku/calibre-web)
-- [Grist](https://www.getgrist.com/)
 - [Obsidian Livesync](https://github.com/vrtmrz/obsidian-livesync)
 - [Obsidian share-note](https://github.com/alangrainger/share-note)
 - [NocoDB](https://nocodb.com/)
