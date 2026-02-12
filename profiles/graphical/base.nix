@@ -20,7 +20,6 @@
     calibre
     imv
     libnotify
-    obsidian
     pwvucontrol
     # TODO: need https://github.com/NixOS/nixpkgs/pull/454282
     # rpi-imager
