@@ -82,10 +82,6 @@
 
   home-manager.users."${config.vars.username}" = {
     programs = {
-      keychain = {
-        enable = true;
-        keys = [ "id_ed25519" ];
-      };
       zathura = {
         enable = true;
         options = {
