@@ -36,6 +36,7 @@ tabline.apply_to_config(config)
 
 -- Wezterm config
 config.term = 'wezterm'
+config.mux_enable_ssh_agent = false
 config.window_background_opacity = 0.7
 config.window_content_alignment = { horizontal = 'Center', vertical = 'Center' }
 config.window_decorations = 'NONE'
