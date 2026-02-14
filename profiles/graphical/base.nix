@@ -17,12 +17,11 @@
   };
 
   environment.defaultPackages = with pkgs; [
-    calibre
+    # calibre
     imv
     libnotify
     pwvucontrol
-    # TODO: need https://github.com/NixOS/nixpkgs/pull/454282
-    # rpi-imager
+    rpi-imager
     vlc
     xdg-utils
   ];

@@ -80,6 +80,7 @@
 
     # PRs
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
+    khal.url = "github:NixOS/nixpkgs/pull/493590/head";
   };
 
   outputs =
@@ -212,6 +213,7 @@
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+              khal = inputs.khal.legacyPackages.${prev.stdenv.hostPlatform.system}.khal;
             })
           ]
           ++ (overlaysFromDir ./overlays);

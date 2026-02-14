@@ -13,6 +13,10 @@ in
     ./shikane.nix
     ./pipewire.nix
   ];
+  networking.firewall.allowedUDPPorts = [
+    53
+    67
+  ];
 
   disko = {
     devices = {
