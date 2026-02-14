@@ -80,6 +80,7 @@
 
     # PRs
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
+    n8n.url = "github:NixOS/nixpkgs/pull/485285/head";
   };
 
   outputs =
@@ -212,6 +213,14 @@
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+              n8n = inputs.n8n.legacyPackages.${prev.stdenv.hostPlatform.system}.n8n;
+              n8n-task-runner-launcher =
+                inputs.n8n.legacyPackages.${prev.stdenv.hostPlatform.system}.n8n-task-runner-launcher;
+              n8n-task-runner = inputs.n8n.legacyPackages.${prev.stdenv.hostPlatform.system}.n8n-task-runner;
+              n8n-task-runner-python =
+                inputs.n8n.legacyPackages.${prev.stdenv.hostPlatform.system}.n8n-task-runner-python;
+              n8n-nodes-carbonejs =
+                inputs.n8n.legacyPackages.${prev.stdenv.hostPlatform.system}.n8n-nodes-carbonejs;
             })
           ]
           ++ (overlaysFromDir ./overlays);
@@ -225,6 +234,12 @@
             inputs.arion.nixosModules.arion
             inputs.nix-minecraft.nixosModules.minecraft-servers
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
+            "${inputs.n8n}/nixos/modules/services/misc/n8n.nix"
+            {
+              disabledModules = [
+                "services/misc/n8n.nix"
+              ];
+            }
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
