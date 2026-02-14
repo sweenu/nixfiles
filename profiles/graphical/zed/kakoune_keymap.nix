@@ -118,8 +118,7 @@
       "l" = "vim::WrappingRight";
       "left" = "vim::WrappingLeft";
       "m" = "vim::PushHelixMatch";
-      # TODO: replace by this when on > 0.213.4 : "n" = "vim::HelixSelectNext";
-      "n" = "search::SelectNextMatch";
+      "n" = "vim::HelixSelectNext";
       "o" = "vim::InsertLineBelow";
       "p" = "vim::HelixPaste";
       "pagedown" = "vim::PageDown";
@@ -133,8 +132,7 @@
       "shift-i" = "vim::InsertFirstNonWhitespace";
       "shift-l" = "pane::ActivateNextItem";
       "shift-m" = "vim::Matching";
-      # TODO: replace by this when on > 0.213.4 : "alt-n" = "vim::HelixSelectPrevious";
-      "alt-n" = "search::SelectPreviousMatch";
+      "alt-n" = "vim::HelixSelectPrevious";
       "shift-o" = "vim::InsertLineAbove";
       "shift-p" = [
         "vim::HelixPaste"
