@@ -1,12 +1,19 @@
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+-- Colors --
+local dank_colors_path = wezterm.config_dir .. '/colors/dank-theme.toml'
+wezterm.add_to_config_reload_watch_list(dank_colors_path)
+local dank_colors = wezterm.color.load_scheme(dank_colors_path)
+config.color_scheme = 'dank-theme'
+
+-- Tabline --
 -- tabline config (need tabline.setup before apply_to_config, which I need before the rest)
 local tabline = require "tabline"
 tabline.setup({
   options = {
     icons_enabled = false,
-    theme = config.colors,
+    theme = dank_colors,
     section_separators = {
       left = wezterm.nerdfonts.ple_right_half_circle_thick,
       right = wezterm.nerdfonts.ple_left_half_circle_thick,
@@ -34,10 +41,10 @@ tabline.setup({
 
 tabline.apply_to_config(config)
 
--- Wezterm config
+-- Wezterm config --
 config.term = 'wezterm'
 config.mux_enable_ssh_agent = false
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0.9
 config.window_content_alignment = { horizontal = 'Center', vertical = 'Center' }
 config.window_decorations = 'NONE'
 config.font_size = 10.0
@@ -48,7 +55,7 @@ config.tab_bar_at_bottom = true
 config.quick_select_remove_styling = true
 config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.5 }
 
--- Keys
+-- Keys --
 config.leader = { key = 'g', mods = 'ALT' }
 config.keys = {
   -- Copy/paste
