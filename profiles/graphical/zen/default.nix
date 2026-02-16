@@ -90,7 +90,7 @@
 
     # Tridactyl
     xdg.configFile."tridactyl/tridactylrc".source = pkgs.replaceVars ./tridactylrc {
-      inherit (config.vars) terminalBin domainName;
+      inherit (config.vars) terminalBin domainName tailnetName;
       editor = config.environment.variables.EDITOR;
     };
     xdg.configFile."tridactyl/themes/zen.css".source = ./tridactyl_style.css;

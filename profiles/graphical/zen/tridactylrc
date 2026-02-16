@@ -34,14 +34,14 @@ set modeindicatormodes normal false
 set editorcmd @terminalBin@ -e @editor@
 set bmarkweight 10000000 "Makes the bookmarks appear first in :open
 set allowautofocus false
-" TODO: remove when https://github.com/tridactyl/tridactyl/commit/e1cce5f2b9c008da8880d14624ef9f20652ded43 is merged
-set completions.Tab.statusstylepretty true
 set completions.History.statusstylepretty true
+" TODO: remove when tridactyl > 1.24.4 is released
+set completions.Tab.statusstylepretty true
 
 "Blacklist
-seturl grist.@domainName@ superignore true
-seturl n8n.@domainName@ superignore true
+seturl n8n.@tailnetName@ superignore true
 seturl nocodb.@domainName@ superignore true
+seturl leetcode.com superignore true
 unbindurl calendar.notion.so ?
 unbindurl calendar.notion.so c
 unbindurl calendar.notion.so f
