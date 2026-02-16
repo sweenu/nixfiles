@@ -17,7 +17,6 @@
     ethtool
     ffmpeg
     gitui
-    gh
     gpg-tui
     nix-search-tv
     nix-output-monitor
