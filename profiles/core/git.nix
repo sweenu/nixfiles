@@ -22,7 +22,6 @@
         pull.rebase = "true";
         push.autoSetupRemote = "true";
         branch.autosetuprebase = "always";
-        blame.ignoreRevsFile = ".git-blame-ignore-revs";
         init.defaultBranch = "main";
         gpg.format = "ssh";
         commit.gpgSign = "true";

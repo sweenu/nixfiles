@@ -22,6 +22,8 @@ pkgs.mkShell {
     ];
 
   shellHook = ''
+    git config --local blame.ignoreRevsFile .git-blame-ignore-revs
+
     echo ""
     echo "🚀 Welcome to nixfiles devshell"
     echo ""
