@@ -1,4 +1,5 @@
 # Options ────────────────────────────────────────────────────────────────────
+colorscheme kanagawa
 set -add global ui_options terminal_assistant=none
 set global tabstop 4
 set global indentwidth 4

@@ -6,6 +6,8 @@
       fedit
     ];
 
+    xdg.configFile."kak/colors/kanagawa.kak".source = ./colors/kanagawa.kak;
+
     programs.kakoune = {
       enable = true;
       extraConfig = builtins.readFile ./kakrc;
