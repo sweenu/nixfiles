@@ -22,6 +22,32 @@
 
   nix = {
     channel.enable = false;
+    registry = {
+      nixos-unstable = {
+        from = {
+          type = "indirect";
+          id = "nixos-unstable";
+        };
+        to = {
+          type = "github";
+          owner = "NixOS";
+          repo = "nixpkgs";
+          ref = "nixos-unstable";
+        };
+      };
+      nixpkgs-master = {
+        from = {
+          type = "indirect";
+          id = "nixpkgs-master";
+        };
+        to = {
+          type = "github";
+          owner = "NixOS";
+          repo = "nixpkgs";
+          ref = "master";
+        };
+      };
+    };
     settings = {
       extra-experimental-features = "nix-command flakes";
       extra-substituters = [
