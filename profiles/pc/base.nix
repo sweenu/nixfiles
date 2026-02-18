@@ -8,6 +8,7 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
+    amp-cli # https://ampcode.com/
     bitwarden-cli
     bitwarden-desktop
     beeper
@@ -18,6 +19,8 @@
     ffmpeg
     gitui
     gpg-tui
+    libreoffice-fresh
+    mpv
     nix-search-tv
     nix-output-monitor
     nix-prefetch-git
@@ -26,7 +29,7 @@
     python3Packages.ptpython
     simple-scan
     tealdeer
-    tmate
+    visidata # TUI csv spreadsheet (https://www.visidata.org/)
     wol
     you-get
     yt-dlp
