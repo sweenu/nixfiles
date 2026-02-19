@@ -37,7 +37,12 @@
 
   services = {
     avahi.enable = true;
-    tailscale.useRoutingFeatures = "client";
+    tailscale = {
+      extraSetFlags = [
+        "--operator=${config.vars.username}"
+      ];
+      useRoutingFeatures = "client";
+    };
     getty = {
       extraArgs = [ "--skip-login" ];
       loginOptions = "${config.vars.username}";
