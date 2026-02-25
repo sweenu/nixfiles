@@ -64,6 +64,7 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixos";
+      inputs.home-manager.follows = "home";
     };
 
     hyprland.url = "github:hyprwm/Hyprland/v0.53.1";
