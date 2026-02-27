@@ -8,6 +8,7 @@
 
 let
   fqdn = "nextcloud.${config.vars.domainName}";
+  url = "https://${fqdn}";
   port = 9821;
   collaboraCfg = config.services.collabora-online;
 in
@@ -33,7 +34,7 @@ in
     https = true;
 
     notify_push.enable = true;
-    notify_push.nextcloudUrl = "http://localhost:${builtins.toString port}";
+    notify_push.nextcloudUrl = url;
 
     autoUpdateApps.enable = false;
     autoUpdateApps.startAt = "05:00:00";
@@ -128,7 +129,7 @@ in
           group = [
             {
               "@allow" = true;
-              host = "https://${fqdn}";
+              host = url;
               alias = "http://localhost:${builtins.toString port}";
             }
           ];
@@ -136,6 +137,9 @@ in
       };
     };
   };
+
+  systemd.services.nextcloud-notify_push.environment.NEXTCLOUD_URL =
+    lib.mkForce "http://localhost:${builtins.toString port}";
 
   systemd.services.nextcloud-setup-collabora =
     let
