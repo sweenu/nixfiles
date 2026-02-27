@@ -79,6 +79,15 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    relay-server = {
+      url = "github:sweenu/relay-server";
+      inputs.nixpkgs.follows = "nixos";
+    };
+    relay-control-plane = {
+      url = "github:sweenu/control-plane";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
     # PRs
     otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
     khal.url = "github:NixOS/nixpkgs/pull/493590/head";
@@ -214,6 +223,9 @@
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
                 inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+              relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
+              relay-control-plane =
+                inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
               khal = inputs.khal.legacyPackages.${prev.stdenv.hostPlatform.system}.khal;
             })
           ]
@@ -227,6 +239,8 @@
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
             inputs.nix-minecraft.nixosModules.minecraft-servers
+            inputs.relay-server.nixosModules.relay-server
+            inputs.relay-control-plane.nixosModules.relay-control-plane
             "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             {
               nixpkgs.overlays = overlays;

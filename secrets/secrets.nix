@@ -21,4 +21,5 @@ in
   "dawarich/oidc_client_secret_env.age".publicKeys = [ carokann najdorfHost ];
   "nocodb/env.age".publicKeys = [ carokann najdorfHost ];
   "pretix/env.age".publicKeys = [ carokann najdorfHost ];
+  "obsidian-relay/env.age".publicKeys = [ carokann najdorfHost ];
 }
