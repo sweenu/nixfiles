@@ -12,6 +12,7 @@
         PAGER = "less -R";
         TERM = "${config.vars.terminal}";
         BROWSER = "${config.vars.defaultBrowser}";
+        NIXPKGS_ALLOW_UNFREE = 1;
       };
       packages = with pkgs; [
         neofetch
