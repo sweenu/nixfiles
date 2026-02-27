@@ -1069,6 +1069,46 @@
         "url": "https://git.outfoxxed.me/quickshell/quickshell"
       }
     },
+    "relay-control-plane": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772404984,
+        "narHash": "sha256-HmMZyr5CA81KrXOB5vDZmVxD1ZbslUrS2F/h5UVjSCo=",
+        "owner": "sweenu",
+        "repo": "control-plane",
+        "rev": "638d81535c9fee16c4b30964a907fb42214a5719",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "control-plane",
+        "type": "github"
+      }
+    },
+    "relay-server": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772446758,
+        "narHash": "sha256-4j0je8p/PHkQRrkjihWdLf9R2BoYgUNpHxO66K18Zp8=",
+        "owner": "sweenu",
+        "repo": "relay-server",
+        "rev": "6f2538a804795119295f7f5f0f496525293be509",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "relay-server",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -1089,6 +1129,8 @@
         "nixos-hardware": "nixos-hardware",
         "otbr": "otbr",
         "pretix-postfinance": "pretix-postfinance",
+        "relay-control-plane": "relay-control-plane",
+        "relay-server": "relay-server",
         "treefmt-nix": "treefmt-nix_2",
         "zen-browser": "zen-browser"
       }

@@ -47,6 +47,7 @@ in
     # Obsidian
     ./obsidian-livesync.nix
     ./obsidian-share-note.nix
+    ./obsidian-relay.nix
 
     # Testing
     ./nocodb.nix
