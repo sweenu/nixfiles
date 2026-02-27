@@ -18,6 +18,7 @@
     ethtool
     ffmpeg
     gitui
+    git-absorb
     gpg-tui
     libreoffice-fresh
     mpv
