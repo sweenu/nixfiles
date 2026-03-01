@@ -63,6 +63,7 @@
     resolved = {
       enable = true;
       settings.Resolve = {
+        DNS = config.vars.dnsResolvers;
         DNSSEC = "allow-downgrade";
         DNSOverTLS = "opportunistic";
         FallbackDNS = config.vars.dnsResolvers;
