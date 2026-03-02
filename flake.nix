@@ -4,6 +4,7 @@
   inputs = {
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixpkgs-patcher.url = "github:gepbird/nixpkgs-patcher";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
@@ -89,8 +90,18 @@
     };
 
     # PRs
-    otbr.url = "github:NixOS/nixpkgs/pull/332296/head";
-    khal.url = "github:NixOS/nixpkgs/pull/493590/head";
+    nixpkgs-patch-otbr = {
+      url = "https://github.com/NixOS/nixpkgs/pull/332296.diff";
+      flake = false;
+    };
+    nixpkgs-patch-libreoffice = {
+      url = "https://github.com/NixOS/nixpkgs/pull/494721.diff";
+      flake = false;
+    };
+    nixpkgs-patch-pymicro-vad = {
+      url = "https://github.com/NixOS/nixpkgs/pull/495160.diff";
+      flake = false;
+    };
   };
 
   outputs =
@@ -99,6 +110,7 @@
       nixos,
       flake-parts,
       haumea,
+      nixpkgs-patcher,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -226,7 +238,6 @@
               relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
               relay-control-plane =
                 inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
-              khal = inputs.khal.legacyPackages.${prev.stdenv.hostPlatform.system}.khal;
             })
           ]
           ++ (overlaysFromDir ./overlays);
@@ -241,7 +252,6 @@
             inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.relay-server.nixosModules.relay-server
             inputs.relay-control-plane.nixosModules.relay-control-plane
-            "${inputs.otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
@@ -293,9 +303,10 @@
               system ? "x86_64-linux",
               extraModules ? [ ],
             }:
-            extendedLib.nixosSystem {
+            nixpkgs-patcher.lib.nixosSystem {
               inherit system;
-              specialArgs = {
+              nixpkgsPatcher.nixpkgs = inputs.nixos;
+              specialArgs = inputs // {
                 inherit
                   self
                   inputs
@@ -303,7 +314,6 @@
                   profiles
                   ;
                 lib = extendedLib;
-                nix-colors = inputs.nix-colors;
               };
               modules =
                 commonModules
