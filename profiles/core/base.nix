@@ -86,7 +86,10 @@
 
   security = {
     rtkit.enable = true;
-    sudo.extraConfig = "Defaults timestamp_timeout=300";
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=300
+      Defaults always_set_home
+    '';
   };
 
   services = {
