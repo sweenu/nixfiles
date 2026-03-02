@@ -34,6 +34,7 @@ in
     font-awesome
     twitter-color-emoji
     material-symbols
+    symbola
   ];
 
   home-manager.users."${config.vars.username}" = {
