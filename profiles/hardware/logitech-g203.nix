@@ -8,6 +8,8 @@ let
   '';
 in
 {
+  services.udev.packages = [ pkgs.openrgb ];
+
   systemd.services.g203-white = {
     description = "g203-white";
     serviceConfig = {
