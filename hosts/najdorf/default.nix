@@ -166,7 +166,7 @@ in
     # tailscale.serve.enable = true;
     avahi.enable = true;
     journald.extraConfig = ''
-      SystemMaxUse = 10G;
+      SystemMaxUse = 10G
     '';
     # PostgreSQL config and backups
     postgresql = {
