@@ -10,6 +10,8 @@
   dockTransparency = 1;
   widgetBackgroundColor = "sch";
   widgetColorMode = "default";
+  controlCenterTileColorMode = "primary";
+  buttonColorMode = "primary";
   cornerRadius = 12;
   niriLayoutGapsOverride = -1;
   niriLayoutRadiusOverride = -1;
@@ -22,10 +24,18 @@
   mangoLayoutBorderSize = -1;
   use24HourClock = true;
   showSeconds = false;
+  padHours12Hour = false;
   useFahrenheit = false;
+  windSpeedUnit = "kmh";
   nightModeEnabled = false;
   animationSpeed = 1;
   customAnimationDuration = 500;
+  syncComponentAnimationSpeeds = true;
+  popoutAnimationSpeed = 1;
+  popoutCustomAnimationDuration = 150;
+  modalAnimationSpeed = 1;
+  modalCustomAnimationDuration = 150;
+  enableRippleEffects = true;
   wallpaperFillMode = "Fill";
   blurredWallpaperLayer = false;
   blurWallpaperOnOverview = false;
@@ -58,6 +68,7 @@
   controlCenterShowMicPercent = false;
   controlCenterShowBatteryIcon = false;
   controlCenterShowPrinterIcon = false;
+  controlCenterShowScreenSharingIcon = true;
   showPrivacyButton = true;
   privacyShowMicIcon = false;
   privacyShowCameraIcon = false;
@@ -109,13 +120,16 @@
   showWorkspacePadding = false;
   workspaceScrolling = false;
   showWorkspaceApps = false;
+  workspaceDragReorder = true;
   maxWorkspaceIcons = 3;
+  workspaceAppIconSizeOffset = 4;
   groupWorkspaceApps = true;
   workspaceFollowFocus = false;
   showOccupiedWorkspacesOnly = true;
   reverseScrolling = false;
   dwlShowAllTags = false;
   workspaceColorMode = "default";
+  workspaceOccupiedColorMode = "none";
   workspaceUnfocusedColorMode = "default";
   workspaceUrgentColorMode = "default";
   workspaceFocusedBorderEnabled = false;
@@ -126,12 +140,23 @@
   scrollTitleEnabled = true;
   audioVisualizerEnabled = true;
   audioScrollMode = "volume";
+  audioWheelScrollAmount = 5;
   clockCompactMode = true;
   focusedWindowCompactMode = false;
   runningAppsCompactMode = true;
+  barMaxVisibleApps = 0;
+  barMaxVisibleRunningApps = 0;
+  barShowOverflowBadge = true;
+  appsDockHideIndicators = false;
+  appsDockColorizeActive = false;
+  appsDockActiveColorMode = "primary";
+  appsDockEnlargeOnHover = false;
+  appsDockEnlargePercentage = 125;
+  appsDockIconSizePercentage = 100;
   keyboardLayoutNameCompactMode = false;
   runningAppsCurrentWorkspace = false;
   runningAppsGroupByApp = false;
+  runningAppsCurrentMonitor = false;
   appIdSubstitutions = [
     {
       pattern = "Spotify";
@@ -154,7 +179,7 @@
       type = "contains";
     }
     {
-      pattern = "^steam_app_(\d+)$";
+      pattern = "^steam_app_(d+)$";
       replacement = "steam_icon_$1";
       type = "regex";
     }
@@ -165,28 +190,41 @@
   mediaSize = 1;
   appLauncherViewMode = "list";
   spotlightModalViewMode = "grid";
+  browserPickerViewMode = "grid";
+  browserUsageHistory = { };
+  appPickerViewMode = "grid";
+  filePickerUsageHistory = { };
   sortAppsAlphabetically = false;
   appLauncherGridColumns = 4;
   spotlightCloseNiriOverview = true;
+  spotlightSectionViewModes = { };
+  appDrawerSectionViewModes = { };
   niriOverviewOverlayEnabled = true;
+  dankLauncherV2Size = "compact";
+  dankLauncherV2BorderEnabled = false;
+  dankLauncherV2BorderThickness = 2;
+  dankLauncherV2BorderColor = "primary";
+  dankLauncherV2ShowFooter = true;
+  dankLauncherV2UnloadOnClose = false;
   useAutoLocation = true;
   weatherEnabled = true;
   networkPreference = "wifi";
-  vpnLastConnected = "";
   iconTheme = "System Default";
   cursorSettings = {
-    theme = "System Default";
-    size = 24;
-    niri = {
-      hideWhenTyping = false;
-      hideAfterInactiveMs = 0;
+    dwl = {
+      cursorHideTimeout = 0;
     };
     hyprland = {
       hideOnKeyPress = false;
       hideOnTouch = false;
       inactiveTimeout = 0;
     };
-    dwl.cursorHideTimeout = 0;
+    niri = {
+      hideAfterInactiveMs = 0;
+      hideWhenTyping = false;
+    };
+    size = 24;
+    theme = "System Default";
   };
   launcherLogoMode = "os";
   launcherLogoCustomPath = "";
@@ -229,8 +267,14 @@
   fadeToDpmsGracePeriod = 5;
   launchPrefix = "";
   brightnessDevicePins = { };
-  wifiNetworkPins.preferredWifi = "LeFauxCep";
-  bluetoothDevicePins.preferredDevice = "94:DB:56:73:D4:C8";
+  wifiNetworkPins = {
+    preferredWifi = [
+      "lfc-Plus"
+    ];
+  };
+  bluetoothDevicePins = {
+    preferredDevice = "94:DB:56:73:D4:C8";
+  };
   audioInputDevicePins = { };
   audioOutputDevicePins = { };
   gtkThemingEnabled = false;
@@ -258,8 +302,10 @@
   matugenTemplateDgop = true;
   matugenTemplateKcolorscheme = false;
   matugenTemplateVscode = false;
+  matugenTemplateEmacs = true;
   showDock = false;
   dockAutoHide = false;
+  dockSmartAutoHide = false;
   dockGroupByApp = false;
   dockOpenOnOverview = false;
   dockPosition = 1;
@@ -273,7 +319,19 @@
   dockBorderOpacity = 1;
   dockBorderThickness = 1;
   dockIsolateDisplays = false;
+  dockLauncherEnabled = false;
+  dockLauncherLogoMode = "apps";
+  dockLauncherLogoCustomPath = "";
+  dockLauncherLogoColorOverride = "";
+  dockLauncherLogoSizeOffset = 0;
+  dockLauncherLogoBrightness = 0.5;
+  dockLauncherLogoContrast = 1;
+  dockMaxVisibleApps = 0;
+  dockMaxVisibleRunningApps = 0;
+  dockShowOverflowBadge = true;
   notificationOverlayEnabled = false;
+  notificationPopupShadowEnabled = true;
+  notificationPopupPrivacyMode = false;
   modalDarkenBackground = true;
   lockScreenShowPowerActions = false;
   lockScreenShowSystemIcons = true;
@@ -281,6 +339,9 @@
   lockScreenShowDate = true;
   lockScreenShowProfileImage = false;
   lockScreenShowPasswordField = true;
+  lockScreenShowMediaPlayer = true;
+  lockScreenPowerOffMonitorsOnLock = false;
+  lockAtStartup = false;
   enableFprint = true;
   maxFprintTries = 15;
   lockScreenActiveMonitor = "all";
@@ -292,16 +353,20 @@
   notificationTimeoutCritical = 0;
   notificationCompactMode = false;
   notificationPopupPosition = 0;
+  notificationAnimationSpeed = 1;
+  notificationCustomAnimationDuration = 400;
   notificationHistoryEnabled = true;
   notificationHistoryMaxCount = 50;
   notificationHistoryMaxAgeDays = 7;
   notificationHistorySaveLow = true;
   notificationHistorySaveNormal = true;
   notificationHistorySaveCritical = true;
+  notificationRules = [ ];
   osdAlwaysShowValue = true;
   osdPosition = 5;
   osdVolumeEnabled = true;
   osdMediaVolumeEnabled = true;
+  osdMediaPlaybackEnabled = false;
   osdBrightnessEnabled = true;
   osdIdleInhibitorEnabled = true;
   osdMicMuteEnabled = true;
@@ -332,12 +397,21 @@
   updaterCustomCommand = "";
   updaterTerminalAdditionalParams = "";
   displayNameMode = "system";
-  screenPreferences.dock = [
-    "all"
-  ];
-  showOnLastDisplay.dock = true;
+  screenPreferences = {
+    dock = [
+      "all"
+    ];
+  };
+  showOnLastDisplay = {
+    dock = true;
+  };
   niriOutputSettings = { };
   hyprlandOutputSettings = { };
+  displayProfiles = { };
+  activeDisplayProfile = { };
+  displayProfileAutoSelect = false;
+  displayShowDisconnected = false;
+  displaySnapToEdge = true;
   barConfigs = [
     {
       autoHide = false;
@@ -353,8 +427,8 @@
           id = "systemTray";
         }
         {
-          id = "dankPomodoroTimer";
           enabled = true;
+          id = "dankPomodoroTimer";
         }
       ];
       enabled = true;
@@ -495,6 +569,13 @@
   desktopWidgetGridSettings = { };
   desktopWidgetInstances = [ ];
   desktopWidgetGroups = [ ];
-  builtInPluginSettings = { };
-  configVersion = 5;
+  builtInPluginSettings = {
+    dms_settings_search = {
+      trigger = "?";
+    };
+  };
+  clipboardEnterToPaste = false;
+  launcherPluginVisibility = { };
+  launcherPluginOrder = [ ];
+  configVersion = 6;
 }

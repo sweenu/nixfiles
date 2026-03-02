@@ -51,7 +51,12 @@ in
 
       # Community plugins
       calculator.enable = true;
-      emojiLauncher.enable = true;
+      emojiLauncher = {
+        enable = true;
+        settings = {
+          trigger = ":";
+        };
+      };
       powerUsagePlugin.enable = true;
       voxtype.enable = false;
       linuxWallpaperEngine.enable = false;
