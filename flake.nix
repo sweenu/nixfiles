@@ -102,6 +102,10 @@
       url = "https://github.com/NixOS/nixpkgs/pull/495160.diff";
       flake = false;
     };
+    nixpkgs-patch-calibre = {
+      url = "https://github.com/NixOS/nixpkgs/pull/494483.diff";
+      flake = false;
+    };
   };
 
   outputs =

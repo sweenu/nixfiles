@@ -17,7 +17,7 @@
   };
 
   environment.defaultPackages = with pkgs; [
-    # calibre
+    calibre
     imv
     libnotify
     pwvucontrol

@@ -956,6 +956,18 @@
         "type": "github"
       }
     },
+    "nixpkgs-patch-calibre": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-eYXocIwEg8YdcnNtSj4NpD6W5sns37D+pzr7c8lH85U=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/494483.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/494483.diff"
+      }
+    },
     "nixpkgs-patch-libreoffice": {
       "flake": false,
       "locked": {
@@ -1145,6 +1157,7 @@
         "nixos": "nixos",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
+        "nixpkgs-patch-calibre": "nixpkgs-patch-calibre",
         "nixpkgs-patch-libreoffice": "nixpkgs-patch-libreoffice",
         "nixpkgs-patch-otbr": "nixpkgs-patch-otbr",
         "nixpkgs-patch-pymicro-vad": "nixpkgs-patch-pymicro-vad",
