@@ -15,7 +15,6 @@ in
   "n8n/encryption_key.age".publicKeys = [ carokann najdorfHost ];
   "n8n/runners_auth_token.age".publicKeys = [ carokann najdorfHost ];
   "immich/env.age".publicKeys = [ carokann najdorfHost ];
-  "obsidian-livesync/env.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-share-note/env.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/secret_key_base.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/oidc_client_secret_env.age".publicKeys = [ carokann najdorfHost ];
