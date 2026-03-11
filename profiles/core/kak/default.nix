@@ -4,6 +4,7 @@
     home.packages = with pkgs; [
       pkgs.nixfmt
       fedit
+      perl # used by kakoune for some commands
     ];
 
     xdg.configFile."kak/colors/kanagawa.kak".source = ./colors/kanagawa.kak;
