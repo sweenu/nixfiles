@@ -71,7 +71,7 @@
     hyprland.url = "github:hyprwm/Hyprland/v0.54.1";
 
     nix-minecraft = {
-      url = "github:sweenu/nix-minecraft";
+      url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixos";
     };
 
@@ -94,16 +94,8 @@
       url = "https://github.com/NixOS/nixpkgs/pull/332296.diff";
       flake = false;
     };
-    nixpkgs-patch-libreoffice = {
-      url = "https://github.com/NixOS/nixpkgs/pull/494721.diff";
-      flake = false;
-    };
-    nixpkgs-patch-pymicro-vad = {
-      url = "https://github.com/NixOS/nixpkgs/pull/495160.diff";
-      flake = false;
-    };
-    nixpkgs-patch-calibre = {
-      url = "https://github.com/NixOS/nixpkgs/pull/494483.diff";
+    nixpkgs-patch-modrinth = {
+      url = "https://github.com/NixOS/nixpkgs/pull/496103.diff";
       flake = false;
     };
   };

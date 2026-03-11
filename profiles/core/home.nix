@@ -15,7 +15,7 @@
         NIXPKGS_ALLOW_UNFREE = 1;
       };
       packages = with pkgs; [
-        neofetch
+        fastfetch
         rclone
       ];
     };

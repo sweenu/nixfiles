@@ -13,7 +13,7 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   powerManagement.powertop.enable = true;
-  systemd.sleep.extraConfig = "HibernateDelaySec=2h";
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "2h";
 
   environment.defaultPackages = with pkgs; [ powertop ];
 }
