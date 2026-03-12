@@ -10,10 +10,7 @@
       HandleLidSwitchDocked = "ignore";
     };
   };
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "2h";
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
-  powerManagement.powertop.enable = true;
-  systemd.sleep.settings.Sleep.HibernateDelaySec = "2h";
-
-  environment.defaultPackages = with pkgs; [ powertop ];
 }
