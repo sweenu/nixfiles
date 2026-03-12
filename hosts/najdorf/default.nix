@@ -51,6 +51,9 @@ in
     # Testing
     ./nocodb.nix
     # ./pretix.nix
+
+    # Gaming
+    ./minecraft.nix
   ]
   ++ suites.server;
 
@@ -162,8 +165,7 @@ in
   };
 
   services = {
-    # TODO: https://github.com/tailscale/tailscale/issues/18381
-    # tailscale.serve.enable = true;
+    tailscale.serve.enable = true;
     avahi.enable = true;
     journald.extraConfig = ''
       SystemMaxUse = 10G

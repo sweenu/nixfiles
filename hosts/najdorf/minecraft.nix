@@ -1,43 +1,55 @@
 { pkgs, ... }:
 
 let
-  modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/TGros-Dubois/Create-Co/raw/c0d4bafcf046a5ba139af3d6136c9cd3adf911fa/pack.toml";
-    packHash = "sha256-8qldwp9EtJyu/fKRTYcGXqiUQXKUjAW+I3w3nu4AXLg=";
+  creabblemonPort = 25565;
+  creabblemonPortStr = builtins.toString creabblemonPort;
+  modpack = pkgs.fetchModrinthModpack {
+    url = "https://github.com/sweenu/mc-modpacks/releases/download/v26.03.301019/creabblemon-fabric.mrpack";
+    packHash = "sha256-TIxrw35tBinvVTSh0Fxhi0oGtGQ5txj1/qLme4gpw60=";
   };
 in
 {
   services.minecraft-servers = {
     enable = true;
     eula = true;
-    openFirewall = true;
 
-    servers.create-co = {
+    servers.creabblemon = {
       enable = true;
       managementSystem = {
-        tmux.enable = true;
-        systemd-socket.enable = false;
+        tmux.enable = false;
+        systemd-socket.enable = true;
       };
       autoStart = true;
+      package = pkgs.fabricServers.fabric-1_20_1.override {
+        loaderVersion = "0.18.4";
+        jre_headless = pkgs.jdk17_headless;
+      };
+      symlinks = {
+        "mods" = "${modpack}/mods";
+      };
 
-      package = pkgs.neoforgeServers.neoforge-1_21_1-21_1_216;
+      extraStartPre = ''
+        # Some previous starts may have left a plain "config" file behind.
+        # Performance mods need a writable config directory to boot.
+        if [ -f config ]; then
+          rm -f config
+        fi
+        mkdir -p config
+      '';
 
       jvmOpts = "-Xms4G -Xmx8G";
 
       serverProperties = {
-        motd = "Create & Co";
+        motd = "Creabblemon";
         max-players = 10;
-        online-mode = true;
-        server-port = 25565;
+        online-mode = false;
+        server-port = creabblemonPort;
         view-distance = 18;
-      };
-
-      symlinks = {
-        mods = "${modpack}/mods";
-      };
-      files = {
-        config = "${modpack}/config";
+        enforce-secure-profile = false;
       };
     };
   };
+
+  # services.tailscale.serve.services.mc-creabblemon.endpoints."tcp:${creabblemonPortStr}" =
+  #   "http://localhost:${creabblemonPortStr}";
 }
