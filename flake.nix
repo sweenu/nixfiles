@@ -71,7 +71,7 @@
     hyprland.url = "github:hyprwm/Hyprland/v0.54.2";
 
     nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
+      url = "github:sweenu/nix-minecraft/dev";
       inputs.nixpkgs.follows = "nixos";
     };
 

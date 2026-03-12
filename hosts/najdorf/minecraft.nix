@@ -1,43 +1,40 @@
 { pkgs, ... }:
 
 let
-  modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/TGros-Dubois/Create-Co/raw/c0d4bafcf046a5ba139af3d6136c9cd3adf911fa/pack.toml";
-    packHash = "sha256-8qldwp9EtJyu/fKRTYcGXqiUQXKUjAW+I3w3nu4AXLg=";
+  cobblemonPort = 25565;
+  cobblemonPortStr = builtins.toString cobblemonPort;
+  modpack = pkgs.fetchModrinthModpack {
+    url = "https://cdn.modrinth.com/data/5FFgwNNP/versions/Lydu1ZNo/Cobblemon%20Modpack%20%5BFabric%5D%201.7.3.mrpack";
+    packHash = "sha256-UnE56M+zvard4/TxrEypr1EtFbsG+Cr0b4RUXAIZ5j4=";
   };
 in
 {
   services.minecraft-servers = {
     enable = true;
     eula = true;
-    openFirewall = true;
 
-    servers.create-co = {
+    servers.cobblemon = {
       enable = true;
+      inherit modpack;
       managementSystem = {
         tmux.enable = true;
         systemd-socket.enable = false;
       };
       autoStart = true;
 
-      package = pkgs.neoforgeServers.neoforge-1_21_1-21_1_216;
-
       jvmOpts = "-Xms4G -Xmx8G";
 
       serverProperties = {
-        motd = "Create & Co";
+        motd = "Cobblemon";
         max-players = 10;
         online-mode = true;
-        server-port = 25565;
+        server-port = cobblemonPort;
         view-distance = 18;
-      };
-
-      symlinks = {
-        mods = "${modpack}/mods";
-      };
-      files = {
-        config = "${modpack}/config";
+        enforce-secure-profile = true;
       };
     };
   };
+
+  services.tailscale.serve.services.mc-cobblemon.endpoints."tcp:${cobblemonPortStr}" =
+    "http://localhost:${cobblemonPortStr}";
 }
