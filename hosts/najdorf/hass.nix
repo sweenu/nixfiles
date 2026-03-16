@@ -2,7 +2,6 @@
   self,
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }:
@@ -45,6 +44,7 @@ in
     home-assistant = {
       enable = true;
       extraComponents = [
+        "anthropic"
         "apple_tv" # looks for it for some reason
         "default_config"
         "esphome"
@@ -71,7 +71,6 @@ in
         bbox
         dawarich-ha
         home-assistant-custom-components.adaptive_lighting
-        extended_openai_conversation
         openai-whisper-cloud
       ];
       config = {
@@ -84,8 +83,6 @@ in
           elevation = "!secret elevation";
           unit_system = "metric";
           temperature_unit = "C";
-          external_url = "https://${fqdn}";
-          internal_url = "http://${serverIP}:${builtins.toString hassPort}";
         };
         http = {
           use_x_forwarded_for = true;
