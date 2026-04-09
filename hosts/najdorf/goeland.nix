@@ -14,6 +14,7 @@ let
     home-assistant = "https://www.home-assistant.io/atom.xml";
     zed = "https://zed.dev/blog.rss";
     matter-alpha = "https://www.matteralpha.com/feed";
+    ciechanowski = "https://ciechanow.ski/atom.xml";
   };
 in
 {
