@@ -14,12 +14,21 @@ final: prev: with prev; {
 
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);
 
-  aiobbox = pkgs.python3Packages.callPackage ./aiobbox.nix { };
+  aiobbox = pkgs.python314Packages.callPackage ./aiobbox.nix { };
   bbox = callPackage ./bbox.nix { };
 
-  dawarich-api = pkgs.python3Packages.callPackage ./dawarich-api.nix { };
+  dawarich-api = pkgs.python314Packages.callPackage ./dawarich-api.nix { };
   dawarich-ha = callPackage ./dawarich-ha.nix { };
 
+  openthread-border-router = prev.openthread-border-router.overrideAttrs (oldAttrs: {
+    postFixup = lib.concatStringsSep "\n" [
+      (oldAttrs.postFixup or "")
+      ''
+        substituteInPlace $out/bin/otbr-firewall \
+          --replace-fail '#!/bin/bash' '#!${bash}/bin/bash'
+      ''
+    ];
+  });
 
   openai-whisper-cloud = callPackage ./openai-whisper-cloud.nix { };
 }

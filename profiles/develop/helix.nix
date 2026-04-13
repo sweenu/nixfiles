@@ -70,12 +70,6 @@
       # C
       clang-tools
 
-      # bash
-      nodePackages.bash-language-server
-
-      # javascript
-      nodePackages.typescript-language-server
-
       # markdown
       marksman
 

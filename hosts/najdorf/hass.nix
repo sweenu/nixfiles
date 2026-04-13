@@ -138,7 +138,7 @@ in
 
     openthread-border-router = {
       enable = true;
-      backboneInterface = "eth0";
+      backboneInterfaces = [ "eth0" ];
       rest.listenAddress = "::";
       web = {
         enable = true;

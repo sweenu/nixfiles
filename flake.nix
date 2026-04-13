@@ -91,11 +91,7 @@
 
     # PRs
     nixpkgs-patch-otbr = {
-      url = "https://github.com/NixOS/nixpkgs/pull/332296.diff";
-      flake = false;
-    };
-    nixpkgs-patch-modrinth = {
-      url = "https://github.com/NixOS/nixpkgs/pull/496103.diff";
+      url = "https://github.com/NixOS/nixpkgs/pull/502388.diff";
       flake = false;
     };
   };

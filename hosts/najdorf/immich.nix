@@ -23,7 +23,6 @@ in
     secretsFile = config.age.secrets."immich/envFile".path;
     mediaLocation = "/opt/immich";
     port = 2283;
-    database.enableVectors = false;
   };
 
   services.traefik.dynamicConfigOptions.http = rec {
