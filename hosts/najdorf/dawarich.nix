@@ -5,11 +5,10 @@
 }:
 
 let
-  fqdn = "dawarich.${config.vars.domainName}";
+  fqdn = "dawarich.${config.vars.tailnetName}";
   tsidpUrl = "https://idp.${config.vars.tailnetName}";
-  dawarichTsUrl = "https://dawarich.${config.vars.tailnetName}";
   oidcClientId = "924f509529c388c8740c7407492777ea";
-  oidcRedirectUri = "${dawarichTsUrl}/users/auth/openid_connect/callback";
+  oidcRedirectUri = "https://${fqdn}/users/auth/openid_connect/callback";
 in
 
 {
@@ -33,12 +32,13 @@ in
       passwordFile = config.age.secrets.smtpPassword.path;
       fromAddress = "Dawarich <${config.vars.email}>";
     };
-    extraConfig = {
+    environment = {
+      APPLICATION_PROTOCOL = "https";
       OIDC_CLIENT_ID = oidcClientId;
       OIDC_ISSUER = tsidpUrl;
       OIDC_REDIRECT_URI = oidcRedirectUri;
       OIDC_PROVIDER_NAME = "Tailscale";
-      OIDC_AUTO_REGISTER = "false";
+      OIDC_AUTO_REGISTER = "true";
       ALLOW_EMAIL_PASSWORD_REGISTRATION = "false";
       PHOTON_API_HOST = "127.0.0.1:2322";
       PHOTON_API_USE_HTTPS = "false";

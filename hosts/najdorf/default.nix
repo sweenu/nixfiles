@@ -39,6 +39,7 @@ in
     ./nextcloud.nix
     ./calibre-web.nix
     ./immich.nix
+    ./dawarich.nix
 
     # Monitoring & Control
     ./netdata.nix
