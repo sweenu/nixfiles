@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -94,12 +94,14 @@
 
   services = {
     avahi = {
-      nssmdns4 = true;
+      enable = lib.mkDefault true;
+      nssmdns4 = lib.mkDefault true; # resolves `*.local` names
+      # Consumer-only by default: don't broadcast our own identity on the LAN.
       publish = {
-        enable = true;
-        addresses = true;
-        domain = true;
-        userServices = true;
+        enable = lib.mkDefault false;
+        addresses = lib.mkDefault false;
+        domain = lib.mkDefault false;
+        userServices = lib.mkDefault false;
       };
     };
     earlyoom = {

@@ -43,6 +43,8 @@
   programs.mosh.enable = true;
 
   services = {
+    # Servers reach other hosts by IP / DNS / Tailscale; no need to resolve `.local` names here.
+    avahi.nssmdns4 = false;
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;

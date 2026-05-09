@@ -38,7 +38,6 @@
   ];
 
   services = {
-    avahi.enable = true;
     tailscale = {
       extraSetFlags = [
         "--operator=${config.vars.username}"

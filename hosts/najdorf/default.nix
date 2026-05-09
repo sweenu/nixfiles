@@ -169,7 +169,6 @@ in
 
   services = {
     tailscale.serve.enable = true;
-    avahi.enable = true;
     journald.extraConfig = ''
       SystemMaxUse = 10G
     '';
