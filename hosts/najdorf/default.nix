@@ -40,6 +40,7 @@ in
     ./calibre-web.nix
     ./immich.nix
     ./dawarich.nix
+    ./actual.nix
 
     # Monitoring & Control
     ./netdata.nix
