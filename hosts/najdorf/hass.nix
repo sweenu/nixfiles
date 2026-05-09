@@ -151,6 +151,13 @@ in
       };
     };
 
+    journal-brief.settings.exclusions = [
+      {
+        SYSLOG_IDENTIFIER = [ "otbr-agent" ];
+        MESSAGE = [ "/.*\\[W\\].*/" ];
+      }
+    ];
+
     wyoming = {
       piper = {
         servers."main" = {

@@ -20,6 +20,8 @@ final: prev: with prev; {
   dawarich-api = pkgs.python314Packages.callPackage ./dawarich-api.nix { };
   dawarich-ha = callPackage ./dawarich-ha.nix { };
 
+  journal-brief = callPackage ./journal-brief.nix { };
+
   openthread-border-router = prev.openthread-border-router.overrideAttrs (oldAttrs: {
     postFixup = lib.concatStringsSep "\n" [
       (oldAttrs.postFixup or "")

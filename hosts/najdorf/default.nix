@@ -35,6 +35,7 @@ in
 
     ./n8n.nix
     ./goeland.nix
+    ./journal-brief.nix
     ./hass.nix
     ./nextcloud.nix
     ./calibre-web.nix
