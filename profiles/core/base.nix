@@ -28,6 +28,7 @@
       kakoune
       less
       lshw
+      lsof
       moreutils
       nmap
       nvd
