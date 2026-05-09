@@ -36,7 +36,7 @@ in
     ./n8n.nix
     ./goeland.nix
     ./journal-brief.nix
-    ./hass.nix
+    ./home-automation
     ./nextcloud.nix
     ./calibre-web.nix
     ./immich.nix

@@ -2,34 +2,14 @@
   self,
   config,
   pkgs,
-  lib,
   ...
 }:
 
 let
-  fqdn = "hass.${config.vars.tailnetName}";
   serverIP = config.vars.staticIP;
   serverIPv6 = "2001:861:3884:4fd0:8ceb:7d56:bf25:5a17";
-  hassPort = config.services.home-assistant.config.http.server_port;
-  massWebPort = 8095;
 in
 {
-  networking.firewall.extraCommands = ''
-    # Thread
-    ${lib.openTCPPortForLAN 8081}
-    ${lib.openTCPPortForLAN 8082}
-    # Music Assistant
-    ${lib.openTCPPortForLAN massWebPort} # web interface
-    ${lib.openTCPPortForLAN 8097} # web socket
-    # Squeezlite
-    ${lib.openTCPPortForLAN 3483}
-    ${lib.openUDPPortForLAN 3483}
-    ${lib.openTCPPortForLAN 9090}
-    # Spotify Connect & more (ephemeral ports)
-    ${lib.openTCPPortRangeForLAN 32768 65535}
-    ${lib.openUDPPortRangeForLAN 32768 65535}
-  '';
-
   age.secrets = {
     hassSecretsYaml = {
       file = "${self}/secrets/hass/secrets.age";
@@ -120,68 +100,14 @@ in
       openFirewall = true;
     };
 
-    music-assistant = {
-      enable = true;
-      providers = [
-        "hass"
-        "hass_players"
-        "spotify"
-        "spotify_connect"
-        "squeezelite"
-        "sendspin"
-      ];
-    };
-
     matter-server = {
       enable = true;
-    };
-
-    openthread-border-router = {
-      enable = true;
-      backboneInterfaces = [ "eth0" ];
-      rest.listenAddress = "::";
-      web = {
-        enable = true;
-        listenAddress = "::";
-      };
-      radio = {
-        device = "/dev/serial/by-id/usb-Nabu_Casa_Home_Assistant_Connect_ZBT-1_a47f43e6f769ef11bee8a976d9b539e6-if00-port0";
-        baudRate = 460800;
-        flowControl = false;
-      };
-    };
-
-    journal-brief.settings.exclusions = [
-      {
-        SYSLOG_IDENTIFIER = [ "otbr-agent" ];
-        MESSAGE = [ "/.*\\[W\\].*/" ];
-      }
-    ];
-
-    wyoming = {
-      piper = {
-        servers."main" = {
-          enable = true;
-          zeroconf.enable = false;
-          voice = "en_GB-jenny_dioco-medium";
-          uri = "tcp://0.0.0.0:10200";
-        };
-      };
-      faster-whisper = {
-        servers.main = {
-          enable = true;
-          model = "small";
-          language = "en";
-          uri = "tcp://0.0.0.0:10300";
-        };
-      };
     };
   };
 
   # TODO: https://github.com/tailscale/tailscale/issues/18381
   # services.tailscale.serve.services = {
-  #   hass.https."443" = "http://localhost:${builtins.toString hassPort}";
-  #   mass.https."443" = "http://localhost:${builtins.toString massWebPort}";
+  #   hass.https."443" = "http://localhost:${builtins.toString config.services.home-assistant.config.http.server_port}";
   # };
 
   services.restic.backups.opt.paths = [ config.services.home-assistant.configDir ];
