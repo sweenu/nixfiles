@@ -12,6 +12,7 @@
         "devenv.*"
         ".devenv.*"
         ".devenv/"
+        ".claude/"
       ];
       settings = {
         user = {
