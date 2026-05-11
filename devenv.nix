@@ -1,27 +1,31 @@
 {
-  config,
   pkgs,
-  inputs',
+  inputs,
+  ...
 }:
 
-pkgs.mkShell {
+let
+  flakeInputs = inputs.nixfiles.inputs;
+in
+{
   packages =
     with pkgs;
     [
       cachix
       git
       nix-output-monitor
+      nixfmt-rfc-style
       nvd
+      treefmt
     ]
     ++ [
-      config.treefmt.build.wrapper
-      inputs'.agenix.packages.default
-      inputs'.deploy.packages.default
-      inputs'.nixos-anywhere.packages.default
-      inputs'.disko.packages.default
+      flakeInputs.agenix.packages.${pkgs.system}.default
+      flakeInputs.deploy.packages.${pkgs.system}.default
+      flakeInputs.nixos-anywhere.packages.${pkgs.system}.default
+      flakeInputs.disko.packages.${pkgs.system}.default
     ];
 
-  shellHook = ''
+  enterShell = ''
     git config --local blame.ignoreRevsFile .git-blame-ignore-revs
 
     echo ""
