@@ -154,7 +154,8 @@ in
       filter = {
         Definition = {
           failregex = ''^<HOST> - \S+ \[.*\] \".*\" (401|403|429) .*$'';
-          ignoreregex = "";
+          # ignore long-lived endpoints
+          ignoreregex = ''^<HOST> - \S+ \[.*\] "(?:GET|POST) (?:/push/ws\b|/socket\.io/\b[^\"]*|[^\"]*\btransport=websocket\b[^\"]*) HTTP/[^\"]+" (?:401|403|429) .*$'';
         };
       };
       settings = {
