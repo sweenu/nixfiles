@@ -8,6 +8,7 @@
       interactiveShellInit = ''
         fish_vi_key_bindings
         set sponge_purge_only_on_exit true
+        command -q devenv; and devenv hook fish | source
       '';
       shellAbbrs = rec {
         # nix
