@@ -9,7 +9,7 @@
         ".env"
         ".envrc"
         ".direnv"
-        "devenv.*"
+        "devenv.local.nix"
         ".devenv.*"
         ".devenv/"
         ".claude/"
