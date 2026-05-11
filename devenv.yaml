@@ -1,0 +1,8 @@
+inputs:
+  nixpkgs:
+    url: github:nixos/nixpkgs/nixos-unstable
+  nixfiles:
+    url: path:.
+    inputs:
+      nixos:
+        follows: nixpkgs

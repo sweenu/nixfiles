@@ -23,7 +23,7 @@ nixfiles/
 ├── pkgs/           → Custom packages
 ├── overlays/       → Additional overlays
 ├── lib.nix         → Custom lib functions
-└── shell.nix       → Development shell
+└── devenv.nix      → Development shell
 ```
 
 ### Software I use on my personal computer (carokann)

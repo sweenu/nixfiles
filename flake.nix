@@ -132,8 +132,6 @@
               };
             };
           };
-
-          devShells.default = import ./shell.nix { inherit config pkgs inputs'; };
         };
 
       flake =
