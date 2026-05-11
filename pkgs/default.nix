@@ -22,14 +22,6 @@ final: prev: with prev; {
 
   journal-brief = callPackage ./journal-brief.nix { };
 
-  openthread-border-router = prev.openthread-border-router.overrideAttrs (oldAttrs: {
-    postFixup = lib.concatStringsSep "\n" [
-      (oldAttrs.postFixup or "")
-      ''
-        substituteInPlace $out/bin/otbr-firewall \
-          --replace-fail '#!/bin/bash' '#!${bash}/bin/bash'
-      ''
-    ];
   });
 
   openai-whisper-cloud = callPackage ./openai-whisper-cloud.nix { };

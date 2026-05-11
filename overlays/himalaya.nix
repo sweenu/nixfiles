@@ -1,10 +1,11 @@
 final: prev: {
   himalaya = prev.himalaya.override {
-    withFeatures = [
+    buildFeatures = [
       "notmuch"
       "imap"
       "maildir"
       "smtp"
     ];
+    buildNoDefaultFeatures = true;
   };
 }

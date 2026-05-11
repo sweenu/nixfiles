@@ -88,12 +88,6 @@
       url = "github:sweenu/control-plane";
       inputs.nixpkgs.follows = "nixos";
     };
-
-    # PRs
-    nixpkgs-patch-otbr = {
-      url = "https://github.com/NixOS/nixpkgs/pull/502388.diff";
-      flake = false;
-    };
   };
 
   outputs =
