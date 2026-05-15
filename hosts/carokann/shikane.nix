@@ -28,11 +28,11 @@ let
 
     # Apply the rule for future workspaces
     # This ensures any NEW workspaces in this range open on this monitor
-    hyprctl keyword workspace "r[$START-$END],monitor:$MONITOR"
+    hyprctl eval "hl.workspace_rule({ workspace = \"r[$START-$END]\", monitor = \"$MONITOR\" })"
 
     # Force-move existing persistent workspaces
     for ((i=START; i<=END; i++)); do
-      hyprctl dispatch moveworkspacetomonitor "$i" "$MONITOR"
+      hyprctl dispatch "hl.dsp.workspace.move({ workspace = \"$i\", monitor = \"$MONITOR\" })"
     done
   '';
 in
@@ -76,7 +76,11 @@ in
                   "${lib.getExe shikaneMonitorSetup} \"$SHIKANE_OUTPUT_NAME\" 5 8"
                 ];
               }
-              (laptopOutput // { exec = [ "hyprctl keyword workspace r[1-4],monitor:$SHIKANE_OUTPUT_NAME" ]; })
+              (laptopOutput // {
+                exec = [
+                  ''hyprctl eval "hl.workspace_rule({ workspace = \"r[1-4]\", monitor = \"$SHIKANE_OUTPUT_NAME\" })"''
+                ];
+              })
             ];
           }
           # At home, put laptop monitor on the right and give the main monitor a, s, d and f

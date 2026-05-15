@@ -1,137 +1,167 @@
-{ config, pkgs }:
+{ lib, config, pkgs }:
 let
+  inherit (lib.generators) mkLuaInline;
+
   backlight = "${pkgs.backlight}/bin/backlight";
   dms = "dms ipc call";
   mod = "SUPER";
+
+  # Dispatcher helpers
+  exec = cmd: mkLuaInline ''hl.dsp.exec_cmd("${cmd}")'';
+  killactive = mkLuaInline "hl.dsp.window.close()";
+  exitHyprland = mkLuaInline "hl.dsp.exit()";
+  movefocus = dir: mkLuaInline ''hl.dsp.focus({ direction = "${dir}" })'';
+  movewindow = dir: mkLuaInline ''hl.dsp.window.move({ direction = "${dir}" })'';
+  focusWorkspace = n: mkLuaInline "hl.dsp.focus({ workspace = ${toString n} })";
+  moveToWorkspaceSilent = n: mkLuaInline "hl.dsp.window.move({ workspace = ${toString n} })";
+  moveToWorkspace = n: mkLuaInline "hl.dsp.window.move({ workspace = ${toString n}, follow = true })";
+  layoutmsg = msg: mkLuaInline ''hl.dsp.layout("${msg}")'';
+  fullscreenMaximized = mkLuaInline ''hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" })'';
+  fullscreenToggle = mkLuaInline ''hl.dsp.window.fullscreen({ action = "toggle" })'';
+  toggleSpecial = name: mkLuaInline ''hl.dsp.workspace.toggle_special("${name}")'';
+  submap = name: mkLuaInline ''hl.dsp.submap("${name}")'';
+  resizeactive = x: y: mkLuaInline "hl.dsp.window.resize({ x = ${toString x}, y = ${toString y}, relative = true })";
+  drag = mkLuaInline "hl.dsp.window.drag()";
+  resizeMouse = mkLuaInline "hl.dsp.window.resize()";
+  dpmsToggle = monitor: mkLuaInline ''hl.dsp.dpms({ action = "toggle", monitor = "${monitor}" })'';
+
+  # Bind helpers
+  bind = key: dsp: { _args = [ key dsp ]; };
+  bindFlags = flags: key: dsp: { _args = [ key dsp flags ]; };
+  bindLocked = bindFlags { locked = true; };
+  bindLockedRepeat = bindFlags {
+    locked = true;
+    repeating = true;
+  };
+  bindRepeat = bindFlags { repeating = true; };
+  bindMouse = bindFlags { mouse = true; };
+
+  workspaces = [
+    {
+      key = "A";
+      n = 1;
+    }
+    {
+      key = "S";
+      n = 2;
+    }
+    {
+      key = "D";
+      n = 3;
+    }
+    {
+      key = "F";
+      n = 4;
+    }
+    {
+      key = "U";
+      n = 5;
+    }
+    {
+      key = "I";
+      n = 6;
+    }
+    {
+      key = "O";
+      n = 7;
+    }
+    {
+      key = "P";
+      n = 8;
+    }
+  ];
 in
-{
-  # Keybindings
-  bind = [
-    # Kill focused window
-    "${mod}, X, killactive"
+[
+  # Window management
+  (bind "${mod} + X" killactive)
+  (bind "${mod} + SHIFT + R" (exec "hyprctl reload"))
+  (bind "${mod} + SHIFT + Q" exitHyprland)
 
-    # Reload configuration
-    "${mod} SHIFT, R, exec, hyprctl reload"
+  # Focus movement
+  (bind "${mod} + H" (movefocus "left"))
+  (bind "${mod} + J" (movefocus "down"))
+  (bind "${mod} + K" (movefocus "up"))
+  (bind "${mod} + L" (movefocus "right"))
 
-    # Exit Hyprland
-    "${mod} SHIFT, Q, exit"
+  # Move windows
+  (bind "${mod} + SHIFT + H" (movewindow "left"))
+  (bind "${mod} + SHIFT + J" (movewindow "down"))
+  (bind "${mod} + SHIFT + K" (movewindow "up"))
+  (bind "${mod} + SHIFT + L" (movewindow "right"))
+]
+++ map (w: bind "${mod} + ${w.key}" (focusWorkspace w.n)) workspaces
+++ map (w: bind "${mod} + SHIFT + ${w.key}" (moveToWorkspaceSilent w.n)) workspaces
+++ map (w: bind "${mod} + CTRL + SHIFT + ${w.key}" (moveToWorkspace w.n)) workspaces
+++ [
+  # Layout controls
+  (bind "${mod} + V" (layoutmsg "togglesplit"))
+  (bind "${mod} + SHIFT + V" (layoutmsg "preselect d"))
+  (bind "${mod} + TAB" fullscreenMaximized)
+  (bind "F11" fullscreenToggle)
 
-    # Focus movement
-    "${mod}, H, movefocus, l"
-    "${mod}, J, movefocus, d"
-    "${mod}, K, movefocus, u"
-    "${mod}, L, movefocus, r"
+  # Apps
+  (bind "${mod} + Space" (exec "${dms} spotlight toggle"))
+  (bind "${mod} + Return" (exec "app2unit -- ${config.vars.terminalBin}"))
+  (bind "${mod} + B" (exec "app2unit -- ${config.vars.defaultBrowser}"))
+  (bind "${mod} + N" (exec "app2unit -- obsidian"))
+  (bind "${mod} + Z" (exec "app2unit -- zeditor"))
+  (bind "${mod} + SHIFT + Escape" (exec "app2unit -- ${dms} processlist open"))
 
-    # Move windows
-    "${mod} SHIFT, H, movewindow, l"
-    "${mod} SHIFT, J, movewindow, d"
-    "${mod} SHIFT, K, movewindow, u"
-    "${mod} SHIFT, L, movewindow, r"
+  # Notifications
+  (bind "${mod} + Comma" (exec "${dms} notifications clearAll"))
+  (bind "${mod} + Period" (exec "${dms} notifications toggle"))
 
-    # Workspace switching
-    "${mod}, A, workspace, 1"
-    "${mod}, S, workspace, 2"
-    "${mod}, D, workspace, 3"
-    "${mod}, F, workspace, 4"
-    "${mod}, U, workspace, 5"
-    "${mod}, I, workspace, 6"
-    "${mod}, O, workspace, 7"
-    "${mod}, P, workspace, 8"
+  # Soundcards
+  (bind "${mod} + bracketleft" (exec "${dms} audio cycleoutput"))
+  (bind "${mod} + bracketright" (exec "${dms} audio cycleoutput"))
 
-    # Move to workspace
-    "${mod} SHIFT, A, movetoworkspacesilent, 1"
-    "${mod} SHIFT, S, movetoworkspacesilent, 2"
-    "${mod} SHIFT, D, movetoworkspacesilent, 3"
-    "${mod} SHIFT, F, movetoworkspacesilent, 4"
-    "${mod} SHIFT, U, movetoworkspacesilent, 5"
-    "${mod} SHIFT, I, movetoworkspacesilent, 6"
-    "${mod} SHIFT, O, movetoworkspacesilent, 7"
-    "${mod} SHIFT, P, movetoworkspacesilent, 8"
+  # Screen capture
+  (bind "Print" (exec "dms screenshot full"))
+  (bind "${mod} + Print" (exec "dms screenshot"))
 
-    "${mod} CTRL SHIFT, A, movetoworkspace, 1"
-    "${mod} CTRL SHIFT, S, movetoworkspace, 2"
-    "${mod} CTRL SHIFT, D, movetoworkspace, 3"
-    "${mod} CTRL SHIFT, F, movetoworkspace, 4"
-    "${mod} CTRL SHIFT, U, movetoworkspace, 5"
-    "${mod} CTRL SHIFT, I, movetoworkspace, 6"
-    "${mod} CTRL SHIFT, O, movetoworkspace, 7"
-    "${mod} CTRL SHIFT, P, movetoworkspace, 8"
+  # Turn off laptop screen
+  (bind "F9" (dpmsToggle "eDP-1"))
 
-    # Layout controls
-    "${mod}, V, layoutmsg, togglesplit"
-    "${mod} SHIFT, V, layoutmsg, preselect d"
-    "${mod}, TAB, fullscreen, 1"
-    ", F11, fullscreen"
+  # Inhibit suspend
+  (bind "F12" (exec "${dms} inhibit toggle"))
+  (bind "XF86AudioMedia" (exec "${dms} inhibit toggle"))
 
-    # Apps
-    "${mod}, Space, exec, ${dms} spotlight toggle"
-    "${mod}, Return, exec, app2unit -- ${config.vars.terminalBin}"
-    "${mod}, B, exec, app2unit -- ${config.vars.defaultBrowser}"
-    "${mod}, N, exec, app2unit -- obsidian"
-    "${mod}, Z, exec, app2unit -- zeditor"
-    "${mod} SHIFT, Escape, exec, app2unit -- ${dms} processlist open"
+  # Special workspace
+  (bind "${mod} + minus" (toggleSpecial "communication"))
+  (bind "${mod} + M" (toggleSpecial "music"))
 
-    # Notifications
-    "${mod}, Comma, exec, ${dms} notifications clearAll"
-    "${mod}, Period, exec, ${dms} notifications toggle"
+  # Submaps
+  (bind "${mod} + W" (submap "window"))
 
-    # Soundcards
-    "${mod}, bracketleft, exec, ${dms} audio cycleoutput"
-    "${mod}, bracketright, exec, ${dms} audio cycleoutput"
+  # DMS
+  (bind "${mod} + question" (exec "${dms} keybinds toggle hyprland"))
+  (bind "${mod} + Escape" (exec "${dms} powermenu toggle"))
 
-    # Screen capture
-    ", Print, exec, dms screenshot full" # Fullscreen screenshot
-    "${mod}, Print, exec, dms screenshot"
+  # Locked binds (work even when input inhibitor is active)
+  (bindLocked "XF86AudioMute" (exec "${dms} audio mute"))
+  (bindLocked "XF86AudioMicMute" (exec "${dms} audio micmute"))
+  (bindLocked "XF86AudioPlay" (exec "${dms} mpris playPause"))
+  (bindLocked "XF86AudioNext" (exec "${dms} mpris next"))
+  (bindLocked "XF86AudioPrev" (exec "${dms} mpris previous"))
+  (bindLocked "XF86AudioStop" (exec "${dms} mpris stop"))
 
-    # Turn off laptop screen
-    ", F9, exec, hyprctl dispatch dpms toggle eDP-1"
+  # Volume (locked + repeating)
+  (bindLockedRepeat "XF86AudioRaiseVolume" (exec "${dms} audio increment 5"))
+  (bindLockedRepeat "XF86AudioLowerVolume" (exec "${dms} audio decrement 5"))
 
-    # Inhibit suspend
-    ", F12, exec, ${dms} inhibit toggle"
-    ", XF86AudioMedia, exec, ${dms} inhibit toggle"
+  # Backlight
+  (bindLockedRepeat "XF86MonBrightnessUp" (exec "${backlight} inc"))
+  (bindLockedRepeat "XF86MonBrightnessDown" (exec "${backlight} dec"))
+  (bindLockedRepeat "SHIFT + XF86MonBrightnessUp" (exec "${dms} brightness increment 5 'ddc:i2c-15'"))
+  (bindLockedRepeat "SHIFT + XF86MonBrightnessDown" (exec "${dms} brightness decrement 5 'ddc:i2c-15'"))
 
-    # Special workspace
-    "${mod}, minus, togglespecialworkspace, communication"
-    "${mod}, M, togglespecialworkspace, music"
+  # Resizing windows (repeating)
+  (bindRepeat "${mod} + left" (resizeactive (-10) 0))
+  (bindRepeat "${mod} + right" (resizeactive 10 0))
+  (bindRepeat "${mod} + up" (resizeactive 0 (-10)))
+  (bindRepeat "${mod} + down" (resizeactive 0 10))
 
-    # Submaps
-    "${mod}, W, submap, window"
-
-    # DMS
-    "${mod}, ?, exec, ${dms} keybinds toggle hyprland"
-    "${mod}, Escape, exec, ${dms} powermenu toggle"
-  ];
-
-  bindl = [
-    ", XF86AudioMute, exec, ${dms} audio mute"
-    ", XF86AudioMicMute, exec, ${dms} audio micmute"
-    ", XF86AudioPlay, exec, ${dms} mpris playPause"
-    ", XF86AudioNext, exec, ${dms} mpris next"
-    ", XF86AudioPrev, exec, ${dms} mpris previous"
-    ", XF86AudioStop, exec, ${dms} mpris stop"
-  ];
-
-  bindle = [
-    # Volume
-    ", XF86AudioRaiseVolume, exec, ${dms} audio increment 5"
-    ", XF86AudioLowerVolume, exec, ${dms} audio decrement 5"
-    # Backlight
-    ", XF86MonBrightnessUp, exec, ${backlight} inc"
-    ", XF86MonBrightnessDown, exec, ${backlight} dec"
-    "SHIFT, XF86MonBrightnessUp, exec, ${dms} brightness increment 5 'ddc:i2c-15'"
-    "SHIFT, XF86MonBrightnessDown, exec, ${dms} brightness decrement 5 'ddc:i2c-15'"
-  ];
-
-  binde = [
-    # Resizing windows
-    "${mod}, left, resizeactive, -10 0"
-    "${mod}, right, resizeactive, 10 0"
-    "${mod}, up, resizeactive, 0 -10"
-    "${mod}, down, resizeactive, 0 10"
-  ];
-
-  bindm = [
-    "${mod}, mouse:272, movewindow"
-    "${mod}, mouse:273, resizewindow"
-  ];
-}
+  # Mouse binds
+  (bindMouse "${mod} + mouse:272" drag)
+  (bindMouse "${mod} + mouse:273" resizeMouse)
+]

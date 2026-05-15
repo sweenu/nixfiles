@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (lib.generators) mkLuaInline;
   palette = config.home-manager.users."${config.vars.username}".colorScheme.palette;
 in
 {
@@ -34,152 +35,343 @@ in
       package = config.programs.hyprland.package;
       portalPackage = config.programs.hyprland.portalPackage;
       systemd.variables = [ "--all" ];
+
       settings = {
-        ecosystem = {
-          no_update_news = true;
-          no_donation_nag = true;
-        };
-        misc = {
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-          mouse_move_enables_dpms = true;
-          key_press_enables_dpms = false;
-          on_focus_under_fullscreen = 1;
-          exit_window_retains_fullscreen = true;
-          focus_on_activate = true;
-        };
-        binds = {
-          movefocus_cycles_fullscreen = true;
-          allow_pin_fullscreen = true; # necessary for fullscreening Picture-in-Picture
-          hide_special_on_workspace_change = true;
-        };
-        xwayland = {
-          enabled = config.programs.hyprland.xwayland.enable;
-          force_zero_scaling = true;
-        };
-
-        # Input configuration
-        input = {
-          kb_layout = "custom-us";
-          kb_options = "caps:escape";
-          repeat_rate = 30;
-          repeat_delay = 200;
-          touchpad = {
-            natural_scroll = true;
-            disable_while_typing = true;
-            tap-to-click = true;
+        config = {
+          ecosystem = {
+            no_update_news = true;
+            no_donation_nag = true;
           };
-        };
-
-        # General settings
-        general = {
-          gaps_in = 10;
-          gaps_out = 40;
-          gaps_workspaces = 20;
-          border_size = 1;
-          "col.active_border" = "rgba(ffffffff)";
-          "col.inactive_border" = "rgba(595959aa)";
-          layout = "dwindle";
-        };
-
-        # Decoration settings
-        decoration = {
-          rounding = 10;
-          blur = {
-            enabled = true;
-            size = 10;
-            passes = 4;
-
-            ignore_opacity = true;
-            new_optimizations = true;
-            xray = false;
-
-            noise = 0.02;
-            contrast = 1.1;
-            vibrancy = 0.2;
-            vibrancy_darkness = 0.3;
+          misc = {
+            disable_hyprland_logo = true;
+            disable_splash_rendering = true;
+            mouse_move_enables_dpms = true;
+            key_press_enables_dpms = false;
+            on_focus_under_fullscreen = 1;
+            exit_window_retains_fullscreen = true;
+            focus_on_activate = true;
+          };
+          binds = {
+            movefocus_cycles_fullscreen = true;
+            allow_pin_fullscreen = true; # necessary for fullscreening Picture-in-Picture
+            hide_special_on_workspace_change = true;
+          };
+          xwayland = {
+            enabled = config.programs.hyprland.xwayland.enable;
+            force_zero_scaling = true;
           };
 
-          shadow = {
-            enabled = true;
-            range = 20;
-            render_power = 3;
+          input = {
+            kb_layout = "custom-us";
+            kb_options = "caps:escape";
+            repeat_rate = 30;
+            repeat_delay = 200;
+            touchpad = {
+              natural_scroll = true;
+              disable_while_typing = true;
+              tap_to_click = true;
+            };
+          };
+
+          general = {
+            gaps_in = 10;
+            gaps_out = 40;
+            gaps_workspaces = 20;
+            border_size = 1;
+            col = {
+              active_border = "rgba(ffffffff)";
+              inactive_border = "rgba(595959aa)";
+            };
+            layout = "dwindle";
+          };
+
+          decoration = {
+            rounding = 10;
+            blur = {
+              enabled = true;
+              size = 10;
+              passes = 4;
+
+              ignore_opacity = true;
+              new_optimizations = true;
+              xray = false;
+
+              noise = 0.02;
+              contrast = 1.1;
+              vibrancy = 0.2;
+              vibrancy_darkness = 0.3;
+            };
+
+            shadow = {
+              enabled = true;
+              range = 20;
+              render_power = 3;
+            };
+          };
+
+          animations.enabled = true;
+
+          dwindle = {
+            force_split = 2;
+            preserve_split = true;
+          };
+
+          master = {
+            smart_resizing = false;
           };
         };
-
-        # Animation settings
-        animations.enabled = true;
-        animation = [
-          "layersIn, 1, 5, emphasizedDecel, slide"
-          "layersOut, 1, 4, emphasizedAccel, slide"
-          "fadeLayers, 1, 5, standard"
-
-          "windowsIn, 1, 5, emphasizedDecel"
-          "windowsOut, 1, 3, emphasizedAccel"
-          "windowsMove, 1, 6, standard"
-          "workspaces, 1, 5, standard"
-
-          "specialWorkspace, 1, 4, specialWorkSwitch, slidefadevert 15%"
-
-          "fade, 1, 6, standard"
-          "fadeDim, 1, 6, standard"
-          "border, 1, 6, standard"
-        ];
 
         # Animation curves
-        bezier = [
-          "specialWorkSwitch, 0.05, 0.7, 0.1, 1"
-          "emphasizedAccel, 0.3, 0, 0.8, 0.15"
-          "emphasizedDecel, 0.05, 0.7, 0.1, 1"
-          "standard, 0.2, 0, 0, 1"
+        curve = [
+          {
+            _args = [
+              "specialWorkSwitch"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.7
+                  ]
+                  [
+                    0.1
+                    1
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "emphasizedAccel"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.3
+                    0
+                  ]
+                  [
+                    0.8
+                    0.15
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "emphasizedDecel"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.05
+                    0.7
+                  ]
+                  [
+                    0.1
+                    1
+                  ]
+                ];
+              }
+            ];
+          }
+          {
+            _args = [
+              "standard"
+              {
+                type = "bezier";
+                points = [
+                  [
+                    0.2
+                    0
+                  ]
+                  [
+                    0
+                    1
+                  ]
+                ];
+              }
+            ];
+          }
         ];
 
-        # Layout settings
-        dwindle = {
-          pseudotile = true;
-          force_split = 2;
-          preserve_split = true;
-        };
-
-        master = {
-          smart_resizing = false;
-        };
-
-        workspace = [
-          "1, defaultName:a, persistent:true, default:true"
-          "2, defaultName:s, persistent:true"
-          "3, defaultName:d, persistent:true"
-          "4, defaultName:f, persistent:true"
-          "5, defaultName:u, persistent:true"
-          "6, defaultName:i, persistent:true"
-          "7, defaultName:o, persistent:true"
-          "8, defaultName:p, persistent:true"
-          "w[tv1]s[false], gapsout:20"
-          "f[1]s[false], gapsout:20"
-          "special:communication, on-created-empty:app2unit -- ${pkgs.beeper}/bin/beeper"
-          "special:music, on-created-empty:app2unit -- spotify"
+        # Animations
+        animation = [
+          {
+            leaf = "layersIn";
+            enabled = true;
+            speed = 5;
+            bezier = "emphasizedDecel";
+            style = "slide";
+          }
+          {
+            leaf = "layersOut";
+            enabled = true;
+            speed = 4;
+            bezier = "emphasizedAccel";
+            style = "slide";
+          }
+          {
+            leaf = "fadeLayers";
+            enabled = true;
+            speed = 5;
+            bezier = "standard";
+          }
+          {
+            leaf = "windowsIn";
+            enabled = true;
+            speed = 5;
+            bezier = "emphasizedDecel";
+          }
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 3;
+            bezier = "emphasizedAccel";
+          }
+          {
+            leaf = "windowsMove";
+            enabled = true;
+            speed = 6;
+            bezier = "standard";
+          }
+          {
+            leaf = "workspaces";
+            enabled = true;
+            speed = 5;
+            bezier = "standard";
+          }
+          {
+            leaf = "specialWorkspace";
+            enabled = true;
+            speed = 4;
+            bezier = "specialWorkSwitch";
+            style = "slidefadevert 15%";
+          }
+          {
+            leaf = "fade";
+            enabled = true;
+            speed = 6;
+            bezier = "standard";
+          }
+          {
+            leaf = "fadeDim";
+            enabled = true;
+            speed = 6;
+            bezier = "standard";
+          }
+          {
+            leaf = "border";
+            enabled = true;
+            speed = 6;
+            bezier = "standard";
+          }
         ];
 
-        windowrule = [
-          "match:fullscreen true, border_color rgb(${palette.base0E})"
+        workspace_rule = [
+          {
+            workspace = "1";
+            default_name = "a";
+            persistent = true;
+            default = true;
+          }
+          {
+            workspace = "2";
+            default_name = "s";
+            persistent = true;
+          }
+          {
+            workspace = "3";
+            default_name = "d";
+            persistent = true;
+          }
+          {
+            workspace = "4";
+            default_name = "f";
+            persistent = true;
+          }
+          {
+            workspace = "5";
+            default_name = "u";
+            persistent = true;
+          }
+          {
+            workspace = "6";
+            default_name = "i";
+            persistent = true;
+          }
+          {
+            workspace = "7";
+            default_name = "o";
+            persistent = true;
+          }
+          {
+            workspace = "8";
+            default_name = "p";
+            persistent = true;
+          }
+          {
+            workspace = "w[tv1]s[false]";
+            gaps_out = 20;
+          }
+          {
+            workspace = "f[1]s[false]";
+            gaps_out = 20;
+          }
+          {
+            workspace = "special:communication";
+            on_created_empty = "app2unit -- ${pkgs.beeper}/bin/beeper";
+          }
+          {
+            workspace = "special:music";
+            on_created_empty = "app2unit -- spotify";
+          }
+        ];
+
+        window_rule = [
+          {
+            match.fullscreen = true;
+            border_color = "rgb(${palette.base0E})";
+          }
         ]
         ++ import ./windowrules.nix;
-        layoutrule = import ./layoutrules.nix;
-      }
-      // (import ./keybindings.nix { inherit config pkgs; });
 
-      # Submaps configuration
-      extraConfig = ''
-        # Window submap
-        submap = window
-        bind =  , p, pin
-        bind =  , p, submap, reset
-        bind =  , f, togglefloating
-        bind =  , f, submap, reset
-        bind = , Return, submap, reset
-        bind = , Escape, submap, reset
-        submap = reset
-      '';
+        layer_rule = import ./layoutrules.nix;
+
+        bind = import ./keybindings.nix { inherit lib config pkgs; };
+      };
+
+      submaps.window = {
+        onDispatch = "reset";
+        settings.bind = [
+          {
+            _args = [
+              "p"
+              (mkLuaInline "hl.dsp.window.pin()")
+            ];
+          }
+          {
+            _args = [
+              "f"
+              (mkLuaInline ''hl.dsp.window.float({ action = "toggle" })'')
+            ];
+          }
+          {
+            _args = [
+              "Return"
+              (mkLuaInline "hl.dsp.no_op()")
+            ];
+          }
+          {
+            _args = [
+              "Escape"
+              (mkLuaInline "hl.dsp.no_op()")
+            ];
+          }
+        ];
+      };
     };
 
     systemd.user.sessionVariables = {

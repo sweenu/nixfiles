@@ -68,7 +68,7 @@
       inputs.home-manager.follows = "home";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.54.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.1";
 
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft/dev";
