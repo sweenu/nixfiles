@@ -92,6 +92,10 @@ in
     };
     sane.enable = true;
     graphics.enable = true;
+    amdgpu = {
+      initrd.enable = true;
+      opencl.enable = true;
+    };
     i2c.enable = true;
   };
 
