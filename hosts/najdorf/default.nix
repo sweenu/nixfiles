@@ -3,6 +3,7 @@
   config,
   suites,
   pkgs,
+  lib,
   ...
 }:
 
@@ -175,7 +176,11 @@ in
     # PostgreSQL config and backups
     postgresql = {
       package = pkgs.postgresql_16;
-      settings.log_timezone = config.time.timeZone;
+      settings = {
+        log_timezone = config.time.timeZone;
+        # Get correct log priorities but lose seeing logs with `systemctl status postgresql`
+        log_destination = lib.mkForce "syslog";
+      };
     };
     postgresqlBackup = {
       enable = config.services.postgresql.enable;
