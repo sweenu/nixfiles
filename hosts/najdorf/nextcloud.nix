@@ -189,5 +189,16 @@ in
     };
   };
 
+  services.journal-brief.settings.exclusions = [
+    {
+      SYSLOG_IDENTIFIER = [ "postgres" ];
+      MESSAGE = [
+        "/.*duplicate key value violates unique constraint \"oc_filecache_extended_pkey\".*/"
+        "/.*Key \\(fileid\\)=\\(\\d+\\) already exists.*/"
+        "/.*INSERT INTO \"oc_filecache_extended\".*/"
+      ];
+    }
+  ];
+
   services.restic.backups.opt.paths = [ config.services.nextcloud.home ];
 }

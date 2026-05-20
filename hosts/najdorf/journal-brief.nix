@@ -11,8 +11,8 @@
       email.subject = "Journal brief";
       exclusions = [
         {
-          SYSLOG_IDENTIFIER = [ "dbus-daemon" ];
-          MESSAGE = [ "Unknown group \"netdev\" in message bus configuration file" ];
+          SYSLOG_IDENTIFIER = [ "dbus-broker-launch" ];
+          MESSAGE = [ "/Ignoring duplicate name .*/" ];
         }
       ];
     };
