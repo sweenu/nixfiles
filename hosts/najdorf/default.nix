@@ -8,7 +8,6 @@
 }:
 
 let
-  resticRepository = "s3:s3.us-west-001.backblazeb2.com/sweenu-server-restic";
   network = {
     matchConfig.Name = "en* eth*";
     networkConfig = {
@@ -195,14 +194,9 @@ in
     resticPassword.file = "${self}/secrets/restic/password.age";
     resticEnv.file = "${self}/secrets/restic/env.age";
   };
-  environment.sessionVariables = {
-    RESTIC_PASSWORD_FILE = config.age.secrets.resticPassword.path;
-    RESTIC_REPOSITORY = resticRepository;
-  };
   services.restic = {
     backups.opt = {
       initialize = true;
-      repository = resticRepository;
       environmentFile = config.age.secrets.resticEnv.path;
       paths = [
         "/opt"
