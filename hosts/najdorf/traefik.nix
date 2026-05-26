@@ -89,7 +89,6 @@ in
           http = {
             middlewares = [
               "sts-header@file"
-              "rate-limit@file"
               "cloudflare-only@file"
             ];
             tls = {
@@ -129,11 +128,6 @@ in
               stsSeconds = 63072000;
             };
           };
-          "rate-limit".rateLimit = {
-            average = 100;
-            burst = 50;
-            period = "1m";
-          };
           "cloudflare-only".ipAllowList = {
             sourceRange = cloudflareIPs;
           };
@@ -153,7 +147,7 @@ in
     jails.traefik = {
       filter = {
         Definition = {
-          failregex = ''^<HOST> - \S+ \[.*\] \".*\" (401|403|429) .*$'';
+          failregex = ''^<HOST> - \S+ \[.*\] \".*\" (401|403) .*$'';
           ignoreregex = "";
         };
       };
