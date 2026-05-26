@@ -25,7 +25,7 @@ in
     ];
     environment = {
       WEBHOOK_URL = publicUrl;
-      N8N_EDITOR_BASE_URL = url;
+      N8N_EDITOR_BASE_URL = publicUrl;
       N8N_ENCRYPTION_KEY_FILE = config.age.secrets."n8n/encryptionKey".path;
       N8N_PERSONALIZATION_ENABLED = "false";
       N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
@@ -37,7 +37,7 @@ in
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-n8n = {
-      rule = "Host(`${publicFqdn}`) && (PathRegexp(`^/webhook(-test)?/.*`) || PathRegexp(`^/form/.*`))";
+      rule = "Host(`${publicFqdn}`)";
       service = "n8n";
     };
     services."${routers.to-n8n.service}".loadBalancer.servers = [
