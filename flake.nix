@@ -68,7 +68,7 @@
       inputs.home-manager.follows = "home";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.3";
 
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft/dev";
@@ -239,6 +239,10 @@
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
+              # Until: https://github.com/NixOS/nixpkgs/issues/526914
+              nixpkgs.config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
             }
             {
               home-manager.useGlobalPkgs = true;
