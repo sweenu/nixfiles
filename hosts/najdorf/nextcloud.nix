@@ -79,7 +79,7 @@ in
         owner = "sweenu";
         repo = "cardhook";
         rev = "main";
-        sha256 = "sha256-eGxmJ2IURQRl71FzDSVg7JXSWNNBBLT+m48NpbCdZRg=";
+        sha256 = "sha256-Ghd2Hm8SI4h7DM5AKV/WQ/muZM3eGZ8UvXswcXeZvWo=";
       };
     };
   };
