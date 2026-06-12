@@ -51,10 +51,6 @@ in
     ./obsidian-share-note.nix
     ./obsidian-relay.nix
 
-    # Testing
-    ./nocodb.nix
-    # ./pretix.nix
-
     # Gaming
     ./minecraft.nix
   ]
