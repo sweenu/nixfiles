@@ -14,6 +14,10 @@
           SYSLOG_IDENTIFIER = [ "dbus-broker-launch" ];
           MESSAGE = [ "/Ignoring duplicate name .*/" ];
         }
+        {
+          SYSLOG_IDENTIFIER = [ "sshd-session" ];
+          MESSAGE = [ "/.*kex_exchange_identification: read: Connection reset by peer.*/" ];
+        }
       ];
     };
     smtp = {
