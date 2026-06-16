@@ -161,16 +161,6 @@ in
     };
   };
 
-  services.journal-brief.settings.exclusions = [
-    {
-      SYSLOG_IDENTIFIER = [ "fail2ban.filter" ];
-      MESSAGE = [
-        "/WARNING \\[traefik\\] Detected a log entry .* before the current time in operation mode.*/"
-        "/WARNING \\[traefik\\] Please check a jail for a timing issue.*/"
-      ];
-    }
-  ];
-
   systemd.services.docker-traefik-network = {
     description = "Ensure external Docker network 'traefik' exists";
     after = [ "docker.service" ];

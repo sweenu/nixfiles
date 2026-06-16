@@ -18,6 +18,13 @@
           SYSLOG_IDENTIFIER = [ "sshd-session" ];
           MESSAGE = [ "/.*kex_exchange_identification: read: Connection reset by peer.*/" ];
         }
+        {
+          SYSLOG_IDENTIFIER = [ "fail2ban.filter" ];
+          MESSAGE = [
+            "/WARNING \\[\\w+\\] Detected a log entry .* before the current time in operation mode.*/"
+            "/WARNING \\[\\w+\\] Please check a jail for a timing issue.*/"
+          ];
+        }
       ];
     };
     smtp = {
