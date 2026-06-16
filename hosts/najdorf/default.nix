@@ -182,7 +182,6 @@ in
       startAt = "*-*-* 03:17:00";
     };
     fstrim.enable = true;
-    fwupd.enable = true;
   };
 
   # Restic backups
