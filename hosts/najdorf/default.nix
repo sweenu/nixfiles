@@ -32,6 +32,7 @@ in
     # Core
     ./traefik.nix
     ./tsidp.nix
+    ./attic.nix
 
     ./n8n.nix
     ./goeland.nix
