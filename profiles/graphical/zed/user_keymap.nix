@@ -78,4 +78,32 @@
       "${mod}-l" = "workspace::ActivatePaneRight";
     };
   }
+  {
+    context = "VimControl && vim_mode == kakoune_normal && !menu";
+    bindings = {
+      # Stop `space` (the vim "move right" motion) from competing with the
+      # leader chords below, so Zed waits for the chord instead of timing out.
+      "space" = null;
+
+      "space c" = "editor::ToggleComments";
+      "space r" = "editor::Rename";
+      "space h" = "editor::SelectAllMatches";
+      "space a" = "editor::ToggleCodeActions";
+      "space d" = "editor::GoToDiagnostic";
+      "space f" = "file_finder::Toggle";
+      "space k" = "editor::Hover";
+      "space o" = "outline::Toggle";
+      "space shift-o" = "project_symbols::Toggle";
+
+      # Surround
+      "space s s" = "vim::PushHelixSurroundAdd";
+      "space s c" = "vim::PushHelixSurroundReplace";
+      "space s d" = "vim::PushHelixSurroundDelete";
+
+      "g p" = "editor::GoToImplementation";
+
+      "ctrl-e" = "vim::LineDown";
+      "ctrl-y" = "vim::LineUp";
+    };
+  }
 ]

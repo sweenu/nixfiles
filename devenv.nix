@@ -14,7 +14,7 @@ in
       cachix
       git
       nix-output-monitor
-      nixfmt-rfc-style
+      nixfmt
       nvd
       treefmt
     ]

@@ -70,6 +70,8 @@
 
     hyprland.url = "github:hyprwm/Hyprland/v0.55.3";
 
+    zed-kakoune.url = "github:sweenu/zed/kakoune-v1.8.0-pre";
+
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft/dev";
       inputs.nixpkgs.follows = "nixos";

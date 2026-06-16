@@ -1,8 +1,14 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home-manager.users."${config.vars.username}".programs.zed-editor = {
     enable = true;
+    package = inputs.zed-kakoune.packages.${pkgs.stdenv.hostPlatform.system}.default;
     extensions = [
       "html"
       "nix"
@@ -14,13 +20,13 @@
       "csv"
     ];
     userSettings = {
-      helix_mode = true;
+      kakoune_mode = true;
       buffer_font_size = 14;
       auto_signature_help = true;
       show_whitespaces = "trailing";
     };
     userTasks = [ ];
-    userKeymaps = (import ./kakoune_keymap.nix) ++ (import ./user_keymap.nix { mod = "ctrl"; });
+    userKeymaps = (import ./user_keymap.nix { mod = "ctrl"; });
     extraPackages = with pkgs; [
       # python
       ruff
