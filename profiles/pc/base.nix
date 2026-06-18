@@ -8,7 +8,6 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
-    amp-cli # https://ampcode.com/
     bitwarden-cli
     bitwarden-desktop
     beeper

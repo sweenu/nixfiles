@@ -252,7 +252,7 @@
               home-manager.sharedModules = hmModules ++ [
                 inputs.nix-colors.homeManagerModules.default
                 inputs.dms.homeModules.dank-material-shell
-                inputs.dms-plugin-registry.modules.default
+                inputs.dms-plugin-registry.nixosModules.default
                 inputs.zen-browser.homeModules.twilight
               ];
             }
