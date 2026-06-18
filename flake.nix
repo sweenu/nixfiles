@@ -90,6 +90,11 @@
       url = "github:sweenu/control-plane";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    claude-desktop = {
+      url = "github:aaddrick/claude-desktop-debian";
+      inputs.nixpkgs.follows = "nixos";
+    };
   };
 
   outputs =

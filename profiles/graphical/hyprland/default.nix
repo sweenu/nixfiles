@@ -328,6 +328,10 @@ in
             workspace = "special:music";
             on_created_empty = "app2unit -- spotify";
           }
+          {
+            workspace = "special:claude";
+            on_created_empty = "app2unit -- claude-desktop";
+          }
         ];
 
         window_rule = [

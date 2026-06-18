@@ -129,6 +129,7 @@ in
   # Special workspace
   (bind "${mod} + minus" (toggleSpecial "communication"))
   (bind "${mod} + M" (toggleSpecial "music"))
+  (bind "${mod} + CTRL + Space" (toggleSpecial "claude"))
 
   # Submaps
   (bind "${mod} + W" (submap "window"))
