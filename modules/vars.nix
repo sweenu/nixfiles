@@ -39,6 +39,7 @@ with lib.types;
     };
 
     sshPublicKey = mkOption { type = str; };
+    gitSigningKey = mkOption { type = str; };
 
     timezone = mkOption { type = str; };
 

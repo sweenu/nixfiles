@@ -18,7 +18,7 @@
         user = {
           email = config.vars.email;
           name = config.vars.username;
-          signingKey = "${config.vars.sshPublicKey}";
+          signingKey = config.vars.gitSigningKey;
         };
         pull.rebase = "true";
         push.autoSetupRemote = "true";

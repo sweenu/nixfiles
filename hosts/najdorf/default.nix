@@ -35,6 +35,7 @@ in
     ./attic.nix
 
     ./n8n.nix
+    ./claude-remote-control.nix
     ./goeland.nix
     ./journal-brief.nix
     ./home-automation
@@ -149,6 +150,9 @@ in
   ];
 
   users.users."${config.vars.username}".openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
+
+  # No ssh-agent here (headless), so sign commits with the private key file directly.
+  vars.gitSigningKey = "${config.vars.home}/.ssh/id_ed25519";
 
   systemd.network.networks."10-wired" = network;
 
