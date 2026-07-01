@@ -5,6 +5,7 @@
 }:
 {
   environment.defaultPackages = [
+    pkgs.qbz
     pkgs.spotifywm
   ];
 

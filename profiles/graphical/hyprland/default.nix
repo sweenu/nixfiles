@@ -326,7 +326,7 @@ in
           }
           {
             workspace = "special:music";
-            on_created_empty = "app2unit -- spotify";
+            on_created_empty = "app2unit -- qbz";
           }
           {
             workspace = "special:claude";
