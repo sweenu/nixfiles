@@ -35,7 +35,6 @@ in
     ./attic.nix
 
     ./n8n.nix
-    ./claude-remote-control.nix
     ./goeland.nix
     ./journal-brief.nix
     ./home-automation
