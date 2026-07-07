@@ -21,6 +21,4 @@ final: prev: with prev; {
   dawarich-ha = callPackage ./dawarich-ha.nix { };
 
   journal-brief = callPackage ./journal-brief.nix { };
-
-  openai-whisper-cloud = callPackage ./openai-whisper-cloud.nix { };
 }

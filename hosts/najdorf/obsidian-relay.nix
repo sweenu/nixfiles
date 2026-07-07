@@ -2,6 +2,8 @@
 
 let
   serverUrl = "https://relay-server.${config.vars.tailnetName}";
+  signingKeyId = "sweenu_ed25519_2026_07_08";
+  publicKey = "PTNV6+uFG/ArYwfjVjEyzocZB/JV00NC4SdKcFoyBNQ=";
 in
 {
   age.secrets = {
@@ -10,9 +12,7 @@ in
 
   services.relay-server = {
     enable = true;
-    environmentFile = config.age.secrets."obsidian-relay/env".path;
     environment = {
-      RELAY_SERVER_KEY_ID = config.services.relay-control-plane.environment.RELAY_HMAC_KEY_ID;
       RUST_LOG = "warn";
     };
     settings = {
@@ -21,6 +21,12 @@ in
         port = 12222;
         valid_issuers = [ config.services.relay-control-plane.environment.RELAY_ISSUER ];
       };
+      auth = [
+        {
+          key_id = signingKeyId;
+          public_key = publicKey;
+        }
+      ];
     };
   };
 
@@ -29,7 +35,7 @@ in
     port = 12223;
     environmentFile = config.age.secrets."obsidian-relay/env".path;
     environment = {
-      RELAY_HMAC_KEY_ID = "sweenu_2026_02_27";
+      RELAY_SIGNING_KEY_ID = signingKeyId;
       RELAY_ISSUER = "sweenu-relay-control-plane";
       RELAY_DEFAULT_PROVIDER_URL = serverUrl;
     };

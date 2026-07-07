@@ -77,11 +77,6 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    pretix-postfinance = {
-      url = "github:sweenu/pretix-postfinance";
-      inputs.nixpkgs.follows = "nixos";
-    };
-
     relay-server = {
       url = "github:sweenu/relay-server";
       inputs.nixpkgs.follows = "nixos";

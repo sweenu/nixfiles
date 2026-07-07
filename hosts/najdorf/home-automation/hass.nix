@@ -51,7 +51,6 @@ in
         bbox
         dawarich-ha
         home-assistant-custom-components.adaptive_lighting
-        openai-whisper-cloud
       ];
       config = {
         automation = "!include automations.yaml";
