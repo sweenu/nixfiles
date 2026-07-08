@@ -3,7 +3,6 @@
 let
   feeds = {
     xe = "https://xeiaso.net/blog.json";
-    determinate-systems = "https://determinate.systems/posts?format=rss";
     emersion = "https://emersion.fr/blog/atom.xml";
     drew-devault = "https://drewdevault.com/blog/index.xml";
     tailscale = "https://tailscale.com/blog/index.xml";
