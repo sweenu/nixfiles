@@ -52,6 +52,7 @@
     resolved = {
       enable = true;
       settings.Resolve = {
+        DNS = config.vars.dnsResolvers; # Use DoT-capable resolvers instead of the ISP router
         DNSSEC = "false"; # DNS resolution stops working after a while with `allow-downgrade`
         DNSOverTLS = "opportunistic";
         FallbackDNS = config.vars.dnsResolvers;
