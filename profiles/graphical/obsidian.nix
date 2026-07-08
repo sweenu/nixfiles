@@ -32,7 +32,7 @@
           {
             name = "templates";
             settings = {
-              folder = "templates";
+              folder = "synced/templates";
             };
           }
         ];
