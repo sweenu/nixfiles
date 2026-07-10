@@ -146,12 +146,22 @@
     }
     {
       enabled = true;
-      id = "nightMode";
+      id = "builtin_tailscale";
       width = 50;
     }
     {
       enabled = true;
-      id = "darkMode";
+      id = "plugin_dankKDEConnect";
+      width = 50;
+    }
+    {
+      enabled = true;
+      id = "colorPicker";
+      width = 50;
+    }
+    {
+      enabled = true;
+      id = "idleInhibitor";
       width = 50;
     }
   ];
@@ -259,7 +269,7 @@
   greeterRememberLastSession = true;
   greeterRememberLastUser = true;
   greeterAutoLogin = false;
-  greeterEnableFprint = false;
+  greeterEnableFprint = true;
   greeterEnableU2f = false;
   greeterWallpaperPath = "";
   greeterUse24HourClock = true;
@@ -299,6 +309,8 @@
   spotlightBarShowModeChips = false;
   keybindsFloatingWindow = false;
   useAutoLocation = true;
+  # Fallback when geoclue has no/garbage fix (defaults to New York otherwise).
+  weatherCoordinates = "48.8566,2.3522";
   weatherEnabled = true;
   dashTabs = [
     {
@@ -397,7 +409,7 @@
   batteryChargeLimitNotificationType = 0;
   batteryLowNotificationType = 0;
   batteryCriticalNotificationType = 1;
-  batteryAutoPowerSaver = false;
+  batteryAutoPowerSaver = true;
   lockBeforeSuspend = true;
   loginctlLockIntegration = true;
   fadeToLockEnabled = false;
@@ -587,7 +599,14 @@
   displayProfileAutoSelect = false;
   displayShowDisconnected = false;
   displaySnapToEdge = true;
-  connectedFrameBarStyleBackups = { };
+  connectedFrameBarStyleBackups = {
+    default = {
+      shadowIntensity = 0;
+      squareCorners = true;
+      gothCornersEnabled = true;
+      borderEnabled = false;
+    };
+  };
   barConfigs = [
     {
       autoHide = false;
@@ -598,10 +617,6 @@
       borderThickness = 1;
       bottomGap = -4;
       centerWidgets = [
-        {
-          enabled = true;
-          id = "systemTray";
-        }
         {
           enabled = true;
           id = "dankPomodoroTimer";
@@ -628,6 +643,18 @@
           enabled = true;
           id = "privacyIndicator";
         }
+        {
+          enabled = true;
+          id = "systemTray";
+          trayAutoOverflow = true;
+          trayMaxVisibleItems = 0;
+          trayPopupSingleLine = true;
+          trayUseInlineExpansion = false;
+        }
+        {
+          enabled = true;
+          id = "weather";
+        }
       ];
       maximizeDetection = false;
       name = "Main Bar";
@@ -637,6 +664,10 @@
       popupGapsManual = 4;
       position = 2;
       rightWidgets = [
+        {
+          enabled = true;
+          id = "claudeCodeUsage";
+        }
         {
           enabled = true;
           id = "notificationButton";
@@ -655,12 +686,11 @@
           id = "clock";
         }
       ];
-      screenPreferences = [
-        "all"
-      ];
+      screenPreferences = [ "all" ];
       scrollEnabled = false;
       scrollXBehavior = "column";
       scrollYBehavior = "workspace";
+      shadowIntensity = 0;
       showOnLastDisplay = true;
       showOnWindowsOpen = false;
       spacing = 0;
@@ -746,6 +776,9 @@
   desktopWidgetInstances = [ ];
   desktopWidgetGroups = [ ];
   builtInPluginSettings = {
+    dms_clipboard_search = {
+      trigger = "cb";
+    };
     dms_settings_search = {
       trigger = "?";
     };
@@ -761,21 +794,21 @@
   ];
   launcherPluginVisibility = { };
   launcherPluginOrder = [ ];
-  frameEnabled = false;
-  frameThickness = 16;
-  frameRounding = 23;
+  frameEnabled = true;
+  frameThickness = 7;
+  frameRounding = 12;
   frameColor = "";
   frameOpacity = 1;
   frameScreenPreferences = [
     "all"
   ];
-  frameBarSize = 40;
+  frameBarSize = 57;
   frameShowOnOverview = false;
   frameBlurEnabled = true;
   frameCloseGaps = true;
-  frameLauncherEmergeSide = "bottom";
-  frameLauncherArcExtender = false;
-  frameLauncherEdgeHover = false;
+  frameLauncherEmergeSide = "top";
+  frameLauncherArcExtender = true;
+  frameLauncherEdgeHover = true;
   frameMode = "connected";
   barInsetPaddingShared = -1;
   barInsetPaddingSyncAll = false;

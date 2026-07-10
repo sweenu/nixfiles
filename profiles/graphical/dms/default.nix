@@ -27,7 +27,7 @@ in
   programs.kdeconnect.enable = true;
 
   programs.dank-material-shell.greeter = {
-    enable = true;
+    enable = false;
     compositor.name = "hyprland";
     # Copy the user's DMS theme/settings into the greeter so it matches.
     configHome = config.users.users."${username}".home;
@@ -53,6 +53,11 @@ in
         restartIfChanged = true;
       };
 
+      # settings.json is a read-only store symlink, so DMS treats itself as
+      # read-only and keeps GUI edits in memory only (never persisted). That's
+      # intentional: settings.nix is the source of truth and GUI tweaks are
+      # ephemeral scratch. Use diff-settings.sh to read the live in-memory state
+      # over IPC and fold the changes you want to keep back into settings.nix.
       settings = import ./settings.nix;
 
       enableSystemMonitoring = true;
