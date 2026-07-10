@@ -99,8 +99,10 @@ in
       openFirewall = true;
     };
 
-    matter-server = {
+    matterjs-server = {
       enable = true;
+      # Match the vendor ID python-matter-server commissioned the fabric with
+      extraArgs = [ "--vendorid=4939" ];
     };
   };
 
