@@ -53,12 +53,17 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell?rev=47b12d09fc8526f9c231de60848a41b5990b4a37";
+      url = "github:AvengeMedia/DankMaterialShell?rev=bdfd565b72cbb416441a9ab828efcac4fd516c70";
       inputs.nixpkgs.follows = "nixos";
     };
 
     dms-plugin-registry = {
       url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
+    dankcalendar = {
+      url = "github:AvengeMedia/dankcalendar";
       inputs.nixpkgs.follows = "nixos";
     };
 
@@ -249,10 +254,12 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-bak";
               home-manager.sharedModules = hmModules ++ [
                 inputs.nix-colors.homeManagerModules.default
                 inputs.dms.homeModules.dank-material-shell
                 inputs.dms-plugin-registry.nixosModules.default
+                inputs.dankcalendar.homeModules.dank-calendar
                 inputs.zen-browser.homeModules.twilight
               ];
             }
