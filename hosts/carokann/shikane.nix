@@ -1,41 +1,7 @@
 {
   config,
-  lib,
-  pkgs,
   ...
 }:
-let
-  shikaneMonitorSetup = pkgs.writeShellScriptBin "shikane-monitor-setup" ''
-    MONITOR="$1"
-    START="$2"
-    END="$3"
-
-    # Wait until the monitor is actually listed by Hyprland
-    # giving up after 5 seconds to prevent infinite hanging
-    MAX_RETRIES=50
-    i=0
-    while ! hyprctl monitors -j | ${lib.getExe pkgs.jq} -e ".[] | select(.name == \"$MONITOR\")" > /dev/null; do
-        if [ $i -ge $MAX_RETRIES ]; then
-            echo "Timeout waiting for monitor $MONITOR"
-            exit 1
-        fi
-        sleep 0.1
-        ((i++))
-    done
-
-    # Small buffer after detection to allow layout to settle
-    sleep 0.2
-
-    # Apply the rule for future workspaces
-    # This ensures any NEW workspaces in this range open on this monitor
-    hyprctl eval "hl.workspace_rule({ workspace = \"r[$START-$END]\", monitor = \"$MONITOR\" })"
-
-    # Force-move existing persistent workspaces
-    for ((i=START; i<=END; i++)); do
-      hyprctl dispatch "hl.dsp.workspace.move({ workspace = \"$i\", monitor = \"$MONITOR\" })"
-    done
-  '';
-in
 {
   home-manager.users."${config.vars.username}".services.shikane = {
     enable = true;
@@ -60,7 +26,8 @@ in
             name = "laptop-only";
             output = [ laptopOutput ];
           }
-          # Put a default external monitor to the right and assign workspaces u, i, o and p.
+          # An external monitor to the right; Hyprland places the "asdf"
+          # workspaces on it (see hypr-workspace-monitor).
           {
             name = "external-output-default";
             output = [
@@ -72,18 +39,11 @@ in
                   y = 0;
                 };
                 mode = "preferred";
-                exec = [
-                  "${lib.getExe shikaneMonitorSetup} \"$SHIKANE_OUTPUT_NAME\" 5 8"
-                ];
               }
-              (laptopOutput // {
-                exec = [
-                  ''hyprctl eval "hl.workspace_rule({ workspace = \"r[1-4]\", monitor = \"$SHIKANE_OUTPUT_NAME\" })"''
-                ];
-              })
+              laptopOutput
             ];
           }
-          # At home, put laptop monitor on the right and give the main monitor a, s, d and f
+          # At home, put the laptop to the right of the Dell.
           {
             name = "home";
             output = [
@@ -99,9 +59,6 @@ in
                   y = 0;
                 };
                 mode = "1920x1080";
-                exec = [
-                  "${lib.getExe shikaneMonitorSetup} \"$SHIKANE_OUTPUT_NAME\" 1 4"
-                ];
               }
               (
                 laptopOutput
@@ -110,9 +67,6 @@ in
                     x = 1920;
                     y = 141;
                   }; # Align bottom corners
-                  exec = [
-                    "${lib.getExe shikaneMonitorSetup} \"$SHIKANE_OUTPUT_NAME\" 5 8"
-                  ];
                 }
               )
             ];

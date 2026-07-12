@@ -376,6 +376,7 @@ in
           }
         ];
       };
+      extraConfig = builtins.readFile ./workspace-to-monitor.lua;
     };
 
     systemd.user.sessionVariables = {
