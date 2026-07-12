@@ -271,46 +271,46 @@ in
         ];
 
         workspace_rule = [
+          # Workspaces 1-4 (a/s/d/f) get their names here so they are correct
+          # from config load, but their monitor is bound at runtime in
+          # workspace-to-monitor.lua so it can follow the external display.
+          # 5-8 (u/i/o/p) always live on the laptop.
           {
             workspace = "1";
             default_name = "a";
-            persistent = true;
             default = true;
           }
           {
             workspace = "2";
             default_name = "s";
-            persistent = true;
           }
           {
             workspace = "3";
             default_name = "d";
-            persistent = true;
           }
           {
             workspace = "4";
             default_name = "f";
-            persistent = true;
           }
           {
             workspace = "5";
             default_name = "u";
-            persistent = true;
+            monitor = "eDP-1";
           }
           {
             workspace = "6";
             default_name = "i";
-            persistent = true;
+            monitor = "eDP-1";
           }
           {
             workspace = "7";
             default_name = "o";
-            persistent = true;
+            monitor = "eDP-1";
           }
           {
             workspace = "8";
             default_name = "p";
-            persistent = true;
+            monitor = "eDP-1";
           }
           {
             workspace = "w[tv1]s[false]";
@@ -376,6 +376,7 @@ in
           }
         ];
       };
+      extraConfig = builtins.readFile ./workspace-to-monitor.lua;
     };
 
     systemd.user.sessionVariables = {
