@@ -1,4 +1,11 @@
 [
+  # Ignore maximize requests from apps (e.g. Zen's Picture-in-Picture window
+  # randomly requests maximize during playback and would steal focus)
+  {
+    match.class = ".*";
+    suppress_event = "maximize";
+  }
+
   # They use native transparency or we want them opaque
   {
     match.class = "org\\.quickshell|imv|swappy";
@@ -159,6 +166,19 @@
     keep_aspect_ratio = true;
     float = true;
     pin = true;
+  }
+
+  # Fix some dragging issues with XWayland
+  {
+    match = {
+      class = "^$";
+      title = "^$";
+      xwayland = true;
+      float = true;
+      fullscreen = false;
+      pin = false;
+    };
+    no_focus = true;
   }
 
   # xwayland popups
