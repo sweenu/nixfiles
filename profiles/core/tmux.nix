@@ -8,7 +8,7 @@
     escapeTime = 0;
     historyLimit = 100000;
     keyMode = "vi";
-    prefix = "M-g";
+    prefix = "C-b";
     secureSocket = true;
     sensibleOnTop = false;
     plugins = with pkgs; [
