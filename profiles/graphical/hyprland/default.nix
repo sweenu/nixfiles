@@ -332,6 +332,10 @@ in
             workspace = "special:claude";
             on_created_empty = "app2unit -- claude-desktop";
           }
+          {
+            workspace = "special:calendar";
+            on_created_empty = "app2unit -- dcal";
+          }
         ];
 
         window_rule = [

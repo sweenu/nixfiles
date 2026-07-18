@@ -35,15 +35,53 @@ in
   };
 
   home-manager.users."${username}" = {
-    # Provided for the Claude Code Usage plugin's helper script.
     home.packages = [
+      # For the Claude Code Usage plugin's helper script.
       pkgs.jq
       pkgs.curl
+      # `dms-settings diff` / `dms-settings dump` to persist live GUI tweaks.
+      pkgs.dms-settings
     ];
+
+    # Like settings.json, this is a read-only store symlink DMS can't write to,
+    # so GUI plugin tweaks stay in memory. `dms-settings dump-plugins` persists them.
+    xdg.configFile."DankMaterialShell/plugin_settings.json".source = ./plugin_settings.json;
 
     programs.dank-calendar = {
       enable = true;
       systemd.enable = true;
+      settings = {
+        allDayReminderDaysBefore = 0;
+        allDayReminderTime = "09:00";
+        allDayReminders = false;
+        closeBehavior = "quit";
+        colorSource = "auto";
+        coreHoursEnabled = false;
+        coreHoursEnd = 17;
+        coreHoursStart = 9;
+        customThemeFile = "";
+        defaultEventDurationMinutes = 30;
+        defaultReminderMinutes = 10;
+        firstDayOfWeek = 1;
+        lastView = "week";
+        monthEventTitleLines = 1;
+        monthShowAllEvents = false;
+        notificationSounds = false;
+        presetTheme = "purple";
+        reminderPersist = false;
+        remindersEnabled = false;
+        showTasks = true;
+        showTrayIcon = false;
+        showWeekNumbers = false;
+        sidebarCollapsed = false;
+        sidebarWidth = 240;
+        snoozeMinutes = 5;
+        syncIntervalMinutes = 10;
+        themeMode = "light";
+        timeFormat = "24h";
+        use24HourClock = true;
+        weekEventTitleLines = 1;
+      };
     };
 
     programs.dank-material-shell = {
@@ -53,12 +91,12 @@ in
         restartIfChanged = true;
       };
 
-      # settings.json is a read-only store symlink, so DMS treats itself as
-      # read-only and keeps GUI edits in memory only (never persisted). That's
-      # intentional: settings.nix is the source of truth and GUI tweaks are
-      # ephemeral scratch. Use diff-settings.sh to read the live in-memory state
-      # over IPC and fold the changes you want to keep back into settings.nix.
-      settings = import ./settings.nix;
+      # The live settings.json is a read-only store symlink, so DMS treats
+      # itself as read-only and keeps GUI edits in memory only (never persisted).
+      # That's intentional: this raw JSON is the source of truth and GUI tweaks
+      # are ephemeral scratch. Run `dms-settings dump` to write the live state
+      # into this file (review with `git diff`), or `dms-settings diff` to preview.
+      settings = lib.importJSON ./settings.json;
 
       enableSystemMonitoring = true;
       enableVPN = false;
@@ -68,35 +106,23 @@ in
       enableCalendarEvents = false;
       enableClipboardPaste = true;
 
+      # These enable flags only install each plugin's code. Their runtime
+      # settings (incl. the effective enabled state DMS reads) live in the
+      # plugin_settings.json owned below.
+      managePluginSettings = false;
       plugins = {
         # Official plugins
         dankActions.enable = true;
-        dankBatteryAlerts = {
-          enable = true;
-          settings = {
-            criticalThreshold = 10;
-          };
-        };
+        dankBatteryAlerts.enable = true;
         dankKDEConnect.enable = true;
-        dankPomodoroTimer = {
-          enable = false;
-          settings = {
-            enabled = true;
-            autoSetDND = true;
-            autoStartBreaks = true;
-            autoStartPomodoros = true;
-          };
-        };
+        dankPomodoroTimer.enable = false;
 
         # Community plugins
         calculator.enable = true;
+        # nderscore/dms-plugins, packaged in the dms-plugin-registry.
+        hyprlandSubmapIndicator.enable = true;
         claudeCodeUsage.enable = true;
-        emojiLauncher = {
-          enable = true;
-          settings = {
-            trigger = ":";
-          };
-        };
+        emojiLauncher.enable = true;
         powerUsagePlugin.enable = true;
         voxtype.enable = false;
         linuxWallpaperEngine.enable = false;

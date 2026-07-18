@@ -1,4 +1,8 @@
-{ lib, config, pkgs }:
+{
+  lib,
+  config,
+  pkgs,
+}:
 let
   inherit (lib.generators) mkLuaInline;
 
@@ -20,14 +24,26 @@ let
   fullscreenToggle = mkLuaInline ''hl.dsp.window.fullscreen({ action = "toggle" })'';
   toggleSpecial = name: mkLuaInline ''hl.dsp.workspace.toggle_special("${name}")'';
   submap = name: mkLuaInline ''hl.dsp.submap("${name}")'';
-  resizeactive = x: y: mkLuaInline "hl.dsp.window.resize({ x = ${toString x}, y = ${toString y}, relative = true })";
+  resizeactive =
+    x: y: mkLuaInline "hl.dsp.window.resize({ x = ${toString x}, y = ${toString y}, relative = true })";
   drag = mkLuaInline "hl.dsp.window.drag()";
   resizeMouse = mkLuaInline "hl.dsp.window.resize()";
   dpmsToggle = monitor: mkLuaInline ''hl.dsp.dpms({ action = "toggle", monitor = "${monitor}" })'';
 
   # Bind helpers
-  bind = key: dsp: { _args = [ key dsp ]; };
-  bindFlags = flags: key: dsp: { _args = [ key dsp flags ]; };
+  bind = key: dsp: {
+    _args = [
+      key
+      dsp
+    ];
+  };
+  bindFlags = flags: key: dsp: {
+    _args = [
+      key
+      dsp
+      flags
+    ];
+  };
   bindLocked = bindFlags { locked = true; };
   bindLockedRepeat = bindFlags {
     locked = true;
@@ -129,6 +145,7 @@ in
   # Special workspace
   (bind "${mod} + minus" (toggleSpecial "communication"))
   (bind "${mod} + M" (toggleSpecial "music"))
+  (bind "${mod} + C" (toggleSpecial "calendar"))
   (bind "${mod} + CTRL + Space" (toggleSpecial "claude"))
 
   # Submaps
@@ -154,7 +171,9 @@ in
   (bindLockedRepeat "XF86MonBrightnessUp" (exec "${backlight} inc"))
   (bindLockedRepeat "XF86MonBrightnessDown" (exec "${backlight} dec"))
   (bindLockedRepeat "SHIFT + XF86MonBrightnessUp" (exec "${dms} brightness increment 5 'ddc:i2c-15'"))
-  (bindLockedRepeat "SHIFT + XF86MonBrightnessDown" (exec "${dms} brightness decrement 5 'ddc:i2c-15'"))
+  (bindLockedRepeat "SHIFT + XF86MonBrightnessDown" (
+    exec "${dms} brightness decrement 5 'ddc:i2c-15'"
+  ))
 
   # Resizing windows (repeating)
   (bindRepeat "${mod} + left" (resizeactive (-10) 0))
