@@ -1,0 +1,47 @@
+{
+  "calculator": {
+    "enabled": true,
+    "trigger": "="
+  },
+  "claudeCodeUsage": {
+    "enabled": true
+  },
+  "dankActions": {
+    "enabled": true
+  },
+  "dankBatteryAlerts": {
+    "criticalThreshold": 10,
+    "enabled": true
+  },
+  "dankKDEConnect": {
+    "enabled": true
+  },
+  "dankNotion": {
+    "enabled": false
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "trigger": ":"
+  },
+  "hyprlandSubmapIndicator": {
+    "defaultIconName": "",
+    "enabled": true,
+    "submapIcons": [
+      {
+        "color": "",
+        "icon": "select_window",
+        "submap": "window"
+      }
+    ],
+    "submapLabels": [
+      {
+        "color": "",
+        "label": "(p)in (f)loat",
+        "submap": "window"
+      }
+    ]
+  },
+  "powerUsagePlugin": {
+    "enabled": true
+  }
+}
