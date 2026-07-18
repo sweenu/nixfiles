@@ -25,6 +25,10 @@
             "/WARNING \\[\\w+\\] Please check a jail for a timing issue.*/"
           ];
         }
+        {
+          SYSLOG_IDENTIFIER = [ "systemd" ];
+          MESSAGE = [ "/Failed to adjust io pressure threshold, ignoring.*/" ];
+        }
       ];
     };
     smtp = {
