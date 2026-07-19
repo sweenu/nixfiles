@@ -36,7 +36,7 @@
         gamend = "git commit --amend --no-edit";
         gb = "git branch";
         gc = "git commit";
-        gco = "git checkout";
+        gsw = "git switch";
         gd = "git diff";
         gds = "git diff --staged";
         gp = "git push";
