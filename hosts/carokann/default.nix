@@ -1,4 +1,5 @@
 {
+  self,
   config,
   suites,
   pkgs,
@@ -115,6 +116,21 @@ in
   environment.defaultPackages = with pkgs; [
     framework-tool
   ];
+
+  age.secrets.efccWireguardKey.file = "${self}/secrets/efcc_wireguard_key.age";
+
+  networking.wg-quick.interfaces.efcc = {
+    address = [ "10.100.0.2/32" ];
+    privateKeyFile = config.age.secrets.efccWireguardKey.path;
+    peers = [
+      {
+        publicKey = "a6mQEbOYaDKuoE2kMNKrk9A1d1d76b9J9qshYsRO+jQ=";
+        endpoint = "152.53.237.254:51820";
+        allowedIPs = [ "10.100.0.1/32" ];
+        persistentKeepalive = 25;
+      }
+    ];
+  };
 
   age.identityPaths = [ "${config.vars.home}/.ssh/id_ed25519" ];
   home-manager.users."${config.vars.username}" = {

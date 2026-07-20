@@ -3,6 +3,9 @@ let
   najdorfHost = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKpdd19cjYDViCu9mLhbMwf33ohOYXEEqg32MY9SP6s root@najdorf";
 in
 {
+  # carokann
+  "efcc_wireguard_key.age".publicKeys = [ carokann ];
+
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
   "fastmail/app_password.age".publicKeys = [ carokann najdorfHost ];
