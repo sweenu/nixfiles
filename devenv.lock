@@ -1260,11 +1260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783464571,
-        "narHash": "sha256-CSBL1X7sbGTgg5PnxLAEy5Fy2SXG4eGcg9MXsvT5Ysw=",
+        "lastModified": 1785865300,
+        "narHash": "sha256-8e7O2Cvo4YUcUkiWOG3q9Kfr+/7cY3c4iD1gtw8YnkA=",
         "owner": "sweenu",
         "repo": "control-plane",
-        "rev": "fb58cb76fe16c2a4280c8f26b8af5ab0758ed18e",
+        "rev": "4cb8410d24214bab9c295e8bdeb2c2418ddffbed",
         "type": "github"
       },
       "original": {
