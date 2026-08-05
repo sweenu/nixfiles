@@ -37,6 +37,8 @@
         gb = "git branch";
         gc = "git commit";
         gsw = "git switch";
+        gre = "git restore";
+        gres = "git restore --staged";
         gd = "git diff";
         gds = "git diff --staged";
         gp = "git push";
