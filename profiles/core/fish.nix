@@ -16,11 +16,14 @@
         np = "nix profile";
         ni = "${np} install";
         nr = "${np} remove";
-        ns = "nix search --no-update-lock-file nixpkgs";
+        ns = "nh search";
         nf = "nix flake";
         nepl = "nix repl '<nixpkgs>'";
-        nrb = ''nixos-rebuild --sudo --flake "$(pwd)#$(hostname)"'';
-        nrbs = "nb $(hostname) && ${nrb} switch";
+        nrb = "nh os";
+        nrbs = "${nrb} switch";
+        nrbb = "${nrb} boot";
+        nb = "${nrb} build";
+        nclean = "nh clean all";
         ndiff = "${pkgs.nvd}/bin/nvd diff --sort semver /nix/var/nix/profiles/(ls -r /nix/var/nix/profiles/ | grep -E 'system-' | sed -n '2 p') /nix/var/nix/profiles/system";
         dep = "deploy .#najdorf -s --auto-rollback=false --magic-rollback=false";
 
@@ -84,7 +87,6 @@
         k = "kak $argv";
         h = "hx $argv";
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
-        nb = "${pkgs.nix-output-monitor}/bin/nom build .#nixosConfigurations.$argv.config.system.build.toplevel";
         nm-wifi = {
           body = "nmcli -t -f SSID device wifi list | sk | xargs -o -I_ nmcli --ask dev wifi connect '_'";
           description = "Fuzzy connect to a wifi";

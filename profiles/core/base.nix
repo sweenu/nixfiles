@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -83,6 +88,10 @@
     fish.enable = true;
     mosh.enable = true;
     mtr.enable = true;
+    nh = {
+      enable = true;
+      flake = "${config.vars.home}/nixfiles";
+    };
   };
 
   security = {
