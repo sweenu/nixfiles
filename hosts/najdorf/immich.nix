@@ -27,7 +27,9 @@ in
 
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-immich = {
-      rule = "Host(`${fqdn}`) && PathPrefix(`/share`)";
+      # Shared links need the SvelteKit bundle and the API on top of /share.
+      # The web UI root stays unrouted so the login page isn't publicly reachable.
+      rule = "Host(`${fqdn}`) && (PathPrefix(`/share`) || PathPrefix(`/_app`) || PathPrefix(`/api`) || PathRegexp(`^/(custom\\.css|favicon.*|apple-icon.*)$`))";
       service = "immich";
     };
     services."${routers.to-immich.service}".loadBalancer.servers = [
