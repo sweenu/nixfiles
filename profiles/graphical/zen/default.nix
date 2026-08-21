@@ -39,6 +39,7 @@
           Preferences = {
             "browser.aboutConfig.showWarning" = false;
             "browser.tabs.insertRelatedAfterCurrent" = false;
+            "browser.tabs.unloadOnLowMemory" = true;
             "browser.urlbar.resultMenu.keyboardAccessible" = true;
             "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = true;
             "zen.view.experimental-no-window-controls" = true;
