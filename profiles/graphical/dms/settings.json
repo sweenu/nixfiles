@@ -126,7 +126,8 @@
         },
         {
           "enabled": true,
-          "id": "controlCenterButton"
+          "id": "controlCenterButton",
+          "showVpnIcon": false
         },
         {
           "clockCompactModed": true,
@@ -183,6 +184,7 @@
   },
   "blurBorderColor": "outline",
   "blurBorderCustomColor": "#ffffff",
+  "blurBorderEnabled": true,
   "blurBorderOpacity": 0.35,
   "blurEnabled": false,
   "blurForegroundLayers": true,
@@ -492,6 +494,7 @@
   "lockAtStartup": false,
   "lockBeforeSuspend": true,
   "lockDateFormat": "",
+  "lockPamExternallyManaged": false,
   "lockPamInlineFprint": false,
   "lockPamInlineU2f": false,
   "lockPamPath": "",
@@ -511,6 +514,7 @@
   "lockScreenVideoPath": "",
   "lockScreenWallpaperFillMode": "",
   "lockScreenWallpaperPath": "",
+  "lockU2fPamPath": "",
   "loginctlLockIntegration": true,
   "m3ElevationColorMode": "default",
   "m3ElevationCustomColor": "#000000",
@@ -602,6 +606,7 @@
   "notificationCustomAnimationDuration": 400,
   "notificationDedupeEnabled": true,
   "notificationFocusedMonitor": false,
+  "notificationForegroundLayers": true,
   "notificationHistoryEnabled": true,
   "notificationHistoryMaxAgeDays": 7,
   "notificationHistoryMaxCount": 50,
