@@ -49,7 +49,7 @@ Here's the list of the main services deployed through their NixOS modules:
 - [Dawarich](https://dawarich.app/)
 
 I deploy some service as Docker containers through [Arion](https://github.com/hercules-ci/arion):
-- [Calibre-web](https://github.com/janeczku/calibre-web)
+- [BookOrbit](https://bookorbit.app/)
 - [Obsidian share-note](https://github.com/alangrainger/share-note)
 - [NocoDB](https://nocodb.com/)
 

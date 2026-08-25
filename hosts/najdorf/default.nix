@@ -39,7 +39,7 @@ in
     ./journal-brief.nix
     ./home-automation
     ./nextcloud.nix
-    ./calibre-web.nix
+    ./bookorbit.nix
     ./immich.nix
     ./dawarich.nix
     ./actual.nix

@@ -24,4 +24,5 @@ in
   "actual/oidc_client_secret.age".publicKeys = [ carokann najdorfHost ];
   "obsidian-relay/env.age".publicKeys = [ carokann najdorfHost ];
   "atticd/env.age".publicKeys = [ carokann najdorfHost ];
+  "bookorbit/env.age".publicKeys = [ carokann najdorfHost ];
 }
