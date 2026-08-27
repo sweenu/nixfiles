@@ -12,7 +12,7 @@ in
     enableDefaultNetwork = false;
     networks.traefik.external = true;
     services.obsidian-share-note.service = {
-      image = "ghcr.io/note-sx/server:latest";
+      image = "ghcr.io/note-sx/server:1.4.0";
       container_name = "obsidian-share-note";
       volumes = [
         "${obsidianShareNoteDir}:/notesx/db:Z"
