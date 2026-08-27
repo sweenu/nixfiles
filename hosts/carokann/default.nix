@@ -121,6 +121,9 @@ in
 
   networking.wg-quick.interfaces.efcc = {
     address = [ "10.100.0.2/32" ];
+    # wg-quick's 1420 default assumes a 1500-byte path; constrained networks
+    # blackhole oversized packets since PMTU discovery ICMP is often filtered
+    mtu = 1380;
     privateKeyFile = config.age.secrets.efccWireguardKey.path;
     peers = [
       {
