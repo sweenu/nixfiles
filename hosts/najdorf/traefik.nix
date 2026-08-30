@@ -115,6 +115,14 @@ in
             storage = "${config.services.traefik.dataDir}/acme.json";
             dnsChallenge = {
               provider = "cloudflare";
+              # Bypass the local systemd-resolved stub (127.0.0.53): its
+              # negative-caching of the pre-creation NXDOMAIN can outlast
+              # lego's propagation check, causing renewal to time out even
+              # though the TXT record is actually there.
+              resolvers = [
+                "1.1.1.1:53"
+                "9.9.9.9:53"
+              ];
             };
           };
         };
