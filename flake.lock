@@ -1167,11 +1167,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783464613,
-        "narHash": "sha256-kzVR1vs9IKvKrIH4M3uENmtb9B0G2ZJqxBH+8tMoRyQ=",
+        "lastModified": 1788244956,
+        "narHash": "sha256-vxg0/GFdjpEfCfD0onqomMW92i9T3bQUtkwk/4vAMGI=",
         "owner": "sweenu",
         "repo": "relay-server",
-        "rev": "7640337d67a82ff644e22a88f8adb17827914bb1",
+        "rev": "aa18b36c6e5dcbcae4a8df68f50b95c38f2c0ebd",
         "type": "github"
       },
       "original": {
