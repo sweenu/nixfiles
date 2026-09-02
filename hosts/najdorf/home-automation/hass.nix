@@ -29,6 +29,7 @@ in
         "default_config"
         "esphome"
         "google"
+        "google_generative_ai_conversation"
         "google_translate" # TTS fallback for wyoming-piper
         "improv_ble"
         "isal" # fast compression
@@ -38,6 +39,7 @@ in
         "meteo_france"
         "music_assistant"
         "open_router"
+        "openai_conversation"
         "otbr"
         "overkiz" # needed for somfy
         "shelly"
