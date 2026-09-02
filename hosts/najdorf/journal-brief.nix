@@ -29,6 +29,9 @@
           SYSLOG_IDENTIFIER = [ "systemd" ];
           MESSAGE = [ "/Failed to adjust io pressure threshold, ignoring.*/" ];
         }
+        {
+          SYSLOG_IDENTIFIER = [ "postgres" ];
+        }
       ];
     };
     smtp = {
