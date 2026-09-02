@@ -29,6 +29,7 @@ let
   drag = mkLuaInline "hl.dsp.window.drag()";
   resizeMouse = mkLuaInline "hl.dsp.window.resize()";
   dpmsToggle = monitor: mkLuaInline ''hl.dsp.dpms({ action = "toggle", monitor = "${monitor}" })'';
+  voxtype = action: exec "voxtype record ${action}";
 
   # Bind helpers
   bind = key: dsp: {
@@ -120,7 +121,6 @@ in
   (bind "${mod} + Return" (exec "app2unit -- ${config.vars.terminalBin}"))
   (bind "${mod} + B" (exec "app2unit -- ${config.vars.defaultBrowser}"))
   (bind "${mod} + N" (exec "app2unit -- obsidian"))
-  (bind "${mod} + Z" (exec "app2unit -- zeditor"))
   (bind "${mod} + SHIFT + Escape" (exec "app2unit -- ${dms} processlist open"))
 
   # Notifications
@@ -130,6 +130,13 @@ in
   # Soundcards
   (bind "${mod} + bracketleft" (exec "${dms} audio cycleoutput"))
   (bind "${mod} + bracketright" (exec "${dms} audio cycleoutput"))
+
+  # Voice dictation. Toggle rather than hold: a release bind only fires when the
+  # modifiers still match at release time, so any chord would silently drop the
+  # stop whenever the modifier is let go a hair early, leaving the recording to
+  # run to max_duration_secs. Press-only binds sidestep that entirely.
+  (bind "${mod} + Z" (voxtype "toggle"))
+  (bind "${mod} + SHIFT + z" (voxtype "cancel"))
 
   # Screen capture
   (bind "Print" (exec "dms screenshot full"))

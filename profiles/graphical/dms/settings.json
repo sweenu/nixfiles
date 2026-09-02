@@ -89,6 +89,10 @@
         },
         {
           "enabled": true,
+          "id": "voxtype"
+        },
+        {
+          "enabled": true,
           "id": "systemTray",
           "trayAutoOverflow": true,
           "trayMaxVisibleItems": 0,

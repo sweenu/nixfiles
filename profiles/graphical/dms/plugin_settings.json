@@ -14,7 +14,8 @@
     "enabled": true
   },
   "dankKDEConnect": {
-    "enabled": true
+    "enabled": true,
+    "selectedDeviceId": "782020ba586a48a099ec634407143a17"
   },
   "dankNotion": {
     "enabled": false
@@ -43,5 +44,11 @@
   },
   "powerUsagePlugin": {
     "enabled": true
+  },
+  "voxtype": {
+    "enabled": true,
+    "hideIdleOnTimeout": "true",
+    "iconTheme": "material",
+    "idleTimeout": 5
   }
 }

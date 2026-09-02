@@ -124,7 +124,7 @@ in
         claudeCodeUsage.enable = true;
         emojiLauncher.enable = true;
         powerUsagePlugin.enable = true;
-        voxtype.enable = false;
+        voxtype.enable = true;
         linuxWallpaperEngine.enable = false;
       };
     };
