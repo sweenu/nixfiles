@@ -177,9 +177,10 @@ in
   # Backlight
   (bindLockedRepeat "XF86MonBrightnessUp" (exec "${backlight} inc"))
   (bindLockedRepeat "XF86MonBrightnessDown" (exec "${backlight} dec"))
-  (bindLockedRepeat "SHIFT + XF86MonBrightnessUp" (exec "${dms} brightness increment 5 'ddc:i2c-15'"))
+  # i2c-19 is the DP-7 AUX bus, where the U3225QE answers DDC (`ddcutil detect`).
+  (bindLockedRepeat "SHIFT + XF86MonBrightnessUp" (exec "${dms} brightness increment 5 'ddc:i2c-19'"))
   (bindLockedRepeat "SHIFT + XF86MonBrightnessDown" (
-    exec "${dms} brightness decrement 5 'ddc:i2c-15'"
+    exec "${dms} brightness decrement 5 'ddc:i2c-19'"
   ))
 
   # Resizing windows (repeating)

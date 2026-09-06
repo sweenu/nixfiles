@@ -50,23 +50,28 @@
               {
                 search = [
                   "v=Dell Inc."
-                  "m=DELL U2424HE"
-                  "s=FF904X3"
+                  "m=DELL U3225QE"
+                  "s=86D0G84"
                 ];
                 enable = true;
                 position = {
                   x = 0;
                   y = 0;
                 };
-                mode = "1920x1080";
+                mode = {
+                  width = 3840;
+                  height = 2160;
+                  refresh = 60;
+                };
+                scale = 1.5;
               }
               (
                 laptopOutput
                 // {
                   position = {
-                    x = 1920;
-                    y = 141;
-                  }; # Align bottom corners
+                    x = 2560; # 3840 / 1.5
+                    y = 500; # Align bottom corners: 2160/1.5 - 1504/1.6
+                  };
                 }
               )
             ];
