@@ -37,6 +37,7 @@ in
         "matter"
         "met"
         "meteo_france"
+        "mqtt"
         "music_assistant"
         "open_router"
         "openai_conversation"

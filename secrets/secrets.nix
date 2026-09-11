@@ -13,6 +13,8 @@ in
   "restic/env.age".publicKeys = [ carokann najdorfHost ];
   "traefik/env.age".publicKeys = [ carokann najdorfHost ];
   "hass/secrets.age".publicKeys = [ carokann najdorfHost ];
+  "mosquitto/hass.age".publicKeys = [ carokann najdorfHost ];
+  "mosquitto/ticmeter.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/admin_password.age".publicKeys = [ carokann najdorfHost ];
   "nextcloud/secrets.age".publicKeys = [ carokann najdorfHost ];
   "n8n/encryption_key.age".publicKeys = [ carokann najdorfHost ];
