@@ -32,6 +32,15 @@
         {
           SYSLOG_IDENTIFIER = [ "postgres" ];
         }
+        # non-interactive `ssh najdorf sudo ...` has no tty to prompt on;
+        # real failed logins log "authentication failure" instead
+        {
+          SYSLOG_IDENTIFIER = [ "sudo" ];
+          MESSAGE = [
+            "/pam_unix\\(sudo:auth\\): conversation failed/"
+            "/pam_unix\\(sudo:auth\\): auth could not identify password for.*/"
+          ];
+        }
       ];
     };
     smtp = {
