@@ -16,6 +16,8 @@
     steam.enable = true;
   };
 
+  services.gvfs.enable = true;
+
   environment.defaultPackages = with pkgs; [
     calibre
     imv
