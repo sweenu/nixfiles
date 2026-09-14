@@ -28,6 +28,8 @@ final: prev: with prev; {
 
   journal-brief = callPackage ./journal-brief.nix { };
 
+  kobodl = callPackage ./kobodl.nix { };
+
   n8n = prev.n8n.overrideAttrs (oldAttrs: {
     NODE_OPTIONS = lib.concatStringsSep " " (
       lib.filter (v: v != "") [
