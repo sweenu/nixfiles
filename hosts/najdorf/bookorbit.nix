@@ -99,7 +99,7 @@ in
   virtualisation.arion.projects.bookorbit.settings = {
     services.bookorbit = {
       service = {
-        image = "ghcr.io/bookorbit/bookorbit:2.8.1";
+        image = "ghcr.io/bookorbit/bookorbit:2.10.0";
         container_name = "bookorbit";
         restart = "unless-stopped";
         # JWT_SECRET, SETUP_BOOTSTRAP_TOKEN, EMAIL_ENCRYPTION_KEY and
