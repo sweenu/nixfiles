@@ -19,6 +19,7 @@
     gitui
     git-absorb
     gpg-tui
+    kobodl
     libreoffice-fresh
     mpv
     modrinth-app
