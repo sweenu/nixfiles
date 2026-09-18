@@ -78,6 +78,11 @@
       mimeApps = {
         enable = true;
         defaultApplications = {
+          # GIO's default-for-uri-scheme lookup only reads this file, not the
+          # desktop entry's MimeType=; without it the browser's "open with system
+          # default" silently no-ops and claude:// login callbacks never arrive.
+          # Claude Desktop can't register itself: mimeapps.list is a store symlink.
+          "x-scheme-handler/claude" = [ "com.anthropic.Claude.desktop" ];
           "text/plain" = [ "text.desktop" ];
           "application/postscript" = [ "pdf.desktop" ];
           "application/pdf" = [ "pdf.desktop" ];
