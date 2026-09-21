@@ -68,7 +68,12 @@ in
       };
     };
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    # Not linuxPackages_latest: since 7.1.4-7.1.6 the amdgpu atomic commit path
+    # loses page-flip completions on this Krackan iGPU, so aquamarine spins on
+    # "Cannot commit when a page-flip is awaiting" and Hyprland never starts.
+    # 6.18 LTS is unaffected. Tracked in hyprwm/aquamarine#353 and #343; retry
+    # linuxPackages_latest once those are fixed.
+    kernelPackages = pkgs.linuxPackages_6_18;
     loader = {
       systemd-boot = {
         enable = true;
