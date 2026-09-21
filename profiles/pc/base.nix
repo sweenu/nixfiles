@@ -8,6 +8,7 @@
   documentation.dev.enable = true;
 
   environment.defaultPackages = with pkgs; [
+    audacity
     bitwarden-cli
     bitwarden-desktop
     beeper
