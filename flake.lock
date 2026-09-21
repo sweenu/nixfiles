@@ -880,11 +880,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1783522502,
-        "narHash": "sha256-iffAls3iaNTyJC2faYcUXSI+Gp02cDjYl+MygxKl2GI=",
+        "lastModified": 1789921291,
+        "narHash": "sha256-Ft/BRnIqw1MywFoXydKobjjWmDFgDdYtSpJliE8+yUw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0bb7ec54c8483066ec9d7720e780a5caa71f8612",
+        "rev": "44a91898084f46797b5fac650c7e8c9ac38c43d4",
         "type": "github"
       },
       "original": {
@@ -1140,6 +1140,23 @@
         "type": "github"
       }
     },
+    "qbz-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784836823,
+        "narHash": "sha256-zseGL7IcH/fdc4TDVwU3Tml1X6wCvSaYCji5D5RxAuA=",
+        "ref": "refs/heads/main",
+        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
+        "revCount": 5962,
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/qbz"
+      },
+      "original": {
+        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/qbz"
+      }
+    },
     "relay-control-plane": {
       "inputs": {
         "nixpkgs": [
@@ -1200,6 +1217,7 @@
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-patcher": "nixpkgs-patcher",
+        "qbz-src": "qbz-src",
         "relay-control-plane": "relay-control-plane",
         "relay-server": "relay-server",
         "treefmt-nix": "treefmt-nix_2",
