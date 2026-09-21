@@ -75,6 +75,14 @@
 
     hyprland.url = "github:hyprwm/Hyprland/v0.55.3";
 
+    # Private fork preserving vicrodh/qbz, whose upstream was deleted. Pinned to
+    # the verified v2.0.2 commit; see pkgs/qbz.nix. git+ssh rather than github:
+    # so the private repo authenticates via ssh instead of an access token.
+    qbz-src = {
+      url = "git+ssh://git@github.com/sweenu/qbz?rev=93ae499f38835dc7c110ebaa07a49da5c714f1f9";
+      flake = false;
+    };
+
     zed-kakoune.url = "github:sweenu/zed/kakoune-v1.8.0-pre";
 
     nix-minecraft = {
@@ -229,6 +237,7 @@
               relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
               relay-control-plane =
                 inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
+              qbz = prev.callPackage ./pkgs/qbz.nix { src = inputs.qbz-src; };
             })
           ]
           ++ (overlaysFromDir ./overlays);

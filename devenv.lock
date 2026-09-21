@@ -969,6 +969,7 @@
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-patcher": "nixpkgs-patcher",
+        "qbz-src": "qbz-src",
         "relay-control-plane": "relay-control-plane",
         "relay-server": "relay-server",
         "treefmt-nix": "treefmt-nix_2",
@@ -1250,6 +1251,23 @@
         "owner": "cachix",
         "repo": "git-hooks.nix",
         "type": "github"
+      }
+    },
+    "qbz-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784836823,
+        "narHash": "sha256-zseGL7IcH/fdc4TDVwU3Tml1X6wCvSaYCji5D5RxAuA=",
+        "ref": "refs/heads/main",
+        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
+        "revCount": 5962,
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/qbz"
+      },
+      "original": {
+        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/qbz"
       }
     },
     "relay-control-plane": {
