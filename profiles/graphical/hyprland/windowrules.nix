@@ -203,4 +203,14 @@
     match.class = "Signal";
     workspace = "special:signal";
   }
+
+  # on_created_empty alone only lands the window on special:music when it
+  # appears while that workspace is still active, which qbz 2.1's Qt startup
+  # is slow enough to miss. The class is com.blitzfc.qbz (confirmed against
+  # hyprctl clients), not qbz as the old Slint build reported — the 2.1
+  # Qt/QML rewrite takes its app id from StartupWMClass in the desktop file.
+  {
+    match.class = "com\\.blitzfc\\.qbz";
+    workspace = "special:music";
+  }
 ]

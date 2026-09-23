@@ -79,7 +79,7 @@
     # the verified v2.0.2 commit; see pkgs/qbz.nix. git+ssh rather than github:
     # so the private repo authenticates via ssh instead of an access token.
     qbz-src = {
-      url = "git+ssh://git@github.com/sweenu/qbz?rev=93ae499f38835dc7c110ebaa07a49da5c714f1f9";
+      url = "git+ssh://git@github.com/sweenu/qbz?rev=e537c7fd41d2bad7e39128c3bb7a5ae7effcbf8f";
       flake = false;
     };
 

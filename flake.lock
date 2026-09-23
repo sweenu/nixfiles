@@ -1143,16 +1143,16 @@
     "qbz-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1784836823,
-        "narHash": "sha256-zseGL7IcH/fdc4TDVwU3Tml1X6wCvSaYCji5D5RxAuA=",
+        "lastModified": 1789630177,
+        "narHash": "sha256-GvXEbUmmgXaCxsA1VvmQXzq3CrEU0ojfG2LQDWhueZY=",
         "ref": "refs/heads/main",
-        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
-        "revCount": 5962,
+        "rev": "e537c7fd41d2bad7e39128c3bb7a5ae7effcbf8f",
+        "revCount": 7114,
         "type": "git",
         "url": "ssh://git@github.com/sweenu/qbz"
       },
       "original": {
-        "rev": "93ae499f38835dc7c110ebaa07a49da5c714f1f9",
+        "rev": "e537c7fd41d2bad7e39128c3bb7a5ae7effcbf8f",
         "type": "git",
         "url": "ssh://git@github.com/sweenu/qbz"
       }
