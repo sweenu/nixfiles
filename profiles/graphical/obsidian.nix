@@ -8,6 +8,12 @@
       enable = true;
       target = "${config.vars.documentsFolder}/notes";
       settings = {
+        app = defaultSettings.app // {
+          newFileLocation = "folder";
+          newFileFolderPath = "synced/unsorted";
+          attachmentFolderPath = "synced/assets";
+        };
+
         corePlugins = [
           "backlink"
           "bases"
