@@ -164,14 +164,15 @@ in
       enable = true;
       daemon.settings.dns = config.vars.dnsResolvers;
     };
-    arion.backend = "docker";
+    arion = {
+      backend = "docker";
+      package = pkgs.arion;
+    };
   };
 
   services = {
     tailscale.serve.enable = true;
-    journald.extraConfig = ''
-      SystemMaxUse = 10G
-    '';
+    journald.settings.Journal.SystemMaxUse = "10G";
     # PostgreSQL config and backups
     postgresql = {
       package = pkgs.postgresql_16;

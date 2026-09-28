@@ -14,9 +14,9 @@
   networking.useDHCP = true;
 
   services = {
-    journald.extraConfig = ''
-      Storage = volatile
-      RuntimeMaxFileSize = 10M;
-    '';
+    journald.settings.Journal = {
+      Storage = "volatile";
+      RuntimeMaxFileSize = "10M";
+    };
   };
 }

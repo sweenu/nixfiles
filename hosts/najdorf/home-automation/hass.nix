@@ -66,15 +66,6 @@ in
           unit_system = "metric";
           temperature_unit = "C";
         };
-        http = {
-          use_x_forwarded_for = true;
-          trusted_proxies = [
-            "127.0.0.1"
-            serverIP
-            "::1"
-            serverIPv6
-          ];
-        };
 
         # Default config except `backup`, `cloud`, `go2rtc`
         assist_pipeline = { };
@@ -99,7 +90,6 @@ in
         zeroconf = { };
       };
       configWritable = true;
-      openFirewall = true;
     };
 
     matterjs-server = {
