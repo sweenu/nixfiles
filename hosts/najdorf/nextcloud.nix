@@ -20,7 +20,7 @@ in
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     hostName = fqdn;
 
     database.createLocally = true;
@@ -72,7 +72,6 @@ in
       inherit polls;
       inherit richdocuments;
       inherit music;
-      inherit previewgenerator;
       inherit gpoddersync;
 
       cardhook = pkgs.fetchFromGitHub {
