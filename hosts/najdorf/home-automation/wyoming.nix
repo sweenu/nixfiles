@@ -13,7 +13,9 @@
     faster-whisper = {
       servers.main = {
         enable = true;
-        model = "small";
+        sttLibrary = "sherpa";
+        model = "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8";
+        zeroconf.enable = false;
         language = "en";
         uri = "tcp://0.0.0.0:10300";
       };
