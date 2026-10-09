@@ -43,6 +43,7 @@ in
     ./immich.nix
     ./dawarich.nix
     ./actual.nix
+    ./openclaw.nix
 
     # Monitoring & Control
     ./netdata.nix

@@ -103,6 +103,12 @@
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    nix-openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.nixpkgs.follows = "nixos";
+      inputs.home-manager.follows = "home";
+    };
   };
 
   outputs =
@@ -230,6 +236,7 @@
             inputs.agenix.overlays.default
             inputs.deploy.overlays.default
             inputs.nix-minecraft.overlay
+            inputs.nix-openclaw.overlays.default
             (final: prev: {
               hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               xdg-desktop-portal-hyprland =
@@ -344,6 +351,7 @@
 
             najdorf = mkHost {
               hostname = "najdorf";
+              extraModules = [ inputs.nix-openclaw.nixosModules.openclaw-gateway ];
             };
 
             ginko = mkHost {
