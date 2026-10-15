@@ -1,4 +1,9 @@
-{ lib, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 
 let
   massWebPort = 8095;
@@ -17,11 +22,17 @@ in
     ${lib.openUDPPortRangeForLAN 32768 65535}
   '';
 
+  age.secrets."mass/app_vars_env".file = "${self}/secrets/mass/app_vars_env.age";
+
+  systemd.services.music-assistant.serviceConfig.EnvironmentFile =
+    config.age.secrets."mass/app_vars_env".path;
+
   services.music-assistant = {
     enable = true;
     providers = [
       "hass"
       "hass_players"
+      "qobuz"
       "spotify"
       "spotify_connect"
       "squeezelite"
