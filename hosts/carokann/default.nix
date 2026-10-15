@@ -105,8 +105,6 @@ in
     i2c.enable = true;
   };
 
-  powerManagement.cpuFreqGovernor = "powersave";
-
   services = {
     fstrim.enable = true;
     fprintd.enable = true;
