@@ -13,10 +13,8 @@ in
     # Music Assistant
     ${lib.openTCPPortForLAN massWebPort} # web interface
     ${lib.openTCPPortForLAN 8097} # web socket
-    # Squeezlite
-    ${lib.openTCPPortForLAN 3483}
-    ${lib.openUDPPortForLAN 3483}
-    ${lib.openTCPPortForLAN 9090}
+    # Sendspin
+    ${lib.openTCPPortForLAN 8927}
     # Spotify Connect & more (ephemeral ports)
     ${lib.openTCPPortRangeForLAN 32768 65535}
     ${lib.openUDPPortRangeForLAN 32768 65535}
@@ -35,7 +33,6 @@ in
       "qobuz"
       "spotify"
       "spotify_connect"
-      "squeezelite"
       "sendspin"
     ];
   };
