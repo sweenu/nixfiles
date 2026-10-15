@@ -101,6 +101,11 @@
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    # HiFiBerryOS on NixOS, for bedroom-speakers. Deliberately not following
+    # `nixos`: it builds on the nixpkgs nixos-raspberrypi pins, which is what
+    # the Raspberry Pi kernel and HiFiBerryOS binary caches hold.
+    hifiberry-nixos.url = "github:sweenu/hifiberry-nixos";
   };
 
   outputs =
@@ -346,6 +351,22 @@
               system = "aarch64-linux";
               extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-3 ];
             };
+
+            # Raspberry Pi 4 with HiFiBerryOS. hifiberry-nixos' nixosSystem adds
+            # the Raspberry Pi kernel, firmware and SD card layout, and builds on
+            # nixos-raspberrypi's nixpkgs, so it does not go through mkHost.
+            bedroom-speakers = inputs.hifiberry-nixos.lib.nixosSystem {
+              board = "rpi4";
+              specialArgs = {
+                inherit
+                  self
+                  inputs
+                  suites
+                  profiles
+                  ;
+              };
+              modules = customModules ++ [ hosts.bedroom-speakers ];
+            };
           };
 
           homeConfigurations =
@@ -383,6 +404,17 @@
                     inputs.deploy.lib.x86_64-linux.activate.home-manager
                       self.homeConfigurations."sweenu@najdorf";
                 };
+              };
+            };
+
+            bedroom-speakers = {
+              hostname = "bedroom-speakers";
+              remoteBuild = false;
+              fastConnection = true;
+              profiles.system = {
+                sshUser = "root";
+                path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.bedroom-speakers;
+                user = "root";
               };
             };
 

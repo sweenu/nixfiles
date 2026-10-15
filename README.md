@@ -8,6 +8,7 @@ Here are my [NixOS](https://nixos.org) machines:
 - _carokann_: personal computer ([Framework](https://frame.work) laptop).
 - _najdorf_: server where I deploy my self-hosted apps.
 - _ginko_: RaspberryPi used as tailscale exit node.
+- _bedroom-speakers_: RaspberryPi 4 with a HiFiBerry DAC+ used as a [Music Assistant](https://music-assistant.io) speaker, running [hifiberry-nixos](https://github.com/sweenu/hifiberry-nixos).
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 
@@ -95,6 +96,13 @@ nixos-rebuild build-image --image-variant sd-card --flake '.#ginko'
 unzstd -d {the output path from the command above} -o nixos-sd-image.img
 sudo dd if=nixos-sd-image.img of=/dev/sda bs=4M status=progress oflag=direct
 ```
+
+For _bedroom-speakers_ (built with hifiberry-nixos' own SD card layout):
+```bash
+nix build '.#nixosConfigurations.bedroom-speakers.config.system.build.sdImage'
+zstdcat result/sd-image/*.img.zst | sudo dd of=/dev/sda bs=4M status=progress oflag=direct
+```
+For Wi-Fi, put a `wifi.txt` (`ssid=…` and `password=…` lines) on the card's `FIRMWARE` partition before the first boot. Then `deploy '.#bedroom-speakers'` for updates.
 
 ### Server
 Deploy the server config to a new machine:
