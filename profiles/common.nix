@@ -54,11 +54,15 @@
         "https://attic.${config.vars.tailnetName}/main"
         "https://nix-community.cachix.org"
         "https://deploy-rs.cachix.org"
+        "https://nixos-raspberrypi.cachix.org"
+        "https://sweenu.cachix.org"
       ];
       extra-trusted-public-keys = [
         "main:OWXJKAuxiGFPlH/3K65aE5q5T7tkJxZ2DMmKGpUy3Oo="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="
+        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+        "sweenu.cachix.org-1:DvQl16NWBp41k5IlxTODTOrIThyGRj8/ekrXxEheBQ0="
       ];
     };
   };
