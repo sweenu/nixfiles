@@ -9,10 +9,6 @@
   "dankActions": {
     "enabled": true
   },
-  "dankBatteryAlerts": {
-    "criticalThreshold": 10,
-    "enabled": true
-  },
   "dankKDEConnect": {
     "enabled": true,
     "selectedDeviceId": "782020ba586a48a099ec634407143a17"

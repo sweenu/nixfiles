@@ -34,7 +34,7 @@ in
       enable = true;
       package = config.programs.hyprland.package;
       portalPackage = config.programs.hyprland.portalPackage;
-      systemd.variables = [ "--all" ];
+      systemd.enable = false;
 
       settings = {
         config = {
@@ -50,6 +50,17 @@ in
             on_focus_under_fullscreen = 1;
             exit_window_retains_fullscreen = true;
             focus_on_activate = true;
+          };
+          render = {
+            # Hand a solitary fullscreen window's buffer straight to the
+            # display controller instead of compositing it. On the 4K external
+            # this drops a full-size blit every frame, which the 4-CU iGPU
+            # cannot spare. Only engages when the buffer matches the output
+            # mode; check `hyprctl monitors` directScanoutBlockedBy otherwise.
+            #
+            # 2 (auto) rather than 1 (enable), so Hyprland decides per frame
+            # instead of us forcing it; 0.56 added this mode.
+            direct_scanout = 2;
           };
           binds = {
             movefocus_cycles_fullscreen = true;

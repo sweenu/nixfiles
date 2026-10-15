@@ -113,7 +113,6 @@ in
       plugins = {
         # Official plugins
         dankActions.enable = true;
-        dankBatteryAlerts.enable = true;
         dankKDEConnect.enable = true;
         dankPomodoroTimer.enable = false;
 

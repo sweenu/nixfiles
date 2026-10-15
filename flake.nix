@@ -73,8 +73,6 @@
       inputs.home-manager.follows = "home";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.3";
-
     # Private fork preserving vicrodh/qbz, whose upstream was deleted. Pinned to
     # the verified v2.0.2 commit; see pkgs/qbz.nix. git+ssh rather than github:
     # so the private repo authenticates via ssh instead of an access token.
@@ -231,9 +229,6 @@
             inputs.deploy.overlays.default
             inputs.nix-minecraft.overlay
             (final: prev: {
-              hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
-              xdg-desktop-portal-hyprland =
-                inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
               relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
               relay-control-plane =
                 inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
