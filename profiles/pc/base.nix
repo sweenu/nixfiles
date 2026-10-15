@@ -55,6 +55,9 @@
     };
     printing = {
       enable = true;
+      # cups-browsed creates implicitclass:// queues that fail to resolve a
+      # destination host; CUPS discovers driverless printers over DNS-SD itself.
+      browsed.enable = false;
       drivers = with pkgs; [
         gutenprint
         gutenprintBin
