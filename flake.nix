@@ -101,6 +101,8 @@
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixos";
     };
+
+    hifiberry-nixos.url = "github:sweenu/hifiberry-nixos";
   };
 
   outputs =
@@ -285,6 +287,7 @@
                 profiles.server
                 profiles.rpi
               ];
+              speakers = common ++ [ profiles.hifiberry ];
               desktop =
                 base
                 ++ [
@@ -325,6 +328,39 @@
                 ++ extraModules;
             };
 
+          # The speakers run hifiberry-nixos' own nixosSystem, which brings the
+          # Raspberry Pi board support and the HiFiBerryOS module with it.
+          mkSpeakersHost =
+            hostname:
+            inputs.hifiberry-nixos.lib.nixosSystem {
+              board = "rpi4";
+              specialArgs = {
+                inherit
+                  self
+                  inputs
+                  suites
+                  profiles
+                  ;
+              };
+              modules = customModules ++ [ hosts.${hostname} ];
+            };
+
+          mkSpeakersDeployNode = hostname: {
+            inherit hostname;
+            remoteBuild = false;
+            fastConnection = true;
+            profiles.system = {
+              sshUser = "root";
+              path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${hostname};
+              user = "root";
+            };
+          };
+
+          speakerHosts = [
+            "bedroom-speakers"
+            "livingroom-speakers"
+          ];
+
         in
         {
           nixosConfigurations = {
@@ -346,7 +382,9 @@
               system = "aarch64-linux";
               extraModules = [ inputs.nixos-hardware.nixosModules.raspberry-pi-3 ];
             };
-          };
+
+          }
+          // lib.genAttrs speakerHosts mkSpeakersHost;
 
           homeConfigurations =
             let
@@ -398,7 +436,9 @@
                 };
               };
             };
-          };
+
+          }
+          // lib.genAttrs speakerHosts mkSpeakersDeployNode;
 
           checks = builtins.mapAttrs (
             system: deployLib: deployLib.deployChecks self.deploy
