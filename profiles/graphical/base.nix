@@ -16,7 +16,15 @@
     steam.enable = true;
   };
 
-  services.gvfs.enable = true;
+  services = {
+    gvfs.enable = true;
+
+    # Needed for KDEConnect
+    avahi.publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
 
   environment.defaultPackages = with pkgs; [
     calibre
@@ -34,13 +42,6 @@
       "${config.vars.screenshotFolder}/.keep".source = builtins.toFile "keep" "";
       "${config.vars.screencastFolder}/.keep".source = builtins.toFile "keep" "";
       "${config.vars.wallpapersFolder}/.keep".source = builtins.toFile "keep" "";
-    };
-
-    services = {
-      kdeconnect = {
-        enable = true;
-        indicator = false;
-      };
     };
 
     xdg = {
