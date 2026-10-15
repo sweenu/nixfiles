@@ -83,7 +83,7 @@
         pyclean = "find . | grep -E '(__pycache__|\\.pyc|\\.pyo$)' | xargs rm -rf";
         trash = "gtrash $argv";
         tp = "trash put $argv";
-        rm = "echo 'Stop using rm, use trash put (or tp) instead'";
+        rm = "echo 'Stop using rm, use \"gtrash put\" (or tp) instead'";
         k = "kak $argv";
         h = "hx $argv";
         myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
