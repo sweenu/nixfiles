@@ -13,7 +13,6 @@
     kdeconnect.enable = true;
     thunar.enable = true;
     zoom-us.enable = true;
-    steam.enable = true;
   };
 
   services = {
