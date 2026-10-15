@@ -416,11 +416,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792077178,
-        "narHash": "sha256-FqANHp+hdeV+HIJjSjuGtDz8jG5LS0+1KHHkFXjWbO4=",
+        "lastModified": 1792079846,
+        "narHash": "sha256-MROc5abtLkV/5f3LzZ+jwx2JTgofclA2yk3oyAj/5i8=",
         "owner": "sweenu",
         "repo": "hifiberry-nixos",
-        "rev": "c7a921c3f49e9894bc91a4890e61642d07152bfa",
+        "rev": "1b155d9b7415dcfadddee7735a262670fc2fa351",
         "type": "github"
       },
       "original": {
