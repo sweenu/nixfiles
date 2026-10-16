@@ -140,69 +140,69 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      assertions = [
-        {
-          assertion = !smtpEnabled || !((cfg.settings.email or { }) ? smtp);
-          message = ''
-            services.journal-brief.smtp and services.journal-brief.settings.email.smtp
-            cannot be set at the same time.
-          '';
-        }
-      ];
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        assertions = [
+          {
+            assertion = !smtpEnabled || !((cfg.settings.email or { }) ? smtp);
+            message = ''
+              services.journal-brief.smtp and services.journal-brief.settings.email.smtp
+              cannot be set at the same time.
+            '';
+          }
+        ];
 
-      systemd.services.journal-brief = {
-        description = "journal-brief: report new systemd journal entries";
-        after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
-        serviceConfig = {
-          Type = "oneshot";
-          DynamicUser = true;
-          SupplementaryGroups =
-            [ "systemd-journal" ]
-            ++ lib.optional smtpEnabled cfg.smtp.passwordFileGroup;
-          StateDirectory = "journal-brief";
-          StateDirectoryMode = "0750";
-          ExecStart = "${lib.getExe cfg.package} --conf ${configFile} ${lib.escapeShellArgs cfg.extraArgs}";
+        systemd.services.journal-brief = {
+          description = "journal-brief: report new systemd journal entries";
+          after = [ "network-online.target" ];
+          wants = [ "network-online.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            DynamicUser = true;
+            SupplementaryGroups = [ "systemd-journal" ] ++ lib.optional smtpEnabled cfg.smtp.passwordFileGroup;
+            StateDirectory = "journal-brief";
+            StateDirectoryMode = "0750";
+            ExecStart = "${lib.getExe cfg.package} --conf ${configFile} ${lib.escapeShellArgs cfg.extraArgs}";
 
-          ProtectSystem = "strict";
-          ProtectHome = true;
-          PrivateTmp = true;
-          PrivateDevices = true;
-          ProtectKernelTunables = true;
-          ProtectKernelModules = true;
-          ProtectControlGroups = true;
-          NoNewPrivileges = true;
-          RestrictNamespaces = true;
-          RestrictRealtime = true;
-          LockPersonality = true;
+            ProtectSystem = "strict";
+            ProtectHome = true;
+            PrivateTmp = true;
+            PrivateDevices = true;
+            ProtectKernelTunables = true;
+            ProtectKernelModules = true;
+            ProtectControlGroups = true;
+            NoNewPrivileges = true;
+            RestrictNamespaces = true;
+            RestrictRealtime = true;
+            LockPersonality = true;
+          };
         };
-      };
 
-      systemd.timers.journal-brief = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnCalendar = cfg.schedule;
-          Persistent = true;
+        systemd.timers.journal-brief = {
+          wantedBy = [ "timers.target" ];
+          timerConfig = {
+            OnCalendar = cfg.schedule;
+            Persistent = true;
+          };
         };
-      };
-    }
+      }
 
-    (lib.mkIf smtpEnabled {
-      programs.msmtp = {
-        enable = lib.mkDefault true;
-        accounts.journal-brief = {
-          auth = true;
-          tls = cfg.smtp.tls;
-          tls_starttls = cfg.smtp.tlsStarttls;
-          host = cfg.smtp.host;
-          port = cfg.smtp.port;
-          user = cfg.smtp.user;
-          from = cfg.smtp.from;
-          passwordeval = "cat ${cfg.smtp.passwordFile}";
+      (lib.mkIf smtpEnabled {
+        programs.msmtp = {
+          enable = lib.mkDefault true;
+          accounts.journal-brief = {
+            auth = true;
+            tls = cfg.smtp.tls;
+            tls_starttls = cfg.smtp.tlsStarttls;
+            host = cfg.smtp.host;
+            port = cfg.smtp.port;
+            user = cfg.smtp.user;
+            from = cfg.smtp.from;
+            passwordeval = "cat ${cfg.smtp.passwordFile}";
+          };
         };
-      };
-    })
-  ]);
+      })
+    ]
+  );
 }

@@ -43,6 +43,7 @@
   # Required, but will be overridden in the resulting installer ISO.
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
   };
 
   home-manager.users."${config.vars.username}" = {
