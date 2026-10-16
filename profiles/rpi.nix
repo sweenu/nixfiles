@@ -17,6 +17,7 @@
     journald.settings.Journal = {
       Storage = "volatile";
       RuntimeMaxFileSize = "10M";
+      RuntimeMaxUse = "50M";
     };
   };
 }
