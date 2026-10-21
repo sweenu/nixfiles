@@ -45,7 +45,6 @@ in
     ./actual.nix
 
     # Monitoring & Control
-    ./netdata.nix
     ./cockpit.nix
 
     # Obsidian
