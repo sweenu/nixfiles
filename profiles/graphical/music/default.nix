@@ -4,6 +4,8 @@
   ...
 }:
 {
+  imports = [ ./sendspin.nix ];
+
   environment.defaultPackages = [
     pkgs.qbz
     pkgs.spotifywm
