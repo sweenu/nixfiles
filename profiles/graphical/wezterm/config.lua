@@ -43,6 +43,10 @@ tabline.apply_to_config(config)
 
 -- Wezterm config --
 config.term = 'wezterm'
+
+-- node CLIs (claude code) detect OSC 8 support from TERM_PROGRAM_VERSION, which
+-- nixpkgs sets to an unparseable "0-unstable-<date>"; without this they print bare URLs
+config.set_environment_variables = { FORCE_HYPERLINK = '1' }
 config.mux_enable_ssh_agent = false
 config.window_background_opacity = 0.9
 config.window_content_alignment = { horizontal = 'Center', vertical = 'Center' }
