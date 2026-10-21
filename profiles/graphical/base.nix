@@ -6,9 +6,6 @@
 }:
 
 {
-  boot.extraModulePackages = [ config.boot.kernelPackages.ddcci-driver ];
-  boot.kernelModules = [ "ddcci" ];
-
   programs = {
     kdeconnect.enable = true;
     thunar.enable = true;

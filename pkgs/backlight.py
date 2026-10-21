@@ -1,5 +1,6 @@
 import sys
 import re
+from pathlib import Path
 from subprocess import run, PIPE
 
 BACKLIGHT_CMD = [
@@ -8,6 +9,42 @@ BACKLIGHT_CMD = [
     "call",
     "brightness"
 ]
+
+I2C_DEVICES = Path("/sys/bus/i2c/devices")
+DRM_DEVICES = Path("/sys/class/drm")
+INTERNAL_CONNECTORS = ("eDP", "LVDS", "DSI")
+
+
+def _external_ddc_device() -> str:
+    """Returns the dms device id of the connected external monitor's DDC bus.
+
+    amdgpu registers two i2c adapters per connector: "AMDGPU DM i2c hw bus N"
+    for the DDC pins and "AMDGPU DM aux hw bus N" for the DisplayPort AUX
+    channel. A connector's `ddc` symlink points at the hw bus, but a DP monitor
+    answers DDC/CI on the aux one, so swap to the aux adapter when it exists.
+    """
+    for connector in sorted(DRM_DEVICES.glob("card*-*")):
+        if connector.name.split("-", 1)[1].startswith(INTERNAL_CONNECTORS):
+            continue
+        ddc = connector / "ddc"
+        if not ddc.exists():
+            continue
+        if (connector / "status").read_text().strip() != "connected":
+            continue
+
+        bus = ddc.resolve()
+        hw_name = (bus / "name").read_text().strip()
+        aux_name = hw_name.replace("i2c hw", "aux hw")
+        for adapter in I2C_DEVICES.iterdir():
+            try:
+                if (adapter / "name").read_text().strip() == aux_name:
+                    bus = adapter
+                    break
+            except OSError:
+                continue
+        return f"ddc:{bus.name}"
+
+    raise SystemExit("backlight: no external monitor connected")
 
 
 def _get_brightness() -> int:
@@ -68,4 +105,13 @@ def change_backlight(
 
 
 if __name__ == "__main__":
-    change_backlight(sys.argv[1])
+    action = sys.argv[1]
+
+    if len(sys.argv) > 2 and sys.argv[2] == "external":
+        # Flat steps rather than the curve above: the curve needs to read the
+        # current brightness back, and `dms brightness status` only ever
+        # reports the device dms itself has selected.
+        verb = {"inc": "increment", "dec": "decrement"}[action]
+        run(BACKLIGHT_CMD + [verb, "5", _external_ddc_device()])
+    else:
+        change_backlight(action)
