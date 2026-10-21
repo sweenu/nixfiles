@@ -60,12 +60,7 @@
       "borderOpacity": 1,
       "borderThickness": 1,
       "bottomGap": -4,
-      "centerWidgets": [
-        {
-          "enabled": true,
-          "id": "dankPomodoroTimer"
-        }
-      ],
+      "centerWidgets": [],
       "enabled": true,
       "fontScale": 1.17,
       "gothCornerRadiusOverride": false,
@@ -115,6 +110,10 @@
         {
           "enabled": true,
           "id": "hyprlandSubmapIndicator"
+        },
+        {
+          "enabled": true,
+          "id": "homeAssistantMonitor"
         },
         {
           "enabled": true,

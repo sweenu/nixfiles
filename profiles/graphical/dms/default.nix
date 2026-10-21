@@ -1,4 +1,5 @@
 {
+  self,
   config,
   pkgs,
   lib,
@@ -11,6 +12,11 @@ let
 in
 {
   imports = [ inputs.dms.nixosModules.greeter ];
+
+  age.secrets.hassToken = {
+    file = "${self}/secrets/dms/hass_token.age";
+    owner = username;
+  };
 
   environment.defaultPackages = lib.mkIf cfg.plugins.linuxWallpaperEngine.enable [
     pkgs.linux-wallpaperengine
@@ -41,6 +47,8 @@ in
       pkgs.curl
       # `dms-settings diff` / `dms-settings dump` to persist live GUI tweaks.
       pkgs.dms-settings
+      # homeAssistantMonitor dep; the registry module installs sources only.
+      pkgs.kdePackages.qtwebsockets
     ];
 
     # Like settings.json, this is a read-only store symlink DMS can't write to,
@@ -118,6 +126,7 @@ in
 
         # Community plugins
         calculator.enable = true;
+        homeAssistantMonitor.enable = true;
         # nderscore/dms-plugins, packaged in the dms-plugin-registry.
         hyprlandSubmapIndicator.enable = true;
         claudeCodeUsage.enable = true;

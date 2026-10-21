@@ -20,6 +20,14 @@
     "enabled": true,
     "trigger": ":"
   },
+  "homeAssistantMonitor": {
+    "enabled": true,
+    "hassTokenPath": "/run/agenix/hassToken",
+    "hassUrl": "https://hass.taila5f2.ts.net",
+    "editModeTwoColumns": true,
+    "showAttributes": true,
+    "showButtonsOnStatusBar": true
+  },
   "hyprlandSubmapIndicator": {
     "defaultIconName": "",
     "enabled": true,

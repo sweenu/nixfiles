@@ -5,6 +5,7 @@ in
 {
   # carokann
   "efcc_wireguard_key.age".publicKeys = [ carokann ];
+  "dms/hass_token.age".publicKeys = [ carokann ];
 
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
