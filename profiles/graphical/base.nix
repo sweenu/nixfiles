@@ -8,7 +8,6 @@
 {
   programs = {
     kdeconnect.enable = true;
-    thunar.enable = true;
     zoom-us.enable = true;
   };
 
@@ -80,6 +79,8 @@
           # default" silently no-ops and claude:// login callbacks never arrive.
           # Claude Desktop can't register itself: mimeapps.list is a store symlink.
           "x-scheme-handler/claude" = [ "com.anthropic.Claude.desktop" ];
+          "inode/directory" = [ "dev.duxlabs.files.desktop" ];
+          "x-scheme-handler/trash" = [ "dev.duxlabs.files.desktop" ];
           "text/plain" = [ "text.desktop" ];
           "application/postscript" = [ "pdf.desktop" ];
           "application/pdf" = [ "pdf.desktop" ];

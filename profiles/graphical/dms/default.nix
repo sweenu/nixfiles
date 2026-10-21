@@ -8,10 +8,11 @@
 }:
 let
   username = config.vars.username;
-  cfg = config.home-manager.users."${username}".programs.dank-material-shell;
+  hmCfg = config.home-manager.users."${username}";
+  cfg = hmCfg.programs.dank-material-shell;
 in
 {
-  imports = [ inputs.dms.nixosModules.greeter ];
+  imports = [ inputs.dms-greeter.nixosModules.default ];
 
   age.secrets.hassToken = {
     file = "${self}/secrets/dms/hass_token.age";
@@ -32,7 +33,7 @@ in
   # Phone Connect plugin talks to the KDE Connect daemon over D-Bus.
   programs.kdeconnect.enable = true;
 
-  programs.dank-material-shell.greeter = {
+  programs.dms-greeter = {
     enable = false;
     compositor.name = "hyprland";
     # Copy the user's DMS theme/settings into the greeter so it matches.
@@ -53,7 +54,18 @@ in
 
     # Like settings.json, this is a read-only store symlink DMS can't write to,
     # so GUI plugin tweaks stay in memory. `dms-settings dump-plugins` persists them.
-    xdg.configFile."DankMaterialShell/plugin_settings.json".source = ./plugin_settings.json;
+    xdg.configFile."dms/plugin_settings.json".source = ./plugin_settings.json;
+
+    # Their own file watchers cannot see home-manager swapping a symlink.
+    systemd.user.services = {
+      dms.Unit.X-Restart-Triggers = [
+        "${hmCfg.xdg.configFile."dms/settings.json".source}"
+        "${hmCfg.xdg.configFile."dms/plugin_settings.json".source}"
+      ];
+      dcal.Unit.X-Restart-Triggers = [
+        "${hmCfg.xdg.configFile."dankcal/ui-settings.json".source}"
+      ];
+    };
 
     programs.dank-calendar = {
       enable = true;
@@ -94,10 +106,7 @@ in
 
     programs.dank-material-shell = {
       enable = true;
-      systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
+      systemd.enable = true;
 
       # The live settings.json is a read-only store symlink, so DMS treats
       # itself as read-only and keeps GUI edits in memory only (never persisted).
@@ -112,7 +121,6 @@ in
       enableAudioWavelength = true;
       # Calendar is provided by dankcalendar (dcal) instead of khal.
       enableCalendarEvents = false;
-      enableClipboardPaste = true;
 
       # These enable flags only install each plugin's code. Their runtime
       # settings (incl. the effective enabled state DMS reads) live in the

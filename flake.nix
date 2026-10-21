@@ -53,17 +53,27 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell?ref=v1.5.2";
+      url = "github:duxlabs-dev/dux-shell?ref=v2.0.0";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
+    dms-greeter = {
+      url = "github:duxlabs-dev/dux-greeter?ref=v2.0.0";
       inputs.nixpkgs.follows = "nixos";
     };
 
     dms-plugin-registry = {
-      url = "github:AvengeMedia/dms-plugin-registry";
+      url = "github:duxlabs-dev/dux-plugin-registry";
       inputs.nixpkgs.follows = "nixos";
     };
 
     dankcalendar = {
-      url = "github:AvengeMedia/dankcalendar";
+      url = "github:duxlabs-dev/dux-calendar?ref=v2.0.0";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
+    dux-files = {
+      url = "github:duxlabs-dev/dux-files?ref=v2.0.0";
       inputs.nixpkgs.follows = "nixos";
     };
 

@@ -1,14 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  theme = {
-    name = "Adwaita";
-    package = pkgs.gnome-themes-extra;
-  };
-  themeQt = {
-    name = "Adwaita-dark";
-    package = pkgs.adwaita-qt;
-  };
+  gtkTheme = pkgs.adw-gtk3;
   cursorTheme = {
     name = "capitaine-cursors-white";
     size = 24;
@@ -22,8 +15,7 @@ let
 in
 {
   environment.systemPackages = [
-    theme.package
-    themeQt.package
+    gtkTheme
     cursorTheme.package
     iconsTheme.package
   ];
@@ -50,36 +42,32 @@ in
       x11.enable = false;
     };
 
+    # DMS probes only ~/.local/share/themes, ~/.themes and /usr/share/themes.
+    home.file = {
+      ".local/share/themes/adw-gtk3".source = "${gtkTheme}/share/themes/adw-gtk3";
+      ".local/share/themes/adw-gtk3-dark".source = "${gtkTheme}/share/themes/adw-gtk3-dark";
+    };
+
+    # No theme/colorScheme on purpose: DMS owns gtk-theme and color-scheme.
     gtk = {
       enable = true;
-      colorScheme = "dark";
       iconTheme = {
         package = iconsTheme.package;
         name = iconsTheme.name;
-      };
-      theme = {
-        package = theme.package;
-        name = "${theme.name}";
       };
       font = {
         package = config.vars.defaultFont.package;
         name = config.vars.defaultFont.name;
         size = 12;
       };
-      gtk3 = {
-        theme = {
-          package = theme.package;
-          name = "${theme.name}-dark";
-        };
-      };
     };
 
+    # nixpkgs' qtengine ships the Qt6 plugin only, so Qt5 apps stay unstyled.
     qt = {
       enable = true;
-      platformTheme.name = "gtk3";
-      style = {
-        name = themeQt.name;
-        package = themeQt.package;
+      platformTheme = {
+        name = "qtengine";
+        package = pkgs.qtengine;
       };
     };
   };
