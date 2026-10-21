@@ -167,7 +167,8 @@ in
   };
 
   services = {
-    tailscale.serve.enable = true;
+    # Until https://github.com/tailscale/tailscale/issues/18381 fixed
+    # tailscale.serve.enable = true;
     journald.settings.Journal.SystemMaxUse = "10G";
     # PostgreSQL config and backups
     postgresql = {
