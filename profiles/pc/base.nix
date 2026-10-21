@@ -23,7 +23,6 @@
     kobodl
     libreoffice-fresh
     mpv
-    modrinth-app
     nix-search-tv
     nix-output-monitor
     nix-prefetch-git
