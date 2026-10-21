@@ -51,9 +51,6 @@ in
     # Obsidian
     ./obsidian-share-note.nix
     ./obsidian-relay.nix
-
-    # Gaming
-    ./minecraft.nix
   ]
   ++ suites.server;
 
