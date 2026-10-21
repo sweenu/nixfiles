@@ -41,7 +41,7 @@ in
     ./nextcloud.nix
     ./bookorbit.nix
     ./immich.nix
-    ./dawarich.nix
+    # ./dawarich.nix
     ./actual.nix
 
     # Monitoring & Control
