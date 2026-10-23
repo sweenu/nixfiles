@@ -53,6 +53,8 @@ in
   ]
   ++ suites.server;
 
+  kak.lsp.enable = false;
+
   users.groups.smtp = { };
   age.secrets = {
     smtpPassword = {

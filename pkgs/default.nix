@@ -16,6 +16,11 @@ final: prev: with prev; {
     runtimeInputs = [ jq ];
   };
 
+  ytdl = writeShellApplication {
+    name = "ytdl";
+    text = (builtins.readFile ./ytdl.sh);
+  };
+
   kakounePlugins = kakounePlugins // lib.recurseIntoAttrs (callPackage ./kakoune_plugins.nix { });
 
   backlight = writers.writePython3Bin "backlight" { } (builtins.readFile ./backlight.py);

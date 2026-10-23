@@ -9,6 +9,8 @@
 {
   imports = suites.base;
 
+  kak.lsp.enable = false;
+
   services.getty.autologinUser = config.vars.username;
   users.users."${config.vars.username}" = {
     password = null;
