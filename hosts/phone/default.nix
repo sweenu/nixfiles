@@ -22,7 +22,6 @@ in
   ++ (with profiles.core; [
     fish
     git
-    helix
     home
     kak
     theme
