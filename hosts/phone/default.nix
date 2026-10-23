@@ -26,7 +26,6 @@ in
     home
     kak
     theme
-    tmux
   ]);
 
   # nix-on-droid has its own state versions, independent from NixOS'.
@@ -36,6 +35,8 @@ in
     userName = config.vars.username;
     shell = "${pkgs.fish}/bin/fish";
   };
+
+  kak.lspLanguages = [ "nix" ];
 
   vars = {
     home = lib.mkForce config.user.home;
@@ -80,21 +81,17 @@ in
   };
 
   # The NixOS-only profiles/core/base.nix can't be imported, so this is its
-  # package list minus what needs root or real hardware access under proot.
+  # package list minus what's useless on Android: hardware and root tools,
+  # process and disk usage tools (sandboxed to the app) and dev tooling.
   environment.packages = with pkgs; [
     bind
     curl
     diffutils
-    dua
-    dust
-    entr
     fd
     file
     findutils
     gawk
-    gdu
     git
-    git-filter-repo
     gnugrep
     gnused
     gnutar
@@ -105,7 +102,6 @@ in
     jq
     kakoune
     less
-    lsof
     man
     moreutils
     mosh
@@ -113,14 +109,11 @@ in
     nvd
     openssh
     procps
-    procs
-    psmisc
     ripgrep
     rsync
     skim
     gtrash
     unzip
-    uutils-coreutils
     wget2
     whois
     which
@@ -152,7 +145,12 @@ in
       nrbs = lib.mkForce "nix-on-droid switch --flake ${flake}";
       nb = lib.mkForce "nix-on-droid build --flake ${flake}";
     };
-    # There's no /run/user/<uid> on Android to put the socket in.
-    tmux.secureSocket = lib.mkForce false;
+    # Android only lets them see the app's own processes.
+    bottom.enable = lib.mkForce false;
+    btop.enable = lib.mkForce false;
+    # Dev tooling, and nix-index's database is a big download for a phone.
+    direnv.enable = lib.mkForce false;
+    gh-dash.enable = lib.mkForce false;
+    nix-index.enable = lib.mkForce false;
   };
 }

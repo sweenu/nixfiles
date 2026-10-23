@@ -1,6 +1,55 @@
-{ config, pkgs, ... }:
 {
-  home-manager.users."${config.vars.username}" = {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  lspLanguages = {
+    nix = ''
+      [language.nix]
+      filetypes = ["nix"]
+      roots = ["flake.nix", "shell.nix", ".git", ".hg"]
+      command = "${pkgs.nil}/bin/nil"
+    '';
+
+    go = ''
+      [language.go]
+      filetypes = ["go"]
+      roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
+      command = "${pkgs.gopls}/bin/gopls"
+      settings_section = "gopls"
+    '';
+
+    python = ''
+      [language.python]
+      filetypes = ["python"]
+      roots = ["pyproject.toml", "requirements.txt", "setup.py", ".git", ".hg"]
+      command = "${pkgs.python3Packages.python-lsp-server}/bin/pylsp"
+      settings_section = "_"
+      [language.python.settings._]
+      pylsp.configurationSources = ["flake8"]
+      pylsp.plugins.flake8.enabled = true
+      pylsp.plugins.mccabe.enabled = false
+      pylsp.plugins.pycodestyle.enabled = false
+      pylsp.plugins.pylint.enabled = false
+      pylsp.plugins.yapf.enabled = false
+    '';
+  };
+in
+{
+  options.kak.lspLanguages = lib.mkOption {
+    type = with lib.types; listOf (enum (builtins.attrNames lspLanguages));
+    default = [
+      "nix"
+      "go"
+      "python"
+    ];
+    description = "Languages kak-lsp gets a language server for.";
+  };
+
+  config.home-manager.users."${config.vars.username}" = {
     home.packages = with pkgs; [
       pkgs.nixfmt
       fedit
@@ -22,32 +71,8 @@
       ];
     };
 
-    xdg.configFile."kak-lsp/kak-lsp.toml".text = ''
-      verbosity = 2
-
-      [language.nix]
-      filetypes = ["nix"]
-      roots = ["flake.nix", "shell.nix", ".git", ".hg"]
-      command = "${pkgs.nil}/bin/nil"
-
-      [language.go]
-      filetypes = ["go"]
-      roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
-      command = "${pkgs.gopls}/bin/gopls"
-      settings_section = "gopls"
-
-      [language.python]
-      filetypes = ["python"]
-      roots = ["pyproject.toml", "requirements.txt", "setup.py", ".git", ".hg"]
-      command = "${pkgs.python3Packages.python-lsp-server}/bin/pylsp"
-      settings_section = "_"
-      [language.python.settings._]
-      pylsp.configurationSources = ["flake8"]
-      pylsp.plugins.flake8.enabled = true
-      pylsp.plugins.mccabe.enabled = false
-      pylsp.plugins.pycodestyle.enabled = false
-      pylsp.plugins.pylint.enabled = false
-      pylsp.plugins.yapf.enabled = false
-    '';
+    xdg.configFile."kak-lsp/kak-lsp.toml".text = lib.concatStringsSep "\n" (
+      [ "verbosity = 2\n" ] ++ map (language: lspLanguages.${language}) config.kak.lspLanguages
+    );
   };
 }
