@@ -9,6 +9,7 @@ Here are my [NixOS](https://nixos.org) machines:
 - _najdorf_: server where I deploy my self-hosted apps.
 - _ginko_: RaspberryPi used as tailscale exit node.
 - _bedroom-speakers_: RaspberryPi 4 with a HiFiBerry DAC+ used as a [Music Assistant](https://music-assistant.io) speaker, running [hifiberry-nixos](https://github.com/sweenu/hifiberry-nixos).
+- _phone_: Android phone running [nix-on-droid](https://github.com/nix-community/nix-on-droid), sharing the core home-manager profiles (fish, git, kakoune, tmux…) through a small shim (`hosts/phone/hm-users-shim.nix`).
 
 The hosts communicate through [Tailscale](https://tailscale.com).
 
@@ -145,6 +146,15 @@ ssh root@najdorf 'sudo -u postgres pg_dumpall --clean --if-exists --no-role-pass
 # Uncomment the services in hosts/najdorf/default.nix
 deploy '.#najdorf'
 ```
+
+### Phone
+Install the [nix-on-droid](https://github.com/nix-community/nix-on-droid) app (F-Droid), let it bootstrap, then:
+```bash
+nix-shell -p git openssh  # bootstrap shell; add an ssh key to GitHub if needed
+git clone https://github.com/sweenu/nixfiles ~/nixfiles
+nix-on-droid switch --flake ~/nixfiles#phone
+```
+Afterwards, `nrbs` rebuilds it. Connect the Tailscale Android app to reach the Attic cache.
 
 ## Acknowledgment:
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS and from which the current structure of the repo is still heavily inspired.

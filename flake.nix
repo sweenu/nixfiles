@@ -18,6 +18,14 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid";
+      inputs = {
+        nixpkgs.follows = "nixos";
+        home-manager.follows = "home";
+      };
+    };
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     agenix = {
@@ -395,6 +403,33 @@
 
           }
           // lib.genAttrs speakerHosts mkSpeakersHost;
+
+          nixOnDroidConfigurations.phone = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+            pkgs = import inputs.nixos {
+              system = "aarch64-linux";
+              overlays = overlays ++ [ inputs.nix-on-droid.overlays.default ];
+              config.allowUnfree = true;
+            };
+            home-manager-path = inputs.home.outPath;
+            extraSpecialArgs = inputs // {
+              inherit
+                self
+                inputs
+                suites
+                profiles
+                ;
+            };
+            modules = [
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  backupFileExtension = "hm-bak";
+                  sharedModules = hmModules ++ [ inputs.nix-colors.homeManagerModules.default ];
+                };
+              }
+              hosts.phone
+            ];
+          };
 
           homeConfigurations =
             let
