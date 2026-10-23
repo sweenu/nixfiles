@@ -135,12 +135,10 @@ in
       warn-dirty = false
     '';
     substituters = [
-      "https://attic.${config.vars.tailnetName}/main"
       "https://nix-community.cachix.org"
       "https://sweenu.cachix.org"
     ];
     trustedPublicKeys = [
-      "main:OWXJKAuxiGFPlH/3K65aE5q5T7tkJxZ2DMmKGpUy3Oo="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "sweenu.cachix.org-1:DvQl16NWBp41k5IlxTODTOrIThyGRj8/ekrXxEheBQ0="
     ];

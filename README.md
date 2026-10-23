@@ -154,7 +154,7 @@ nix-shell -p git openssh  # bootstrap shell; add an ssh key to GitHub if needed
 git clone https://github.com/sweenu/nixfiles ~/nixfiles
 nix-on-droid switch --flake ~/nixfiles#phone
 ```
-Afterwards, `nrbs` rebuilds it. Connect the Tailscale Android app to reach the Attic cache.
+Afterwards, `nrbs` rebuilds it.
 
 ## Acknowledgment:
 * Thanks to the [digga](https://digga.divnix.com) people for making my life easier when I first started to use NixOS and from which the current structure of the repo is still heavily inspired.
