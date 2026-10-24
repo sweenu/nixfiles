@@ -5,7 +5,7 @@
 # can be upgraded the moment YouTube breaks it, with `ytdl --upgrade`.
 
 profile="$HOME/.local/state/nix/profiles/yt-dlp"
-dest="$HOME/storage/shared/Youtube"
+dest="$HOME/storage/shared/YouTube"
 
 # Shared links run in a session that closes on exit, so keep errors readable.
 set -o errtrace
