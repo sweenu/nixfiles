@@ -47,6 +47,8 @@ in
 
   time.timeZone = config.vars.timezone;
 
+  environment.motd = null;
+
   # nix-on-droid hardcodes 1.1.1.1 and 8.8.8.8, which can't resolve tailnet
   # names. MagicDNS also resolves public names while the Tailscale app is
   # connected; the short timeout keeps the fallback quick when it isn't.
