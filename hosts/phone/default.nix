@@ -16,6 +16,7 @@ in
 {
   imports = [
     ./hm-users-shim.nix
+    ./nix-profile-fix.nix
     ./ytdl.nix
     ../../modules/vars.nix
     profiles.vars
