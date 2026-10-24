@@ -13,6 +13,11 @@ in
 {
   environment.packages = [ pkgs.ytdl ];
 
+  # So `yt-dlp` in a shell is the one `ytdl --upgrade` keeps up to date.
+  home-manager.users.${config.vars.username}.home.sessionPath = [
+    "${config.user.home}/.local/state/nix/profiles/yt-dlp/bin"
+  ];
+
   build.activation.termuxUrlOpener = ''
     $DRY_RUN_CMD mkdir $VERBOSE_ARG -p "${config.user.home}/bin"
     $DRY_RUN_CMD install $VERBOSE_ARG -m 755 ${urlOpener} "${config.user.home}/bin/termux-url-opener"

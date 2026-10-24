@@ -11,8 +11,18 @@ dest="$HOME/storage/shared/Youtube"
 set -o errtrace
 trap 'read -rp "Something went wrong, press Enter to close." _' ERR
 
+install_yt_dlp() {
+  echo "Installing yt-dlp..."
+  mkdir -p "$(dirname "$profile")"
+  nix profile add --profile "$profile" github:NixOS/nixpkgs/nixpkgs-unstable#yt-dlp
+}
+
 if [[ "${1:-}" == "--upgrade" ]]; then
-  nix profile upgrade --profile "$profile" --all
+  if [[ -x "$profile/bin/yt-dlp" ]]; then
+    nix profile upgrade --profile "$profile" --all
+  else
+    install_yt_dlp
+  fi
   exit
 fi
 
@@ -23,9 +33,7 @@ fi
 url="$1"
 
 if [[ ! -x "$profile/bin/yt-dlp" ]]; then
-  echo "Installing yt-dlp..."
-  mkdir -p "$(dirname "$profile")"
-  nix profile add --profile "$profile" github:NixOS/nixpkgs/nixpkgs-unstable#yt-dlp
+  install_yt_dlp
 fi
 
 if [[ ! -d "$HOME/storage/shared" ]]; then
