@@ -83,6 +83,8 @@ in
   # The NixOS-only profiles/core/base.nix can't be imported, so this is its
   # package list minus what's useless on Android: hardware and root tools,
   # process and disk usage tools (sandboxed to the app) and dev tooling.
+  # Unlike NixOS, everything here and in home.packages lands in one buildEnv
+  # that fails on colliding files: drop duplicates or lower their priority.
   environment.packages = with pkgs; [
     bind
     curl
@@ -97,10 +99,8 @@ in
     gnutar
     gzip
     highlight
-    hostname
-    inetutils
+    (lib.lowPrio inetutils) # whois has its own package
     jq
-    kakoune
     less
     man
     moreutils
