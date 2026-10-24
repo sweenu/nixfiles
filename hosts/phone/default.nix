@@ -47,6 +47,16 @@ in
 
   time.timeZone = config.vars.timezone;
 
+  # nix-on-droid hardcodes 1.1.1.1 and 8.8.8.8, which can't resolve tailnet
+  # names. MagicDNS also resolves public names while the Tailscale app is
+  # connected; the short timeout keeps the fallback quick when it isn't.
+  environment.etc."resolv.conf".text = lib.mkForce ''
+    nameserver 100.100.100.100
+    nameserver 1.1.1.1
+    search ${config.vars.tailnetName}
+    options timeout:1 attempts:1
+  '';
+
   android-integration = {
     termux-open.enable = true;
     termux-open-url.enable = true;
