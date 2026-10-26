@@ -23,6 +23,8 @@ in
     pkgs.linux-wallpaperengine
   ];
 
+  programs.gpu-screen-recorder.enable = cfg.plugins.quickCapture.enable;
+
   programs.dux-search = {
     enable = true;
     # Only run in a real graphical session, not the greeter's (its home is
@@ -50,6 +52,12 @@ in
       pkgs.dms-settings
       # homeAssistantMonitor dep; the registry module installs sources only.
       pkgs.kdePackages.qtwebsockets
+      # quickCapture: WebP/JPEG export and OCR/QR cropping, PDF export, the OCR
+      # text scanner and the QR scanner, in that order.
+      pkgs.imagemagick
+      pkgs.img2pdf
+      pkgs.tesseract
+      pkgs.zbar
     ];
 
     # Like settings.json, this is a read-only store symlink DMS can't write to,
@@ -74,7 +82,7 @@ in
         allDayReminderDaysBefore = 0;
         allDayReminderTime = "09:00";
         allDayReminders = false;
-        closeBehavior = "quit";
+        closeBehavior = "minimize";
         colorSource = "auto";
         coreHoursEnabled = false;
         coreHoursEnd = 17;
@@ -142,6 +150,10 @@ in
         powerUsagePlugin.enable = true;
         voxtype.enable = true;
         linuxWallpaperEngine.enable = false;
+        quickCapture.enable = true;
+        # Replaces the builtin tailscale control center tile. Needs the user to
+        # be the tailscale operator, which pc/base.nix already sets.
+        dankscale.enable = true;
       };
     };
   };

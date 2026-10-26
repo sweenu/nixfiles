@@ -16,15 +16,21 @@
   "dankNotion": {
     "enabled": false
   },
+  "dankscale": {
+    "copyField": "dns",
+    "downloadDir": "~/downloads",
+    "enabled": true,
+    "lastAccount": "brunoinec@gmail.com"
+  },
   "emojiLauncher": {
     "enabled": true,
     "trigger": ":"
   },
   "homeAssistantMonitor": {
+    "editModeTwoColumns": true,
     "enabled": true,
     "hassTokenPath": "/run/agenix/hassToken",
     "hassUrl": "https://hass.taila5f2.ts.net",
-    "editModeTwoColumns": true,
     "showAttributes": true,
     "showButtonsOnStatusBar": true
   },
@@ -48,6 +54,18 @@
   },
   "powerUsagePlugin": {
     "enabled": true
+  },
+  "quickCapture": {
+    "enabled": true,
+    "modalDisplayMode": "modal",
+    "modalScaleToContent": true,
+    "recordingDirectory": "~/videos/screencasts",
+    "recordingFramerate": "30",
+    "recordingScreenTarget": "focused",
+    "saveDirectory": "~/pictures/screenshots",
+    "showToolbarBorder": true,
+    "show_shortcut_hints": true,
+    "toolbarPosition": "top"
   },
   "voxtype": {
     "enabled": true,

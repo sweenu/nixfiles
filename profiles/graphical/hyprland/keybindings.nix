@@ -139,8 +139,8 @@ in
   (bind "${mod} + SHIFT + z" (voxtype "cancel"))
 
   # Screen capture
-  (bind "Print" (exec "dms screenshot full"))
-  (bind "${mod} + Print" (exec "dms screenshot"))
+  (bind "Print" (exec "${dms} quickCapture screenshot full edit"))
+  (bind "${mod} + Print" (exec "${dms} quickCapture screenshot region edit"))
 
   # Turn off laptop screen
   (bind "F9" (dpmsToggle "eDP-1"))

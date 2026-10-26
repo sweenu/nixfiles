@@ -141,6 +141,10 @@
         },
         {
           "enabled": true,
+          "id": "dankscale"
+        },
+        {
+          "enabled": true,
           "id": "weather"
         }
       ],
@@ -340,6 +344,10 @@
         {
           "enabled": true,
           "id": "claudeCodeUsage"
+        },
+        {
+          "enabled": true,
+          "id": "dankscale"
         },
         {
           "enabled": true,
@@ -557,14 +565,6 @@
       "w": 4
     },
     {
-      "col": 6,
-      "enabled": true,
-      "h": 1,
-      "id": "builtin_tailscale",
-      "row": 3,
-      "w": 1
-    },
-    {
       "col": 0,
       "enabled": true,
       "h": 1,
@@ -605,6 +605,14 @@
       "id": "builtin_cups",
       "row": 3,
       "w": 1
+    },
+    {
+      "col": 6,
+      "enabled": true,
+      "h": 1,
+      "id": "plugin_quickCapture",
+      "row": 3,
+      "w": 1
     }
   ],
   "currentThemeCategory": "dynamic",
@@ -641,9 +649,133 @@
   "dankLauncherV2ShowSourceBadges": true,
   "dankLauncherV2Size": "compact",
   "dankLauncherV2UnloadOnClose": false,
+  "dashCards": [
+    {
+      "col": 0,
+      "h": 1,
+      "id": "clock",
+      "row": 0,
+      "w": 2
+    },
+    {
+      "col": 2,
+      "h": 1,
+      "id": "weather",
+      "row": 0,
+      "w": 2
+    },
+    {
+      "col": 0,
+      "h": 4,
+      "id": "calendar",
+      "row": 1,
+      "w": 4
+    },
+    {
+      "col": 4,
+      "h": 3,
+      "id": "sysmon",
+      "row": 2,
+      "w": 2
+    },
+    {
+      "col": 4,
+      "h": 1,
+      "id": "disk",
+      "row": 1,
+      "w": 1
+    },
+    {
+      "col": 5,
+      "h": 1,
+      "id": "memory",
+      "row": 0,
+      "w": 1
+    },
+    {
+      "col": 4,
+      "h": 1,
+      "id": "cpu",
+      "row": 0,
+      "w": 1
+    },
+    {
+      "col": 5,
+      "h": 1,
+      "id": "network",
+      "row": 1,
+      "w": 1
+    }
+  ],
   "dashOptions": {
+    "calendar": {
+      "weekends": true
+    },
+    "clock": {
+      "date": true,
+      "seconds": true
+    },
     "media": {
       "albumArtAccent": false
+    },
+    "wallpaper": {
+      "filename": false,
+      "layout": "carousel"
+    },
+    "weather": {
+      "widgets": [
+        {
+          "city": false,
+          "col": 0,
+          "h": 2,
+          "id": "conditions",
+          "row": 0,
+          "tone": "primary",
+          "w": 2
+        },
+        {
+          "col": 0,
+          "forecast": "chart",
+          "h": 2,
+          "id": "hourly",
+          "row": 2,
+          "w": 4
+        },
+        {
+          "col": 3,
+          "h": 2,
+          "id": "sun",
+          "row": 0,
+          "tone": "",
+          "w": 1
+        },
+        {
+          "col": 2,
+          "graphics": true,
+          "h": 2,
+          "id": "wind",
+          "row": 0,
+          "tone": "",
+          "w": 1
+        },
+        {
+          "col": 3,
+          "graphics": true,
+          "h": 2,
+          "id": "uv",
+          "row": 4,
+          "tone": "",
+          "w": 1
+        },
+        {
+          "col": 0,
+          "forecast": "chart",
+          "h": 2,
+          "id": "daily",
+          "row": 4,
+          "w": 3
+        }
+      ]
     }
   },
   "dashTabs": [

@@ -116,7 +116,6 @@
 
     services = {
       playerctld.enable = true;
-      tailscale-systray.enable = true;
     };
 
     xdg.userDirs = {
