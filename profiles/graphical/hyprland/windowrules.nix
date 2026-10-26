@@ -1,18 +1,19 @@
 [
-  # Ignore maximize requests from apps (e.g. Zen's Picture-in-Picture window
-  # randomly requests maximize during playback and would steal focus)
+  # Zen's Picture-in-Picture randomly requests maximize during playback and
+  # would steal focus
   {
-    match.class = ".*";
+    match.class = "zen-twilight";
     suppress_event = "maximize";
   }
 
   # They use native transparency or we want them opaque
   {
-    match.class = "org\\.quickshell|imv|swappy";
+    match.class = "dev\\.duxlabs\\..*|imv|swappy";
     opaque = true;
   }
 
-  # Center all floating windows (not xwayland cause popups)
+  # Center all floating windows (not xwayland cause popups); the sized rules
+  # below rely on this instead of centering themselves
   {
     match = {
       float = true;
@@ -23,59 +24,18 @@
 
   # Float
   {
-    match.class = "guifetch";
-    float = true;
-  }
-  {
-    match.class = "wev";
-    float = true;
-  }
-  {
-    match.class = "org\\.gnome\\.FileRoller";
-    float = true;
-  }
-  {
-    match.class = "file-roller";
-    float = true;
-  }
-  {
-    match.class = "feh";
-    float = true;
-  }
-  {
-    match.class = "imv";
-    float = true;
-  }
-  {
-    match.class = "system-config-printer";
-    float = true;
-  }
-  {
-    match.class = "org\\.quickshell";
+    match.class = "wev|imv|dev\\.duxlabs\\..*|org\\.kde\\.kdeconnect\\.sms";
     float = true;
   }
   {
     match = {
-      class = "Zoom Workspace";
+      class = "zoom";
       title = "menu window";
     };
     float = true;
   }
-  {
-    match.class = "org\\.kde\\.kdeconnect\\.sms";
-    float = true;
-  }
 
-  # Float, resize and center
-  {
-    match.class = "org\\.gnome\\.Settings";
-    float = true;
-    size = [
-      "monitor_w*0.7"
-      "monitor_h*0.8"
-    ];
-    center = true;
-  }
+  # Float and resize
   {
     match.class = "com\\.saivert\\.pwvucontrol";
     float = true;
@@ -83,25 +43,6 @@
       "monitor_w*0.6"
       "monitor_h*0.7"
     ];
-    center = true;
-  }
-  {
-    match.class = "nwg-look";
-    float = true;
-    size = [
-      "monitor_w*0.5"
-      "monitor_h*0.6"
-    ];
-    center = true;
-  }
-  {
-    match.class = "signal";
-    float = true;
-    size = [
-      773
-      471
-    ];
-    center = true;
   }
   {
     match.class = "com\\.nextcloud\\.desktopclient\\.nextcloud";
@@ -110,7 +51,6 @@
       607
       607
     ];
-    center = true;
   }
   {
     match.class = "wdisplays";
@@ -119,7 +59,14 @@
       1021
       622
     ];
-    center = true;
+  }
+  {
+    match.class = "dev\\.duxlabs\\.files";
+    float = true;
+    size = [
+      "monitor_w*0.7"
+      "monitor_h*0.75"
+    ];
   }
 
   # Dialogs
@@ -148,7 +95,10 @@
     float = true;
   }
   {
-    match.title = "Library";
+    match = {
+      class = "zen-twilight";
+      title = "^Library$";
+    };
     float = true;
   }
 
@@ -192,16 +142,10 @@
     rounding = 10;
   }
 
-  # Kill Firefox sharing indicator
+  # Zen titles it "<brand> — Sharing Indicator", so don't match on Firefox
   {
-    match.title = "Firefox.*Sharing Indicator";
+    match.title = ".*— Sharing Indicator";
     suppress_event = "maximize fullscreen";
-  }
-
-  # App specific
-  {
-    match.class = "Signal";
-    workspace = "special:signal";
   }
 
   # on_created_empty alone only lands the window on special:music when it

@@ -3,20 +3,11 @@
     match.namespace = "selection";
     animation = "fade";
   } # slurp
-  {
-    match.namespace = "wayfreeze";
-    animation = "fade";
-  }
-
-  {
-    match.namespace = "launcher";
-    animation = "popin 80%";
-    blur = true;
-  }
 
   ## Shell ##
+  # dms:frame is the bar
   {
-    match.namespace = "^(dms)$";
+    match.namespace = "^dms:frame$";
     no_anim = true;
   }
   {
@@ -29,7 +20,7 @@
   }
 
   {
-    match.namespace = "dms:(color-picker|clipboard|spotlight|settings)";
+    match.namespace = "dms:(color-picker|clipboard|spotlight)";
     blur = true;
     dim_around = true;
   }
