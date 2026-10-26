@@ -101,6 +101,15 @@
 
     zed-kakoune.url = "github:sweenu/zed/kakoune-v1.8.0-pre";
 
+    # `delta` on PATH stays git-delta (home-manager's); the editor is launched
+    # from its desktop entry or as `delta-app`.
+    delta = {
+      url = "github:zed-industries/delta-nix";
+      # Upstream asks for the host's nixpkgs so Delta's glibc matches the
+      # graphics stack it loads from /run/opengl-driver.
+      inputs.nixpkgs.follows = "nixos";
+    };
+
     nix-minecraft = {
       url = "github:sweenu/nix-minecraft/dev";
       inputs.nixpkgs.follows = "nixos";

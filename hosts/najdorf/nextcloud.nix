@@ -14,7 +14,6 @@ let
 in
 {
   age.secrets = {
-    nextcloudAdminPass.file = "${self}/secrets/nextcloud/admin_password.age";
     nextcloudSecrets.file = "${self}/secrets/nextcloud/secrets.age";
   };
 
@@ -26,8 +25,6 @@ in
     database.createLocally = true;
     config = {
       dbtype = "pgsql";
-      adminuser = "sweenu";
-      adminpassFile = config.age.secrets.nextcloudAdminPass.path;
     };
 
     maxUploadSize = "16G";
@@ -64,7 +61,12 @@ in
       mail_domain = builtins.elemAt (lib.strings.splitString "@" config.vars.email) 1;
     };
 
-    appstoreEnable = true;
+    # Leaving the app store enabled gives Nextcloud a writable app dir, which it
+    # unpacks app store updates into even for apps served from the read-only
+    # nix-apps dir. Two copies of the same app then get loaded in one PHP
+    # process, which is a hard fatal for any app whose composer autoloader class
+    # name is version-independent (contacts). So every app has to come from Nix.
+    appstoreEnable = false;
     extraAppsEnable = true;
     extraApps = with config.services.nextcloud.package.packages.apps; {
       inherit contacts;
@@ -73,12 +75,38 @@ in
       inherit richdocuments;
       inherit music;
       inherit gpoddersync;
+      inherit guests;
+      inherit previewgenerator;
 
       cardhook = pkgs.fetchFromGitHub {
         owner = "sweenu";
         repo = "cardhook";
         rev = "main";
         sha256 = "sha256-Ghd2Hm8SI4h7DM5AKV/WQ/muZM3eGZ8UvXswcXeZvWo=";
+      };
+
+      duplicatefinder = pkgs.fetchNextcloudApp {
+        appName = "duplicatefinder";
+        appVersion = "1.9.0";
+        url = "https://github.com/eldertek/duplicatefinder/releases/download/v1.9.0/duplicatefinder-v1.9.0.tar.gz";
+        hash = "sha256-oiIAZaIJcYM440pZeW6onibM7ELSWaJvWLW1heZv2Bw=";
+        license = "agpl3Plus";
+      };
+
+      epubviewer = pkgs.fetchNextcloudApp {
+        appName = "epubviewer";
+        appVersion = "1.9.18";
+        url = "https://github.com/devnoname120/epubviewer/releases/download/1.9.18/epubviewer-1.9.18.tar.gz";
+        hash = "sha256-MN46C/YLENfjbWELzR3gh+rHZbQjUaw8BHLM2oA95yk=";
+        license = "agpl3Plus";
+      };
+
+      workflow_pdf_converter = pkgs.fetchNextcloudApp {
+        appName = "workflow_pdf_converter";
+        appVersion = "6.0.0";
+        url = "https://github.com/nextcloud-releases/workflow_pdf_converter/releases/download/v6.0.0/workflow_pdf_converter-v6.0.0.tar.gz";
+        hash = "sha256-qniNmi79ERveq9kPrFHty3AZmu1W8FzD/Dwp1ro3t4Q=";
+        license = "agpl3Plus";
       };
     };
   };

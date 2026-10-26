@@ -21,7 +21,7 @@
     git-absorb
     gpg-tui
     kobodl
-    libreoffice-fresh
+    libreoffice
     mpv
     nix-search-tv
     nix-output-monitor

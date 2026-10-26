@@ -84,7 +84,6 @@ in
         };
       };
       systemd = {
-        enable = true;
         users.root.shell = "/bin/systemd-tty-ask-password-agent";
         network.networks."10-wired" = network;
       };

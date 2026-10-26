@@ -23,10 +23,10 @@ in
     pkgs.linux-wallpaperengine
   ];
 
-  programs.dsearch = {
+  programs.dux-search = {
     enable = true;
     # Only run in a real graphical session, not the greeter's (its home is
-    # /var/empty, where dsearch can't write its index and crash-loops).
+    # /var/empty, where dux-search can't write its index and crash-loops).
     systemd.target = "graphical-session.target";
   };
 

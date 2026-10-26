@@ -59,9 +59,6 @@ in
         "thunderbolt"
         "nvme"
       ];
-      systemd = {
-        enable = true;
-      };
       luks.devices.${encryptedRoot} = {
         allowDiscards = true;
         bypassWorkqueues = true;
