@@ -16,6 +16,10 @@ let
       Gateway = config.vars.defaultGateway;
       IPv6AcceptRA = true;
       DNSDefaultRoute = true;
+      # The Bbox has no DoT listener, so resolved probes TLS, fails and logs a
+      # downgrade every time the grace period expires. Only affects the
+      # link-scoped router resolvers; global DoT to `dnsResolvers` still applies.
+      DNSOverTLS = false;
     };
     domains = [
       "~lan"
