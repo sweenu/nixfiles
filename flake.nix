@@ -99,7 +99,11 @@
       flake = false;
     };
 
-    zed-kakoune.url = "github:sweenu/zed/kakoune-v1.8.0-pre";
+    zed-kakoune = {
+      url = "github:sweenu/zed/kakoune-v1.26.2-pre";
+      # Must share the host's nixpkgs: Zed dlopens the Vulkan drivers from /run/opengl-driver
+      inputs.nixpkgs.follows = "nixos";
+    };
 
     # `delta` on PATH stays git-delta (home-manager's); the editor is launched
     # from its desktop entry or as `delta-app`.
