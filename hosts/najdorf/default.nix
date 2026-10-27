@@ -85,6 +85,9 @@ in
         ssh = {
           enable = true;
           hostKeys = [ "/etc/ssh/initrd_ssh_host_ed25519_key" ];
+          authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys ++ [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICn92xM7uL1ylDdKGicg3QYghSUMLmFHmmT4gCREYFXv sweenu@phone"
+          ];
         };
       };
       systemd = {
