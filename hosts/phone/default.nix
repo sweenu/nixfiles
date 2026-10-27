@@ -20,6 +20,7 @@ in
     ./ytdl.nix
     ../../modules/vars.nix
     profiles.vars
+    profiles.ssh
   ]
   ++ (with profiles.core; [
     fish

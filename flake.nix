@@ -319,6 +319,7 @@
                 base
                 ++ [
                   profiles.audio
+                  profiles.ssh
                   profiles.virt-manager
                 ]
                 ++ (explodeAttrs profiles.graphical)
