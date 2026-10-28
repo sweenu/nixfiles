@@ -11,7 +11,8 @@
 let
   hmConfig = config.home-manager.users.${config.vars.username};
   palette = hmConfig.colorScheme.palette;
-  flake = "${config.vars.home}/nixfiles#phone";
+  nixfiles = "${config.vars.home}/nixfiles";
+  flake = "${nixfiles}#phone";
 in
 {
   imports = [
@@ -154,6 +155,11 @@ in
   environment.etcBackupExtension = ".bak";
 
   home-manager.users.${config.vars.username}.programs = {
+    fish.loginShellInit = ''
+      if test -d ${nixfiles}
+          cd ${nixfiles}
+      end
+    '';
     fish.shellAbbrs = {
       nrb = lib.mkForce "nix-on-droid";
       nrbs = lib.mkForce "nix-on-droid switch --flake ${flake}";
