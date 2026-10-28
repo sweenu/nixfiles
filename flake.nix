@@ -261,7 +261,6 @@
           overlays = [
             pkgsOverlay
             inputs.agenix.overlays.default
-            inputs.deploy.overlays.default
             inputs.nix-minecraft.overlay
             (final: prev: {
               relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
