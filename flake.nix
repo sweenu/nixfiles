@@ -133,6 +133,8 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    luks-prompt-alert.url = "github:sweenu/luks-prompt-alert";
+
     hifiberry-nixos.url = "github:sweenu/hifiberry-nixos";
   };
 
@@ -280,6 +282,7 @@
             inputs.nix-minecraft.nixosModules.minecraft-servers
             inputs.relay-server.nixosModules.relay-server
             inputs.relay-control-plane.nixosModules.relay-control-plane
+            inputs.luks-prompt-alert.nixosModules.default
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;

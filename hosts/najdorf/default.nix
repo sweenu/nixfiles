@@ -59,6 +59,8 @@ in
 
   kak.lsp.enable = false;
 
+  services.luksPromptAlert.enable = true;
+
   users.groups.smtp = { };
   age.secrets = {
     smtpPassword = {

@@ -563,6 +563,21 @@
         "type": "github"
       }
     },
+    "luks-prompt-alert": {
+      "locked": {
+        "lastModified": 1793180794,
+        "narHash": "sha256-TcPa1RKcalRs2sGc1QM5p7BnqNgRaODjoM69IQL9+Fc=",
+        "owner": "sweenu",
+        "repo": "luks-prompt-alert",
+        "rev": "7a98b92f7fc25475319a42916cf20a558fee976a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "luks-prompt-alert",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -1096,6 +1111,7 @@
         "haumea": "haumea",
         "hifiberry-nixos": "hifiberry-nixos",
         "home": "home",
+        "luks-prompt-alert": "luks-prompt-alert",
         "nix-colors": "nix-colors",
         "nix-minecraft": "nix-minecraft",
         "nix-on-droid": "nix-on-droid",
