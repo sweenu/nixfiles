@@ -753,9 +753,7 @@
         "nix-colors": "nix-colors",
         "nix-minecraft": "nix-minecraft",
         "nix-on-droid": "nix-on-droid",
-        "nixos": [
-          "nixpkgs"
-        ],
+        "nixos": "nixos",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-patcher": "nixpkgs-patcher",
@@ -775,6 +773,22 @@
         "type": "path"
       },
       "parent": []
+    },
+    "nixos": {
+      "locked": {
+        "lastModified": 1792773339,
+        "narHash": "sha256-rZLrzrC6i+jnTAlvPZHogKDulY7WWDEv9hJeHieO7Zw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "3ec636362e1816bc2f0888fa0fa2c69f1bc9e504",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
     },
     "nixos-anywhere": {
       "inputs": {

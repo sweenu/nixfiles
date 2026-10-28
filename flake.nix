@@ -274,6 +274,28 @@
 
           extendedLib = lib.extend (final: prev: import ./lib.nix);
 
+          # deploy-rs' flake builds its `activate` binary from source against our
+          # nixpkgs pin, so deploy-rs.cachix.org never has a matching hash and every
+          # node embeds that build in its closure — on aarch64 that means a full Rust
+          # build under qemu on each nixpkgs bump. nixpkgs ships a cached deploy-rs
+          # for both arches, so keep deploy-rs' activation lib but point it at that
+          # binary. basePkgs is deliberately unconfigured and un-overlaid so the
+          # derivation matches exactly what Hydra built.
+          deployLib = lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
+            system:
+            let
+              basePkgs = import inputs.nixos { inherit system; };
+              deployPkgs = (basePkgs.extend inputs.deploy.overlays.default).extend (
+                final: prev: {
+                  deploy-rs = prev.deploy-rs // {
+                    inherit (basePkgs) deploy-rs;
+                  };
+                }
+              );
+            in
+            deployPkgs.deploy-rs.lib
+          );
+
           commonModules = [
             inputs.agenix.nixosModules.age
             inputs.home.nixosModules.home-manager
@@ -386,7 +408,7 @@
             fastConnection = true;
             profiles.system = {
               sshUser = "root";
-              path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.${name};
+              path = deployLib.aarch64-linux.activate.nixos self.nixosConfigurations.${name};
               user = "root";
             };
           };
@@ -473,15 +495,13 @@
               profiles = {
                 system = {
                   sshUser = "root";
-                  path = inputs.deploy.lib.x86_64-linux.activate.nixos self.nixosConfigurations.najdorf;
+                  path = deployLib.x86_64-linux.activate.nixos self.nixosConfigurations.najdorf;
                   user = "root";
                 };
                 sweenu = {
                   user = "sweenu";
                   sshUser = "root";
-                  path =
-                    inputs.deploy.lib.x86_64-linux.activate.home-manager
-                      self.homeConfigurations."sweenu@najdorf";
+                  path = deployLib.x86_64-linux.activate.home-manager self.homeConfigurations."sweenu@najdorf";
                 };
               };
             };
@@ -493,7 +513,7 @@
               profiles = {
                 system = {
                   sshUser = "root";
-                  path = inputs.deploy.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ginko;
+                  path = deployLib.aarch64-linux.activate.nixos self.nixosConfigurations.ginko;
                   user = "root";
                 };
               };
@@ -502,9 +522,7 @@
           }
           // lib.genAttrs speakerHosts mkSpeakersDeployNode;
 
-          checks = builtins.mapAttrs (
-            system: deployLib: deployLib.deployChecks self.deploy
-          ) inputs.deploy.lib;
+          checks = builtins.mapAttrs (system: dl: dl.deployChecks self.deploy) deployLib;
         };
     };
 }

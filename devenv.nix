@@ -19,8 +19,12 @@ in
       treefmt
     ]
     ++ [
+      # nixpkgs' deploy-rs rather than the deploy flake's: it is cached for both
+      # arches, and taking it from the flake's own nixos pin keeps the CLI built
+      # from the same deploy-rs source rev as the `activate` binary embedded in
+      # each node's closure. See the deployLib comment in flake.nix.
+      flakeInputs.nixos.legacyPackages.${pkgs.system}.deploy-rs
       flakeInputs.agenix.packages.${pkgs.system}.default
-      flakeInputs.deploy.packages.${pkgs.system}.default
       flakeInputs.nixos-anywhere.packages.${pkgs.system}.default
       flakeInputs.disko.packages.${pkgs.system}.default
     ];
