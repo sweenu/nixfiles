@@ -9,7 +9,6 @@
 
   environment.defaultPackages = with pkgs; [
     audacity
-    bitwarden-cli
     bitwarden-desktop
     beeper
     brightnessctl

@@ -10,6 +10,17 @@ let
   username = config.vars.username;
   hmCfg = config.home-manager.users."${username}";
   cfg = hmCfg.programs.dank-material-shell;
+
+  dankVaultPatched =
+    (import "${inputs.dms-plugin-registry}/nix/default.nix" {
+      inherit pkgs;
+    }).dankVault.overrideAttrs
+      (_: {
+        postFixup = ''
+          substituteInPlace $out/DankVault.qml \
+            --replace-fail "wl-copy --paste-once --sensitive" "wl-copy --sensitive"
+        '';
+      });
 in
 {
   imports = [ inputs.dms-greeter.nixosModules.default ];
@@ -130,9 +141,6 @@ in
       # Calendar is provided by dankcalendar (dcal) instead of khal.
       enableCalendarEvents = false;
 
-      # These enable flags only install each plugin's code. Their runtime
-      # settings (incl. the effective enabled state DMS reads) live in the
-      # plugin_settings.json owned below.
       managePluginSettings = false;
       plugins = {
         # Official plugins
@@ -143,7 +151,6 @@ in
         # Community plugins
         calculator.enable = true;
         homeAssistantMonitor.enable = true;
-        # nderscore/dms-plugins, packaged in the dms-plugin-registry.
         hyprlandSubmapIndicator.enable = true;
         claudeCodeUsage.enable = true;
         emojiLauncher.enable = true;
@@ -151,8 +158,10 @@ in
         voxtype.enable = true;
         linuxWallpaperEngine.enable = false;
         quickCapture.enable = true;
-        # Replaces the builtin tailscale control center tile. Needs the user to
-        # be the tailscale operator, which pc/base.nix already sets.
+        dankVault = {
+          enable = true;
+          src = lib.mkForce dankVaultPatched;
+        };
         dankscale.enable = true;
       };
     };
