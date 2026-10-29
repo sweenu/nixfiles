@@ -16,6 +16,13 @@
   "dankNotion": {
     "enabled": false
   },
+  "dankVault": {
+    "backend": "rbw",
+    "defaultAction": "password",
+    "enabled": true,
+    "trigger": "@",
+    "triggerOnlyVisibilityDefaultApplied": true
+  },
   "dankscale": {
     "copyField": "dns",
     "downloadDir": "~/downloads",

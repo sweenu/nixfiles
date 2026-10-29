@@ -1015,7 +1015,32 @@
   "keybindsFloatingWindow": false,
   "launchPrefix": "",
   "launcherPluginOrder": [],
-  "launcherPluginVisibility": {},
+  "launcherPluginVisibility": {
+    "calculator": {
+      "allowWithoutTrigger": false
+    },
+    "dankVault": {
+      "allowWithoutTrigger": false
+    },
+    "dms_clipboard_search": {
+      "allowWithoutTrigger": false
+    },
+    "dms_power": {
+      "allowWithoutTrigger": false
+    },
+    "dms_qr_generator": {
+      "allowWithoutTrigger": false
+    },
+    "dms_settings_search": {
+      "allowWithoutTrigger": false
+    },
+    "dms_vpn": {
+      "allowWithoutTrigger": false
+    },
+    "emojiLauncher": {
+      "allowWithoutTrigger": false
+    }
+  },
   "launcherStyle": "full",
   "launcherUseOverlayLayer": false,
   "lockAtStartup": false,
