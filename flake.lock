@@ -58,6 +58,26 @@
         "type": "github"
       }
     },
+    "artos": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793375068,
+        "narHash": "sha256-Fb2AlRWZ7SMbU0sLC7qY+umlIGCWv1ffQhDftGJzxn8=",
+        "ref": "refs/heads/main",
+        "rev": "9551707ec345bfd998da9ea29a75a2a084e72bd9",
+        "revCount": 7,
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/artos"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/artos"
+      }
+    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -1114,6 +1134,7 @@
       "inputs": {
         "agenix": "agenix",
         "arion": "arion",
+        "artos": "artos",
         "claude-desktop": "claude-desktop",
         "dankcalendar": "dankcalendar",
         "delta": "delta",

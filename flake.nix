@@ -91,6 +91,11 @@
       flake = false;
     };
 
+    artos = {
+      url = "git+ssh://git@github.com/sweenu/artos";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixos";
