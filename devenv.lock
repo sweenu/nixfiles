@@ -350,6 +350,22 @@
         "type": "github"
       }
     },
+    "dux-bible-verse": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793350635,
+        "narHash": "sha256-BZHQ1OIG8nacRIZQyQl2LT8gHPuJTxIMA+a7J/WRvLo=",
+        "owner": "sweenu",
+        "repo": "dux-bible-verse",
+        "rev": "d5aa109c9c39b0ae342964e28da23d8fba39749b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "dux-bible-verse",
+        "type": "github"
+      }
+    },
     "dux-files": {
       "inputs": {
         "dank-qml-common": "dank-qml-common_4",
@@ -744,6 +760,7 @@
         "dms": "dms",
         "dms-greeter": "dms-greeter",
         "dms-plugin-registry": "dms-plugin-registry",
+        "dux-bible-verse": "dux-bible-verse",
         "dux-files": "dux-files",
         "flake-parts": "flake-parts_3",
         "haumea": "haumea",

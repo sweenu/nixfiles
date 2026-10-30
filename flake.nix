@@ -85,6 +85,12 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
+    # Not in the plugin registry; DMS consumes the QML sources directly.
+    dux-bible-verse = {
+      url = "github:sweenu/dux-bible-verse";
+      flake = false;
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixos";

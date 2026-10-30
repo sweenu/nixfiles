@@ -1,4 +1,11 @@
 {
+  "bibleVerse": {
+    "enabled": true,
+    "referencePosition": "before",
+    "translation": "NBS",
+    "trigger": "bible",
+    "verseNumbers": false
+  },
   "calculator": {
     "enabled": true,
     "trigger": "="
