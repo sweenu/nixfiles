@@ -121,6 +121,7 @@ in
   (bind "${mod} + Return" (exec "app2unit -- ${config.vars.terminalBin}"))
   (bind "${mod} + B" (exec "app2unit -- ${config.vars.defaultBrowser}"))
   (bind "${mod} + N" (exec "app2unit -- obsidian"))
+  (bind "${mod} + R" (exec "app2unit -- artos"))
   (bind "${mod} + SHIFT + Escape" (exec "app2unit -- ${dms} processlist open"))
 
   # Notifications

@@ -58,6 +58,26 @@
         "type": "github"
       }
     },
+    "artos": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793748229,
+        "narHash": "sha256-ZSohW9D3xDTUAsYq3k1enlacgY8E11NPcfLIaCZhCm4=",
+        "ref": "refs/heads/main",
+        "rev": "08f7cf9617b08845cd3a10f170538b02abaeadee",
+        "revCount": 58,
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/artos"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/artos"
+      }
+    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -1088,6 +1108,7 @@
       "inputs": {
         "agenix": "agenix",
         "arion": "arion",
+        "artos": "artos",
         "claude-desktop": "claude-desktop",
         "dankcalendar": "dankcalendar",
         "delta": "delta",
@@ -1114,6 +1135,7 @@
         "relay-control-plane": "relay-control-plane",
         "relay-server": "relay-server",
         "treefmt-nix": "treefmt-nix_2",
+        "usfm-importer": "usfm-importer",
         "zed-kakoune": "zed-kakoune",
         "zen-browser": "zen-browser"
       }
@@ -1222,6 +1244,26 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "usfm-importer": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793668148,
+        "narHash": "sha256-RrDfDTT0W7qgHAPv3eutn2f6lv6ZUcsM1rB90+1slRQ=",
+        "ref": "refs/heads/main",
+        "rev": "78f6392bb815a9daf09030f237cdd42c7a131773",
+        "revCount": 3,
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/usfm-importer"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/sweenu/usfm-importer"
       }
     },
     "utils": {
