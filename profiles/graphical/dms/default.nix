@@ -163,6 +163,12 @@ in
           src = lib.mkForce dankVaultPatched;
         };
         dankscale.enable = true;
+
+        # Own plugins
+        bibleVerse = {
+          enable = true;
+          src = inputs.dux-bible-verse;
+        };
       };
     };
   };
