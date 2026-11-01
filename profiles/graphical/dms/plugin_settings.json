@@ -11,7 +11,8 @@
     "trigger": "="
   },
   "claudeCodeUsage": {
-    "enabled": true
+    "enabled": true,
+    "refreshInterval": 5
   },
   "dankActions": {
     "enabled": true
