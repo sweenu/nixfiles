@@ -99,7 +99,7 @@ in
   virtualisation.arion.projects.bookorbit.settings = {
     services.bookorbit = {
       service = {
-        image = "ghcr.io/bookorbit/bookorbit:2.10.0";
+        image = "ghcr.io/bookorbit/bookorbit:3.6.0";
         container_name = "bookorbit";
         restart = "unless-stopped";
         # JWT_SECRET, SETUP_BOOTSTRAP_TOKEN, EMAIL_ENCRYPTION_KEY and
@@ -163,6 +163,7 @@ in
       # /api/v1/kobo stay tailnet-only.
       rule = "Host(`${publicFqdn}`) && (PathPrefix(`/api/v1/kobo/`) || PathPrefix(`/api/v3/`) || PathPrefix(`/api/UserStorage/`)) && !PathRegexp(`^/api/v1/kobo/(devices|settings|history)(/|$)`)";
       service = "bookorbit";
+      middlewares = [ "cloudflare-only@file" ];
     };
     services."${routers.to-bookorbit.service}".loadBalancer.servers = [
       {
