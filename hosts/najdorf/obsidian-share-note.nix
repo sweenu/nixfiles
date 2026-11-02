@@ -37,6 +37,7 @@ in
         "traefik.enable" = "true";
         "traefik.http.routers.to-obsidian-share-note.rule" = "Host(`${fqdn}`)";
         "traefik.http.routers.to-obsidian-share-note.service" = "obsidian-share-note";
+        "traefik.http.routers.to-obsidian-share-note.middlewares" = "cloudflare-only@file";
         "traefik.http.services.obsidian-share-note.loadbalancer.server.port" = "3000";
       };
     };

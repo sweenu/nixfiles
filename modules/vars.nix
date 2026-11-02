@@ -51,6 +51,7 @@ with lib.types;
     staticIP = mkOption { type = str; };
 
     lanSubnet = mkOption { type = str; };
+    lanSubnet6 = mkOption { type = str; };
     domainName = mkOption { type = str; };
     tailnetName = mkOption { type = str; };
     smtp = mkOption {

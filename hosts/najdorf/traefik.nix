@@ -87,9 +87,12 @@ in
             advertisedPort = 443;
           };
           http = {
+            # cloudflare-only is attached per-router, not here: Cloudflare caps
+            # proxied request bodies at 100MiB, which immich's single-shot
+            # asset upload cannot chunk around, so immich is served DNS-only
+            # and needs this entrypoint to accept direct connections.
             middlewares = [
               "sts-header@file"
-              "cloudflare-only@file"
             ];
             tls = {
               certResolver = "default";
@@ -151,11 +154,23 @@ in
       enable = true;
       maxtime = "48h";
     };
-    ignoreIP = [ config.vars.lanSubnet ];
+    # Traefik logs the forwarded client IP, so LAN clients appear under their
+    # own address and would otherwise be bannable by this jail.
+    ignoreIP = [
+      config.vars.lanSubnet
+      config.vars.lanSubnet6
+    ];
     jails.traefik = {
       filter = {
         Definition = {
-          failregex = ''^<HOST> - \S+ \[.*\] \".*\" (401|403) .*$'';
+          # 403 only. Traefik logs the forwarded client IP, so for the
+          # Cloudflare-proxied routers a ban targets an address that never
+          # connects here directly and matches nothing; the one router reachable
+          # directly is immich, where 401 is simply the unauthenticated
+          # response, so counting it would ban guests mid-upload. What is left
+          # that 403 catches is worth catching: direct hits on the other hosts
+          # are rejected by cloudflare-only, and those bans do apply.
+          failregex = ''^<HOST> - \S+ \[.*\] \".*\" 403 .*$'';
           ignoreregex = "";
         };
       };

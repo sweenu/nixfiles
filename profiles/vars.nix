@@ -48,6 +48,8 @@
     staticIPWithSubnet = "192.168.1.41/24";
     staticIP = builtins.head (lib.splitString "/" staticIPWithSubnet);
     lanSubnet = "192.168.1.0/24";
+    # ISP-delegated, so it can change if a new prefix is handed out.
+    lanSubnet6 = "2001:861:3884:4fd0::/64";
     domainName = "sweenu.xyz";
     tailnetName = "taila5f2.ts.net";
     smtp = {

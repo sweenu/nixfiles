@@ -39,6 +39,7 @@ in
     routers.to-n8n = {
       rule = "Host(`${publicFqdn}`)";
       service = "n8n";
+      middlewares = [ "cloudflare-only@file" ];
     };
     services."${routers.to-n8n.service}".loadBalancer.servers = [
       {

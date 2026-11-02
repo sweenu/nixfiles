@@ -197,10 +197,12 @@ in
     routers.to-nextcloud = {
       rule = "Host(`${fqdn}`)";
       service = "nextcloud";
+      middlewares = [ "cloudflare-only@file" ];
     };
     routers.to-collabora = {
       rule = "Host(`${collaboraCfg.settings.server_name}`)";
       service = "collabora";
+      middlewares = [ "cloudflare-only@file" ];
     };
     services = {
       "${routers.to-nextcloud.service}".loadBalancer.servers = [
