@@ -61,12 +61,7 @@
     };
 
     dms = {
-      url = "github:duxlabs-dev/dux-shell?ref=v2.0.0";
-      inputs.nixpkgs.follows = "nixos";
-    };
-
-    dms-greeter = {
-      url = "github:duxlabs-dev/dux-greeter?ref=v2.0.0";
+      url = "github:duxlabs-dev/dux-shell?ref=v2.1.0";
       inputs.nixpkgs.follows = "nixos";
     };
 

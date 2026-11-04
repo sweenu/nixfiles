@@ -23,8 +23,6 @@ let
       });
 in
 {
-  imports = [ inputs.dms-greeter.nixosModules.default ];
-
   age.secrets.hassToken = {
     file = "${self}/secrets/dms/hass_token.age";
     owner = username;
@@ -45,14 +43,6 @@ in
 
   # Phone Connect plugin talks to the KDE Connect daemon over D-Bus.
   programs.kdeconnect.enable = true;
-
-  programs.dms-greeter = {
-    enable = false;
-    compositor.name = "hyprland";
-    # Copy the user's DMS theme/settings into the greeter so it matches.
-    configHome = config.users.users."${username}".home;
-    logs.save = true;
-  };
 
   home-manager.users."${username}" = {
     home.packages = [
