@@ -22,6 +22,12 @@ in
     };
     secretsFile = config.age.secrets."immich/envFile".path;
     mediaLocation = "/opt/immich";
+    # Not the module default of "localhost": node resolves that to ::1 and
+    # binds IPv6 only, so clients that pick the IPv4 address for "localhost"
+    # — ruby's Net::HTTP, and so dawarich's immich integration — get
+    # ECONNREFUSED. Go dialers happy-eyeball past it, which is why traefik and
+    # tailscale serve never noticed.
+    host = "127.0.0.1";
     port = 2283;
   };
 
