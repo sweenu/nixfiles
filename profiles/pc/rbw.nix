@@ -27,7 +27,7 @@ in
       settings = {
         email = "brunoinec@gmail.com";
         lock_timeout = 900; # 15min
-        pinentry = pkgs.pinentry-qt;
+        pinentry = pkgs.dank-pinentry;
       };
     };
 

@@ -275,6 +275,16 @@
               relay-control-plane =
                 inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
               qbz = prev.callPackage ./pkgs/qbz.nix { src = inputs.qbz-src; };
+              dank-pinentry =
+                let
+                  plugin =
+                    (import "${inputs.dms-plugin-registry}/nix/default.nix" {
+                      pkgs = prev;
+                    }).dankbarPinentry;
+                in
+                prev.callPackage ./pkgs/dank-pinentry.nix {
+                  inherit (plugin) src version;
+                };
             })
           ]
           ++ (overlaysFromDir ./overlays);

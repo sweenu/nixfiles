@@ -59,6 +59,7 @@ in
       pkgs.img2pdf
       pkgs.tesseract
       pkgs.zbar
+      pkgs.dank-pinentry
     ];
 
     # Like settings.json, this is a read-only store symlink DMS can't write to,
@@ -153,6 +154,7 @@ in
           src = lib.mkForce dankVaultPatched;
         };
         dankscale.enable = true;
+        dankbarPinentry.enable = true;
 
         # Own plugins
         bibleVerse = {

@@ -838,6 +838,7 @@
       "margin": 0,
       "maxVisibleApps": 0,
       "maxVisibleRunningApps": 0,
+      "middleClickAction": "close",
       "mode": "compact",
       "name": "Dock",
       "openOnOverview": false,

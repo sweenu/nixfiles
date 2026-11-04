@@ -31,6 +31,13 @@
     "trigger": "@",
     "triggerOnlyVisibilityDefaultApplied": true
   },
+  "dankbarPinentry": {
+    "barText": false,
+    "dimBackdrop": false,
+    "enabled": true,
+    "focusMode": "hold",
+    "placement": "bottom"
+  },
   "dankscale": {
     "copyField": "dns",
     "downloadDir": "~/downloads",
