@@ -733,6 +733,7 @@
         "nixos": "nixos",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
+        "nixpkgs-patch-dawarich-1-19": "nixpkgs-patch-dawarich-1-19",
         "nixpkgs-patcher": "nixpkgs-patcher",
         "qbz-src": "qbz-src",
         "relay-control-plane": "relay-control-plane",
@@ -1016,6 +1017,18 @@
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
         "type": "github"
+      }
+    },
+    "nixpkgs-patch-dawarich-1-19": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-BBEvq6Yy2VzC5akaOO9w6oufAsNlTNuWWrsK0GLHb8c=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/579621.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/579621.diff"
       }
     },
     "nixpkgs-patcher": {

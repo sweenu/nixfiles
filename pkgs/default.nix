@@ -28,9 +28,6 @@ final: prev: with prev; {
   aiobbox = pkgs.python314Packages.callPackage ./aiobbox.nix { };
   bbox = callPackage ./bbox.nix { };
 
-  dawarich-api = pkgs.python314Packages.callPackage ./dawarich-api.nix { };
-  dawarich-ha = callPackage ./dawarich-ha.nix { };
-
   journal-brief = callPackage ./journal-brief.nix { };
 
   kobodl = callPackage ./kobodl.nix { };

@@ -6,6 +6,13 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     nixpkgs-patcher.url = "github:gepbird/nixpkgs-patcher";
 
+    # dawarich 1.19.0 and the sidekiq job-class sync. Merged to master on
+    # 2026-11-03; drop this once nixos-unstable advances past it.
+    nixpkgs-patch-dawarich-1-19 = {
+      url = "https://github.com/NixOS/nixpkgs/pull/579621.diff";
+      flake = false;
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     haumea = {

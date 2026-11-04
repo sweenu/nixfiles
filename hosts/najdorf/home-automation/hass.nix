@@ -52,7 +52,6 @@ in
       ];
       customComponents = with pkgs; [
         bbox
-        dawarich-ha
         home-assistant-custom-components.adaptive_lighting
       ];
       config = {
