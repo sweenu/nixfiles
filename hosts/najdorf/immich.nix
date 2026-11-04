@@ -31,6 +31,13 @@ in
     port = 2283;
   };
 
+  services.restic.backups.opt.exclude =
+    map (folder: "${config.services.immich.mediaLocation}/${folder}")
+      [
+        "thumbs"
+        "encoded-video"
+      ];
+
   services.traefik.dynamicConfigOptions.http = rec {
     routers.to-immich = {
       # Shared links need the SvelteKit bundle and the API on top of /share.
