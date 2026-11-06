@@ -19,6 +19,10 @@ bind <C-y> scrollline -2
 set smoothscroll true
 set scrollduration 10
 
+" Tabs
+bind J tabnext
+bind K tabprev
+
 " Vim search mode
 bind / fillcmdline find
 bind ? fillcmdline find -?
