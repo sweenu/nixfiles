@@ -41,8 +41,8 @@ in
     systemd.target = "graphical-session.target";
   };
 
-  # Phone Connect plugin talks to the KDE Connect daemon over D-Bus.
-  programs.kdeconnect.enable = true;
+  # Phone Connect plugin talks to the KDE Connect daemon over D-Bus; enabled
+  # (without the LAN firewall ports) in profiles/graphical/base.nix.
 
   home-manager.users."${username}" = {
     home.packages = [

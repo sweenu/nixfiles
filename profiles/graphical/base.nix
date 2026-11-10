@@ -7,19 +7,22 @@
 
 {
   programs = {
-    kdeconnect.enable = true;
     zoom-us.enable = true;
-  };
-
-  services = {
-    gvfs.enable = true;
-
-    # Needed for KDEConnect
-    avahi.settings.publish = {
-      disable-publishing = false;
-      disable-user-service-publishing = false;
+    kdeconnect = {
+      enable = true;
+      # The phone is reached over the tailnet, and tailscale0 is already a
+      # trusted interface, so opening 1714-1764 would only expose the daemon on
+      # untrusted Wi-Fi. This is also why avahi keeps the consumer-only publish
+      # settings from profiles/core/base.nix: discovery is the customDevices
+      # entry below, not an mDNS announcement.
+      openFirewall = false;
+      # Stop beaconing our device ID and name to 255.255.255.255 on every
+      # network we join; the phone is in customDevices instead.
+      announceOnBroadcast = false;
     };
   };
+
+  services.gvfs.enable = true;
 
   environment.defaultPackages = with pkgs; [
     calibre
@@ -32,6 +35,9 @@
   ];
 
   home-manager.users."${config.vars.username}" = {
+    # pixel-9-pro-xl on the tailnet. Must be the IP: kdeconnectd rejects names.
+    programs.kdeconnect.customDevices = [ "100.117.165.6" ];
+
     home.file = {
       ".face".source = "${self}/assets/pp.png";
       "${config.vars.screenshotFolder}/.keep".source = builtins.toFile "keep" "";
