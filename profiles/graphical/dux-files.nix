@@ -1,6 +1,7 @@
 { inputs, ... }:
 
 {
+  disabledModules = [ "programs/dux-files.nix" ];
   imports = [ inputs.dux-files.nixosModules.default ];
 
   programs.dux-files = {

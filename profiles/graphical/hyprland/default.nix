@@ -8,6 +8,12 @@
 let
   inherit (lib.generators) mkLuaInline;
   palette = config.home-manager.users."${config.vars.username}".colorScheme.palette;
+  specialApps = {
+    "special:communication" = "app2unit -- ${pkgs.beeper}/bin/beeper";
+    "special:music" = "app2unit -- qbz";
+    "special:claude" = "app2unit -- claude-desktop";
+    "special:calendar" = "app2unit -- dcal";
+  };
 in
 {
   environment.defaultPackages = with pkgs; [
@@ -323,22 +329,6 @@ in
             workspace = "f[1]s[false]";
             gaps_out = 20;
           }
-          {
-            workspace = "special:communication";
-            on_created_empty = "app2unit -- ${pkgs.beeper}/bin/beeper";
-          }
-          {
-            workspace = "special:music";
-            on_created_empty = "app2unit -- qbz";
-          }
-          {
-            workspace = "special:claude";
-            on_created_empty = "app2unit -- claude-desktop";
-          }
-          {
-            workspace = "special:calendar";
-            on_created_empty = "app2unit -- dcal";
-          }
         ];
 
         window_rule = [
@@ -383,7 +373,15 @@ in
           }
         ];
       };
-      extraConfig = builtins.readFile ./workspace-to-monitor.lua;
+      extraConfig = builtins.readFile ./workspace-to-monitor.lua + ''
+        local special_apps = ${lib.generators.toLua { } specialApps}
+        hl.on("workspace.created", function(ws)
+          local cmd = special_apps[ws.name]
+          if cmd and ws.is_empty then
+            hl.exec_cmd(cmd, { workspace = ws.name })
+          end
+        end)
+      '';
     };
 
     systemd.user.sessionVariables = {

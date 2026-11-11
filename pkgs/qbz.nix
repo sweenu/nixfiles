@@ -16,6 +16,7 @@
 # below; see the comment there.
 {
   alsa-lib,
+  aws-lc,
   autoPatchelfHook,
   cmake,
   lib,
@@ -109,6 +110,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   buildInputs = qtModules ++ [
     alsa-lib
+    aws-lc
     libjack2
   ];
 

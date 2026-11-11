@@ -6,13 +6,6 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     nixpkgs-patcher.url = "github:gepbird/nixpkgs-patcher";
 
-    # dawarich 1.19.0 and the sidekiq job-class sync. Merged to master on
-    # 2026-11-03; drop this once nixos-unstable advances past it.
-    nixpkgs-patch-dawarich-1-19 = {
-      url = "https://github.com/NixOS/nixpkgs/pull/579621.diff";
-      flake = false;
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     haumea = {
@@ -68,7 +61,7 @@
     };
 
     dms = {
-      url = "github:duxlabs-dev/dux-shell?ref=v2.1.0";
+      url = "github:duxlabs-dev/dux-shell?ref=v2.1.2";
       inputs.nixpkgs.follows = "nixos";
     };
 
@@ -78,12 +71,12 @@
     };
 
     dankcalendar = {
-      url = "github:duxlabs-dev/dux-calendar?ref=v2.0.0";
+      url = "github:duxlabs-dev/dux-calendar?ref=v2.1.2";
       inputs.nixpkgs.follows = "nixos";
     };
 
     dux-files = {
-      url = "github:duxlabs-dev/dux-files?ref=v2.0.0";
+      url = "github:duxlabs-dev/dux-files?ref=v2.1.2";
       inputs.nixpkgs.follows = "nixos";
     };
 
