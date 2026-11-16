@@ -27,6 +27,7 @@
     nix-prefetch-git
     nix-prefetch-github
     nixpkgs-review
+    nod
     python3Packages.ptpython
     simple-scan
     tealdeer

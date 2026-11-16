@@ -1,0 +1,67 @@
+--- a/src/server/discovered-connections.ts
++++ b/src/server/discovered-connections.ts
+@@ -14,6 +14,7 @@
+ import type { ConnectedCli } from '../ports/computer.ts';
+ import type { ConnectedMcpServer } from '../ports/agent.ts';
+ import type { Connection } from '../shared/contracts.ts';
++import { loopbackHost } from '../shared/loopback.ts';
+ import { transaction } from './transaction.ts';
+ import type { createAppGrantVault } from './vault-app-grants.ts';
+ import type { TurnRef } from './thread.ts';
+@@ -386,7 +387,12 @@
+         : {}),
+     }));
+   }
+-  async function create(input: unknown, turn?: TurnRef, returnTo?: ReturnTarget) {
++  async function create(
++    input: unknown,
++    turn?: TurnRef,
++    returnTo?: ReturnTarget,
++    local = false,
++  ) {
+     const parsed = proposalSchema.parse(input);
+     let name = parsed.name;
+     if (parsed.paths.some((path) => path.auth === 'oauth')) {
+@@ -429,8 +435,11 @@
+       }
+       const checked = {
+         ...path,
+-        endpoint: await options.transport.validateEndpoint(path.endpoint),
++        endpoint: await (
++          local ? via({ ...path, id: pathId, local }) : options
++        ).transport.validateEndpoint(path.endpoint),
+         id: pathId,
++        ...(local ? { local } : {}),
+       };
+       if (checked.kind === 'http') target(checked, checked.testPath);
+       paths.push(checked);
+@@ -1471,9 +1480,18 @@
+         .safeParse(request.body);
+       if (!parsed.success) throw error('Enter a name, server URL and authentication method.');
+       const { name, auth } = parsed.data;
+-      const endpoint = await options.transport.validateEndpoint(parsed.data.endpoint).catch(() => {
+-        throw error('Use a public HTTPS server address without a query or fragment.');
+-      });
++      let local = false;
++      const endpoint = await options.transport
++        .validateEndpoint(parsed.data.endpoint)
++        .catch(() => {
++          const url = new URL(parsed.data.endpoint);
++          if (!options.local || !loopbackHost(url.hostname)) throw new Error();
++          local = true;
++          return options.local(url.origin).transport.validateEndpoint(parsed.data.endpoint);
++        })
++        .catch(() => {
++          throw error('Use a public HTTPS or loopback server address without a query or fragment.');
++        });
+       const service = `mcp-${createHash('sha256').update(endpoint).digest('hex').slice(0, 24)}`;
+       const result = await create(
+         {
+@@ -1490,6 +1508,7 @@
+         },
+         undefined,
+         'apps',
++        local,
+       );
+       return reply.header('Cache-Control', 'no-store').send(result);
+     });
