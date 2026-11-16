@@ -154,6 +154,8 @@ in
   (bind "${mod} + minus" (toggleSpecial "communication"))
   (bind "${mod} + M" (toggleSpecial "music"))
   (bind "${mod} + C" (toggleSpecial "calendar"))
+  (bind "${mod} + E" (toggleSpecial "mail"))
+  (bind "${mod} + semicolon" (toggleSpecial "nod"))
   (bind "${mod} + CTRL + Space" (toggleSpecial "claude"))
 
   # Submaps

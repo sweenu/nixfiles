@@ -13,6 +13,8 @@ let
     "special:music" = "app2unit -- qbz";
     "special:claude" = "app2unit -- claude-desktop";
     "special:calendar" = "app2unit -- dcal";
+    "special:mail" = "app2unit -- thunderbird";
+    "special:nod" = "app2unit -- nod";
   };
 in
 {

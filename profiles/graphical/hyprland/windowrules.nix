@@ -157,4 +157,13 @@
     match.class = "com\\.blitzfc\\.qbz";
     workspace = "special:music";
   }
+  # Same startup race as qbz
+  {
+    match.class = "thunderbird";
+    workspace = "special:mail";
+  }
+  {
+    match.class = "nod";
+    workspace = "special:nod";
+  }
 ]
