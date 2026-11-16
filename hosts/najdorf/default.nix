@@ -47,6 +47,7 @@ in
     ./immich.nix
     ./dawarich.nix
     ./actual.nix
+    ./jellyfin.nix
     ./mail-backup.nix
 
     # Monitoring & Control
