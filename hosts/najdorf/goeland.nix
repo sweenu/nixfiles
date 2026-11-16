@@ -16,6 +16,7 @@ let
     ciechanowski = "https://ciechanow.ski/atom.xml";
     pretix = "https://pretix.eu/about/en/blog/rss/";
     pretix-behind-the-scenes = "https://behind.pretix.eu/feed.xml";
+    pebble = "https://repebble.com/blog/rss/";
   };
 in
 {
