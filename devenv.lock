@@ -68,11 +68,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793748229,
-        "narHash": "sha256-ZSohW9D3xDTUAsYq3k1enlacgY8E11NPcfLIaCZhCm4=",
+        "lastModified": 1794767181,
+        "narHash": "sha256-gWRzyM0RhHFg9liLZMsuJ2Y9l42cjR4YvHfQRB2HNzg=",
         "ref": "refs/heads/main",
-        "rev": "08f7cf9617b08845cd3a10f170538b02abaeadee",
-        "revCount": 58,
+        "rev": "96f0f6cc00038b97e3501f59e31f86204a915137",
+        "revCount": 68,
         "type": "git",
         "url": "ssh://git@github.com/sweenu/artos"
       },
@@ -106,11 +106,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794272847,
-        "narHash": "sha256-CucWKWqPKOcn10XarO6POopxPVd+8B4OVnbxkzTRxiQ=",
+        "lastModified": 1794795501,
+        "narHash": "sha256-qFyZAi2pGtW3AS5jHH025BDg9gVptzZ3qAW49jKGqME=",
         "owner": "aaddrick",
         "repo": "claude-desktop-debian",
-        "rev": "604e829e66595eaf9f9914fe0c081667f3b9ca65",
+        "rev": "e015299ebc92e394d462f189e52313d544b96f6b",
         "type": "github"
       },
       "original": {
@@ -319,11 +319,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794320905,
-        "narHash": "sha256-PQK3SrS1joc2ffyrYMG+IxK/XHSHdGe0hZa1ejSE0gg=",
+        "lastModified": 1794802344,
+        "narHash": "sha256-vXuMHEDKMkklEkLSMWrE9uUW4Vnh+xmJJ0cFqOeqXjo=",
         "owner": "duxlabs-dev",
         "repo": "dux-plugin-registry",
-        "rev": "3220cf1c8ca7a35de814fd0807da870d7b124d9b",
+        "rev": "4625fde9db44a355d2db0288924ee5098438255e",
         "type": "github"
       },
       "original": {
@@ -580,11 +580,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794278858,
-        "narHash": "sha256-rkrJwLgLSHBnXfgoSKIDa+2LLGdTqynsV3GAxOTGhUU=",
+        "lastModified": 1794715309,
+        "narHash": "sha256-awkBBs5ctFKgEYjpNGpi3t/VqF589n5EWfdinRb2gNI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "82ce401aa350502897c3f2e85f384d61cd3b0b6d",
+        "rev": "a1293da7dd8e497e08d26173f97e2976b36a31ea",
         "type": "github"
       },
       "original": {
@@ -776,11 +776,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1794042290,
-        "narHash": "sha256-ziZn2PvCJE5JEEpqTdxXwJpPB+L3YqoCpTAMCzyaP3U=",
+        "lastModified": 1794537146,
+        "narHash": "sha256-Wpz/7x/YWnDIBu7yj6ixe8j6fIMsidd9Y+o1PqPF3iM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f4a03c008967841f2a0b3cb7c436fc6fc31671f6",
+        "rev": "d5cc6833999746cffdfe0598f7bc801a57b887a9",
         "type": "github"
       },
       "original": {
@@ -824,11 +824,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1794222723,
-        "narHash": "sha256-jehPADpSIsWnyNHw/s44OHF9l6Y75QmW74sqO9cEe0A=",
+        "lastModified": 1794597451,
+        "narHash": "sha256-bUkc9dMpCFiJuuf5Efr7pnCDs5q18aA8zJah+MYZl9w=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "919c16cf46a7acf9b44b2c2444bc39aa094eaa85",
+        "rev": "eb3c90bd715f7a9a28719bb014f53d309ccb2fc8",
         "type": "github"
       },
       "original": {
@@ -1390,11 +1390,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794215717,
-        "narHash": "sha256-es8MSf8k9iRKAW0ny1Dfqo09imWwx0w561wbuz4u5Xk=",
+        "lastModified": 1794805570,
+        "narHash": "sha256-sG0P1rHWgbPQIeR+peNmapCWQKf0nauyDl500JhX9Qo=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "3c9c2843c3ca92de0c82f98e1c4641d95e7163f2",
+        "rev": "cb44a9fc1faa18c55dde38a8338f6d46fa2bc6de",
         "type": "github"
       },
       "original": {
