@@ -6,6 +6,7 @@
     mergeWithExisting = true;
     overrideOnConflict = false;
     settings = {
+      enable_spellcheck = false;
       keybindings = {
         ARCHIVE_ALL_READ_THREADS = "disabled";
         TOGGLE_THREAD_READ = "disabled";
@@ -92,6 +93,9 @@
         };
         SHOW_TRANSCRIBE_BAR = {
           keys = [ "alt+shift+t" ];
+        };
+        UNDO_PENDING_SEND = {
+          keys = [ "alt+u" ];
         };
       };
     };
