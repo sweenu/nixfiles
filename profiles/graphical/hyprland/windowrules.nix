@@ -159,7 +159,7 @@
   }
   # Same startup race as qbz
   {
-    match.class = "thunderbird";
+    match.class = "velo";
     workspace = "special:mail";
   }
   {

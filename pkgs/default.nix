@@ -34,6 +34,8 @@ final: prev: with prev; {
 
   nod = callPackage ./nod.nix { };
 
+  velo = callPackage ./velo.nix { };
+
   n8n = prev.n8n.overrideAttrs (oldAttrs: {
     NODE_OPTIONS = lib.concatStringsSep " " (
       lib.filter (v: v != "") [
