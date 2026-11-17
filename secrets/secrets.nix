@@ -28,4 +28,5 @@ in
   "obsidian-relay/env.age".publicKeys = [ carokann najdorfHost ];
   "atticd/env.age".publicKeys = [ carokann najdorfHost ];
   "bookorbit/env.age".publicKeys = [ carokann najdorfHost ];
+  "beeper-minus/mcp_token.age".publicKeys = [ carokann najdorfHost ];
 }

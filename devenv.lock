@@ -97,6 +97,27 @@
         "type": "github"
       }
     },
+    "beeper-minus": {
+      "inputs": {
+        "nixpkgs": [
+          "nixfiles",
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795111816,
+        "narHash": "sha256-I5pTJWpuzccKdECbObIm0zLEpy0g3Lf7muj44JGBomg=",
+        "owner": "sweenu",
+        "repo": "beeper-minus",
+        "rev": "bfaf252af6793819b02051a946efd6225f4ff5ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sweenu",
+        "repo": "beeper-minus",
+        "type": "github"
+      }
+    },
     "claude-desktop": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -735,6 +756,7 @@
         "agenix": "agenix",
         "arion": "arion",
         "artos": "artos",
+        "beeper-minus": "beeper-minus",
         "claude-desktop": "claude-desktop",
         "dankcalendar": "dankcalendar",
         "delta": "delta",

@@ -49,6 +49,7 @@ in
     ./actual.nix
     ./jellyfin.nix
     ./mail-backup.nix
+    ./beeper.nix
 
     # Monitoring & Control
     ./cockpit.nix

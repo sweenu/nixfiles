@@ -146,6 +146,11 @@
 
     luks-prompt-alert.url = "github:sweenu/luks-prompt-alert";
 
+    beeper-minus = {
+      url = "github:sweenu/beeper-minus";
+      inputs.nixpkgs.follows = "nixos";
+    };
+
     hifiberry-nixos.url = "github:sweenu/hifiberry-nixos";
   };
 
@@ -325,6 +330,7 @@
             inputs.relay-server.nixosModules.relay-server
             inputs.relay-control-plane.nixosModules.relay-control-plane
             inputs.luks-prompt-alert.nixosModules.default
+            inputs.beeper-minus.nixosModules.default
             {
               nixpkgs.overlays = overlays;
               nixpkgs.config.allowUnfree = true;
