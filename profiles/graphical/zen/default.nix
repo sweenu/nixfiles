@@ -110,6 +110,7 @@
             "browser.tabs.insertRelatedAfterCurrent" = false;
             "browser.tabs.unloadOnLowMemory" = true;
             "browser.urlbar.resultMenu.keyboardAccessible" = true;
+            "intl.regional_prefs.use_os_locales" = true;
             "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = true;
             "zen.view.experimental-no-window-controls" = true;
           };

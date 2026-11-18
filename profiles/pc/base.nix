@@ -91,6 +91,8 @@
     };
   };
 
+  i18n.extraLocaleSettings.LC_TIME = "fr_FR.UTF-8";
+
   home-manager.users."${config.vars.username}" = {
     programs = {
       zathura = {
