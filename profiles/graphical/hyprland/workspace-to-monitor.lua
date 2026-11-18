@@ -36,7 +36,8 @@ local function place_workspaces()
   -- Rules only affect creation; migrate any already-open asdf workspaces onto
   -- the target monitor. Empty ones simply don't exist here, so nothing strays.
   for _, w in ipairs(hl.get_workspaces()) do
-    if w.id >= 1 and w.id <= 4 then
+    -- special workspaces have a nil id
+    if w.id and w.id >= 1 and w.id <= 4 then
       hl.dispatch(hl.dsp.workspace.move({ workspace = tostring(w.id), monitor = target }))
     end
   end
