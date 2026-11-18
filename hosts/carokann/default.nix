@@ -102,6 +102,18 @@ in
     i2c.enable = true;
   };
 
+  # The AX210 sometimes doesn't come back from s2idle ("Hardware became
+  # unavailable upon resume"); NetworkManager then spins in the driver holding
+  # rtnl, which blocks hibernation and makes shutdown hang for ~10 minutes.
+  # Unloading the driver across sleep skips its broken resume path.
+  # NixOS's modprobe "remove iwlwifi" rule already unloads iwlmvm too. Never let
+  # this fail: resumeCommands live in the same unit's ExecStop, which only runs
+  # if ExecStart succeeded.
+  powerManagement = {
+    powerDownCommands = "${pkgs.kmod}/bin/modprobe -r iwlwifi || true";
+    resumeCommands = "${pkgs.kmod}/bin/modprobe iwlwifi";
+  };
+
   services = {
     fstrim.enable = true;
     fprintd.enable = true;
