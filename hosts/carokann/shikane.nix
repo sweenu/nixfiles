@@ -10,6 +10,10 @@
         let
           resWidth = 2256;
           resHeight = 1504;
+          laptopScale = 1.6;
+          dellWidth = 3840;
+          dellHeight = 2160;
+          dellScale = 1.5;
           laptopOutput = {
             search = "n=eDP-1";
             enable = true;
@@ -18,7 +22,7 @@
               height = resHeight;
               refresh = 60;
             };
-            scale = 1.6;
+            scale = laptopScale;
           };
         in
         [
@@ -35,12 +39,20 @@
                 search = "n/(DP-[1-9]|HDMI-[A-C]-[1-9])";
                 enable = true;
                 position = {
-                  x = resWidth;
+                  x = builtins.floor (resWidth / laptopScale);
                   y = 0;
                 };
                 mode = "preferred";
               }
-              laptopOutput
+              (
+                laptopOutput
+                // {
+                  position = {
+                    x = 0;
+                    y = 0;
+                  };
+                }
+              )
             ];
           }
           # At home, put the laptop to the right of the Dell.
@@ -59,18 +71,19 @@
                   y = 0;
                 };
                 mode = {
-                  width = 3840;
-                  height = 2160;
+                  width = dellWidth;
+                  height = dellHeight;
                   refresh = 60;
                 };
-                scale = 1.5;
+                scale = dellScale;
               }
               (
                 laptopOutput
                 // {
                   position = {
-                    x = 2560; # 3840 / 1.5
-                    y = 500; # Align bottom corners: 2160/1.5 - 1504/1.6
+                    x = builtins.floor (dellWidth / dellScale);
+                    # Align bottom corners
+                    y = builtins.floor (dellHeight / dellScale - resHeight / laptopScale);
                   };
                 }
               )
