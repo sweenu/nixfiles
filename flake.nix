@@ -152,6 +152,8 @@
     };
 
     hifiberry-nixos.url = "github:sweenu/hifiberry-nixos";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs =

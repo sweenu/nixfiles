@@ -1,6 +1,32 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
+  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+
+  services.flatpak = {
+    enable = true;
+    # The GeForce NOW runtime comes from flathub, so it must stay listed.
+    remotes = [
+      {
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      }
+      {
+        name = "GeForceNOW";
+        location = "https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo";
+      }
+    ];
+    packages = [
+      {
+        appId = "com.nvidia.geforcenow";
+        origin = "GeForceNOW";
+      }
+    ];
+    # On Wayland, SDL2 renders at 1x and Hyprland upscales it, which is blurry. Through
+    # XWayland with force_zero_scaling the image is sharp, but the UI is smaller.
+    overrides."com.nvidia.geforcenow".Environment.SDL_VIDEODRIVER = "x11";
+  };
+
   programs = {
     steam.enable = true;
 
