@@ -5,8 +5,8 @@
     settings.Login = {
       HandlePowerKey = "lock";
       LidSwitchIgnoreInhibited = "no";
-      HandleLidSwitch = "suspend-then-hibernate";
-      HandleLidSwitchExternalPower = "suspend-then-hibernate";
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
       HandleLidSwitchDocked = "ignore";
     };
   };
