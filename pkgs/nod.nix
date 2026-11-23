@@ -11,7 +11,7 @@
 
 let
   pname = "nod";
-  version = "0.9.0";
+  version = "0.9.6";
 
   part =
     n: hash:
@@ -28,8 +28,8 @@ let
     inherit version;
 
     srcs = [
-      (part "00" "sha256-CjMszt+mUIbTSP3JYkryip7oh0t+MjE7hKzFy8NJIg4=")
-      (part "01" "sha256-7u2hWtx5su/aC9HOkjoEqDpUuSl6sFv6nWFIVaVr7gw=")
+      (part "00" "sha256-OJZEz8UNJhYvb1oyYnpnbtBOyJ/L/rEQqSy5xMFG9kg=")
+      (part "01" "sha256-RkYIPJVzpM33UDYk+SmAofWht8dsxaCn1I2VpXPu/34=")
     ];
 
     nativeBuildInputs = [
