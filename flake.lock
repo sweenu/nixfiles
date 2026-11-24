@@ -101,11 +101,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795111816,
-        "narHash": "sha256-I5pTJWpuzccKdECbObIm0zLEpy0g3Lf7muj44JGBomg=",
+        "lastModified": 1795543877,
+        "narHash": "sha256-8M0ZOupunWp1zOtzjAXtsnVvDPnKbiTEmT9JjqtdCds=",
         "owner": "sweenu",
         "repo": "beeper-minus",
-        "rev": "bfaf252af6793819b02051a946efd6225f4ff5ba",
+        "rev": "31ebd27d2d2e5f99ba9a8d729a4ae18ae0fa24d8",
         "type": "github"
       },
       "original": {

@@ -33,6 +33,7 @@ final: prev: with prev; {
   kobodl = callPackage ./kobodl.nix { };
 
   nod = callPackage ./nod.nix { };
+  nod-server = callPackage ./nod-server.nix { };
 
   n8n = prev.n8n.overrideAttrs (oldAttrs: {
     NODE_OPTIONS = lib.concatStringsSep " " (

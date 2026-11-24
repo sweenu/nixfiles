@@ -50,6 +50,7 @@ in
     ./jellyfin.nix
     ./mail-backup.nix
     ./beeper.nix
+    ./nod.nix
 
     # Monitoring & Control
     ./cockpit.nix
