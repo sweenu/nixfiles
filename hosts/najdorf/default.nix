@@ -172,6 +172,10 @@ in
     docker = {
       enable = true;
       daemon.settings.dns = config.vars.dnsResolvers;
+      autoPrune = {
+        enable = true;
+        flags = [ "--all" ];
+      };
     };
     arion = {
       backend = "docker";
