@@ -6,6 +6,8 @@ in
   # carokann
   "efcc_wireguard_key.age".publicKeys = [ carokann ];
   "dms/hass_token.age".publicKeys = [ carokann ];
+  "syncthing/carokann-cert.age".publicKeys = [ carokann ];
+  "syncthing/carokann-key.age".publicKeys = [ carokann ];
 
   # najdorf
   "smtp_password.age".publicKeys = [ carokann najdorfHost ];
@@ -29,4 +31,6 @@ in
   "bookorbit/env.age".publicKeys = [ carokann najdorfHost ];
   "beeper-minus/mcp_token.age".publicKeys = [ carokann najdorfHost ];
   "nod/env.age".publicKeys = [ carokann najdorfHost ];
+  "syncthing/najdorf-cert.age".publicKeys = [ carokann najdorfHost ];
+  "syncthing/najdorf-key.age".publicKeys = [ carokann najdorfHost ];
 }

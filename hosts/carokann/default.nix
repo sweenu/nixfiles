@@ -13,6 +13,7 @@ in
   imports = suites.laptop ++ [
     ./shikane.nix
     ./pipewire.nix
+    ./syncthing.nix
   ];
 
   disko = {
