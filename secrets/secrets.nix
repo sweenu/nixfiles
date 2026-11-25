@@ -25,7 +25,6 @@ in
   "dawarich/secret_key_base.age".publicKeys = [ carokann najdorfHost ];
   "dawarich/oidc_client_secret_env.age".publicKeys = [ carokann najdorfHost ];
   "actual/oidc_client_secret.age".publicKeys = [ carokann najdorfHost ];
-  "obsidian-relay/env.age".publicKeys = [ carokann najdorfHost ];
   "atticd/env.age".publicKeys = [ carokann najdorfHost ];
   "bookorbit/env.age".publicKeys = [ carokann najdorfHost ];
   "beeper-minus/mcp_token.age".publicKeys = [ carokann najdorfHost ];

@@ -130,15 +130,6 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    relay-server = {
-      url = "github:sweenu/relay-server";
-      inputs.nixpkgs.follows = "nixos";
-    };
-    relay-control-plane = {
-      url = "github:sweenu/control-plane";
-      inputs.nixpkgs.follows = "nixos";
-    };
-
     claude-desktop = {
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixos";
@@ -281,9 +272,6 @@
             inputs.agenix.overlays.default
             inputs.nix-minecraft.overlay
             (final: prev: {
-              relay-server = inputs.relay-server.packages.${prev.stdenv.hostPlatform.system}.default;
-              relay-control-plane =
-                inputs.relay-control-plane.packages.${prev.stdenv.hostPlatform.system}.default;
               qbz = prev.callPackage ./pkgs/qbz.nix { src = inputs.qbz-src; };
               dank-pinentry =
                 let
@@ -329,8 +317,6 @@
             inputs.disko.nixosModules.disko
             inputs.arion.nixosModules.arion
             inputs.nix-minecraft.nixosModules.minecraft-servers
-            inputs.relay-server.nixosModules.relay-server
-            inputs.relay-control-plane.nixosModules.relay-control-plane
             inputs.luks-prompt-alert.nixosModules.default
             inputs.beeper-minus.nixosModules.default
             {

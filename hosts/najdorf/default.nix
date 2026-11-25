@@ -57,7 +57,6 @@ in
 
     # Obsidian
     ./obsidian-share-note.nix
-    ./obsidian-relay.nix
   ]
   ++ suites.server;
 
