@@ -20,6 +20,14 @@ in
     cert = config.age.secrets.syncthingCert.path;
     key = config.age.secrets.syncthingKey.path;
     settings = {
+      options = {
+        # Only reached through the Tailscale service.
+        listenAddresses = [ "tcp://127.0.0.1:22000" ];
+        globalAnnounceEnabled = false;
+        localAnnounceEnabled = false;
+        relaysEnabled = false;
+        natEnabled = false;
+      };
       devices = {
         carokann.id = "JBSKLWD-GDNKAIZ-DRGZWWI-B6W3BTZ-GBXKRL5-XM6WZDF-QK7WZCP-223KUAL";
         phone.id = "TTT2EL5-JWBLEYS-IJNDMBV-WKASVUI-HKSG6VO-BIIV3HD-M42DHCS-AMJBOAD";
@@ -55,4 +63,7 @@ in
   };
 
   services.restic.backups.opt.paths = [ cfg.dataDir ];
+
+  # TODO: https://github.com/tailscale/tailscale/issues/18381
+  # services.tailscale.serve.services.syncthing.endpoints."tcp:22000" = "tcp://localhost:22000";
 }
