@@ -57,6 +57,7 @@ in
 
     # Obsidian
     ./obsidian-share-note.nix
+    ./syncthing.nix
   ]
   ++ suites.server;
 
