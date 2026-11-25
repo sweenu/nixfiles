@@ -20,10 +20,16 @@ in
     cert = config.age.secrets.syncthingCert.path;
     key = config.age.secrets.syncthingKey.path;
     settings = {
-      devices.carokann.id = "JBSKLWD-GDNKAIZ-DRGZWWI-B6W3BTZ-GBXKRL5-XM6WZDF-QK7WZCP-223KUAL";
+      devices = {
+        carokann.id = "JBSKLWD-GDNKAIZ-DRGZWWI-B6W3BTZ-GBXKRL5-XM6WZDF-QK7WZCP-223KUAL";
+        phone.id = "TTT2EL5-JWBLEYS-IJNDMBV-WKASVUI-HKSG6VO-BIIV3HD-M42DHCS-AMJBOAD";
+      };
       folders.notes = {
         path = notes;
-        devices = [ "carokann" ];
+        devices = [
+          "carokann"
+          "phone"
+        ];
       };
     };
   };
