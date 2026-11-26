@@ -352,9 +352,14 @@ in
         DOCKER_CONFIG = "${stateDir}/.docker";
         WORKSPACE_CONTAINER = workspaceContainer;
         BROWSER_CONTAINER = browserContainer;
+        NOD_WEB_ROOT = "/run/nod/web";
       }
       // cfg.environment;
       serviceConfig = {
+        # The ETag is size + mtime, and every store file has mtime 1: after an update,
+        # an index.html of the same size gets a 304 and clients load assets that are gone.
+        ExecStartPre = "${pkgs.coreutils}/bin/cp -r --no-preserve=mode ${cfg.package}/lib/nod/dist/web /run/nod/web";
+        RuntimeDirectory = "nod";
         ExecStart = lib.getExe cfg.package;
         EnvironmentFile = cfg.environmentFile;
         User = "nod";
