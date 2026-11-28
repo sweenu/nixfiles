@@ -19,7 +19,7 @@ local function external_monitor()
   return nil
 end
 
-local function place_workspaces()
+local function place_workspaces(refocus)
   local target = external_monitor() or laptop
 
   -- (Re)bind where the asdf workspaces are (re)created from now on. Names are
@@ -42,7 +42,7 @@ local function place_workspaces()
     end
   end
 
-  if external_monitor() then
+  if refocus and external_monitor() then
     -- External just appeared: give the laptop a real active workspace so no
     -- empty one is auto-spawned, then land focus on the external.
     hl.dispatch(hl.dsp.focus({ workspace = 5 }))
@@ -55,9 +55,11 @@ end
 local pending
 local function schedule_workspaces_placement()
   if pending then pending:set_enabled(false) end
-  pending = hl.timer(place_workspaces, { timeout = 600, type = "oneshot" })
+  pending = hl.timer(function() place_workspaces(true) end, { timeout = 600, type = "oneshot" })
 end
 
 hl.on("hyprland.start", schedule_workspaces_placement)
 hl.on("monitor.added", schedule_workspaces_placement)
 hl.on("monitor.removed", schedule_workspaces_placement)
+-- A reload drops the runtime monitor binding above; restore it without stealing focus.
+hl.on("config.reloaded", function() place_workspaces(false) end)
