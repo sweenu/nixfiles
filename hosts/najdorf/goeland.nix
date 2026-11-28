@@ -8,7 +8,7 @@ let
     tailscale = "https://tailscale.com/blog/index.xml";
     poettering = "https://0pointer.net/blog/index.atom";
     notion = "https://rss.app/feeds/NsIZtd0vgm0BsqKL.xml";
-    starlwart = "https://stalwartlabs.medium.com/feed";
+    stalwart = "https://stalw.art/blog/rss.xml";
     alternativeto = "https://feed.alternativeto.net/news/all/";
     home-assistant = "https://www.home-assistant.io/atom.xml";
     zed = "https://zed.dev/blog.rss";
