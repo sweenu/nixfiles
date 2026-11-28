@@ -48,6 +48,10 @@
     "enabled": true,
     "trigger": ":"
   },
+  "gameControllerBattery": {
+    "enabled": true,
+    "hideWhenNoControllersConnected": true
+  },
   "homeAssistantMonitor": {
     "editModeTwoColumns": true,
     "enabled": true,

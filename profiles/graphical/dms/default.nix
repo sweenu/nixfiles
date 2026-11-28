@@ -146,6 +146,7 @@ in
         claudeCodeUsage.enable = true;
         emojiLauncher.enable = true;
         powerUsagePlugin.enable = true;
+        gameControllerBattery.enable = true;
         voxtype.enable = true;
         linuxWallpaperEngine.enable = false;
         quickCapture.enable = true;

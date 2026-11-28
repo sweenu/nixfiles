@@ -175,6 +175,10 @@
           "id": "notificationButton"
         },
         {
+          "enabled": true,
+          "id": "gameControllerBattery"
+        },
+        {
           "batteryStyle": "icon",
           "enabled": true,
           "id": "battery",
@@ -352,6 +356,10 @@
         {
           "enabled": true,
           "id": "notificationButton"
+        },
+        {
+          "enabled": true,
+          "id": "gameControllerBattery"
         },
         {
           "enabled": true,
